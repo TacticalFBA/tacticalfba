@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-function App() {
+// import css
+import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
+import "./App.css";
+
+// import components
+import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Prices from "./components/Prices";
+import Contact from "./components/Contact";
+import Landing from "./components/Landing";
+import TemplateList from "./components/Insert/TemplateList";
+import LoginModal from "./components/Account/LoginModal";
+import Account from "./components/Account/Account";
+import Cart from "./components/Cart/Cart";
+import EditTemplate from "./components/Insert/EditTemplate.jsx";
+
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Navbar />
       </header>
+      <main className="container py-5">
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route path="/new-card" component={TemplateList} />
+          <Route path="/about" component={About} />
+          <Route path="/prices" component={Prices} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/account" component={Account} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/edit-template/:pid" component={EditTemplate} />
+        </Switch>
+        <LoginModal />
+      </main>
     </div>
   );
-}
+};
 
 export default App;
