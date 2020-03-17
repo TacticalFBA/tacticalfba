@@ -9,12 +9,12 @@ export default function AccountNav() {
         if (user) {
           return (
             <React.Fragment>
-              <Link to="/account" className="btn btn-sm btn-primary mx-2">
+              <Link to="/account" className="btn btn-sm mx-1">
                 Account
               </Link>
               <Link
                 to="/"
-                className="btn btn-sm btn-outline-primary"
+                className="btn btn-sm"
                 onClick={() => {
                   signOut();
                 }}

@@ -10,8 +10,7 @@ export default class ProductProvider extends Component {
     cart: JSON.parse(localStorage.getItem("cart")) || [],
     cartSubtotal: 0,
     cartTax: 0,
-    cartTotal: 0,
-    paid: false
+    cartTotal: 0
   };
 
   componentDidMount() {
@@ -28,27 +27,44 @@ export default class ProductProvider extends Component {
     this.setState({ products: tempProducts });
   };
 
+  setUser = (user) => {
+    let newsampleTemplate = Object.assign({}, sampleTemplate);
+    newsampleTemplate.user = user;
+    this.setState({ sampleTemplate, newsampleTemplate })
+  }
+
   getItem = id => {
     const product = this.state.products.find(item => item.pid === id);
     return product;
   };
 
-  // handleDetail = id => {
-  //   const product = this.getItem(id);
-  //   this.setState({ detailProduct: product });
-  // };
+  addToCart = (history, templateName, address) => {
+    const contentArr = JSON.parse(localStorage.getItem("template"));
+    const content = contentArr.filter(content => content.templateName === templateName)[0];
 
-  addToCart = (id, history, content) => {
-    let tempProducts = [...this.state.products];
-    const index = tempProducts.indexOf(this.getItem(id));
-    const product = tempProducts[index];
-    product.content = content;
-    product.inCart = true;
-    product.count = 1;
-    product.total = product.price;
+    const tempProduct = products.filter(product => product.pid === content.pid)[0]
+    const price = tempProduct.price;
+    const type = tempProduct.type;
+    const name = tempProduct.name;
+
+    //get random cid
+    const createRandomId = () => {
+      return (Math.random() * 10000000).toString(16).substr(0, 4) + '-' + (new Date()).getTime() + '-' + Math.random().toString().substr(2, 5);
+    }
+
+    const product = {
+      cid: createRandomId(),
+      type: type,
+      name: name,
+      content: content,
+      address: address,
+      inCart: true,
+      count: 1,
+      price: price,
+      total: price
+    };
     this.setState(
       {
-        products: tempProducts,
         cart: [...this.state.cart, product]
       },
       () => {
@@ -61,19 +77,21 @@ export default class ProductProvider extends Component {
 
   increment = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.pid === id);
+    const selectedProduct = tempCart.find(item => item.cid === id);
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
     product.count++;
     product.total = product.price * product.count;
-    localStorage.setItem("cart", JSON.stringify(tempCart));
-    localStorage.setItem("cart", JSON.stringify(this.state.cart));
-    this.addTotals();
+
+    this.setState({ cart: [...tempCart] }, () => {
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      this.addTotals();
+    });
   };
 
   decrement = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.pid === id);
+    const selectedProduct = tempCart.find(item => item.cid === id);
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
     product.count--;
@@ -81,31 +99,26 @@ export default class ProductProvider extends Component {
       this.removeItem(id);
     } else {
       product.total = product.price * product.count;
-      localStorage.setItem("cart", JSON.stringify(tempCart));
-      this.setState({ cart: [...tempCart] });
-      this.addTotals();
+      this.setState({ cart: [...tempCart] }, () => {
+        localStorage.setItem("cart", JSON.stringify(this.state.cart));
+        this.addTotals();
+      });
     }
   };
 
-  removeItem = id => {
-    let tempProducts = [...this.state.products];
-    let tempCart = JSON.parse(localStorage.getItem("cart"));
-    tempCart = tempCart.filter(item => item.pid !== id);
-    const index = tempProducts.indexOf(this.getItem(id));
-    let removedProduct = tempProducts[index];
-    removedProduct.inCart = false;
-    removedProduct.count = 0;
-    removedProduct.total = 0;
-    localStorage.setItem("cart", JSON.stringify(tempCart));
-    this.setState({ cart: [...tempCart], products: [...tempProducts] });
-    this.addTotals();
+  removeItem = cid => {
+    let tempCart = [...this.state.cart].filter(item => item.cid !== cid);
+    this.setState({ cart: [...tempCart] }, () => {
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
+      this.addTotals();
+    });
   };
 
   clearCart = () => {
-    this.setState({ cart: [] });
-    localStorage.removeItem("cart");
-    this.setProducts();
-    this.addTotals();
+    this.setState({ cart: [] }, () => {
+      localStorage.removeItem("cart");
+      this.addTotals();
+    });
   };
 
   addTotals = () => {
@@ -122,7 +135,6 @@ export default class ProductProvider extends Component {
       <ProductContext.Provider
         value={{
           ...this.state,
-          // handleDetail: this.handleDetail,
           addToCart: this.addToCart,
           increment: this.increment,
           decrement: this.decrement,
@@ -132,7 +144,7 @@ export default class ProductProvider extends Component {
       >
         {this.props.children}
       </ProductContext.Provider>
-    );
+    )
   }
 }
 

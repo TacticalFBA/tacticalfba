@@ -4,15 +4,19 @@
   --mainWhite: #fafafa;
   --mainDark: #0a0908;
 }
-body {
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body,main {
   /* font-family: "Hind Madurai", sans-serif !important; */
+  height: 100%;
+  width: 100%;
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
+  scroll-behavior:smooth;
 }
-.text-title {
-  letter-spacing: 0.2rem;
-  text-transform: uppercase;
-}
+
 .text-orange {
   color: var(--mainOrange);
 }
@@ -49,4 +53,23 @@ body {
 .btn-outline-primary {
   color: var(--mainOrange);
   border-color: var(--mainOrange);
+}
+
+
+.juzhong {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: center;
+}
+
+
+/* responsive */
+
+@media (max-width: 768px) { 
+
+  .container {
+      padding: 0 8%;
+  }
+
 }

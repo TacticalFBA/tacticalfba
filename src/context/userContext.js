@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { auth } from "../config/Firebase";
+import { auth, db } from "../config/Firebase";
 
 const UserContext = React.createContext();
 
 class UserProvider extends Component {
   state = {
     user: null,
+    addList: [],
     modalOpen: false
   };
 
@@ -23,11 +24,24 @@ class UserProvider extends Component {
           email: email
         };
         this.setState({ user: tempUser });
+        localStorage.setItem("uid", JSON.stringify(this.state.user.uid));
+        this.synceAdd(uid);
       } else {
         this.setState({ user: null });
       }
     });
   };
+
+  synceAdd = uid => {
+    db.collection("address").where("uid", "==", uid)
+      .onSnapshot(snapshot => {
+        const addList = snapshot.docs.map(doc => {
+          let temp = doc.data();
+          return temp = { ...temp, aid: doc.id };
+        })
+        this.setState({ addList: addList })
+      })
+  }
 
   openModal = () => {
     this.setState({ modalOpen: true });
@@ -43,7 +57,7 @@ class UserProvider extends Component {
       .then(() => {
         this.closeModal();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(error.message);
       });
   };
@@ -55,7 +69,7 @@ class UserProvider extends Component {
         console.log("account created");
         this.closeModal();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(error.message);
       });
   };
@@ -66,7 +80,7 @@ class UserProvider extends Component {
       .then(() => {
         console.log("signed out");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(error.message);
       });
   };

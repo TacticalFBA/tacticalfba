@@ -97,6 +97,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.3);
   display: flex;
+  z-index:9999;
   align-items: center;
   justify-content: center;
   #modal {

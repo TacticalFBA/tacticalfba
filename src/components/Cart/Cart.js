@@ -8,17 +8,17 @@ import CartTotals from "./CartTotals";
 export default class Cart extends Component {
   render() {
     return (
-      <section>
+      <section className="pt-5">
         <ProductConsumer>
           {value => {
             const { cart } = value;
             if (cart.length > 0) {
               return (
-                <React.Fragment>
+                <div className="container pt-5">
                   <CartColumns />
                   <CartList cart={cart} value={value} />
                   <CartTotals value={value} />
-                </React.Fragment>
+                </div>
               );
             } else {
               return <EmptyCart />;

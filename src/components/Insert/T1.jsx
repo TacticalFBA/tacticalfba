@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Parser from 'html-react-parser';
 import { PreviewContainer } from "../Styled/PreviewContainer";
+import { UserConsumer } from "../../context/userContext"
 
 export default function T1({ content, handleInputChange, onSelectFile }) {
   let { textOne, textTwo, textThree, frontImg } = content.front;
@@ -28,49 +29,66 @@ export default function T1({ content, handleInputChange, onSelectFile }) {
         </div>
         <div className="col-10 col-lg-6">
           <h6 className="mb-4">Edit:</h6>
-          <form>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                value={textTwo}
-                name="front.textTwo"
-                onFocus={e => e.target.select()}
-                onChange={e => handleInputChange(e)}
-              />
-              <input
-                type="text"
-                className="form-control"
-                value={textThree}
-                name="front.textThree"
-                onFocus={e => e.target.select()}
-                onChange={e => handleInputChange(e)}
-              />
-              <input
-                className="form-control"
-                type="file"
-                name="front.frontImg"
-                onChange={e => onSelectFile(e)}
-              />
-              <textarea
-                className="form-control"
-                rows="5"
-                value={textOne}
-                name="front.textOne"
-                onFocus={e => e.target.select()}
-                onChange={e => handleInputChange(e)}
-              />
-            </div>
-            <input
-              className="form-control"
-              type="text"
-              name="templateName"
-              onChange={e => handleInputChange(e)}
-            />
-          </form>
+          <UserConsumer>
+            {({ user }) => {
+              return (<form>
+                <div className="form-group">
+
+                  {/* textTwo */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={textTwo}
+                    name="front.textTwo"
+                    onFocus={e => e.target.select()}
+                    onChange={e => handleInputChange(e)}
+                  />
+
+                  {/* textThree */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={textThree}
+                    name="front.textThree"
+                    onFocus={e => e.target.select()}
+                    onChange={e => handleInputChange(e)}
+                  />
+
+                  {/* frontImg */}
+                  <input
+                    className="form-control"
+                    type="file"
+                    name="front.frontImg"
+                    onChange={e => onSelectFile(e)}
+                  />
+
+                  {/* mainText */}
+                  <textarea
+                    className="form-control"
+                    rows="5"
+                    value={textOne}
+                    name="front.textOne"
+                    onFocus={e => e.target.select()}
+                    onChange={e => handleInputChange(e)}
+                  />
+                </div>
+
+                {/* template name CANNOT BE DUPLICATE */}
+                <label htmlFor="templateName">Set Template Name</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  id="templateName"
+                  name="templateName"
+                  placeholder="My Template..."
+                  onChange={e => handleInputChange(e)}
+                />
+              </form>)
+            }}
+          </UserConsumer>
         </div>
       </div>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
 

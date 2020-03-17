@@ -8,7 +8,7 @@ import CartBtn from "./Cart/CartBtn";
 export default class Navbar extends Component {
   render() {
     return (
-      <NavWrapper className="navbar navbar-expand-sm px-sm-3 top-fixed">
+      <NavWrapper className="navbar navbar-expand-sm px-sm-3">
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img src={logo} alt="logo" />
@@ -32,7 +32,7 @@ export default class Navbar extends Component {
             </li>
             <li className="nav-item ml-2">
               <NavLink className="nav-link" to="/new-card">
-                Create New Card
+                Make Insert
               </NavLink>
             </li>
           </ul>
@@ -47,6 +47,10 @@ export default class Navbar extends Component {
 }
 
 const NavWrapper = styled.nav`
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
   background: var(--mainWhite);
   box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.3);
   img {

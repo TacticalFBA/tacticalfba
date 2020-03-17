@@ -9,11 +9,18 @@ import T1 from "./T1";
 import T2 from "./T2";
 
 export default function EditTemplate({ history, match }) {
-  const [content, setContent] = useState(sampleTemplate);
+
+  // initialize template content with pid and uid
+  const pid = parseInt(match.params.pid);
+  const uid = JSON.parse(localStorage.getItem("uid"));
+  let tempContent = sampleTemplate;
+  tempContent.uid = uid;
+  tempContent.pid = pid;
+
+  const [content, setContent] = useState(tempContent);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  const pid = parseInt(match.params.pid);
 
   const handleColorChange = color => {
     let newContent = Object.assign({}, content);
@@ -46,40 +53,59 @@ export default function EditTemplate({ history, match }) {
     setContent(newContent);
   };
 
-  const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        // progrss function ....
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress({ progress });
-      },
-      error => {
-        // error function ....
-        console.log(error);
-      },
-      () => {
-        // complete function ....
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-            let newContent = Object.assign({}, content);
-            newContent.front.frontImg = url;
-            setContent(newContent);
-          });
-      }
-    );
+  const saveTemp = () => {
+    if (localStorage.getItem("template") === null) {
+      localStorage.setItem("template", JSON.stringify([content]));
+    } else {
+      let newTemplate = JSON.parse(localStorage.getItem("template"));
+      newTemplate = [...newTemplate, content];
+      localStorage.setItem("template", JSON.stringify(newTemplate));
+    }
+
+    history.push(`/address/${content.templateName}`);
+
+    // const name = `${Math.random()}${image.name}`;
+    // const uploadTask = storage.ref(`images/${name}`).put(image);
+    // uploadTask.on(
+    //   "state_changed",
+    //   snapshot => {
+    //     // progrss function ....
+    //     const newProgress = Math.round(
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     );
+    //     setProgress(newProgress);
+    //   },
+    //   error => {
+    //     // error function ....
+    //     console.log(error);
+    //   },
+    //   () => {
+    //     // complete function ....
+    //     storage
+    //       .ref("images")
+    //       .child(image.name)
+    //       .getDownloadURL()
+    //       .then(url => {
+    //         // console.log(url);
+    //         let newContent = Object.assign({}, content);
+    //         newContent.front.frontImg = url;
+    //         setContent(newContent);
+    //         db.collection("savedTemplates").add(content)
+    //           .then(() => {
+    //             console.log("Document successfully written!");
+    //             history.push("/address");
+    //           })
+    //           .catch(error => {
+    //             console.error("Error writing document: ", error);
+    //           });
+    //       });
+    //   }
+    // );
   };
 
-  const saveTemp = () => {
-    handleUpload();
-  };
+  // const saveTemp = async () => {
+  //   await handleUpload();
+  // };
 
   const renderTemplate = id => {
     switch (id) {
@@ -115,28 +141,29 @@ export default function EditTemplate({ history, match }) {
   };
 
   return (
-    <ProductConsumer>
-      {value => {
-        const { addToCart } = value;
-        return (
-          <React.Fragment>
-            <h4>Edit Template: </h4>
-            <ThemeColor
-              color={content.themeColor}
-              handleColorChange={handleColorChange}
-            />
-            <div>{renderTemplate(pid)}</div>
-            <progress value={progress} max="100" />
-            <button
-              className="btn btn-small btn-primary"
-              type="button"
-              onClick={saveTemp}
-            >
-              save
+    <div className="container pt-5">
+      <ProductConsumer>
+        {value => {
+          return (
+            <div>
+              <h4 className="pt-5">Edit Template: </h4>
+              <ThemeColor
+                color={content.themeColor}
+                handleColorChange={handleColorChange}
+              />
+              <div>{renderTemplate(pid)}</div>
+              <progress value={progress} max="100" />
+              <button
+                className="btn btn-small btn-primary"
+                type="button"
+                onClick={saveTemp}
+              >
+                save
             </button>
-          </React.Fragment>
-        );
-      }}
-    </ProductConsumer>
+            </div>
+          );
+        }}
+      </ProductConsumer>
+    </div>
   );
 }

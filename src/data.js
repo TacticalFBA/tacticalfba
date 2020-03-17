@@ -1,5 +1,6 @@
 export const sampleTemplate = {
-  uid: "visitor",
+  uid: "",
+  pid: "",
   templateName: "sample",
   themeColor: "#f0523c",
   front: {
@@ -19,6 +20,7 @@ export const sampleTemplate = {
 export const products = [
   {
     pid: 1,
+    cid: "",
     type: "Insert",
     name: "Basic",
     img: "img/template-1.jpg",
@@ -27,10 +29,11 @@ export const products = [
     inCart: false,
     count: 0,
     total: 0,
-    paid: false
+    address: ""
   },
   {
     pid: 2,
+    cid: "",
     type: "Insert",
     name: "Natural",
     img: "img/template-1.jpg",
@@ -39,10 +42,11 @@ export const products = [
     inCart: false,
     count: 0,
     total: 0,
-    paid: false
+    address: ""
   },
   {
     pid: 3,
+    cid: "",
     type: "Insert",
     name: "BNW",
     img: "img/template-1.jpg",
@@ -51,6 +55,6 @@ export const products = [
     inCart: false,
     count: 0,
     total: 0,
-    paid: false
+    address: ""
   }
 ];

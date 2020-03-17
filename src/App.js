@@ -11,12 +11,13 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Prices from "./components/Prices";
 import Contact from "./components/Contact";
-import Landing from "./components/Landing";
+import Landing from "./components/Landing/Landing.js"
 import TemplateList from "./components/Insert/TemplateList";
 import LoginModal from "./components/Account/LoginModal";
 import Account from "./components/Account/Account";
 import Cart from "./components/Cart/Cart";
 import EditTemplate from "./components/Insert/EditTemplate.jsx";
+import Address from "./components/Address/Address"
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
       <header className="App-header">
         <Navbar />
       </header>
-      <main className="container py-5">
+      <main>
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/new-card" component={TemplateList} />
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/account" component={Account} />
           <Route path="/cart" component={Cart} />
           <Route path="/edit-template/:pid" component={EditTemplate} />
+          <Route path="/address/:tempName" component={Address} />
         </Switch>
         <LoginModal />
       </main>

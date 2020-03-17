@@ -8,6 +8,9 @@ export default function CartColumns() {
           <p className="text-uppercase">item</p>
         </div>
         <div className="col-10 mx-auto col-lg-2">
+          <p className="text-uppercase">factory</p>
+        </div>
+        <div className="col-10 mx-auto col-lg-2">
           <p className="text-uppercase">price</p>
         </div>
         <div className="col-10 mx-auto col-lg-2">
@@ -17,13 +20,9 @@ export default function CartColumns() {
           <p className="text-uppercase">total</p>
         </div>
         <div className="col-10 mx-auto col-lg-2">
-          <p className="text-uppercase">edit</p>
-        </div>
-        <div className="col-10 mx-auto col-lg-2">
-          <p className="text-uppercase">remove</p>
         </div>
       </div>
-      <hr className="mb-5 mt-0" />
+      <hr />
     </div>
   );
 }
