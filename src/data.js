@@ -2,18 +2,17 @@ export const sampleTemplate = {
   uid: "",
   pid: "",
   templateName: "sample",
-  themeColor: "#f0523c",
+  themeColor: "#000",
   front: {
-    textOne:
-      "Hey there,<br/><br/>Thanks so much for supporting our small and growing Amazon business. <br/>We really hope you like our products, if you have any questions, feel free to reach out anytime. <br/>If you have a second, leaving us an honest review would help us out so much, as well as help other customers who might be looking for our products. <br/><br/>Thanks again!",
-    textTwo: "A note",
-    textThree: "James from TacticalFBA",
-    frontImg: `${process.env.PUBLIC_URL}/img/front-img.jpg`
+    messageBody:
+      `<p>Hey there,</p><br/><p>Thanks so much for supporting our small and growing Amazon business.</p><br/><p>We really hope you like our products, if you have any questions, feel free to reach out anytime.</p><br/><p>If you have a second, leaving us an honest review would help us out so much, as well as help other customers who might be looking for our products.</p><br/><p>Thanks again!</p>`,
+    sellerName: `<p>James</p><p>from</p><p>TacticalFBA</p>`,
+    facePhoto: `${process.env.PUBLIC_URL}/img/front-img.jpg`
   },
-  back: {
-    backText:
+  rear: {
+    messageBody:
       "We appreciate your support! Here is a promo code for 30% off on your next order: THANKYOU30",
-    backImg: `${process.env.PUBLIC_URL}/img/logo.png`
+    companyLogo: `${process.env.PUBLIC_URL} /img/logo.png`
   }
 };
 

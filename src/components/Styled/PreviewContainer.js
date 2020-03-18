@@ -6,4 +6,8 @@ export const PreviewContainer = styled.div`
   width: 30rem;
   height: 18rem;
   border: 1px solid #ccc;
+  p{
+    margin:0;
+    padding:0;
+  }
 `;

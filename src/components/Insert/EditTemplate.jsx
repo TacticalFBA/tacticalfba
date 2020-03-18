@@ -8,6 +8,12 @@ import ThemeColor from "./ThemeColor";
 import T1 from "./T1";
 import T2 from "./T2";
 
+// import editor
+import Editor from "./Editor";
+import { EditorState, convertFromHTML, ContentState } from "draft-js";
+import { stateToHTML } from 'draft-js-export-html';
+
+
 export default function EditTemplate({ history, match }) {
 
   // initialize template content with pid and uid
@@ -22,11 +28,46 @@ export default function EditTemplate({ history, match }) {
   const [progress, setProgress] = useState(0);
 
 
+  // Step One : default color - choose color - sync template
+
   const handleColorChange = color => {
     let newContent = Object.assign({}, content);
     newContent.themeColor = color.hex;
     setContent(newContent);
   };
+
+
+  // Step Two: select text area, pass the method to template
+
+  const [editorShow,setEditorShow] = useState(false);
+  const [part, setPart] = useState("messageBody");
+
+  const onSelect = (p) => {
+    setEditorShow(true);
+    setPart(p);
+    // get the default html of selected part
+    const html = content.front[p];
+    // set the default editor content
+    const blocksFromHTML = convertFromHTML(html);
+    const defaultContent = ContentState.createFromBlockArray(
+      blocksFromHTML.contentBlocks,
+      blocksFromHTML.entityMap
+    );
+    setEditorState(EditorState.createWithContent(defaultContent));
+  }
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const updateEditorState = (editorState) => {
+    setEditorState(editorState);
+    let contentState = editorState.getCurrentContent();
+    let html = stateToHTML(contentState);
+    let newContent = Object.assign({}, content);
+    newContent.front[part] = html;
+    setContent(newContent);
+  }
+
+  // Editor End
 
   const handleInputChange = e => {
     let newContent = Object.assign({}, content);
@@ -115,8 +156,7 @@ export default function EditTemplate({ history, match }) {
             pid={id}
             history={history}
             content={content}
-            handleInputChange={handleInputChange}
-            onSelectFile={onSelectFile}
+            onSelect={onSelect}
           />
         );
       case 2:
@@ -125,7 +165,6 @@ export default function EditTemplate({ history, match }) {
             pid={id}
             history={history}
             content={content}
-            handleInputChange={handleInputChange}
           />
         );
       default:
@@ -151,8 +190,27 @@ export default function EditTemplate({ history, match }) {
                 color={content.themeColor}
                 handleColorChange={handleColorChange}
               />
-              <div>{renderTemplate(pid)}</div>
-              <progress value={progress} max="100" />
+              <div className="row">
+                <div className="col-10 col-lg-6">{renderTemplate(pid)}</div>
+                <div className="col-10 col-lg-6">
+                  {editorShow === true && <Editor
+                    editorState={editorState}
+                    updateEditorState={updateEditorState} />}
+                </div>
+              </div>
+
+              {/* template name CANNOT BE DUPLICATE */}
+
+              <label htmlFor="templateName">Set Template Name</label>
+              <input
+                className="form-control"
+                type="text"
+                id="templateName"
+                name="templateName"
+                placeholder="My Template..."
+                onChange={e => handleInputChange(e)}
+              />
+              <progress className="d-block" value={progress} max="100" />
               <button
                 className="btn btn-small btn-primary"
                 type="button"

@@ -1,17 +1,9 @@
 import React from 'react'
-// import { db } from "../../config/Firebase"
 import { ProductConsumer } from "../../context/productContext"
 
 export default function AddItem({ add, match, history }) {
     const templateName = match.params.tempName;
-    const { aid, factory, address, zipcode, contact, email, mobile } = add;
-    // const handleDel = () => {
-    //     db.collection("address").doc(aid)
-    //         .delete()
-    //         .catch(err => {
-    //             console.log(err.message);
-    //         })
-    // }
+    const { factory, address, zipcode, contact, email, mobile } = add;
     return (
         <ProductConsumer>
             {
@@ -39,7 +31,6 @@ export default function AddItem({ add, match, history }) {
                         </div>
                         <div className="col-10 mx-auto col-lg-1">
                             <button className="btn btn-sm text-orange" onClick={() => addToCart(history, templateName, add)}>Use</button>
-                            {/* <button className="btn btn-sm text-muted" onClick={handleDel}>Delete</button> */}
                         </div>
                     </div>)
                 }

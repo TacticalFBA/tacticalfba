@@ -3,6 +3,7 @@
   --darkOrange: #ed3218;
   --mainWhite: #fafafa;
   --mainDark: #0a0908;
+  --mainGrey: #b1b1b1;
 }
 *{
   margin: 0;
@@ -20,6 +21,11 @@ html,body,main {
 .text-orange {
   color: var(--mainOrange);
 }
+
+.text-grey {
+  color: var(--mainGrey);
+}
+
 .btn-black {
   background: transparent;
   text-transform: capitalize;
@@ -39,22 +45,10 @@ html,body,main {
   font-size: 1.2rem;
   color: var(--mainOrange);
 }
-.btn-primary,
-.btn-outline-primary:hover,
-.badge-primary {
-  color: #fff;
-  background-color: var(--mainOrange);
-  border-color: var(--mainOrange);
-}
-.btn-primary:hover {
-  background-color: var(--darkOrange);
-  border-color: var(--darkOrange);
-}
-.btn-outline-primary {
-  color: var(--mainOrange);
-  border-color: var(--mainOrange);
-}
 
+.btn:hover {
+  color: var(--darkOrange) !important;
+}
 
 .juzhong {
   display: flex;
@@ -63,10 +57,13 @@ html,body,main {
   vertical-align: center;
 }
 
+.pointer {
+  cursor: pointer;
+}
 
 /* responsive */
 
-@media (max-width: 768px) { 
+@media (max-width: 375px) { 
 
   .container {
       padding: 0 8%;
