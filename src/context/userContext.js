@@ -7,6 +7,7 @@ class UserProvider extends Component {
   state = {
     user: null,
     addList: [],
+    tempList: [],
     modalOpen: false
   };
 
@@ -24,22 +25,33 @@ class UserProvider extends Component {
           email: email
         };
         this.setState({ user: tempUser });
-        localStorage.setItem("uid", JSON.stringify(this.state.user.uid));
-        this.synceAdd(uid);
+        this.syncAdd(uid);
+        this.syncTemp(uid);
       } else {
         this.setState({ user: null });
       }
     });
   };
 
-  synceAdd = uid => {
+  syncAdd = uid => {
     db.collection("address").where("uid", "==", uid)
       .onSnapshot(snapshot => {
         const addList = snapshot.docs.map(doc => {
           let temp = doc.data();
           return temp = { ...temp, aid: doc.id };
         })
-        this.setState({ addList: addList })
+        this.setState({ addList })
+      })
+  }
+
+  syncTemp = uid => {
+    db.collection("templates").where("uid", "==", uid)
+      .onSnapshot(snapshot => {
+        const tempList = snapshot.docs.map(doc => {
+          let temp = doc.data();
+          return temp = { ...temp, tid: doc.id };
+        })
+        this.setState({ tempList })
       })
   }
 

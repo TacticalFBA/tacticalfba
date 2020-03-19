@@ -13,8 +13,14 @@ import Editor from "./Editor";
 import { EditorState, convertFromHTML, ContentState } from "draft-js";
 import { stateToHTML } from 'draft-js-export-html';
 
+import ImageUploader from "./ImageUploader"
 
 export default function EditTemplate({ history, match }) {
+
+  //get random cid
+  const createRandomId = () => {
+    return (Math.random() * 10000000).toString(16).substr(0, 4) + '-' + (new Date()).getTime() + '-' + Math.random().toString().substr(2, 5);
+  }
 
   // initialize template content with pid and uid
   const pid = parseInt(match.params.pid);
@@ -24,7 +30,8 @@ export default function EditTemplate({ history, match }) {
   tempContent.pid = pid;
 
   const [content, setContent] = useState(tempContent);
-  const [image, setImage] = useState(null);
+  const [frontImage, setFrontImage] = useState(null);
+  const [rearImage, setRearImage] = useState(null);
   const [progress, setProgress] = useState(0);
 
 
@@ -39,21 +46,39 @@ export default function EditTemplate({ history, match }) {
 
   // Step Two: select text area, pass the method to template
 
-  const [editorShow,setEditorShow] = useState(false);
-  const [part, setPart] = useState("messageBody");
+  const [editorShow, setEditorShow] = useState(false);
+  const [imgUploaderShow, setImgUploaderShow] = useState(false);
+  const [part, setPart] = useState("");
+  const [side, setSide] = useState("");
+  const [item, setItem] = useState("");
 
   const onSelect = (p) => {
-    setEditorShow(true);
-    setPart(p);
-    // get the default html of selected part
-    const html = content.front[p];
-    // set the default editor content
-    const blocksFromHTML = convertFromHTML(html);
-    const defaultContent = ContentState.createFromBlockArray(
-      blocksFromHTML.contentBlocks,
-      blocksFromHTML.entityMap
-    );
-    setEditorState(EditorState.createWithContent(defaultContent));
+
+    p = p.split("/");
+    const type = p[0];
+    const side = p[1];
+    const item = p[2];
+    setSide(side);
+    setItem(item);
+
+    if (type === "text") {
+      setEditorShow(true);
+      setImgUploaderShow(false);
+      setPart(item);
+      // get the default html of selected part
+      const html = content[side][item];
+      // set the default editor content
+      const blocksFromHTML = convertFromHTML(html);
+      const defaultContent = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap
+      );
+      setEditorState(EditorState.createWithContent(defaultContent));
+    }
+    if (type === "img") {
+      setEditorShow(false);
+      setImgUploaderShow(true);
+    }
   }
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -63,7 +88,7 @@ export default function EditTemplate({ history, match }) {
     let contentState = editorState.getCurrentContent();
     let html = stateToHTML(contentState);
     let newContent = Object.assign({}, content);
-    newContent.front[part] = html;
+    newContent[side][item] = html;
     setContent(newContent);
   }
 
@@ -71,82 +96,77 @@ export default function EditTemplate({ history, match }) {
 
   const handleInputChange = e => {
     let newContent = Object.assign({}, content);
-    if (e.currentTarget.name.includes(".")) {
-      const arr = e.currentTarget.name.split(".");
-      const side = arr[0];
-      const name = arr[1];
-      newContent[side][name] = e.currentTarget.value;
-    } else {
-      newContent[e.currentTarget.name] = e.currentTarget.value;
-    }
+    newContent[e.currentTarget.name] = e.currentTarget.value;
     setContent(newContent);
   };
 
   const onSelectFile = e => {
     const file = e.target.files[0];
-    setImage(file);
+    if (side === "front") {
+      setFrontImage(file);
+    } else {
+      setRearImage(file);
+    }
+
     const url = URL.createObjectURL(file);
-    const arr = e.currentTarget.name.split(".");
-    const side = arr[0];
-    const name = arr[1];
     let newContent = Object.assign({}, content);
-    newContent[side][name] = url;
+    newContent[side][item] = url;
     setContent(newContent);
   };
 
-  const saveTemp = () => {
-    if (localStorage.getItem("template") === null) {
-      localStorage.setItem("template", JSON.stringify([content]));
-    } else {
-      let newTemplate = JSON.parse(localStorage.getItem("template"));
-      newTemplate = [...newTemplate, content];
-      localStorage.setItem("template", JSON.stringify(newTemplate));
-    }
 
-    history.push(`/address/${content.templateName}`);
-
-    // const name = `${Math.random()}${image.name}`;
-    // const uploadTask = storage.ref(`images/${name}`).put(image);
-    // uploadTask.on(
-    //   "state_changed",
-    //   snapshot => {
-    //     // progrss function ....
-    //     const newProgress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //     setProgress(newProgress);
-    //   },
-    //   error => {
-    //     // error function ....
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     // complete function ....
-    //     storage
-    //       .ref("images")
-    //       .child(image.name)
-    //       .getDownloadURL()
-    //       .then(url => {
-    //         // console.log(url);
-    //         let newContent = Object.assign({}, content);
-    //         newContent.front.frontImg = url;
-    //         setContent(newContent);
-    //         db.collection("savedTemplates").add(content)
-    //           .then(() => {
-    //             console.log("Document successfully written!");
-    //             history.push("/address");
-    //           })
-    //           .catch(error => {
-    //             console.error("Error writing document: ", error);
-    //           });
-    //       });
-    //   }
-    // );
+  const saveTemp = (arr) => {
+    arr.forEach(file => upLoadImg(file.img, file.side, file.item))
   };
 
-  // const saveTemp = async () => {
-  //   await handleUpload();
-  // };
+  let itemsProcessed = 0;
+  const upLoadImg = (img, side, item) => {
+    const name = `${createRandomId()}__${img.name}`;
+    const uploadTask = storage.ref(`images/${name}`).put(img);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        // progrss function ....
+        const newProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(newProgress);
+      },
+      error => {
+        // error function ....
+        console.log(error);
+      },
+      () => {
+        // complete function ....
+        storage
+          .ref("images")
+          .child(name)
+          .getDownloadURL()
+          .then(url => {
+            // console.log(url);
+            let newContent = Object.assign({}, content);
+            newContent[side][item] = url;
+            setContent(newContent);
+            itemsProcessed++;
+            if (itemsProcessed === 2) {
+              saveToDb();
+            }
+          });
+      }
+    );
+
+  }
+
+  const saveToDb = () => {
+    db.collection("templates").add(content)
+      .then((docRef) => {
+        // console.log("Document successfully written!");
+        history.push(`/address/${docRef.id}`);
+      })
+      .catch(error => {
+        console.error("Error writing document: ", error);
+      });
+  }
 
   const renderTemplate = id => {
     switch (id) {
@@ -165,6 +185,7 @@ export default function EditTemplate({ history, match }) {
             pid={id}
             history={history}
             content={content}
+            onSelect={onSelect}
           />
         );
       default:
@@ -173,7 +194,7 @@ export default function EditTemplate({ history, match }) {
             pid={id}
             history={history}
             content={content}
-            handleInputChange={handleInputChange}
+            onSelect={onSelect}
           />
         );
     }
@@ -185,36 +206,54 @@ export default function EditTemplate({ history, match }) {
         {value => {
           return (
             <div>
+
+              {/* page title */}
               <h4 className="pt-5">Edit Template: </h4>
+              <p className="mb-5"> -- Hover over to edit --</p>
+
+              {/* preview area */}
+              <div className="mb-3">{renderTemplate(pid)}</div>
+
+              {/* edit area */}
+              <div>
+                {editorShow === true && <Editor
+                  editorState={editorState}
+                  updateEditorState={updateEditorState} />}
+                {
+                  imgUploaderShow === true && <ImageUploader onSelectFile={onSelectFile} />
+                }
+              </div >
+
+
               <ThemeColor
                 color={content.themeColor}
                 handleColorChange={handleColorChange}
               />
-              <div className="row">
-                <div className="col-10 col-lg-6">{renderTemplate(pid)}</div>
-                <div className="col-10 col-lg-6">
-                  {editorShow === true && <Editor
-                    editorState={editorState}
-                    updateEditorState={updateEditorState} />}
-                </div>
-              </div>
+              {/* choose theme color */}
+
 
               {/* template name CANNOT BE DUPLICATE */}
 
-              <label htmlFor="templateName">Set Template Name</label>
-              <input
-                className="form-control"
-                type="text"
-                id="templateName"
-                name="templateName"
-                placeholder="My Template..."
-                onChange={e => handleInputChange(e)}
-              />
+              <div className="input-group my-3">
+                Pick a name for your template: <input type="text" placeholder="My Template" name="templateName" onChange={e => handleInputChange(e)} />
+              </div>
+
               <progress className="d-block" value={progress} max="100" />
+
               <button
                 className="btn btn-small btn-primary"
                 type="button"
-                onClick={saveTemp}
+                onClick={() => saveTemp([
+                  {
+                    img: frontImage,
+                    side: "front",
+                    item: "facePhoto"
+                  }, {
+                    img: rearImage,
+                    side: "rear",
+                    item: "companyLogo"
+                  }
+                ])}
               >
                 save
             </button>
@@ -222,6 +261,6 @@ export default function EditTemplate({ history, match }) {
           );
         }}
       </ProductConsumer>
-    </div>
+    </div >
   );
 }

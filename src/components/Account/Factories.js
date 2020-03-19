@@ -8,6 +8,12 @@ export default function Factories({ addList }) {
     const handleDel = aid => {
         db.collection("address").doc(aid)
             .delete()
+            .then(() => {
+                // remove cart item that uses this address
+                const cart = JSON.parse(localStorage.getItem("cart"))
+                const newCart = cart.filter(item => item.aid !== aid);
+                localStorage.setItem("cart", JSON.stringify(newCart));
+            })
             .catch(err => {
                 console.log(err.message);
             })

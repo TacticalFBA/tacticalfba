@@ -2,7 +2,7 @@ import React from 'react'
 import { ProductConsumer } from "../../context/productContext"
 
 export default function AddItem({ add, match, history }) {
-    const templateName = match.params.tempName;
+    const tid = match.params.tid;
     const { factory, address, zipcode, contact, email, mobile } = add;
     return (
         <ProductConsumer>
@@ -30,7 +30,7 @@ export default function AddItem({ add, match, history }) {
                             {mobile}
                         </div>
                         <div className="col-10 mx-auto col-lg-1">
-                            <button className="btn btn-sm text-orange" onClick={() => addToCart(history, templateName, add)}>Use</button>
+                            <button className="btn btn-sm text-orange" onClick={() => addToCart(history, tid, add.aid, add.factory)}>Use</button>
                         </div>
                     </div>)
                 }

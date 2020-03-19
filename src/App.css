@@ -46,19 +46,19 @@ html,body,main {
   color: var(--mainOrange);
 }
 
-.btn:hover {
-  color: var(--darkOrange) !important;
-}
-
 .juzhong {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  vertical-align: center;
+  align-items: center;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.highlight:hover{
+  border: .125rem dashed var(--mainDark);
 }
 
 /* responsive */

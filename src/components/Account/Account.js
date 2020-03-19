@@ -27,7 +27,7 @@ export default function Account() {
   return (
     <section className="container pt-5">
       <UserConsumer>
-        {({ user, addList }) => {
+        {({ user, addList, tempList }) => {
           if (user !== null) {
             return (
               <div className="pt-5">
@@ -48,7 +48,7 @@ export default function Account() {
                 </div>
                 <hr />
                 {show.orders === "show" && <Orders />}
-                {show.templates === "show" && <Templates />}
+                {show.templates === "show" && <Templates tempList={tempList} />}
                 {show.factories === "show" && <Factories addList={addList} />}
               </div>
             );

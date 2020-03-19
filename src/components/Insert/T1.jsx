@@ -5,29 +5,38 @@ import { PreviewContainer } from "../Styled/PreviewContainer";
 
 export default function T1({ content, onSelect }) {
   let { messageBody, sellerName, facePhoto } = content.front;
-  // let { backText, backImg } = content.back;
+  let { rearMessage, companyLogo } = content.rear;
   let themeColor = {
     background: content.themeColor
   };
   return (
-    <React.Fragment>
+    <div className="row">
 
       {/* front */}
-      <div className="my-4">Front</div>
+      <div className="col-lg-6">
+        <h6 className="mb-3">Front:</h6>
+        <PreviewContainer>
+          <LeftWrapper className="juzhong" style={themeColor}>
+            <img className="pointer highlight" src={facePhoto} alt="front" onClick={() => onSelect("img/front/facePhoto")} />
+            <div className="pointer highlight" onClick={() => onSelect("text/front/sellerName")}>{Parser(sellerName)}</div>
+          </LeftWrapper>
+          <RightWrapper className="pointer highlight" onClick={() => onSelect("text/front/messageBody")}>{Parser(messageBody)}
+          </RightWrapper>
+        </PreviewContainer>
+      </div>
 
-      <h6 className="mb-4">Preview:</h6>
+      {/* rear */}
+      <div className="col-lg-6">
+        <h6 className="mb-3">Rear:</h6>
+        <PreviewContainer className="juzhong" style={themeColor}>
+          <RearWrapper>
+            <img className="pointer highlight" src={companyLogo} alt="rear" onClick={() => onSelect("img/rear/companyLogo")} />
+            <div className="pointer highlight" onClick={() => onSelect("text/rear/rearMessage")}>{Parser(rearMessage)}</div>
+          </RearWrapper>
+        </PreviewContainer>
+      </div>
 
-      <PreviewContainer className="mt-3">
-        <LeftWrapper className="juzhong" style={themeColor}>
-          <img src={facePhoto} alt="front" />
-          <div className="pointer" onClick={() => onSelect("sellerName")}> {Parser(sellerName)}</div>
-        </LeftWrapper>
-        <RightWrapper className="pointer juzhong" onClick={() => onSelect("messageBody")}>
-          {Parser(messageBody)}
-        </RightWrapper>
-      </PreviewContainer>
-
-    </React.Fragment >
+    </div>
   );
 }
 
@@ -35,11 +44,11 @@ const LeftWrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  padding: 1.5rem;
-  width: 7rem;
-  height: 18rem;
+  padding: 1rem;
+  width: 23%;
+  height: 100%;
   color: var(--mainWhite);
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-align: center;
   img {
     margin: 1rem 0;
@@ -53,8 +62,22 @@ const RightWrapper = styled.div`
   right: 0;
   top: 0;
   padding: 1.5rem 1.75rem 1.5rem 1.2rem;
-  width: 23rem;
-  height: 18rem;
+  width: 77%;
+  height: 100%;
   background: var(--mainWhite);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 `;
+
+const RearWrapper = styled.div`
+width: 70%;
+text-align: center;
+img {
+  width: 15%;
+}
+div {
+  margin-top: 1rem;
+  color: var(--mainWhite);
+  width: 100%;
+  font-size: 0.8rem;
+}
+`

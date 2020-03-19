@@ -1,17 +1,17 @@
 import React from "react";
 
 export default function CartItem({ item, value }) {
-  const { cid, type, name, price, count, total, address, content } = item;
+  const { cid, type, name, price, count, total, templateName, factory } = item;
   const { increment, decrement, removeItem } = value;
   return (
     <div className="row my-2 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">
         <span className="d-lg-none">product: </span>
-        {name} {type} - {content.templateName}
+        {name} {type} - {templateName}
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <span className="d-lg-none">Factory: </span>
-        {address.factory}
+        {factory}
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <span className="d-lg-none">price: </span>${price}

@@ -1,7 +1,6 @@
 
 import React from "react";
 import { inlineStyles } from "./constants";
-import styled from "styled-components";
 import { ToolbarItem, Container } from "./common";
 import { RichUtils } from "draft-js";
 

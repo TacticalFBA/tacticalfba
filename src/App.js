@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/account" component={Account} />
           <Route path="/cart" component={Cart} />
           <Route path="/edit-template/:pid" component={EditTemplate} />
-          <Route path="/address/:tempName" component={Address} />
+          <Route path="/address/:tid" component={Address} />
         </Switch>
         <LoginModal />
       </main>

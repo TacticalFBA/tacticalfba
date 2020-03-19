@@ -1,14 +1,25 @@
 import React from "react";
-import TemplateItem from "./TemplateItem";
 
+import { UserConsumer } from "../../context/userContext";
 import { ProductConsumer } from "../../context/productContext";
+
 import ChooseTemp from "./ChooseTemp";
+import TemplateItem from "./TemplateItem";
 
 
 export default function TemplateList({ history }) {
+
   return (
+
     <div className="container pt-5">
-      {localStorage.getItem("template") !== null && <ChooseTemp history={history} />}
+      < UserConsumer>
+        {({ tempList }) => {
+          return (<div>
+            {tempList.length > 0 && <ChooseTemp history={history} myTemps={tempList} />}
+          </div>
+          )
+        }}
+      </UserConsumer>
       <div>
         <h4 className="pt-5">Choose a Template</h4>
         {/* to be changed to a link */}
