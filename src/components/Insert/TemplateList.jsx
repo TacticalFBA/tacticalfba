@@ -1,7 +1,7 @@
 import React from "react";
 
-import { UserConsumer } from "../../context/userContext";
-import { ProductConsumer } from "../../context/productContext";
+import { UserConsumer } from "../../context";
+import { products } from "../../data"
 
 import ChooseTemp from "./ChooseTemp";
 import TemplateItem from "./TemplateItem";
@@ -25,13 +25,9 @@ export default function TemplateList({ history }) {
         {/* to be changed to a link */}
         <span> or upload your own artwork</span>
         <div className="row mt-5">
-          <ProductConsumer>
-            {({ products }) => {
-              return products.map(product => {
-                return <TemplateItem key={product.pid} product={product} />;
-              });
-            }}
-          </ProductConsumer>
+          {
+            products.map(product => <TemplateItem key={product.pid} product={product} />)
+          }
         </div>
       </div>
     </div>

@@ -17,6 +17,9 @@ html,body,main {
   color: var(--mainDark) !important;
   scroll-behavior:smooth;
 }
+btn:hover {
+  outline: none !important;
+}
 
 .text-orange {
   color: var(--mainOrange);
@@ -24,6 +27,15 @@ html,body,main {
 
 .text-grey {
   color: var(--mainGrey);
+}
+
+.btn-orange {
+  background-color: var(--mainOrange) !important;
+  color: var(--mainWhite) !important;
+}
+
+.btn-orange:hover {
+  background-color: var(--darkOrange) !important;
 }
 
 .btn-black {

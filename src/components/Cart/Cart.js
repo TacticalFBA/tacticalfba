@@ -1,23 +1,24 @@
 import React from 'react'
-import { UserConsumer } from "../../context/userContext";
+import { UserConsumer } from "../../context";
+import { FullPageContainer } from "../Styled/FullPageContainer"
 
 import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCart";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
 
-export default function Cart() {
+export default function Cart({ history }) {
 
   return (
-    <section className="pt-5">
+    <FullPageContainer>
       <UserConsumer>
-        {({ cartList, increment, decrement, removeItem, totalCart }) => {
+        {({ user, cartList, increment, decrement, removeItem, totalCart, clearCart }) => {
           if (cartList.length > 0) {
             return (
               <div className="container pt-5">
                 <CartColumns />
                 <CartList cart={cartList} increment={increment} decrement={decrement} removeItem={removeItem} />
-                <CartTotals totalCart={totalCart} />
+                <CartTotals uid={user.uid} cart={cartList} totalCart={totalCart} clearCart={clearCart} history={history} />
               </div>
             );
           } else {
@@ -25,6 +26,6 @@ export default function Cart() {
           }
         }}
       </UserConsumer>
-    </section>
+    </FullPageContainer>
   );
 }

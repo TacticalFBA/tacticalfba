@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ProductConsumer } from "../../context/productContext";
 import { sampleTemplate } from "../../data";
 import { db, storage } from "../../config/Firebase";
-import { UserConsumer } from "../../context/userContext"
+import { UserConsumer } from "../../context"
 
 // import components
 import ThemeColor from "./ThemeColor";
@@ -203,74 +202,69 @@ export default function EditTemplate({ history, match }) {
 
   return (
     <div className="container pt-5">
-      <ProductConsumer>
-        {value => {
-          return (
-            <div>
 
-              {/* page title */}
-              <h4 className="pt-5">Edit Template: </h4>
-              <p className="mb-5"> -- Hover over to edit --</p>
+      <div>
 
-              {/* preview area */}
-              <div className="mb-3">{renderTemplate(pid)}</div>
+        {/* page title */}
+        <h4 className="pt-5">Edit Template: </h4>
+        <p className="mb-5"> -- Hover over to edit --</p>
 
-              {/* edit area */}
-              <div>
-                {editorShow === true &&
-                  (<div>
-                    <p>Edit: {part}</p>
-                    <Editor
-                      editorState={editorState}
-                      updateEditorState={updateEditorState} />
-                  </div>)}
-                {
-                  imgUploaderShow === true &&
-                  (<div>
-                    <p>Edit: {part}</p>
-                    <ImageUploader onSelectFile={onSelectFile} />
-                  </div>)}
-              </div >
+        {/* preview area */}
+        <div className="mb-3">{renderTemplate(pid)}</div>
 
-              <ThemeColor
-                color={content.themeColor}
-                handleColorChange={handleColorChange}
-              />
-              {/* choose theme color */}
+        {/* edit area */}
+        <div>
+          {editorShow === true &&
+            (<div>
+              <p>Edit: {part}</p>
+              <Editor
+                editorState={editorState}
+                updateEditorState={updateEditorState} />
+            </div>)}
+          {
+            imgUploaderShow === true &&
+            (<div>
+              <p>Edit: {part}</p>
+              <ImageUploader onSelectFile={onSelectFile} />
+            </div>)}
+        </div >
+
+        <ThemeColor
+          color={content.themeColor}
+          handleColorChange={handleColorChange}
+        />
+        {/* choose theme color */}
 
 
-              {/* template name CANNOT BE DUPLICATE */}
+        {/* template name CANNOT BE DUPLICATE */}
 
-              <div className="input-group my-3">
-                Pick a name for your template: <input type="text" placeholder="My Template" name="templateName" onChange={e => handleInputChange(e)} />
-              </div>
+        <div className="input-group my-3">
+          Pick a name for your template: <input type="text" placeholder="My Template" name="templateName" onChange={e => handleInputChange(e)} />
+        </div>
 
-              <progress className="d-block" value={progress} max="100" />
+        <progress className="d-block" value={progress} max="100" />
 
-              <UserConsumer>
-                {({ user }) => <button
-                  className="btn btn-small btn-primary"
-                  type="button"
-                  onClick={() => saveTemp(user.uid, [
-                    {
-                      img: frontImage,
-                      side: "front",
-                      item: "facePhoto"
-                    }, {
-                      img: rearImage,
-                      side: "rear",
-                      item: "companyLogo"
-                    }
-                  ])}
-                >
-                  save
+        <UserConsumer>
+          {({ user }) => <button
+            className="btn btn-small btn-orange"
+            type="button"
+            onClick={() => saveTemp(user.uid, [
+              {
+                img: frontImage,
+                side: "front",
+                item: "facePhoto"
+              }, {
+                img: rearImage,
+                side: "rear",
+                item: "companyLogo"
+              }
+            ])}
+          >
+            save
             </button>}
 
-              </UserConsumer>
-            </div>
-          );
-        }}
-      </ProductConsumer>
+        </UserConsumer>
+      </div>
     </div >
   );
 }

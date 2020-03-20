@@ -25,22 +25,22 @@ export const products = [
     count: 0,
     total: 0
   },
-  {
-    pid: 2,
-    type: "Insert",
-    name: "Natural",
-    img: "img/template-1.jpg",
-    price: 10,
-    count: 0,
-    total: 0
-  },
-  {
-    pid: 3,
-    type: "Insert",
-    name: "BNW",
-    img: "img/template-1.jpg",
-    price: 10,
-    count: 0,
-    total: 0
-  }
+  // {
+  //   pid: 2,
+  //   type: "Insert",
+  //   name: "Natural",
+  //   img: "img/template-1.jpg",
+  //   price: 10,
+  //   count: 0,
+  //   total: 0
+  // },
+  // {
+  //   pid: 3,
+  //   type: "Insert",
+  //   name: "BNW",
+  //   img: "img/template-1.jpg",
+  //   price: 10,
+  //   count: 0,
+  //   total: 0
+  // }
 ];

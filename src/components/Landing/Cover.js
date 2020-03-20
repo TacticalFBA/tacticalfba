@@ -1,18 +1,30 @@
 import React from 'react'
-import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
+import { UserConsumer } from "../../context"
 
 export default function Cover() {
+
     return (
         <CoverWrapper>
             <div className="text-wrap">
-                <h2>Get more reviews with TacticalFBA</h2>
-                <p className="lead">Research shows that well-worded product inserts help to increase the frequency of Amazon
-                reviews. We can
-                help design, print, and ship your product insert directly to your factory in China for immediate
-                packaging.
+                <div>
+                    <h2>Get more reviews with TacticalFBA</h2>
+                    <p className="lead">Research shows that well-worded product inserts help to increase the frequency of Amazon
+                    reviews. We can
+                    help design, print, and ship your product insert directly to your factory in China for immediate
+                    packaging.
           </p>
-                <Link to="/new-card" className="btn btn-primary">Get Started</Link>
+                </div>
+                <UserConsumer>
+                    {({ user, openModal }) => {
+                        if (user === null) {
+                            return (<button className="btn btn-orange" onClick={() => openModal()}>Get Started</button>)
+                        } else {
+                            return (<Link to="/new-card" className="btn btn-orange">Get Started</Link>)
+                        }
+                    }}
+                </UserConsumer>
             </div>
         </CoverWrapper>
     )

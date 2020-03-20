@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { auth, db } from "../config/Firebase";
-import { products } from "../data"
+import { auth, db } from "./config/Firebase";
+import { products } from "./data"
 
 const UserContext = React.createContext();
 
@@ -10,6 +10,7 @@ class UserProvider extends Component {
     user: null,
     addList: [],
     tempList: [],
+    orderList: [],
     cartList: [],
     totalCart: {
       cartSubtotal: 0,
@@ -36,6 +37,7 @@ class UserProvider extends Component {
         this.setState({ user: tempUser });
         this.syncTemp(uid);
         this.syncAdd(uid);
+        this.syncOrder(uid);
       } else {
         this.setState({ user: null });
       }
@@ -64,6 +66,19 @@ class UserProvider extends Component {
         return tempDoc = { ...tempDoc, tid: doc.id };
       })
       this.setState({ tempList });
+      // console.log("tempReady");
+    })
+  }
+
+  syncOrder = uid => {
+    const ref = db.collection("users").doc(uid).collection("order");
+    ref.onSnapshot(snapshot => {
+      const orderList = snapshot.docs.map(doc => {
+        // adding document id to the data
+        let tempDoc = doc.data();
+        return tempDoc = { ...tempDoc, oid: doc.id };
+      })
+      this.setState({ orderList });
       // console.log("tempReady");
     })
   }
@@ -129,7 +144,8 @@ class UserProvider extends Component {
     const price = tempProduct.price;
     const type = tempProduct.type;
     const name = tempProduct.name;
-    const cid = `tid:${tid}&aid${aid}`;
+    const cid = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36);
+
 
     const currentCart = this.state.cartList;
     const exist = currentCart.filter(item => item.cid === cid)
@@ -212,6 +228,14 @@ class UserProvider extends Component {
     })
   }
 
+  clearCart = () => {
+    this.setState({
+      cartList: []
+    }, () => {
+      this.addTotals()
+    })
+  }
+
   // cart manipulation end
 
 
@@ -249,6 +273,7 @@ class UserProvider extends Component {
                 increment: this.increment,
                 decrement: this.decrement,
                 removeItem: this.removeItem,
+                clearCart: this.clearCart,
                 //other fns
                 handleDel: this.handleDel,
               }}

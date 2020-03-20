@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { UserConsumer } from "../../context/userContext"
+import { UserConsumer } from "../../context"
 import { db } from "../../config/Firebase"
 
 export default function AddressForm() {
@@ -26,19 +26,17 @@ export default function AddressForm() {
 
     const saveAdd = (uid) => {
         setShow(false);
+        const newAdd = {
+            factory: "",
+            address: "",
+            zipcode: "",
+            contact: "",
+            email: "",
+            mobile: ""
+        }
+        setAdd(newAdd);
         const ref = db.collection("users").doc(uid).collection("factory");
         ref.add(add)
-            .then(() => {
-                const newAdd = {
-                    factory: "",
-                    address: "",
-                    zipcode: "",
-                    contact: "",
-                    email: "",
-                    mobile: ""
-                }
-                setAdd(newAdd);
-            })
             .catch(error => {
                 console.log(error.message);
             })
@@ -46,7 +44,7 @@ export default function AddressForm() {
 
     return (
         <div>
-            <button className="btn btn-sm" onClick={showForm}>+ New Address</button>
+            <button className="btn btn-sm btn-orange" onClick={showForm}>+ New Address</button>
             {show === true &&
                 <form className="pt-3">
                     <div className="form-row">

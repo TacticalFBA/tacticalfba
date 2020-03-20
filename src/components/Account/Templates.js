@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { UserConsumer } from "../../context/userContext"
+import { UserConsumer } from "../../context"
 
 export default function Templates({ tempList }) {
 
@@ -10,7 +10,7 @@ export default function Templates({ tempList }) {
             {tempList.length === 0 && (
                 <div>
                     <p>No template yet...</p>
-                    <Link to="/new-card" className="btn btn-sm btn-primary">Get Started</Link>
+                    <Link to="/new-card" className="btn btn-sm btn-orange">+ Create Your Insert</Link>
                 </div>
             )}
 

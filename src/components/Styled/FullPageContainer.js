@@ -1,5 +1,8 @@
 import styled from "styled-components";
 export const FullPageContainer = styled.div`
 height: 100vh;
-text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `;

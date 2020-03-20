@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { UserConsumer } from "../../context/userContext";
+import { UserConsumer } from "../../context";
 
 export default class LoginModal extends Component {
   state = {
@@ -71,7 +71,7 @@ export default class LoginModal extends Component {
                     </button>
                     <button
                       type="button"
-                      className="btn btn-primary btn-sm"
+                      className="btn btn-orange btn-sm"
                       onClick={() =>
                         signIn(this.state.email, this.state.password)
                       }

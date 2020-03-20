@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserConsumer } from "../../context/userContext"
+import { UserConsumer } from "../../context"
 
 export default function AddItem({ add, match, history }) {
 

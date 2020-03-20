@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ProductConsumer } from "../../context/productContext";
 
 export default class Template extends Component {
   render() {
@@ -9,15 +8,12 @@ export default class Template extends Component {
     return (
       <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
         <div className="card">
-          <ProductConsumer>
-            {({ addToCart }) => (
-              <div className="img-container p-3">
-                <Link to={`/edit-template/${pid}`}>
-                  <img src={img} alt="template" className="card-img-top" />
-                </Link>
-              </div>
-            )}
-          </ProductConsumer>
+
+          <div className="img-container p-3">
+            <Link to={`/edit-template/${pid}`}>
+              <img src={img} alt="template" className="card-img-top" />
+            </Link>
+          </div>
 
           {/* card footer */}
           <div className="card-footer">

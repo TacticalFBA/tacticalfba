@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserConsumer } from "../../context/userContext";
+import { UserConsumer } from "../../context";
 import { FullPageContainer } from "../Styled/FullPageContainer"
 import Templates from "./Templates";
 import Factories from "./Factories";
@@ -27,7 +27,7 @@ export default function Account() {
   return (
     <section className="container pt-5">
       <UserConsumer>
-        {({ user, addList, tempList }) => {
+        {({ user, orderList, addList, tempList }) => {
           if (user !== null) {
             return (
               <div className="pt-5">
@@ -36,18 +36,18 @@ export default function Account() {
                   <button
                     name="orders"
                     className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)}>Orders</button>
+                    onClick={e => handleClick(e)}>Orders</button> |
                   <button
                     name="templates"
                     className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)} > Templates</button>
+                    onClick={e => handleClick(e)} > Templates</button> |
                   <button
                     name="factories"
                     className="btn btn-lg px-5"
                     onClick={e => handleClick(e)}> Factories</button>
                 </div>
                 <hr />
-                {show.orders === "show" && <Orders />}
+                {show.orders === "show" && <Orders orderList={orderList} />}
                 {show.templates === "show" && <Templates tempList={tempList} />}
                 {show.factories === "show" && <Factories addList={addList} />}
               </div>

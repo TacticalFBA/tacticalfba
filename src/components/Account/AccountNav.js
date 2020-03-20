@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { UserConsumer } from "../../context/userContext";
+import { UserConsumer } from "../../context";
 import CartBtn from "../Cart/CartBtn";
 
 export default function AccountNav() {
@@ -28,7 +28,7 @@ export default function AccountNav() {
         } else {
           return (
             <button
-              className="btn btn-sm btn-primary ml-2"
+              className="btn btn-sm btn-orange ml-2"
               onClick={() => openModal()}
             >
               Login
