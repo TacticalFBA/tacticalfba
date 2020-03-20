@@ -1,5 +1,5 @@
 import React from 'react';
-import PaypalExpressBtn from 'react-paypal-express-checkout';
+import PaypalExpressBtn from "react-paypal-express-checkout";
 import { db } from "../../config/Firebase"
 
 export default class PaypalBtn extends React.Component {
