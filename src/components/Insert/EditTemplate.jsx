@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ProductConsumer } from "../../context/productContext";
 import { sampleTemplate } from "../../data";
 import { db, storage } from "../../config/Firebase";
+import { UserConsumer } from "../../context/userContext"
 
 // import components
 import ThemeColor from "./ThemeColor";
@@ -22,11 +23,9 @@ export default function EditTemplate({ history, match }) {
     return (Math.random() * 10000000).toString(16).substr(0, 4) + '-' + (new Date()).getTime() + '-' + Math.random().toString().substr(2, 5);
   }
 
-  // initialize template content with pid and uid
+  // get template id
   const pid = parseInt(match.params.pid);
-  const uid = JSON.parse(localStorage.getItem("uid"));
   let tempContent = sampleTemplate;
-  tempContent.uid = uid;
   tempContent.pid = pid;
 
   const [content, setContent] = useState(tempContent);
@@ -78,6 +77,7 @@ export default function EditTemplate({ history, match }) {
     if (type === "img") {
       setEditorShow(false);
       setImgUploaderShow(true);
+      setPart(item);
     }
   }
 
@@ -115,12 +115,12 @@ export default function EditTemplate({ history, match }) {
   };
 
 
-  const saveTemp = (arr) => {
-    arr.forEach(file => upLoadImg(file.img, file.side, file.item))
+  const saveTemp = (uid, arr) => {
+    arr.forEach(file => upLoadImg(uid, file.img, file.side, file.item))
   };
 
   let itemsProcessed = 0;
-  const upLoadImg = (img, side, item) => {
+  const upLoadImg = (uid, img, side, item) => {
     const name = `${createRandomId()}__${img.name}`;
     const uploadTask = storage.ref(`images/${name}`).put(img);
     uploadTask.on(
@@ -149,7 +149,7 @@ export default function EditTemplate({ history, match }) {
             setContent(newContent);
             itemsProcessed++;
             if (itemsProcessed === 2) {
-              saveToDb();
+              saveToDb(uid);
             }
           });
       }
@@ -157,11 +157,12 @@ export default function EditTemplate({ history, match }) {
 
   }
 
-  const saveToDb = () => {
-    db.collection("templates").add(content)
+  const saveToDb = (uid) => {
+    const ref = db.collection("users").doc(uid).collection("template");
+    ref.add(content)
       .then((docRef) => {
-        // console.log("Document successfully written!");
-        history.push(`/address/${docRef.id}`);
+        // params = pid & tid & templateName
+        history.push(`/address/${pid}&${docRef.id}&${content.templateName}`);
       })
       .catch(error => {
         console.error("Error writing document: ", error);
@@ -216,14 +217,20 @@ export default function EditTemplate({ history, match }) {
 
               {/* edit area */}
               <div>
-                {editorShow === true && <Editor
-                  editorState={editorState}
-                  updateEditorState={updateEditorState} />}
+                {editorShow === true &&
+                  (<div>
+                    <p>Edit: {part}</p>
+                    <Editor
+                      editorState={editorState}
+                      updateEditorState={updateEditorState} />
+                  </div>)}
                 {
-                  imgUploaderShow === true && <ImageUploader onSelectFile={onSelectFile} />
-                }
+                  imgUploaderShow === true &&
+                  (<div>
+                    <p>Edit: {part}</p>
+                    <ImageUploader onSelectFile={onSelectFile} />
+                  </div>)}
               </div >
-
 
               <ThemeColor
                 color={content.themeColor}
@@ -240,23 +247,26 @@ export default function EditTemplate({ history, match }) {
 
               <progress className="d-block" value={progress} max="100" />
 
-              <button
-                className="btn btn-small btn-primary"
-                type="button"
-                onClick={() => saveTemp([
-                  {
-                    img: frontImage,
-                    side: "front",
-                    item: "facePhoto"
-                  }, {
-                    img: rearImage,
-                    side: "rear",
-                    item: "companyLogo"
-                  }
-                ])}
-              >
-                save
-            </button>
+              <UserConsumer>
+                {({ user }) => <button
+                  className="btn btn-small btn-primary"
+                  type="button"
+                  onClick={() => saveTemp(user.uid, [
+                    {
+                      img: frontImage,
+                      side: "front",
+                      item: "facePhoto"
+                    }, {
+                      img: rearImage,
+                      side: "rear",
+                      item: "companyLogo"
+                    }
+                  ])}
+                >
+                  save
+            </button>}
+
+              </UserConsumer>
             </div>
           );
         }}

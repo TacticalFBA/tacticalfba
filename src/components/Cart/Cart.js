@@ -1,31 +1,30 @@
-import React, { Component } from "react";
+import React from 'react'
+import { UserConsumer } from "../../context/userContext";
+
 import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCart";
-import { ProductConsumer } from "../../context/productContext";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
 
-export default class Cart extends Component {
-  render() {
-    return (
-      <section className="pt-5">
-        <ProductConsumer>
-          {value => {
-            const { cart } = value;
-            if (cart.length > 0) {
-              return (
-                <div className="container pt-5">
-                  <CartColumns />
-                  <CartList cart={cart} value={value} />
-                  <CartTotals value={value} />
-                </div>
-              );
-            } else {
-              return <EmptyCart />;
-            }
-          }}
-        </ProductConsumer>
-      </section>
-    );
-  }
+export default function Cart() {
+
+  return (
+    <section className="pt-5">
+      <UserConsumer>
+        {({ cartList, increment, decrement, removeItem, totalCart }) => {
+          if (cartList.length > 0) {
+            return (
+              <div className="container pt-5">
+                <CartColumns />
+                <CartList cart={cartList} increment={increment} decrement={decrement} removeItem={removeItem} />
+                <CartTotals totalCart={totalCart} />
+              </div>
+            );
+          } else {
+            return <EmptyCart />;
+          }
+        }}
+      </UserConsumer>
+    </section>
+  );
 }

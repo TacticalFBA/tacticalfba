@@ -10,7 +10,8 @@ export default function ChooseTemp({ history, myTemps }) {
                 <Link
                     key={template.templateName}
                     className="btn btn-sm btn-outline-secondary mr-3"
-                    to={"/address/" + template.tid}
+                    // params = pid & tid & templateName
+                    to={"/address/" + template.pid + "&" + template.tid + "&" + template.templateName}
                 >
                     {template.templateName}
                 </Link>

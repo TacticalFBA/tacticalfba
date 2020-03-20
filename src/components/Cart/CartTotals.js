@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function CartTotals({ value }) {
-  const { cartSubtotal, cartTax, cartTotal, clearCart } = value;
+export default function CartTotals({ totalCart }) {
+  const { cartSubtotal, cartTax, cartTotal } = totalCart;
   return (
     <React.Fragment>
       <div className="container">
@@ -13,7 +13,7 @@ export default function CartTotals({ value }) {
               <button
                 className="btn btn-sm btn-outline-danger text-uppercase px-4 my-3"
                 type="button"
-                onClick={() => clearCart()}
+              // onClick={() => clearCart()}
               >
                 clear cart
               </button>

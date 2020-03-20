@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
+import { UserConsumer } from "../../context/userContext"
 import { db } from "../../config/Firebase"
 
 export default function AddressForm() {
-    const [show, setShow] = useState(false)
 
+    const [show, setShow] = useState(false)
     const showForm = () => {
         setShow(true)
     }
 
-    const uid = JSON.parse(localStorage.getItem("uid"));
     const [add, setAdd] = useState({
-        uid: uid,
         factory: "",
         address: "",
         zipcode: "",
@@ -25,13 +24,12 @@ export default function AddressForm() {
         setAdd(newAdd);
     };
 
-    const saveAdd = (e) => {
-        e.preventDefault();
+    const saveAdd = (uid) => {
         setShow(false);
-        db.collection("address").add(add)
+        const ref = db.collection("users").doc(uid).collection("factory");
+        ref.add(add)
             .then(() => {
                 const newAdd = {
-                    uid: uid,
                     factory: "",
                     address: "",
                     zipcode: "",
@@ -86,8 +84,15 @@ export default function AddressForm() {
                             <input type="text" className="form-control" name="mobile" id="mobile" value={add.mobile} required onChange={e => handleInputChange(e)} />
                         </div>
                     </div>
-
-                    <button type="submit" className="btn btn-sm btn-dark mt-3" onClick={e => saveAdd(e)}>Save</button>
+                    <UserConsumer>
+                        {({ user }) => (
+                            <button type="button"
+                                className="btn btn-sm btn-dark mt-3"
+                                onClick={() => saveAdd(user.uid)}>
+                                Save</button>
+                        )
+                        }
+                    </UserConsumer>
 
                 </form>}
         </div >

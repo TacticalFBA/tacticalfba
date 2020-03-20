@@ -1,22 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { db } from "../../config/Firebase"
+import { UserConsumer } from "../../context/userContext"
 
 export default function Templates({ tempList }) {
-
-    const handleDel = tid => {
-        db.collection("templates").doc(tid)
-            .delete()
-            .then(() => {
-                // remove cart item that uses this template
-                const cart = JSON.parse(localStorage.getItem("cart"))
-                const newCart = cart.filter(item => item.tid !== tid);
-                localStorage.setItem("cart", JSON.stringify(newCart));
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
-    }
 
     return (
         <div className="mt-5">
@@ -38,10 +24,17 @@ export default function Templates({ tempList }) {
                             <div className="col-sm-6 col-md-5 col-lg-4">
                                 <Link
                                     className="btn btn-sm text-dark ml-5"
-                                    to={"/address/" + template.templateName}
+                                    // params = pid & tid & templateName
+                                    to={"/address/" + template.pid + "&" + template.tid + "&" + template.templateName}
                                 >Use</Link>
-                                <button className="btn btn-sm text-dark ml-3">Edit</button>
-                                <button className="btn btn-sm text-dark ml-3" onClick={() => handleDel(template.tid)}>Delete</button>
+                                {/* <button className="btn btn-sm text-dark ml-3">Edit</button> */}
+                                <UserConsumer>
+                                    {({ handleDel }) =>
+                                        <button
+                                            className="btn btn-sm text-dark ml-3"
+                                            onClick={() => handleDel(template.tid, "template", "tid")}>
+                                            Delete</button>}
+                                </UserConsumer>
                             </div>
                         </div>)
                 }

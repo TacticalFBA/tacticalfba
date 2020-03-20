@@ -8,9 +8,9 @@ export default function Address({ match, history }) {
     return (
         <div className="container mt-5">
             <UserConsumer>{
-                ({ addList }) => {
+                ({ user, addList }) => {
                     if (addList.length > 0) {
-                        return (<AddressList addList={addList} match={match} history={history} />)
+                        return (<AddressList user={user} addList={addList} match={match} history={history} />)
                     }
                 }}
             </UserConsumer>

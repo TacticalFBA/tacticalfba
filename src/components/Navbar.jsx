@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../logo.svg";
 import styled from "styled-components";
 import AccountNav from "./Account/AccountNav";
-import CartBtn from "./Cart/CartBtn";
 
 export default class Navbar extends Component {
   render() {
@@ -30,14 +29,8 @@ export default class Navbar extends Component {
                 Contact
               </NavLink>
             </li>
-            <li className="nav-item ml-2">
-              <NavLink className="nav-link" to="/new-card">
-                Make Insert
-              </NavLink>
-            </li>
           </ul>
           <div className="ml-auto">
-            <CartBtn />
             <AccountNav />
           </div>
         </div>

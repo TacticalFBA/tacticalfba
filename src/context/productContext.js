@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { products, sampleTemplate } from "../data";
-import { db } from "../config/Firebase"
+
 
 const ProductContext = React.createContext();
 
@@ -8,7 +8,7 @@ export default class ProductProvider extends Component {
   state = {
     products: [],
     sampleTemplate: sampleTemplate,
-    cart: JSON.parse(localStorage.getItem("cart")) || [],
+    cart: [],
     cartSubtotal: 0,
     cartTax: 0,
     cartTotal: 0
@@ -28,68 +28,12 @@ export default class ProductProvider extends Component {
     this.setState({ products: tempProducts });
   };
 
-  setUser = (user) => {
-    let newsampleTemplate = Object.assign({}, sampleTemplate);
-    newsampleTemplate.user = user;
-    this.setState({ sampleTemplate, newsampleTemplate })
-  }
-
-  getItem = id => {
-    const product = this.state.products.find(item => item.pid === id);
-    return product;
-  };
-
-  addToCart = (history, tid, aid, factory) => {
+  // getItem = id => {
+  //   const product = this.state.products.find(item => item.pid === id);
+  //   return product;
+  // };
 
 
-    db.collection("templates")
-      .get()
-      .then(
-        snapshot => {
-          // get selected template
-          const template = snapshot.docs.filter(doc => doc.id === tid)[0].data();
-
-          const tempProduct = products.filter(product => product.pid === template.pid)[0]
-          const price = tempProduct.price;
-          const type = tempProduct.type;
-          const name = tempProduct.name;
-
-          //get random cid
-          const createRandomId = () => {
-            return (Math.random() * 10000000).toString(16).substr(0, 4) + '-' + (new Date()).getTime() + '-' + Math.random().toString().substr(2, 5);
-          }
-
-          const product = {
-            cid: createRandomId(),
-            type: type,
-            name: name,
-            tid: tid,
-            templateName: template.templateName,
-            aid: aid,
-            factory: factory,
-            inCart: true,
-            count: 1,
-            price: price,
-            total: price
-          };
-          this.setState(
-            {
-              cart: [...this.state.cart, product]
-            },
-            () => {
-              localStorage.setItem("cart", JSON.stringify(this.state.cart));
-              this.addTotals();
-              history.push("/cart");
-            }
-          );
-        }
-      )
-      .catch(
-        error => {
-          console.log(error.message);
-        }
-      )
-  };
 
   increment = id => {
     let tempCart = [...this.state.cart];

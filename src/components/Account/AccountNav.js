@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserConsumer } from "../../context/userContext";
+import CartBtn from "../Cart/CartBtn";
 
 export default function AccountNav() {
   return (
@@ -9,6 +10,7 @@ export default function AccountNav() {
         if (user) {
           return (
             <React.Fragment>
+              <CartBtn />
               <Link to="/account" className="btn btn-sm mx-1">
                 Account
               </Link>

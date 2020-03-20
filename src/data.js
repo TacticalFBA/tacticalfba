@@ -1,5 +1,4 @@
 export const sampleTemplate = {
-  uid: "",
   pid: "",
   templateName: "sample",
   themeColor: "#f0523c",
@@ -19,41 +18,29 @@ export const sampleTemplate = {
 export const products = [
   {
     pid: 1,
-    cid: "",
     type: "Insert",
     name: "Basic",
     img: "img/template-1.jpg",
-    content: sampleTemplate,
     price: 10,
-    inCart: false,
     count: 0,
-    total: 0,
-    address: ""
+    total: 0
   },
   {
     pid: 2,
-    cid: "",
     type: "Insert",
     name: "Natural",
     img: "img/template-1.jpg",
-    content: sampleTemplate,
     price: 10,
-    inCart: false,
     count: 0,
-    total: 0,
-    address: ""
+    total: 0
   },
   {
     pid: 3,
-    cid: "",
     type: "Insert",
     name: "BNW",
     img: "img/template-1.jpg",
-    content: sampleTemplate,
     price: 10,
-    inCart: false,
     count: 0,
-    total: 0,
-    address: ""
+    total: 0
   }
 ];

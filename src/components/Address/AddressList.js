@@ -2,7 +2,7 @@ import React from 'react'
 import AddItem from './AddItem'
 import AddColumns from './AddColumns'
 
-export default function AddressList({ addList, match, history }) {
+export default function AddressList({ user, addList, match, history }) {
 
 
     return (
@@ -12,7 +12,7 @@ export default function AddressList({ addList, match, history }) {
             <AddColumns />
             {
                 addList.map(add => (
-                    <AddItem key={add.aid} add={add} match={match} history={history} />
+                    <AddItem key={add.aid} user={user} add={add} match={match} history={history} />
                 ))
             }
         </div>
