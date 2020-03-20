@@ -7,7 +7,8 @@ class About extends Component {
     return (
       <FullPageContainer>
         <h2>About</h2>
-      </FullPageContainer>)
+      </FullPageContainer>
+    )
   }
 }
 
