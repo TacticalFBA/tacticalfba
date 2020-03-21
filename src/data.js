@@ -19,28 +19,19 @@ export const products = [
   {
     pid: 1,
     type: "Insert",
-    name: "Basic",
-    img: "img/template-1.jpg",
+    name: "Discount Code",
+    img: "img/discount.png",
     price: 10,
     count: 0,
     total: 0
   },
-  // {
-  //   pid: 2,
-  //   type: "Insert",
-  //   name: "Natural",
-  //   img: "img/template-1.jpg",
-  //   price: 10,
-  //   count: 0,
-  //   total: 0
-  // },
-  // {
-  //   pid: 3,
-  //   type: "Insert",
-  //   name: "BNW",
-  //   img: "img/template-1.jpg",
-  //   price: 10,
-  //   count: 0,
-  //   total: 0
-  // }
+  {
+    pid: 2,
+    type: "Insert",
+    name: "New Prodcut",
+    img: "img/newproduct.png",
+    price: 10,
+    count: 0,
+    total: 0
+  }
 ];

@@ -32,14 +32,20 @@ export default function Features() {
 }
 
 const FeatureWrapper = styled.div`
-height: 100vh;
+padding-top: 5rem;
+padding-bottom: 5rem;
 text-align: center;
 h6 {
     margin: 40px 0;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 i {
     font-size: 1.5rem;
     color: var(--mainOrange);
+}
+@media (max-width: 768px) {
+    i {
+        margin-top: 4rem;
+    }
 }
 `

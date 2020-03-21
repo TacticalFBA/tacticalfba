@@ -31,34 +31,27 @@ export default function Cover() {
 }
 
 const CoverWrapper = styled.div`
+    height: 96vh;
     position: relative;
-    background: url(img/sample.jpg) no-repeat center center fixed;
+    background: url(img/coverD.jpg) no-repeat center center fixed;
     width: 100%;
-    height: 100vh;
     background-size: cover;
-    // &::after {
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     content: "";
-    //     background-color: rgba(255,255,255,.2);
-    //     z-index: 1;
-    //     width: 100%;
-    //     height: 100%;
-    // }
+
     .text-wrap {
         position: absolute;
         left: 70%;
         top: 50%;
         z-index: 2;
         transform: translate(-50%,-50%);
-        width: 50%;
+        width: 30%;
         p {
             margin: 50px 0 60px;
             font-weight: 400;
         }
     }
     @media (max-width: 768px) { 
+        background: url(img/coverM.jpg) no-repeat bottom center fixed;
+        background-size: cover;
         text-align: center;
         .text-wrap {
             left: 50%;

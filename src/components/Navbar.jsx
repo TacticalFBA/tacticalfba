@@ -1,67 +1,75 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from "../logo.svg";
-import styled from "styled-components";
 import AccountNav from "./Account/AccountNav";
 
-export default class Navbar extends Component {
+export default class NavBar extends Component {
   render() {
     return (
-      <NavWrapper className="navbar navbar-expand-sm px-sm-3">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            <img src={logo} alt="logo" />
-            <h1>TacticalFBA</h1>
-          </Link>
-          <ul className="navbar-nav align-item-center">
-            <li className="nav-item ml-3">
+      <Navbar bg="light" expand="lg" fixed="top" style={style}>
+        <Container>
+          <Navbar.Brand>
+            <Link className="navbar-brand" to="/">
+              <img
+                alt=""
+                src={logo}
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />
+              <h1 style={style.h1}>TacticalFBA</h1>
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+
+
               <NavLink className="nav-link" to="/about">
                 About
-              </NavLink>
-            </li>
-            <li className="nav-item ml-2">
+                </NavLink>
+
+
               <NavLink className="nav-link" to="/prices">
                 Prices
-              </NavLink>
-            </li>
-            <li className="nav-item ml-2">
+                </NavLink>
+
+
               <NavLink className="nav-link" to="/contact">
                 Contact
-              </NavLink>
-            </li>
-          </ul>
-          <div className="ml-auto">
-            <AccountNav />
-          </div>
-        </div>
-      </NavWrapper>
+                </NavLink>
+
+            </Nav>
+            <Nav className="ml-auto">
+              <AccountNav />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );
   }
 }
 
-const NavWrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  width: 100%;
-  background: var(--mainWhite);
-  box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.3);
-  img {
-    width: 1.8rem;
+const style = {
+  background: "var(--mainWhite)",
+  boxShadow: "0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.3)",
+  h1: {
+    display: "inline-block",
+    color: "var(--mainDark)",
+    fontSize: "1.2rem",
+    marginLeft: "1rem"
+  },
+  li: {
+    display: "inline-block",
   }
-  h1 {
-    display: inline-block;
-    color: var(--mainDark);
-    font-size: 1.2rem;
-    margin: 0 0 0 0.5rem;
-    vertical-align: middle;
-  }
-  .nav-link {
-    color: var(--mainDark);
-    font-size: 1rem;
-    text-transform: capitalize;
-    &:hover {
-      color: var(--mainOrange);
-    }
-  }
-`;
+}
+
+  // .nav-link {
+  //   color: var(--mainDark);
+  //   font-size: 1rem;
+  //   text-transform: capitalize;
+  //   &:hover {
+  //     color: var(--mainOrange);
+  //   }
+  // }

@@ -3,11 +3,11 @@ import styled from "styled-components"
 
 export default function Why() {
     return (
-        <WhyWrapper className="juzhong">
+        <WhyWrapper>
             <div className="container">
                 <div className="row">
                     <div className="col-xl-2 col-md-4 col-sm-12">
-                        <h3>What are packaging inserts?</h3>
+                        <h4>What are packaging inserts?</h4>
                     </div>
                     <div className="col-xl-4 col-md-8 col-sm-12">
                         <p>Packaging inserts are printed marketing materials that sellers can add to their Amazon packages before
@@ -17,7 +17,7 @@ export default function Why() {
                             experience, achieve different marketing goals, and directly communicate with your Amazon community.</p>
                     </div>
                     <div className="col-xl-2 col-md-4 col-sm-12">
-                        <h3>Why do I need packaging inserts?</h3>
+                        <h4>Why do I need packaging inserts?</h4>
                     </div>
                     <div className="col-xl-4 col-md-8 col-sm-12">
                         <p>Amazon doesn’t provide sellers with the personal contact information of their customers. But from a
@@ -34,19 +34,16 @@ export default function Why() {
 }
 
 const WhyWrapper = styled.div`
-height: 100vh;
-h3{
+padding-top: 5rem;
+padding-bottom: 5rem;
+h4{
     padding-right: 30px;
-    border-right: 5px solid #f25134;
+    border-right: 3px solid #f25134;
     color: #f25134;
 }
 
-// p {
-//     display: none;
-// }
-
 @media (max-width: 768px) { 
-    h3{
+    h4{
         border-right: none;
         &::after{
             content: '';
@@ -54,7 +51,7 @@ h3{
             margin-bottom: 20px;
             width: 50px;
             height: 20px;
-            border-bottom: 4px solid #f25134;
+            border-bottom: 2.5px solid #f25134;
         }    
     }
     .row div:nth-child(3),

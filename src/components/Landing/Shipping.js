@@ -5,8 +5,8 @@ export default function Shipping() {
     return (
         <ShippingWrapper className="juzhong">
             <div className="container">
-                <h4>FREE shipping to your factory in China</h4>
-                <p className="lead">Because our printing press is located in China, after we finish printing your order we will
+                <h6>FREE shipping to your factory in China</h6>
+                <p>Because our printing press is located in China, after we finish printing your order we will
                 ship it
                 straight to your factory for them to insert into each of your product packages. This should be a
                 complimentary service that your factory provides.
@@ -46,16 +46,16 @@ i {
     font-size: 3rem;
     margin-bottom: 3rem;
 }
-h4 {
+h6 {
     margin-bottom: 30px;
-    font-size:1.75rem;
+    font-size:1.25rem;
     &::before {
         content: '';
         display: block;
         margin: 0 auto 30px;
         background: url(img/free-shipping.png) no-repeat center center;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         background-size: cover;
     }
     &::after{
@@ -63,7 +63,7 @@ h4 {
         display: block;
         margin: 0 auto;
         width: 50px;
-        height: 20px;
+        height: 40px;
         border-bottom: 4px solid #333;
     }
 }

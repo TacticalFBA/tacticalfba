@@ -5,7 +5,7 @@
   --mainDark: #0a0908;
   --mainGrey: #b1b1b1;
 }
-*{
+h1,h2,h3,h4,h5,h6{
   margin: 0;
   padding: 0;
 }
@@ -17,6 +17,10 @@ html,body,main {
   color: var(--mainDark) !important;
   scroll-behavior:smooth;
 }
+.pTop {
+  padding-top: 4.125rem;
+}
+
 btn:hover {
   outline: none !important;
 }
@@ -78,7 +82,7 @@ btn:hover {
 @media (max-width: 375px) { 
 
   .container {
-      padding: 0 8%;
+      padding: 0 1.5rem !important;
   }
 
 }

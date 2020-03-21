@@ -7,7 +7,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 
 // import components
-import Navbar from "./components/Navbar";
+import NavBar from "./components/Navbar";
 import About from "./components/About";
 import Prices from "./components/Prices";
 import Contact from "./components/Contact";
@@ -23,9 +23,9 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
+        <NavBar />
       </header>
-      <main>
+      <main className="pTop">
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/new-card" component={TemplateList} />

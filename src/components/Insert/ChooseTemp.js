@@ -5,7 +5,7 @@ export default function ChooseTemp({ history, myTemps }) {
 
     return (
         <div className="pt-5">
-            <h6>Exciting Template:</h6>
+            <h6>Your Saved Templates:</h6>
             {myTemps.map(template =>
                 <Link
                     key={template.templateName}
