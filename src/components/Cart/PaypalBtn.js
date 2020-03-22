@@ -4,7 +4,7 @@ import { db } from "../../config/Firebase"
 
 export default class PaypalBtn extends React.Component {
     render() {
-        const { uid, cart, clearCart, cartTotal, history } = this.props;
+        const { user, cart, clearCart, cartTotal, history } = this.props;
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             console.log("The payment was succeeded!", payment);
@@ -23,7 +23,7 @@ export default class PaypalBtn extends React.Component {
                 }
             }
 
-            const ref = db.collection("users").doc(uid).collection("order");
+            const ref = db.collection("users").doc(user).collection("order");
             ref.add(order)
                 .then(() => {
                     clearCart();

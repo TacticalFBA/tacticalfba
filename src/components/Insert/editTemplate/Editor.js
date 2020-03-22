@@ -1,7 +1,7 @@
 import React from 'react'
 import { Editor as DraftEditor } from "draft-js";
 import styled from "styled-components";
-import Toolbar from "../../toolbar";
+import Toolbar from "./toolbar";
 
 export default function Editor({ editorState, updateEditorState }) {
 
@@ -37,9 +37,8 @@ const EditorContainer = styled.div`
   min-height: 9em;
   border-radius: 4px;
   background-color: #fff;
-  padding: 20px;
-  font-size: 17px;
+  padding: 1rem 1rem;
+  font-size: .9rem;
   font-weight: 300;
-  border: #333 1px solid;
-  margin-bottom: 20px;
+  border: #ccc 1px solid;
 `;

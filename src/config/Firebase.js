@@ -15,7 +15,13 @@ const config = {
 };
 
 firebase.initializeApp(config);
+
 const auth = firebase.auth();
+var actionCodeSettings = {
+  url: 'http://localhost:3000/confirm',
+  handleCodeInApp: true
+};
+
 const db = firebase.firestore();
 const storage = firebase.storage();
-export { db, auth, storage };
+export { db, auth, actionCodeSettings, storage };

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from "styled-components"
 
-export default function Orders({ orderList }) {
+export default function Orders({ orders }) {
     return (
         <div className="mt-5">
-            {orderList.map(order => {
+            {orders.map(order => {
                 return (
                     <Wrapper key={order.oid}>
                         <div>Order submitted on {order.info.date} at {order.info.time}</div>

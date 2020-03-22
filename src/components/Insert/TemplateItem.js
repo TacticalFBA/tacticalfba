@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default class Template extends Component {
   render() {
-    const { pid, type, name, img } = this.props.product;
+    const { pid, type, name, img } = this.props.template;
     return (
       <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
         <div className="card">
@@ -17,8 +17,7 @@ export default class Template extends Component {
 
           {/* card footer */}
           <div className="card-footer">
-            <p className="mb-0">{name}</p>
-            <p className="mb-0">{type}</p>
+            <p className="mb-0">{type} with <strong>{name}</strong></p>
           </div>
         </div>
       </TemplateWrapper>

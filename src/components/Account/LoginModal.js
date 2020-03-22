@@ -4,14 +4,13 @@ import { UserConsumer } from "../../context";
 
 export default class LoginModal extends Component {
   state = {
-    email: "",
-    password: ""
+    email: ""
   };
 
   render() {
     return (
       <UserConsumer>
-        {({ modalOpen, closeModal, signIn, register }) => {
+        {({ type, modalOpen, closeModal, sendEmail }) => {
           if (!modalOpen) {
             return null;
           } else {
@@ -19,9 +18,9 @@ export default class LoginModal extends Component {
               <ModalContainer>
                 <div className="model modal-content col-10 col-sm-8 col-md-6 col-lg-4">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalCenterTitle">
-                      Welcome to TacticalFBA
-                    </h5>
+                    <h6 className="modal-title" id="exampleModalCenterTitle">
+                      Login to TacticalFBA with your Email
+                    </h6>
                     <button
                       type="button"
                       className="close"
@@ -32,52 +31,29 @@ export default class LoginModal extends Component {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <form>
-                      <div className="form-group">
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          placeholder="Email"
-                          value={this.state.email}
-                          onChange={e =>
-                            this.setState({ email: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="form-group">
-                        <input
-                          type="password"
-                          className="form-control"
-                          name="password"
-                          placeholder="Password"
-                          value={this.state.password}
-                          onChange={e =>
-                            this.setState({ password: e.target.value })
-                          }
-                        />
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
+
+                    <div className="form-group">
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={e =>
+                          this.setState({ email: e.target.value })
+                        }
+                      />
+                    </div>
                     <button
                       type="button"
-                      className="btn btn-secondary btn-sm"
+                      className="btn btn-orange btn-sm btn-block"
                       onClick={() =>
-                        register(this.state.email, this.state.password)
+                        sendEmail(this.state.email, type)
                       }
                     >
-                      Create account
+                      Send link
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-orange btn-sm"
-                      onClick={() =>
-                        signIn(this.state.email, this.state.password)
-                      }
-                    >
-                      Login
-                    </button>
+
                   </div>
                 </div>
               </ModalContainer>
@@ -95,7 +71,7 @@ const ModalContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   z-index:9999;
   align-items: center;

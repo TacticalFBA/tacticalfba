@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { UserConsumer } from "../../context";
-import { FullPageContainer } from "../Styled/FullPageContainer"
-import Templates from "./Templates";
+import Inserts from "./Inserts";
 import Factories from "./Factories";
 import Orders from "./Orders";
 
@@ -10,14 +9,14 @@ export default function Account() {
 
   const [show, setShow] = useState({
     orders: "show",
-    templates: "hide",
+    inserts: "hide",
     factories: "hide"
   });
 
   const handleClick = e => {
     let tempShow = {
       orders: "hide",
-      templates: "hide",
+      inserts: "hide",
       factories: "hide"
     };
     tempShow[e.currentTarget.name] = "show";
@@ -27,36 +26,30 @@ export default function Account() {
   return (
     <section className="container pt-5">
       <UserConsumer>
-        {({ user, orderList, addList, tempList }) => {
-          if (user !== null) {
+        {({ user, orders, adds, inserts }) => {
+          if (user) {
             return (
               <div className="pt-5">
-                <h4>Hello, {user.email}</h4>
+                <h4>Hello, {user}</h4>
                 <div className="pt-5">
                   <button
                     name="orders"
                     className="btn btn-lg px-5"
                     onClick={e => handleClick(e)}>Orders</button> |
                   <button
-                    name="templates"
+                    name="inserts"
                     className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)} > Templates</button> |
+                    onClick={e => handleClick(e)} > Inserts</button> |
                   <button
                     name="factories"
                     className="btn btn-lg px-5"
                     onClick={e => handleClick(e)}> Factories</button>
                 </div>
                 <hr />
-                {show.orders === "show" && <Orders orderList={orderList} />}
-                {show.templates === "show" && <Templates tempList={tempList} />}
-                {show.factories === "show" && <Factories addList={addList} />}
+                {show.orders === "show" && <Orders orders={orders} />}
+                {show.inserts === "show" && <Inserts inserts={inserts} />}
+                {show.factories === "show" && <Factories adds={adds} />}
               </div>
-            );
-          } else {
-            return (
-              <FullPageContainer className="juzhong">
-                <h4>Loading...</h4>
-              </FullPageContainer>
             )
           }
         }}

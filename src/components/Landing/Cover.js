@@ -11,22 +11,21 @@ export default function Cover() {
                 <div>
                     <h2>Get more reviews with TacticalFBA</h2>
                     <p className="lead">Research shows that well-worded product inserts help to increase the frequency of Amazon
-                    reviews. We can
+                    reviews.<br />We can
                     help design, print, and ship your product insert directly to your factory in China for immediate
-                    packaging.
-          </p>
+                    packaging.</p>
                 </div>
                 <UserConsumer>
                     {({ user, openModal }) => {
                         if (user === null) {
-                            return (<button className="btn btn-orange" onClick={() => openModal()}>Get Started</button>)
+                            return (<button className="btn btn-orange" onClick={() => openModal("new card")}>Get Started</button>)
                         } else {
-                            return (<Link to="/new-card" className="btn btn-orange">Get Started</Link>)
+                            return (<Link to="/insert" className="btn btn-orange">Get Started</Link>)
                         }
                     }}
                 </UserConsumer>
             </div>
-        </CoverWrapper>
+        </CoverWrapper >
     )
 }
 
@@ -43,7 +42,7 @@ const CoverWrapper = styled.div`
         top: 50%;
         z-index: 2;
         transform: translate(-50%,-50%);
-        width: 30%;
+        width: 40%;
         p {
             margin: 50px 0 60px;
             font-weight: 400;

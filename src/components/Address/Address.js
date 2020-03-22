@@ -1,5 +1,5 @@
 import React from 'react'
-import { FullPageContainer } from "../Styled/FullPageContainer"
+import { FullPageContainer } from "../Styled/Containers"
 import { UserConsumer } from "../../context";
 import styled from "styled-components"
 
@@ -13,9 +13,9 @@ export default function Address({ match, history }) {
         <FullPageContainer>
             <AddListContainer>
                 <UserConsumer>{
-                    ({ user, addList }) => {
-                        if (addList.length > 0) {
-                            return (<AddressList user={user} addList={addList} match={match} history={history} />)
+                    ({ user, adds }) => {
+                        if (adds.length > 0) {
+                            return (<AddressList user={user} adds={adds} match={match} history={history} />)
                         }
                     }}
                 </UserConsumer>

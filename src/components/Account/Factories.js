@@ -3,13 +3,13 @@ import { UserConsumer } from "../../context"
 
 import AddressForm from "../Address/AddressForm"
 
-export default function Factories({ addList }) {
+export default function Factories({ adds }) {
 
     return (
         <div className="mt-5">
             <AddressForm />
             <div className="mt-5">
-                {addList.map(add =>
+                {adds.map(add =>
                     <div key={add.aid} className="row py-2">
                         <div className="col-6">
                             <h6 className="mb-3">{add.factory}: </h6>

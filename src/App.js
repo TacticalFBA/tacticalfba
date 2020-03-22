@@ -16,8 +16,9 @@ import TemplateList from "./components/Insert/TemplateList";
 import LoginModal from "./components/Account/LoginModal";
 import Account from "./components/Account/Account";
 import Cart from "./components/Cart/Cart";
-import EditTemplate from "./components/Insert/EditTemplate.jsx";
+import EditTemplate from "./components/Insert/editTemplate/EditTemplate"
 import Address from "./components/Address/Address"
+import Confirm from "./components/Account/Confirm"
 
 const App = () => {
   return (
@@ -28,14 +29,15 @@ const App = () => {
       <main className="pTop">
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/new-card" component={TemplateList} />
+          <Route exact path="/confirm" component={Confirm} />
+          <Route path="/insert" component={TemplateList} />
           <Route path="/about" component={About} />
           <Route path="/prices" component={Prices} />
           <Route path="/contact" component={Contact} />
           <Route path="/account" component={Account} />
           <Route path="/cart" component={Cart} />
           <Route path="/edit-template/:pid" component={EditTemplate} />
-          <Route path="/address/:tempInfo" component={Address} />
+          <Route path="/address/:insertInfo" component={Address} />
         </Switch>
         <LoginModal />
       </main>

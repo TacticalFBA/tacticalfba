@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ChooseTemp({ history, myTemps }) {
+export default function UserInserts({ myInserts }) {
 
     return (
         <div className="pt-5">
             <h6>Your Saved Templates:</h6>
-            {myTemps.map(template =>
+            {myInserts.map(insert =>
                 <Link
-                    key={template.templateName}
+                    key={insert.iName}
                     className="btn btn-sm btn-outline-secondary mr-3"
                     // params = pid & tid & templateName
-                    to={"/address/" + template.pid + "&" + template.tid + "&" + template.templateName}
+                    to={"/address/" + insert.pid + "&" + insert.iid + "&" + insert.iName}
                 >
-                    {template.templateName}
+                    {insert.iName}
                 </Link>
             )
             }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FullPageContainer } from "./Styled/FullPageContainer"
+import { FullPageContainer } from "./Styled/Containers"
 
 class Prices extends Component {
   state = {};

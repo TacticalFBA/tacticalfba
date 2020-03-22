@@ -1,117 +1,135 @@
 import React, { Component } from "react";
-import { auth, db } from "./config/Firebase";
+import { auth, actionCodeSettings, db } from "./config/Firebase";
 import { products } from "./data"
 
 const UserContext = React.createContext();
 
 class UserProvider extends Component {
   state = {
-    loaded: false,
+    spin: true,
+    type: "",
     user: null,
-    addList: [],
-    tempList: [],
-    orderList: [],
-    cartList: [],
+    adds: [],
+    inserts: [],
+    orders: [],
+    cart: [],
     totalCart: {
       cartSubtotal: 0,
       cartTax: 0,
       cartTotal: 0
     },
-    modalOpen: false
+    modalOpen: false,
   };
 
   componentDidMount() {
-    this.setUser();
-    this.setState({ loaded: true })
+    this.authListener();
   }
 
-  setUser = () => {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        const uid = user.uid;
-        const email = user.email;
-        const tempUser = {
-          uid: uid,
-          email: email
-        };
-        this.setState({ user: tempUser });
-        this.syncTemp(uid);
-        this.syncAdd(uid);
-        this.syncOrder(uid);
-      } else {
-        this.setState({ user: null });
+  SignIn = () => {
+    if (auth.isSignInWithEmailLink(window.location.href)) {
+      var email = window.localStorage.getItem('emailForSignIn');
+      var url = window.localStorage.getItem('redirectTo');
+      if (!email) {
+        email = window.prompt('Please provide your email for confirmation');
       }
-    })
+      auth.signInWithEmailLink(email, window.location.href)
+        .then(result => {
+          if (url === "new card") {
+            window.location = '/new-card'
+          }
+          if (url === "account") {
+            window.location = '/account'
+          }
+          window.localStorage.removeItem('emailForSignIn');
+          window.localStorage.removeItem('redirectTo');
+        })
+        .catch(error => {
+          console.log(`sign in : ${error.code}`);
+        });
+    }
   };
 
-  syncAdd = uid => {
-    const ref = db.collection("users").doc(uid).collection("factory");
+  authListener = () => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        const email = user.email;
+        const tempUser = email;
+        this.setState({ user: tempUser });
+        this.syncInsert(email);
+        this.syncAdd(email);
+        this.syncOrder(email);
+        this.setState({ spin: false })
+      } else {
+        this.setState({ user: null });
+        this.setState({ spin: false })
+      }
+    })
+  }
+
+  syncAdd = user => {
+    const ref = db.collection("users").doc(user).collection("factory");
     ref.onSnapshot(snapshot => {
-      const addList = snapshot.docs.map(doc => {
+      const adds = snapshot.docs.map(doc => {
         // adding document id to the data
         let tempDoc = doc.data();
         return tempDoc = { ...tempDoc, aid: doc.id };
       })
-      this.setState({ addList })
+      this.setState({ adds })
       // console.log("addReady");
     })
   }
 
-  syncTemp = uid => {
-    const ref = db.collection("users").doc(uid).collection("template");
+  syncInsert = user => {
+    const ref = db.collection("users").doc(user).collection("insert");
     ref.onSnapshot(snapshot => {
-      const tempList = snapshot.docs.map(doc => {
+      const inserts = snapshot.docs.map(doc => {
         // adding document id to the data
         let tempDoc = doc.data();
-        return tempDoc = { ...tempDoc, tid: doc.id };
+        return tempDoc = { ...tempDoc, iid: doc.id };
       })
-      this.setState({ tempList });
+      this.setState({ inserts });
       // console.log("tempReady");
     })
   }
 
-  syncOrder = uid => {
-    const ref = db.collection("users").doc(uid).collection("order");
+  syncOrder = user => {
+    const ref = db.collection("users").doc(user).collection("order");
     ref.onSnapshot(snapshot => {
-      const orderList = snapshot.docs.map(doc => {
+      const orders = snapshot.docs.map(doc => {
         // adding document id to the data
         let tempDoc = doc.data();
         return tempDoc = { ...tempDoc, oid: doc.id };
       })
-      this.setState({ orderList });
+      this.setState({ orders });
       // console.log("tempReady");
     })
   }
 
   // account start //
-  openModal = () => {
-    this.setState({ modalOpen: true });
+  openModal = (type) => {
+    this.setState(
+      {
+        modalOpen: true,
+        type: type
+      }
+    );
   };
 
   closeModal = () => {
     this.setState({ modalOpen: false });
   };
 
-  signIn = (email, password) => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.closeModal();
-      })
-      .catch(function (error) {
-        alert(error.message);
-      });
-  };
-
-  register = (email, password) => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log("account created");
-        this.closeModal();
-      })
-      .catch(function (error) {
-        alert(error.message);
+  sendEmail = (email, redirect) => {
+    auth.sendSignInLinkToEmail(email, actionCodeSettings)
+      .then(function () {
+        // The link was successfully sent. Inform the user.
+        alert("Go to your email to get the link")
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        window.localStorage.setItem('redirectTo', redirect);
+      }).catch(function (error) {
+        console.log(error.code);
       });
   };
 
@@ -120,9 +138,9 @@ class UserProvider extends Component {
       .signOut()
       .then(() => {
         this.setState({
-          addList: [],
-          tempList: [],
-          cartList: [],
+          adds: [],
+          insert: [],
+          cart: [],
           totalCart: {
             cartSubtotal: 0,
             cartTax: 0,
@@ -138,7 +156,7 @@ class UserProvider extends Component {
 
   // cart manipulation start
 
-  addToCart = (pid, tid, templateName, aid, factory, history) => {
+  addToCart = (pid, tid, tempName, aid, factory, history) => {
 
     const tempProduct = products.find(product => product.pid === pid);
     const price = tempProduct.price;
@@ -147,7 +165,7 @@ class UserProvider extends Component {
     const cid = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36);
 
 
-    const currentCart = this.state.cartList;
+    const currentCart = this.state.cart;
     const exist = currentCart.filter(item => item.cid === cid)
 
     if (exist.length === 0) {
@@ -158,13 +176,13 @@ class UserProvider extends Component {
         tid: tid,
         type: type,
         name: name,
-        templateName: templateName,
+        tempName: tempName,
         factory: factory,
         count: 1,
         price: price,
         total: price
       };
-      this.setState({ cartList: [...currentCart, product] }, () => {
+      this.setState({ cart: [...currentCart, product] }, () => {
         this.addTotals();
         history.push("/cart");
       });
@@ -175,23 +193,23 @@ class UserProvider extends Component {
 
   // find cart Item
   getCartItem = cid => {
-    const cartItem = this.state.cartList.find(item => item.cid === cid);
+    const cartItem = this.state.cart.find(item => item.cid === cid);
     return cartItem;
   }
 
   increment = cid => {
-    let tempCart = [...this.state.cartList];
+    let tempCart = [...this.state.cart];
     const cartItem = this.getCartItem(cid);
     const index = tempCart.indexOf(cartItem);
     const product = tempCart[index];
     product.count++;
     product.total = product.price * product.count;
-    this.setState({ cartList: [...tempCart] });
+    this.setState({ cart: [...tempCart] });
     this.addTotals();
   }
 
   decrement = cid => {
-    let tempCart = [...this.state.cartList];
+    let tempCart = [...this.state.cart];
     const cartItem = this.getCartItem(cid);
     const index = tempCart.indexOf(cartItem);
     const product = tempCart[index];
@@ -200,22 +218,22 @@ class UserProvider extends Component {
       this.removeItem(cid);
     } else {
       product.total = product.price * product.count;
-      this.setState({ cartList: [...tempCart] });
+      this.setState({ cart: [...tempCart] });
       this.addTotals();
     }
   }
 
   removeItem = cid => {
-    let tempCart = [...this.state.cartList];
+    let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.cid !== cid);
-    this.setState({ cartList: [...tempCart] }, () => {
+    this.setState({ cart: [...tempCart] }, () => {
       this.addTotals();
     });
   }
 
   addTotals = () => {
     let subTotal = 0;
-    this.state.cartList.map(item => (subTotal += item.total));
+    this.state.cart.map(item => (subTotal += item.total));
     const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax;
@@ -230,7 +248,7 @@ class UserProvider extends Component {
 
   clearCart = () => {
     this.setState({
-      cartList: []
+      cart: []
     }, () => {
       this.addTotals()
     })
@@ -241,12 +259,12 @@ class UserProvider extends Component {
 
   handleDel = (id, collection, idType) => {
     alert(`Cart items that uses this ${collection} will be removed!`);
-    const ref = db.collection("users").doc(this.state.user.uid).collection(collection).doc(id);
+    const ref = db.collection("users").doc(this.state.user.email).collection(collection).doc(id);
     ref.delete()
       .then(() => {
-        const currentCart = this.state.cartList;
+        const currentCart = this.state.cart;
         const newCart = currentCart.filter(item => item[idType] !== id);
-        this.setState({ cartList: newCart })
+        this.setState({ cart: newCart })
       })
       .catch(err => {
         console.log(err.message);
@@ -256,33 +274,28 @@ class UserProvider extends Component {
 
   render() {
     return (
-      <div>
-        {
-          this.state.loaded ?
-            (<UserContext.Provider
-              value={{
-                ...this.state,
-                // Signin fns
-                openModal: this.openModal,
-                closeModal: this.closeModal,
-                signIn: this.signIn,
-                register: this.register,
-                signOut: this.signOut,
-                // cart manipulation fns
-                addToCart: this.addToCart,
-                increment: this.increment,
-                decrement: this.decrement,
-                removeItem: this.removeItem,
-                clearCart: this.clearCart,
-                //other fns
-                handleDel: this.handleDel,
-              }}
-            >
-              {this.props.children}
-            </UserContext.Provider>) : (<div>Loading...</div>)
-        }
-      </div>
-    );
+      <UserContext.Provider
+        value={{
+          ...this.state,
+          // Signin fns
+          openModal: this.openModal,
+          closeModal: this.closeModal,
+          sendEmail: this.sendEmail,
+          SignIn: this.SignIn,
+          signOut: this.signOut,
+          // cart manipulation fns
+          addToCart: this.addToCart,
+          increment: this.increment,
+          decrement: this.decrement,
+          removeItem: this.removeItem,
+          clearCart: this.clearCart,
+          //other fns
+          handleDel: this.handleDel,
+        }}
+      >
+        {this.props.children}
+      </UserContext.Provider>
+    )
   }
 }
 

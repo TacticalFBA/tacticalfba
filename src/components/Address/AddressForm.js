@@ -24,7 +24,7 @@ export default function AddressForm() {
         setAdd(newAdd);
     };
 
-    const saveAdd = (uid) => {
+    const saveAdd = (user) => {
         setShow(false);
         const newAdd = {
             factory: "",
@@ -35,7 +35,7 @@ export default function AddressForm() {
             mobile: ""
         }
         setAdd(newAdd);
-        const ref = db.collection("users").doc(uid).collection("factory");
+        const ref = db.collection("users").doc(user).collection("factory");
         ref.add(add)
             .catch(error => {
                 console.log(error.message);
@@ -86,7 +86,7 @@ export default function AddressForm() {
                         {({ user }) => (
                             <button type="button"
                                 className="btn btn-sm btn-dark mt-3"
-                                onClick={() => saveAdd(user.uid)}>
+                                onClick={() => saveAdd(user)}>
                                 Save</button>
                         )
                         }

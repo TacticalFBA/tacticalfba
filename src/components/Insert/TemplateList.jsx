@@ -1,35 +1,46 @@
 import React from "react";
 
 import { UserConsumer } from "../../context";
+// products data
 import { products } from "../../data"
 
-import ChooseTemp from "./ChooseTemp";
+// import components
+import Title from "../Styled/Title";
+import UserInserts from "./UserInserts";
 import TemplateItem from "./TemplateItem";
 
 
 export default function TemplateList({ history }) {
 
+  // get all products that type is "Insert" as templates 
+  const templates = products.filter(product => product.type === "Insert")
+
   return (
 
-    <div className="container pt-5">
+    <div className="container">
+
+      {/* if user already has some inserts saved, list them for choose */}
       < UserConsumer>
-        {({ tempList }) => {
+        {({ inserts }) => {
           return (<div>
-            {tempList.length > 0 && <ChooseTemp history={history} myTemps={tempList} />}
+            {inserts.length > 0 && <UserInserts history={history} myInserts={inserts} />}
           </div>
           )
         }}
       </UserConsumer>
+
+      {/* or choose from templates anyway */}
       <div>
-        <h4 className="pt-5">Choose a Template</h4>
-        {/* to be changed to a link */}
-        <span> or upload your own artwork</span>
-        <div className="row mt-5">
+        <Title title={"Choose a template"} />
+        {/* Todo: allow to upload own insert file */}
+        {/* <span> or upload your own artwork</span> */}
+        <div className="row">
           {
-            products.map(product => <TemplateItem key={product.pid} product={product} />)
+            templates.map(template => <TemplateItem key={template.pid} template={template} />)
           }
         </div>
       </div>
-    </div>
+
+    </div >
   );
 }

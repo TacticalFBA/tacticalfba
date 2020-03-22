@@ -1,6 +1,6 @@
 import React from 'react'
 import { UserConsumer } from "../../context";
-import { FullPageContainer } from "../Styled/FullPageContainer"
+import { FullPageContainer } from "../Styled/Containers"
 
 import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCart";
@@ -12,13 +12,13 @@ export default function Cart({ history }) {
   return (
     <FullPageContainer>
       <UserConsumer>
-        {({ user, cartList, increment, decrement, removeItem, totalCart, clearCart }) => {
-          if (cartList.length > 0) {
+        {({ user, cart, increment, decrement, removeItem, totalCart, clearCart }) => {
+          if (cart.length > 0) {
             return (
               <div className="container pt-5">
                 <CartColumns />
-                <CartList cart={cartList} increment={increment} decrement={decrement} removeItem={removeItem} />
-                <CartTotals uid={user.uid} cart={cartList} totalCart={totalCart} clearCart={clearCart} history={history} />
+                <CartList cart={cart} increment={increment} decrement={decrement} removeItem={removeItem} />
+                <CartTotals user={user} cart={cart} totalCart={totalCart} clearCart={clearCart} history={history} />
               </div>
             );
           } else {

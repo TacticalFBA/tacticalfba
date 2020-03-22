@@ -1,5 +1,5 @@
 import React from "react";
-import { FullPageContainer } from "../Styled/FullPageContainer"
+import { FullPageContainer } from "../Styled/Containers"
 
 export default function EmptyCart() {
   return (

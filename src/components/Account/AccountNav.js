@@ -29,7 +29,7 @@ export default function AccountNav() {
           return (
             <button
               className="btn btn-sm btn-orange ml-2"
-              onClick={() => openModal()}
+              onClick={() => openModal("account")}
             >
               Login
             </button>

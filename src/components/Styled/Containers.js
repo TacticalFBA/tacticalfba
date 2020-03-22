@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const PreviewContainer = styled.div`
   position: relative;
   overflow: hidden;
@@ -10,4 +11,13 @@ export const PreviewContainer = styled.div`
     margin:0;
     padding:0;
   }
+`;
+
+
+export const FullPageContainer = styled.div`
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `;

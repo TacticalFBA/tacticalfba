@@ -9,10 +9,10 @@ export default function CartBtn() {
       <CartWrapper>
         <i className="fa fa-shopping-cart text-dark"></i>
         <UserConsumer>
-          {({ cartList }) => {
+          {({ cart }) => {
             return (
               <span className="badge badge-pill badge-primary">
-                {cartList.length}
+                {cart.length}
               </span>
             );
           }}
