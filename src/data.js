@@ -17,7 +17,7 @@ export const samples = [
     frontMsgSec: "<strong>James<br>from<br>TacticalFBA</strong>",
     rearMsg: "<p><strong>Check out our new product!</strong></p><br><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt oreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation</p>",
     frontImg: `${process.env.PUBLIC_URL}/img/person.jpg`,
-    rearImg: `${process.env.PUBLIC_URL} /img/product.png`
+    rearImg: `${process.env.PUBLIC_URL} /img/product.jpg`
   }
 ];
 

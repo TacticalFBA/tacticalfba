@@ -7,8 +7,8 @@ export default function T1({ content, onSelect }) {
   let { themeColor, frontMsgBody, frontMsgSec, rearMsg, frontImg, rearImg } = content;
   const imgWrapper = {
     backgroundImage: `url(${frontImg})`,
-    backgroudPosition: "center center",
-    backgroudRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   }
   return (

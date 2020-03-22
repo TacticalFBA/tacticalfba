@@ -31,7 +31,7 @@ export default function Templates({ inserts }) {
                                     {({ handleDel }) =>
                                         <button
                                             className="btn btn-sm text-dark ml-3"
-                                            onClick={() => handleDel(insert.tid, "insert", "iid")}>
+                                            onClick={() => handleDel(insert.iid, "insert", "iid")}>
                                             Delete</button>}
                                 </UserConsumer>
                             </div>

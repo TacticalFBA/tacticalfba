@@ -259,7 +259,7 @@ class UserProvider extends Component {
 
   handleDel = (id, collection, idType) => {
     alert(`Cart items that uses this ${collection} will be removed!`);
-    const ref = db.collection("users").doc(this.state.user.email).collection(collection).doc(id);
+    const ref = db.collection("users").doc(this.state.user).collection(collection).doc(id);
     ref.delete()
       .then(() => {
         const currentCart = this.state.cart;
