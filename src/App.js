@@ -29,7 +29,7 @@ const App = () => {
       <main className="pTop">
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/confirm" component={Confirm} />
+          <Route path="/confirm" component={Confirm} />
           <Route path="/insert" component={TemplateList} />
           <Route path="/about" component={About} />
           <Route path="/prices" component={Prices} />
