@@ -18,7 +18,7 @@ firebase.initializeApp(config);
 
 const auth = firebase.auth();
 var actionCodeSettings = {
-  url: 'http://localhost:3000/confirm',
+  url: 'http://https://tacticalfba.netlify.com/confirm',
   handleCodeInApp: true
 };
 
