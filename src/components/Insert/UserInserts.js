@@ -1,22 +1,33 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-export default function UserInserts({ myInserts }) {
+export default function UserInserts({ history, myInserts }) {
+
+    const handleClick = (pid, iid, iName) => {
+        localStorage.setItem("comb", JSON.stringify(
+            {
+                pid: pid,
+                iid: iid,
+                iName: iName
+            }
+        ))
+        history.push("/address");
+    }
 
     return (
-        <div className="pt-5">
-            <h6>Your Saved Templates:</h6>
-            {myInserts.map(insert =>
-                <Link
-                    key={insert.iName}
-                    className="btn btn-sm btn-outline-secondary mr-3"
-                    // params = pid & tid & templateName
-                    to={"/address/" + insert.pid + "&" + insert.iid + "&" + insert.iName}
-                >
-                    {insert.iName}
-                </Link>
-            )
-            }
+        <div>
+            <h6 className="text-dark text-center">Your saved inserts:</h6>
+            <div className="mt-3 text-center">
+                {myInserts.map(insert =>
+                    <button
+                        key={insert.iName}
+                        className="btn btn-sm btn-outline-secondary mr-3 mb-2"
+                        onClick={() => handleClick(insert.pid, insert.iid, insert.iName)}
+                    >
+                        {insert.iName}
+                    </button>
+                )
+                }
+            </div>
         </div >
     )
 }

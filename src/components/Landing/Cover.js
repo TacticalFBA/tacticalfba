@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { UserConsumer } from "../../context"
+import { UserConsumer } from "../../contexts/UserContext"
 
 export default function Cover() {
 
@@ -18,7 +18,7 @@ export default function Cover() {
                 <UserConsumer>
                     {({ user, openModal }) => {
                         if (user === null) {
-                            return (<button className="btn btn-orange" onClick={() => openModal("new card")}>Get Started</button>)
+                            return (<button className="btn btn-orange" onClick={() => openModal(" new card")}>Get Started</button>)
                         } else {
                             return (<Link to="/insert" className="btn btn-orange">Get Started</Link>)
                         }

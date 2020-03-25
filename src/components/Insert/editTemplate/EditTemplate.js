@@ -1,6 +1,5 @@
 import React from "react";
-import { UserConsumer } from "../../../context"
-import { InsertProvider, InsertConsumer } from "../InsertContext"
+import { InsertProvider, InsertConsumer } from "../../../contexts/InsertContext"
 
 // import components
 import Title from "../../Styled/Title";
@@ -12,7 +11,7 @@ import ImageUploader from "./ImageUploader"
 import Spinner from "../../Spinner"
 import Alert from "./Alert"
 
-export default function EditTemplate({ history, match }) {
+export default function EditTemplate({ user, history, match }) {
 
   // get template id
   const pid = parseInt(match.params.pid);
@@ -92,25 +91,23 @@ export default function EditTemplate({ history, match }) {
                 <Alert show={value.show} error={value.error} />
 
                 {/* submit button */}
-                <UserConsumer>
-                  {({ user }) =>
-                    <button
-                      className="btn btn-sm btn-dark"
-                      type="button"
-                      onClick={() => value.saveTemp(user,
-                        [{
-                          img: value.frontImage,
-                          item: "frontImg"
-                        },
-                        {
-                          img: value.rearImage,
-                          item: "rearImg"
-                        }]
-                      )}
-                    >
-                      Save
-                  </button>}
-                </UserConsumer>
+
+                <button
+                  className="btn btn-sm btn-dark"
+                  type="button"
+                  onClick={() => value.saveTemp(user,
+                    [{
+                      img: value.frontImage,
+                      item: "frontImg"
+                    },
+                    {
+                      img: value.rearImage,
+                      item: "rearImg"
+                    }]
+                  )}
+                >
+                  Save
+                  </button>
 
                 {/* Reset Button */}
                 {/* <button className="btn btn-sm btn-secondary ml-3">Reset</button> */}

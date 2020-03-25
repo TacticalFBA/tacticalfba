@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { UserConsumer } from "../../context";
+import { UserConsumer } from "../../contexts/UserContext";
 
 export default class LoginModal extends Component {
   state = {
@@ -10,7 +10,7 @@ export default class LoginModal extends Component {
   render() {
     return (
       <UserConsumer>
-        {({ type, modalOpen, closeModal, sendEmail }) => {
+        {({ type, modalOpen, closeModal, sendEmail, googleLogin }) => {
           if (!modalOpen) {
             return null;
           } else {
@@ -52,6 +52,14 @@ export default class LoginModal extends Component {
                       }
                     >
                       Send link
+                    </button>
+                    <p className="text-center text-muted">or</p>
+                    <button
+                      type="button"
+                      className="btn btn-orange btn-sm btn-block"
+                      onClick={googleLogin}
+                    >
+                      Login with Google
                     </button>
 
                   </div>

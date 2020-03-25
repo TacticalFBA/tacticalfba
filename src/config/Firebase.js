@@ -18,10 +18,11 @@ firebase.initializeApp(config);
 
 const auth = firebase.auth();
 var actionCodeSettings = {
-  url: 'https://tacticalfba.netlify.com/confirm',
+  url: 'https://tacticalfba.netlify.com/finish-signup',
   handleCodeInApp: true
 };
 
 const db = firebase.firestore();
 const storage = firebase.storage();
-export { db, auth, actionCodeSettings, storage };
+const provider = new firebase.auth.GoogleAuthProvider()
+export { db, auth, provider, actionCodeSettings, storage };

@@ -42,7 +42,7 @@ export default class NavBar extends Component {
 
             </Nav>
             <Nav className="ml-auto">
-              <AccountNav />
+              <AccountNav/>
             </Nav>
           </Navbar.Collapse>
         </Container>

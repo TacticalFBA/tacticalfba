@@ -1,31 +1,20 @@
 import React from 'react'
-import { FullPageContainer } from "../Styled/Containers"
-import { UserConsumer } from "../../context";
-import styled from "styled-components"
 
+import Progress from "../Progress";
+
+import Title from "../Styled/Title"
 import AddressForm from "./AddressForm"
-import AddressList from "./AddressList"
+import AddressTable from "./AddressTable"
 
-export default function Address({ match, history }) {
-
+export default function Address({ user, adds, addToCart, handleDel, history }) {
 
     return (
-        <FullPageContainer>
-            <AddListContainer>
-                <UserConsumer>{
-                    ({ user, adds }) => {
-                        if (adds.length > 0) {
-                            return (<AddressList user={user} adds={adds} match={match} history={history} />)
-                        }
-                    }}
-                </UserConsumer>
-            </AddListContainer>
-            <AddressForm />
-        </FullPageContainer>
+        <div className="container">
+            <Progress page="address" history={history} />
+            <Title title={"Factory Address"} />
+            <AddressForm user={user} />
+            <AddressTable user={user} adds={adds} history={history} addToCart={addToCart} handleDel={handleDel} type={"toCart"} />
+        </div>
+
     )
 }
-
-const AddListContainer = styled.div`
-    width: 70%;
-    margin-bottom: 5rem;
-`

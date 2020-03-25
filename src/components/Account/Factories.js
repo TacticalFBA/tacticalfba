@@ -1,29 +1,15 @@
 import React from 'react'
-import { UserConsumer } from "../../context"
 
 import AddressForm from "../Address/AddressForm"
+import AddressTable from "../Address/AddressTable"
 
-export default function Factories({ adds }) {
+
+export default function Factories({ user, adds, handleDel }) {
 
     return (
         <div className="mt-5">
-            <AddressForm />
-            <div className="mt-5">
-                {adds.map(add =>
-                    <div key={add.aid} className="row py-2">
-                        <div className="col-6">
-                            <h6 className="mb-3">{add.factory}: </h6>
-                            <p>{add.address} ({add.zipcode})</p>
-                            <p>{add.contact}, {add.email}, {add.mobile}</p>
-                        </div>
-                        <div className="col-2">
-                            <UserConsumer>
-                                {({ handleDel }) => <button className="btn btn-sm text-dark ml-3" onClick={() => handleDel(add.aid, "factory", "aid")}>Delete</button>}
-                            </UserConsumer>
-                        </div>
-                    </div>
-                )}
-            </div>
+            <AddressForm user={user} />
+            <AddressTable adds={adds} handleDel={handleDel} type={"account"} />
         </div>
     )
 }

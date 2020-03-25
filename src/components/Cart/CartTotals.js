@@ -9,18 +9,21 @@ export default function CartTotals({ user, cart, totalCart, clearCart, history }
         <hr className="mt-5" />
         <div className="row">
           <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
-            <h6>
-              <span>subtotal: </span>
-              <span>$ {cartSubtotal}</span>
-            </h6>
-            <h6>
-              <span>tax: </span>
-              <span>$ {cartTax}</span>
-            </h6>
-            <h6>
-              <span>total: </span>
-              <span>$ {cartTotal}</span>
-            </h6>
+            <div className="mb-3">
+              <h6>
+                <span>subtotal: </span>
+                <span>$ {cartSubtotal}</span>
+              </h6>
+              <h6>
+                <span>tax: </span>
+                <span>$ {cartTax}</span>
+              </h6>
+              <h6>
+                <span>total: </span>
+                <span>$ {cartTotal}</span>
+              </h6>
+
+            </div>
             <PaypalBtn user={user} cart={cart} cartTotal={totalCart.cartTotal} clearCart={clearCart} history={history} />
           </div>
         </div>

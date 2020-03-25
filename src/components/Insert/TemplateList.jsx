@@ -1,10 +1,12 @@
 import React from "react";
 
-import { UserConsumer } from "../../context";
+import { UserConsumer } from "../../contexts/UserContext";
+
 // products data
 import { products } from "../../data"
 
 // import components
+import Progress from "../Progress"
 import Title from "../Styled/Title";
 import UserInserts from "./UserInserts";
 import TemplateItem from "./TemplateItem";
@@ -19,19 +21,24 @@ export default function TemplateList({ history }) {
 
     <div className="container">
 
-      {/* if user already has some inserts saved, list them for choose */}
-      < UserConsumer>
-        {({ inserts }) => {
-          return (<div>
-            {inserts.length > 0 && <UserInserts history={history} myInserts={inserts} />}
-          </div>
-          )
-        }}
-      </UserConsumer>
+      <Progress />
 
       {/* or choose from templates anyway */}
       <div>
         <Title title={"Choose a template"} />
+
+        {/* if user already has some inserts saved, list them for choose */}
+        <div className="mb-5">
+          < UserConsumer>
+            {({ inserts }) => {
+              return (<div>
+                {inserts.length > 0 && <UserInserts history={history} myInserts={inserts} />}
+              </div>
+              )
+            }}
+          </UserConsumer>
+        </div>
+
         {/* Todo: allow to upload own insert file */}
         {/* <span> or upload your own artwork</span> */}
         <div className="row">

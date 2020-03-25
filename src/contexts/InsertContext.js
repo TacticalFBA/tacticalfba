@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { samples } from "../../data";
-import { db, storage } from "../../config/Firebase";
+import { samples } from "../data";
+import { db, storage } from "../config/Firebase";
 import { EditorState, convertFromHTML, ContentState } from "draft-js";
 import { stateToHTML } from 'draft-js-export-html';
 
@@ -8,7 +8,7 @@ const InsertContext = React.createContext();
 
 function InsertProvider(props) {
 
-    const { pid, history } = props;
+    const { pid, history, user } = props;
 
     const tempInsert = samples.filter(sample => sample.pid === pid)[0];
     const [content, setContent] = useState(tempInsert);
@@ -154,12 +154,20 @@ function InsertProvider(props) {
     const saveToDb = (user) => {
         const ref = db.collection("users").doc(user).collection("insert");
         ref.add(content)
-            .then((docRef) => {
-                // params = pid & iid & iName
-                history.push(`/address/${pid}&${docRef.id}&${content.iName}`);
+            .then(docRef => {
+                history.push("/address");
+
+                const comb = {
+                    pid: pid,
+                    iid: docRef.id,
+                    iName: content.iName
+                }
+
+                localStorage.setItem("comb", JSON.stringify(comb));
+
             })
             .catch(error => {
-                console.error("Error writing document: ", error);
+                console.log("Error writing document: ", error.message);
             });
     }
 
@@ -168,6 +176,7 @@ function InsertProvider(props) {
             value={{
                 content: content,
                 spin: spin,
+                user: user,
                 editorShow: editorShow,
                 editorState: editorState,
                 item: item,

@@ -1,13 +1,13 @@
 import React from "react";
 
 export default function CartItem({ item, increment, decrement, removeItem }) {
-  const { cid, type, name, price, count, total, templateName, factory } = item;
+  const { cid, type, pName, price, count, total, iName, factory } = item;
 
   return (
     <div className="row my-2 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">
         <span className="d-lg-none">product: </span>
-        {name} {type} - {templateName}
+        {pName} {type} - {iName}
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <span className="d-lg-none">Factory: </span>
@@ -20,7 +20,8 @@ export default function CartItem({ item, increment, decrement, removeItem }) {
         <div className="d-flex justify-content-center">
           <button
             className="btn btn-black mx-1"
-            onClick={() => decrement(cid)}>
+            onClick={() => decrement(cid)}
+          >
             -
           </button>
           <span
@@ -29,7 +30,8 @@ export default function CartItem({ item, increment, decrement, removeItem }) {
           </span>
           <button
             className="btn btn-black mx-1"
-            onClick={() => increment(cid)}>
+            onClick={() => increment(cid)}
+          >
             +
           </button>
         </div>
@@ -41,7 +43,7 @@ export default function CartItem({ item, increment, decrement, removeItem }) {
         className="col-10 mx-auto col-lg-2 my-2 my-lg-0"
       >
         {/* <button className="btn btn-sm">Edit</button> */}
-        <button className="btn btn-sm" onClick={() => removeItem(cid)}>Remove</button>
+        <button className="btn btn-sm text-muted font-weight-bold" onClick={() => removeItem(cid)}>Remove</button>
       </div>
     </div>
   );

@@ -33,12 +33,13 @@ btn:hover {
   color: var(--mainGrey);
 }
 
-.btn-orange {
+.btn-orange,.badge-orange  {
   background-color: var(--mainOrange) !important;
   color: var(--mainWhite) !important;
 }
 
-.btn-orange:hover {
+.btn-orange:hover,
+.badge-orange:hover  {
   background-color: var(--darkOrange) !important;
 }
 
@@ -75,6 +76,15 @@ btn:hover {
 
 .highlight:hover{
   border: .125rem dashed var(--mainDark);
+}
+
+
+.btn:focus,.btn:active:focus,
+.btn.active:focus,.btn.focus,
+.btn:active.focus,.btn.active.focus { 
+ outline: none;  
+ border-color: transparent;  
+ box-shadow:none;
 }
 
 /* responsive */

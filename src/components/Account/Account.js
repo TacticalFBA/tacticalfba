@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { UserConsumer } from "../../context";
+
+import Title from "../Styled/Title"
 import Inserts from "./Inserts";
 import Factories from "./Factories";
 import Orders from "./Orders";
 
 
-export default function Account() {
+export default function Account({ user, adds, orders, inserts, handleDel }) {
 
   const [show, setShow] = useState({
     orders: "show",
@@ -24,36 +25,28 @@ export default function Account() {
   }
 
   return (
-    <section className="container pt-5">
-      <UserConsumer>
-        {({ user, orders, adds, inserts }) => {
-          if (user) {
-            return (
-              <div className="pt-5">
-                <h4>Hello, {user}</h4>
-                <div className="pt-5">
+    <section className="container">
+
+      <Title title={`Hello,  ${user}`} />
+      <div className="text-center">
+        <button
+          name="orders"
+          className="btn font-weight-bold px-5"
+          onClick={e => handleClick(e)}>Orders</button> |
                   <button
-                    name="orders"
-                    className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)}>Orders</button> |
+          name="inserts"
+          className="btn font-weight-bold px-5"
+          onClick={e => handleClick(e)} > Inserts</button> |
                   <button
-                    name="inserts"
-                    className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)} > Inserts</button> |
-                  <button
-                    name="factories"
-                    className="btn btn-lg px-5"
-                    onClick={e => handleClick(e)}> Factories</button>
-                </div>
-                <hr />
-                {show.orders === "show" && <Orders orders={orders} />}
-                {show.inserts === "show" && <Inserts inserts={inserts} />}
-                {show.factories === "show" && <Factories adds={adds} />}
-              </div>
-            )
-          }
-        }}
-      </UserConsumer>
+          name="factories"
+          className="btn font-weight-bold px-5"
+          onClick={e => handleClick(e)}> Factories</button>
+      </div>
+      <hr />
+      {show.orders === "show" && <Orders orders={orders} />}
+      {show.inserts === "show" && <Inserts inserts={inserts} handleDel={handleDel} />}
+      {show.factories === "show" && <Factories user={user} adds={adds} handleDel={handleDel} />}
+
     </section >
   );
 }

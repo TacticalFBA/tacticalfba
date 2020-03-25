@@ -1,7 +1,7 @@
 import React from 'react'
-import { UserConsumer } from "../../context"
+import { UserConsumer } from "../../contexts/UserContext"
 
-export default function Confirm() {
+export default function FinishSignUp() {
     return (
         <div>
             <UserConsumer>

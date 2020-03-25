@@ -1,17 +1,16 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { UserConsumer } from "../../context"
 
-export default function Templates({ inserts }) {
+
+export default function Templates({ inserts, handleDel }) {
 
     return (
         <div className="mt-5">
 
-            {inserts.length === 0 && (
-                <div>
-                    <Link to="/insert" className="btn btn-sm btn-orange">+ Create Your Insert</Link>
-                </div>
-            )}
+            <div>
+                <Link to="/insert" className="btn btn-sm text-orange font-weight-bold">+ Create Your Insert</Link>
+            </div>
+
 
             {inserts.length > 0 && (<div>
                 {
@@ -27,13 +26,12 @@ export default function Templates({ inserts }) {
                                     to={"/address/" + insert.pid + "&" + insert.iid + "&" + insert.iName}
                                 >Use</Link>
                                 {/* <button className="btn btn-sm text-dark ml-3">Edit</button> */}
-                                <UserConsumer>
-                                    {({ handleDel }) =>
-                                        <button
-                                            className="btn btn-sm text-dark ml-3"
-                                            onClick={() => handleDel(insert.iid, "insert", "iid")}>
-                                            Delete</button>}
-                                </UserConsumer>
+
+                                <button
+                                    className="btn btn-sm text-dark ml-3"
+                                    onClick={() => handleDel(insert.iid, "insert", "iid")}>
+                                    Delete</button>
+
                             </div>
                         </div>)
                 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { auth, actionCodeSettings, db } from "./config/Firebase";
-import { products } from "./data"
+import { products } from "../data";
+import { auth, provider, actionCodeSettings, db } from "../config/Firebase";
 
 const UserContext = React.createContext();
 
@@ -55,27 +55,14 @@ class UserProvider extends Component {
         const email = user.email;
         const tempUser = email;
         this.setState({ user: tempUser });
-        this.syncInsert(email);
         this.syncAdd(email);
+        this.syncInsert(email);
         this.syncOrder(email);
         this.setState({ spin: false })
       } else {
         this.setState({ user: null });
         this.setState({ spin: false })
       }
-    })
-  }
-
-  syncAdd = user => {
-    const ref = db.collection("users").doc(user).collection("factory");
-    ref.onSnapshot(snapshot => {
-      const adds = snapshot.docs.map(doc => {
-        // adding document id to the data
-        let tempDoc = doc.data();
-        return tempDoc = { ...tempDoc, aid: doc.id };
-      })
-      this.setState({ adds })
-      // console.log("addReady");
     })
   }
 
@@ -90,6 +77,22 @@ class UserProvider extends Component {
       this.setState({ inserts });
       // console.log("tempReady");
     })
+  }
+
+  syncAdd = user => {
+    if (user != null) {
+      const ref = db.collection("users").doc(user).collection("factory");
+      ref.onSnapshot(snapshot => {
+        const adds = snapshot.docs.map(doc => {
+          // adding document id to the data
+          let tempDoc = doc.data();
+          return tempDoc = { ...tempDoc, aid: doc.id };
+        })
+        this.setState({ adds });
+        // console.log("addReady");
+      })
+    }
+    return;
   }
 
   syncOrder = user => {
@@ -129,9 +132,30 @@ class UserProvider extends Component {
         window.localStorage.setItem('emailForSignIn', email);
         window.localStorage.setItem('redirectTo', redirect);
       }).catch(function (error) {
-        console.log(error.code);
+        console.log(error.message);
       });
   };
+
+  googleLogin = () => {
+
+    auth.signInWithPopup(provider).then(function (result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // var token = result.credential.accessToken;
+      // The signed-in user info.
+      // var user = result.user;
+      // ...
+    }).catch(function (error) {
+      // Handle Errors here.
+      // var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorMessage);
+      // The email of the user's account used.
+      // var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      // var credential = error.credential;
+      // ...
+    });
+  }
 
   signOut = () => {
     auth
@@ -156,46 +180,12 @@ class UserProvider extends Component {
 
   // cart manipulation start
 
-  addToCart = (pid, tid, tempName, aid, factory, history) => {
-
-    const tempProduct = products.find(product => product.pid === pid);
-    const price = tempProduct.price;
-    const type = tempProduct.type;
-    const name = tempProduct.name;
-    const cid = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36);
-
-
-    const currentCart = this.state.cart;
-    const exist = currentCart.filter(item => item.cid === cid)
-
-    if (exist.length === 0) {
-      // set cart product
-      const product = {
-        cid: cid,
-        aid: aid,
-        tid: tid,
-        type: type,
-        name: name,
-        tempName: tempName,
-        factory: factory,
-        count: 1,
-        price: price,
-        total: price
-      };
-      this.setState({ cart: [...currentCart, product] }, () => {
-        this.addTotals();
-        history.push("/cart");
-      });
-    } else {
-      alert("Aready in cart");
-    }
-  };
-
   // find cart Item
   getCartItem = cid => {
     const cartItem = this.state.cart.find(item => item.cid === cid);
     return cartItem;
   }
+
 
   increment = cid => {
     let tempCart = [...this.state.cart];
@@ -204,8 +194,10 @@ class UserProvider extends Component {
     const product = tempCart[index];
     product.count++;
     product.total = product.price * product.count;
-    this.setState({ cart: [...tempCart] });
-    this.addTotals();
+    localStorage.setItem("cart", JSON.stringify(tempCart));
+    this.setState({ cart: [...tempCart] }, () => {
+      this.addTotals();
+    });
   }
 
   decrement = cid => {
@@ -218,14 +210,17 @@ class UserProvider extends Component {
       this.removeItem(cid);
     } else {
       product.total = product.price * product.count;
-      this.setState({ cart: [...tempCart] });
-      this.addTotals();
+      localStorage.setItem("cart", JSON.stringify(tempCart));
+      this.setState({ cart: [...tempCart] }, () => {
+        this.addTotals();
+      });
     }
   }
 
   removeItem = cid => {
     let tempCart = [...this.state.cart];
     tempCart = tempCart.filter(item => item.cid !== cid);
+    localStorage.setItem("cart", JSON.stringify(tempCart));
     this.setState({ cart: [...tempCart] }, () => {
       this.addTotals();
     });
@@ -233,7 +228,7 @@ class UserProvider extends Component {
 
   addTotals = () => {
     let subTotal = 0;
-    this.state.cart.map(item => (subTotal += item.total));
+    JSON.parse(localStorage.getItem("cart")).map(item => (subTotal += item.total));
     const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax;
@@ -247,6 +242,7 @@ class UserProvider extends Component {
   }
 
   clearCart = () => {
+    localStorage.setItem("cart", JSON.stringify([]));
     this.setState({
       cart: []
     }, () => {
@@ -257,14 +253,62 @@ class UserProvider extends Component {
   // cart manipulation end
 
 
+
+
+  addToCart = (aid, factory, history) => {
+
+    const comb = JSON.parse(localStorage.getItem("comb"));
+    const { pid, iid, iName } = comb;
+
+    const tempProduct = products.find(product => product.pid === pid);
+    const price = tempProduct.price;
+    const type = tempProduct.type;
+    const pName = tempProduct.name;
+    const cid = iid + aid;
+
+    // set cart product
+    const product = {
+      cid: cid,
+      pid: pid,
+      aid: aid,
+      iid: iid,
+      type: type,
+      pName: pName,
+      iName: iName,
+      factory: factory,
+      count: 1,
+      price: price,
+      total: price
+    };
+
+
+    const exist = this.state.cart.filter(item => item.cid === cid);
+    if (exist.length === 0) {
+      const newCart = [...this.state.cart, product]
+      localStorage.setItem("cart", JSON.stringify(newCart))
+      this.setState({ cart: [...newCart] }, () => {
+        this.addTotals();
+        localStorage.removeItem("comb")
+        history.push("/cart");
+      });
+    } else {
+      alert("Aready in cart");
+    }
+
+  };
+
+
   handleDel = (id, collection, idType) => {
     alert(`Cart items that uses this ${collection} will be removed!`);
     const ref = db.collection("users").doc(this.state.user).collection(collection).doc(id);
     ref.delete()
       .then(() => {
-        const currentCart = this.state.cart;
+        const currentCart = JSON.parse(localStorage.getItem("cart"));
         const newCart = currentCart.filter(item => item[idType] !== id);
-        this.setState({ cart: newCart })
+        localStorage.setItem("cart", newCart);
+        this.setState({ cart: [...newCart] }, () => {
+          this.addTotals();
+        });
       })
       .catch(err => {
         console.log(err.message);
@@ -283,6 +327,7 @@ class UserProvider extends Component {
           sendEmail: this.sendEmail,
           SignIn: this.SignIn,
           signOut: this.signOut,
+          googleLogin: this.googleLogin,
           // cart manipulation fns
           addToCart: this.addToCart,
           increment: this.increment,
