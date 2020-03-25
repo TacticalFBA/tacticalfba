@@ -114,7 +114,8 @@ export default function EditTemplate({ user, history, match }) {
 
                 {/* preview area */}
                 <div className="py-5">
-                  <Preview pid={pid} history={history} content={value.content} onSelect={value.onSelect} />
+                  <Preview
+                    pid={pid} history={history} content={value.content} onSelect={value.onSelect} />
                 </div>
 
                 {/* spin when uploading images and save insert to the db */}

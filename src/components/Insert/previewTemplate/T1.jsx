@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Parser from 'html-react-parser';
 import { PreviewContainer } from "../../Styled/Containers";
 
 export default function T1({ content, onSelect }) {
+
+  const frontRef = useRef();
+
   let { themeColor, frontMsgBody, frontMsgSec, rearMsg, frontImg, rearImg } = content;
   const imgWrapper = {
     backgroundImage: `url(${frontImg})`,
@@ -15,7 +18,9 @@ export default function T1({ content, onSelect }) {
     <div className="row">
 
       {/* front */}
-      <div className="col-12 col-md-6">
+      <div className="col-12 col-md-6"
+        ref={frontRef}
+      >
         <h6 className="mb-3">Front:</h6>
         <PreviewContainer>
           <LeftWrapper className="juzhong" style={{ backgroundColor: themeColor }}>
