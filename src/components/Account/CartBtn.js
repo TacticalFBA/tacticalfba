@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CartConsumer } from "../../contexts/CartContext";
 
-export default function CartBtn({cart}) {
-
-
+export default function CartBtn() {
   return (
     <Link to={`/cart`}>
       <CartWrapper>
         <i className="fa fa-shopping-cart text-dark"></i>
-        <span className="badge badge-pill badge-orange">
-          {cart.length}
-        </span>
+        <CartConsumer>
+          {({ cart }) => (
+            <span className="badge badge-pill badge-orange">{cart.length}</span>
+          )}
+        </CartConsumer>
       </CartWrapper>
     </Link>
   );

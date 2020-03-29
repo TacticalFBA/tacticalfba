@@ -1,33 +1,46 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import Parser from 'html-react-parser';
+import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
 
-export default function T1({ content, onSelect }) {
-
-  const frontRef = useRef();
-
-  let { themeColor, frontMsgBody, frontMsgSec, rearMsg, frontImg, rearImg } = content;
+export default function T1({ content, onSelect, frontRef, backRef }) {
+  let {
+    themeColor,
+    frontMsgBody,
+    frontMsgSec,
+    rearMsg,
+    frontImg,
+    rearImg
+  } = content;
   const imgWrapper = {
     backgroundImage: `url(${frontImg})`,
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
-  }
+  };
   return (
     <div className="row">
-
       {/* front */}
-      <div className="col-12 col-md-6"
-        ref={frontRef}
-      >
+      <div className="col-12 col-md-6">
         <h6 className="mb-3">Front:</h6>
-        <PreviewContainer>
-          <LeftWrapper className="juzhong" style={{ backgroundColor: themeColor }}>
+        <PreviewContainer ref={frontRef}>
+          <LeftWrapper
+            className="juzhong"
+            style={{ backgroundColor: themeColor }}
+          >
             <div className="frontImg" style={imgWrapper} />
-            <div className="pointer highlight" onClick={() => onSelect("frontMsgSec")}>{Parser(frontMsgSec)}</div>
+            <div
+              className="pointer highlight"
+              onClick={() => onSelect("frontMsgSec")}
+            >
+              {Parser(frontMsgSec)}
+            </div>
           </LeftWrapper>
-          <RightWrapper className="pointer highlight" onClick={() => onSelect("frontMsgBody")}>{Parser(frontMsgBody)}
+          <RightWrapper
+            className="pointer highlight"
+            onClick={() => onSelect("frontMsgBody")}
+          >
+            {Parser(frontMsgBody)}
           </RightWrapper>
         </PreviewContainer>
       </div>
@@ -35,15 +48,23 @@ export default function T1({ content, onSelect }) {
       {/* rear */}
       <div className="col-12 col-md-6">
         <h6 className="mb-3">Rear:</h6>
-        <PreviewContainer className="juzhong" style={{ backgroundColor: themeColor }}>
+        <PreviewContainer
+          ref={backRef}
+          className="juzhong"
+          style={{ backgroundColor: themeColor }}
+        >
           <RearWrapper>
             <img src={rearImg} alt="rear" />
-            <div className="pointer highlight" onClick={() => onSelect("rearMsg")}>{Parser(rearMsg)}</div>
+            <div
+              className="pointer highlight"
+              onClick={() => onSelect("rearMsg")}
+            >
+              {Parser(rearMsg)}
+            </div>
           </RearWrapper>
         </PreviewContainer>
       </div>
-
-    </div >
+    </div>
   );
 }
 
@@ -77,15 +98,15 @@ const RightWrapper = styled.div`
 `;
 
 const RearWrapper = styled.div`
-width: 70%;
-text-align: center;
-img {
-  width: 25%;
-}
-div {
-  margin-top: 1rem;
-  color: var(--mainWhite);
-  width: 100%;
-  font-size: 0.8rem;
-}
-`
+  width: 70%;
+  text-align: center;
+  img {
+    width: 25%;
+  }
+  div {
+    margin-top: 1rem;
+    color: var(--mainWhite);
+    width: 100%;
+    font-size: 0.8rem;
+  }
+`;

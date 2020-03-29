@@ -2,12 +2,11 @@ import React from 'react'
 
 export default function UserInserts({ history, myInserts }) {
 
-    const handleClick = (pid, iid, iName) => {
+    const handleClick = (pid, iid, iName, frontPre, backPre) => {
         localStorage.setItem("comb", JSON.stringify(
             {
                 pid: pid,
-                iid: iid,
-                iName: iName
+                iid: iid
             }
         ))
         history.push("/address");
@@ -21,7 +20,7 @@ export default function UserInserts({ history, myInserts }) {
                     <button
                         key={insert.iName}
                         className="btn btn-sm btn-outline-secondary mr-3 mb-2"
-                        onClick={() => handleClick(insert.pid, insert.iid, insert.iName)}
+                        onClick={() => handleClick(insert.pid, insert.iid, insert.iName, insert.frontPre, insert.backPre)}
                     >
                         {insert.iName}
                     </button>

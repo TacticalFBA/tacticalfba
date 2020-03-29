@@ -1,8 +1,15 @@
 import React from "react";
 import PaypalBtn from "./PaypalBtn";
+import { UserConsumer } from "../../contexts/UserContext";
 
-export default function CartTotals({ user, cart, totalCart, clearCart, history }) {
-  const { cartSubtotal, cartTax, cartTotal } = totalCart;
+export default function CartTotals({
+  cart,
+  cartSubtotal,
+  cartTax,
+  cartTotal,
+  clearCart,
+  history
+}) {
   return (
     <React.Fragment>
       <div className="container">
@@ -22,9 +29,20 @@ export default function CartTotals({ user, cart, totalCart, clearCart, history }
                 <span>total: </span>
                 <span>$ {cartTotal}</span>
               </h6>
-
             </div>
-            <PaypalBtn user={user} cart={cart} cartTotal={totalCart.cartTotal} clearCart={clearCart} history={history} />
+            <UserConsumer>
+              {({ user, inserts, adds }) => (
+                <PaypalBtn
+                  inserts={inserts}
+                  adds={adds}
+                  user={user}
+                  cart={cart}
+                  cartTotal={cartTotal}
+                  clearCart={clearCart}
+                  history={history}
+                />
+              )}
+            </UserConsumer>
           </div>
         </div>
       </div>

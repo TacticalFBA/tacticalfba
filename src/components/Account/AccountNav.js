@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserConsumer } from "../../contexts/UserContext";
-import CartBtn from "../Cart/CartBtn";
+import CartBtn from "./CartBtn";
 
 export default function AccountNav() {
   return (
     <UserConsumer>
-      {({ user, openModal, signOut,cart }) => {
+      {({ user, openModal, signOut }) => {
         if (user) {
           return (
             <React.Fragment>
-              <CartBtn cart={cart}/>
+              <CartBtn />
               <Link to="/account" className="btn btn-sm mx-1">
                 Account
               </Link>

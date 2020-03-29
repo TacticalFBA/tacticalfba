@@ -1,15 +1,22 @@
-import React from 'react'
+import React from "react";
+import { UserConsumer } from "../contexts/UserContext";
 import styled from "styled-components";
-import { Spinner as SpinnerH } from "react-bootstrap"
+import { Spinner as SpinnerH } from "react-bootstrap";
 
-export default function Spinner({ spin }) {
-    return !spin ? null : (
-        <ModalContainer>
+export default function Spinner() {
+  return (
+    <UserConsumer>
+      {({ spin }) => {
+        return !spin ? null : (
+          <ModalContainer>
             <SpinnerH animation="border" role="status" variant="light">
-                <span className="sr-only">Loading...</span>
-            </SpinnerH >
-        </ModalContainer >
-    )
+              <span className="sr-only">Loading...</span>
+            </SpinnerH>
+          </ModalContainer>
+        );
+      }}
+    </UserConsumer>
+  );
 }
 
 const ModalContainer = styled.div`
@@ -20,7 +27,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
-  z-index:9999;
+  z-index: 9999;
   align-items: center;
   justify-content: center;
   #modal {
