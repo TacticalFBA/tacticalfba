@@ -49,11 +49,13 @@ class UserProvider extends Component {
         const email = user.email;
         const tempUser = email;
         this.setState({ user: tempUser }, () => {
-          this.syncAdd(email);
-          this.syncInsert(email);
-          this.syncOrder(email);
+          const p1 = this.syncAdd(email);
+          const p2 = this.syncInsert(email);
+          const p3 = this.syncOrder(email);
+          Promise.all([p1, p2, p3]).then(() => {
+            this.setState({ spin: false });
+          });
         });
-        this.setState({ spin: false });
       } else {
         this.setState({ user: null });
         this.setState({ spin: false });
@@ -143,12 +145,13 @@ class UserProvider extends Component {
   googleLogin = () => {
     auth
       .signInWithPopup(provider)
-      .then(function(result) {
+      .then(result => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // var token = result.credential.accessToken;
         // The signed-in user info.
         // var user = result.user;
         // ...
+        this.closeModal();
       })
       .catch(function(error) {
         // Handle Errors here.

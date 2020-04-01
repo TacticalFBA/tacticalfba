@@ -14,7 +14,10 @@ export default function CartColumns() {
           <p className="text-uppercase">price</p>
         </div>
         <div className="col-10 mx-auto col-lg-2">
-          <p className="text-uppercase">quantity</p>
+          <p className="text-uppercase" style={{ margin: "0" }}>
+            quantity
+          </p>
+          <small className="text-muted">( in thousands )</small>
         </div>
         <div className="col-10 mx-auto col-lg-2">
           <p className="text-uppercase">total</p>

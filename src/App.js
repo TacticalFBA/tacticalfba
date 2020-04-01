@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import { UserConsumer } from "./contexts/UserContext";
+
 // import css
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
@@ -24,7 +26,7 @@ import FinishSignUp from "./components/Account/FinishSignUp";
 const App = () => {
   return (
     <React.Fragment>
-      <Spinner />
+      <UserConsumer>{({ spin }) => <Spinner spin={spin} />}</UserConsumer>
       <div className="App">
         <header className="App-header">
           <NavBar />
@@ -37,7 +39,7 @@ const App = () => {
             <Route path="/prices" component={Prices} />
             <Route path="/contact" component={Contact} />
             <Route path="/cart" component={Cart} />
-            <Route path="/account" component={Account} />
+            <Route exact path="/account" component={Account} />
             <Route path="/insert" component={TemplateList} />
             <Route path="/edit-template/:pid" component={EditTemplate} />
             <Route path="/address" component={Address} />

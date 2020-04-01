@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PreviewModal from "../PreviewModal";
+import NewInsertBtn from "./NewInsertBtn";
 
-export default function Orders({ orders }) {
+export default function Orders({ orders, history }) {
   const [show, setShow] = useState(false);
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
@@ -17,7 +18,9 @@ export default function Orders({ orders }) {
     setBack("");
   };
   return (
-    <div className="mt-5">
+    <div>
+      <NewInsertBtn history={history} />
+
       {show && (
         <div onClick={closeModal}>
           <PreviewModal front={front} back={back} />
@@ -39,7 +42,7 @@ export default function Orders({ orders }) {
                 return (
                   <div className="item" key={item.insert.iid}>
                     <div className="row">
-                      <div className="col-2 title">Item:</div>
+                      <div className="col-2 title">Insert:</div>
                       <div className="col-10">
                         <span
                           style={{
@@ -58,7 +61,7 @@ export default function Orders({ orders }) {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-2 title">Factory:</div>
+                      <div className="col-2 title">Send to:</div>
                       <div className="col-10">
                         {item.add.factory}, {item.add.address},{" "}
                         {item.add.zipcode}
@@ -75,7 +78,9 @@ export default function Orders({ orders }) {
                       <div className="col-10">${item.price}</div>
                     </div>
                     <div className="row">
-                      <div className="col-2 title">Count:</div>
+                      <div className="col-2 title">
+                        Count: <small>(in thousands)</small>
+                      </div>
                       <div className="col-10 ">{item.count}</div>
                     </div>
                     <div className="row">

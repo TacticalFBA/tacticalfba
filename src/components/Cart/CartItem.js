@@ -80,12 +80,12 @@ export default function CartItem({
           <strong className="d-lg-none">item total : </strong>${item.total}
         </div>
         <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0">
-          <button
+          {/* <button
             className="btn btn-sm text-orange font-weight-bold"
             onClick={editInsert}
           >
             Edit Insert
-          </button>
+          </button> */}
           <button
             className="btn btn-sm text-muted font-weight-bold"
             onClick={() => removeItem(cid)}

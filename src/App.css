@@ -1,21 +1,28 @@
 :root {
-  --mainOrange: #f0523c;
-  --darkOrange: #ed3218;
+  --mainOrange: #1655b7;
+  --darkOrange: #030c7e;
   --mainWhite: #fafafa;
   --mainDark: #0a0908;
   --mainGrey: #b1b1b1;
 }
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
 }
-html,body,main {
+html,
+body,
+main {
   /* font-family: "Hind Madurai", sans-serif !important; */
   height: 100%;
   width: 100%;
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
-  scroll-behavior:smooth;
+  scroll-behavior: smooth;
 }
 .pTop {
   padding-top: 4.125rem;
@@ -33,13 +40,14 @@ btn:hover {
   color: var(--mainGrey);
 }
 
-.btn-orange,.badge-orange  {
+.btn-orange,
+.badge-orange {
   background-color: var(--mainOrange) !important;
   color: var(--mainWhite) !important;
 }
 
 .btn-orange:hover,
-.badge-orange:hover  {
+.badge-orange:hover {
   background-color: var(--darkOrange) !important;
 }
 
@@ -74,25 +82,36 @@ btn:hover {
   cursor: pointer;
 }
 
-.highlight:hover{
-  border: .125rem dashed var(--mainDark);
+.highlight:hover {
+  border: 0.125rem dashed var(--mainDark);
 }
 
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
 
-.btn:focus,.btn:active:focus,
-.btn.active:focus,.btn.focus,
-.btn:active.focus,.btn.active.focus { 
- outline: none;  
- border-color: transparent;  
- box-shadow:none;
+button:focus,
+button:active:focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+buttonactive.focus {
+  outline: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* responsive */
 
-@media (max-width: 375px) { 
-
+@media (max-width: 375px) {
   .container {
-      padding: 0 1.5rem !important;
+    padding: 0 1.5rem !important;
   }
-
 }

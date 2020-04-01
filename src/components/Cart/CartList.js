@@ -34,8 +34,8 @@ export default function CartList({
                 className="btn mt-5 d-block text-center text-orange"
               >
                 {cart.length === 0
-                  ? " + Your cart is empty, let's make an insert"
-                  : " + Add another insert or factory"}
+                  ? " + Your cart is empty, let's create an insert"
+                  : " + Create another insert"}
               </Link>
             </div>
           )

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { samples } from "../data";
-import { db } from "../config/Firebase";
+import { db, storage } from "../config/Firebase";
 import { EditorState, convertFromHTML, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import htmlToImage from "html-to-image";
@@ -13,10 +13,10 @@ function InsertProvider(props) {
   const backRef = useRef();
   let tempInsert = {};
 
-  if (iid.length === 1) {
-    tempInsert = samples.filter(sample => sample.pid === pid)[0];
-  } else {
+  if (iid) {
     tempInsert = inserts.filter(insert => insert.iid === iid)[0];
+  } else {
+    tempInsert = samples.filter(sample => sample.pid === pid)[0];
   }
 
   const [content, setContent] = useState(tempInsert);
@@ -93,49 +93,133 @@ function InsertProvider(props) {
 
   const genPreview = async arr => {
     let newContent = Object.assign({}, content);
+    await htmlToImage.toJpeg(frontRef.current, { quality: 1 }).then(dataUrl => {
+      newContent.frontPre = dataUrl;
+      console.log("front preview converted");
+    });
+    await htmlToImage.toJpeg(backRef.current, { quality: 1 }).then(dataUrl => {
+      newContent.backPre = dataUrl;
+      console.log("back preview converted");
+    });
+    return newContent;
+  };
 
-    for (const item of arr) {
-      await htmlToImage
-        .toJpeg(item.ref.current, { quality: 1 })
-        .then(dataUrl => {
-          newContent[item.name] = dataUrl;
-        });
+  const genID = () => {
+    return Number(
+      Math.random()
+        .toString()
+        .substr(10) + Date.now()
+    ).toString(36);
+  };
+
+  const uploadImg = async (arr, cb) => {
+    let newContent = Object.assign({}, content);
+    let count = 0;
+    for await (const image of arr) {
+      const imgID = genID();
+      const ref = storage.ref(`/images/${imgID}`);
+      const uploadTask = ref.putString(image.dataUrl, "data_url");
+      uploadTask.on(
+        "state_changed",
+        snapShot => {
+          //takes a snap shot of the process as it is happening
+          // console.log(snapShot);
+        },
+        err => {
+          //catches the errors
+          console.log(err);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(imgID)
+            .getDownloadURL()
+            .then(fireBaseUrl => {
+              newContent[image.name] = fireBaseUrl;
+              count++;
+              console.log(image.name + " uploaded");
+              if (count === arr.length) {
+                console.log("images all uploaded");
+                cb(newContent);
+              }
+            });
+        }
+      );
     }
 
-    if (iid.length === 1) {
-      const ref = db
-        .collection("users")
-        .doc(user)
-        .collection("insert");
+    // for await (const image of arr) {
+    //   const imgID = genID();
+    //   const ref = storage.ref(`/images/${imgID}`);
+    //   const uploadTask = ref.putString(image.dataUrl, "data_url");
+    //   uploadTask.on(
+    //     "state_changed",
+    //     snapShot => {
+    //       //takes a snap shot of the process as it is happening
+    //       // console.log(snapShot);
+    //     },
+    //     err => {
+    //       //catches the errors
+    //       console.log(err);
+    //     },
+    //     () => {
+    //       storage
+    //         .ref("images")
+    //         .child(imgID)
+    //         .getDownloadURL()
+    //         .then(fireBaseUrl => {
+    //           newContent[image.name] = fireBaseUrl;
+    //           console.log(image.name + " uploaded");
+    //           count++;
+    //           if (count === arr.length) {
+    //             console.log("images all uploaded");
+    //             cb(newContent);
+    //             count = 0;
+    //           }
+    //         });
+    //     }
+    //   );
+    // }
+  };
 
-      ref
-        .add(newContent)
-        .then(docRef => {
-          const comb = {
-            pid: pid,
-            iid: docRef.id
-          };
+  const saveToDb = data => {
+    const ref = db
+      .collection("users")
+      .doc(user)
+      .collection("insert");
+    ref
+      .add(data)
+      .then(docRef => {
+        const comb = {
+          pid: pid,
+          iid: docRef.id
+        };
+        localStorage.setItem("comb", JSON.stringify(comb));
+        history.push("/address");
+      })
+      .catch(error => {
+        console.log("Error writing document: ", error.message);
+      });
+  };
 
-          localStorage.setItem("comb", JSON.stringify(comb));
-
-          history.push("/address");
-        })
-        .catch(error => {
-          console.log("Error writing document: ", error.message);
-        });
-    } else {
-      const ref = db
-        .collection("users")
-        .doc(user)
-        .collection("insert")
-        .doc(iid);
-      ref
-        .update(newContent)
-        .then(history.push("/cart"))
-        .catch(error => {
-          console.log("Error writing document: ", error.message);
-        });
-    }
+  const updateDb = data => {
+    const ref = db
+      .collection("users")
+      .doc(user)
+      .collection("insert")
+      .doc(iid);
+    ref
+      .update(data)
+      .then(docRef => {
+        const comb = {
+          pid: pid,
+          iid: iid
+        };
+        localStorage.setItem("comb", JSON.stringify(comb));
+        history.push("/address");
+      })
+      .catch(error => {
+        console.log("Error writing document: ", error.message);
+      });
   };
 
   const saveTemp = async () => {
@@ -148,10 +232,96 @@ function InsertProvider(props) {
 
     await setSpin(true);
 
-    await genPreview([
-      { ref: frontRef, name: "frontPre" },
-      { ref: backRef, name: "backPre" }
-    ]);
+    const converted = await genPreview();
+
+    const imgArr = [
+      {
+        dataUrl: converted.frontImg,
+        name: "frontImg"
+      },
+      {
+        dataUrl: converted.rearImg,
+        name: "rearImg"
+      },
+      {
+        dataUrl: converted.frontPre,
+        name: "frontPre"
+      },
+      {
+        dataUrl: converted.backPre,
+        name: "backPre"
+      }
+    ];
+
+    uploadImg(imgArr, saveToDb);
+  };
+
+  const saveAsNew = async () => {
+    // check if insert name set
+    if (content.iName.trim() === "") {
+      setShow(true);
+      setError("Please name your insert before save!");
+      return false;
+    }
+    await setSpin(true);
+    const converted = await genPreview();
+    let imgArr = [
+      {
+        dataUrl: converted.frontPre,
+        name: "frontPre"
+      },
+      {
+        dataUrl: converted.backPre,
+        name: "backPre"
+      }
+    ];
+    if (content.frontImg.includes("data")) {
+      imgArr.push({
+        dataUrl: converted.frontImg,
+        name: "frontImg"
+      });
+    }
+    if (content.rearImg.includes("data")) {
+      imgArr.push({
+        dataUrl: converted.rearImg,
+        name: "rearImg"
+      });
+    }
+    uploadImg(imgArr, saveToDb);
+  };
+
+  const updateTemp = async () => {
+    // check if insert name set
+    if (content.iName.trim() === "") {
+      setShow(true);
+      setError("Please name your insert before save!");
+      return false;
+    }
+    await setSpin(true);
+    const converted = await genPreview();
+    let imgArr = [
+      {
+        dataUrl: converted.frontPre,
+        name: "frontPre"
+      },
+      {
+        dataUrl: converted.backPre,
+        name: "backPre"
+      }
+    ];
+    if (content.frontImg.includes("data")) {
+      imgArr.push({
+        dataUrl: converted.frontImg,
+        name: "frontImg"
+      });
+    }
+    if (content.rearImg.includes("data")) {
+      imgArr.push({
+        dataUrl: converted.rearImg,
+        name: "rearImg"
+      });
+    }
+    uploadImg(imgArr, updateDb);
   };
 
   return (
@@ -172,7 +342,9 @@ function InsertProvider(props) {
         onSelectImg: onSelectImg,
         saveTemp: saveTemp,
         show: show,
-        error: error
+        error: error,
+        updateTemp: updateTemp,
+        saveAsNew: saveAsNew
       }}
     >
       {props.children}

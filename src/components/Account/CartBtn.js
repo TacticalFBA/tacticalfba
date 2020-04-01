@@ -1,39 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { CartConsumer } from "../../contexts/CartContext";
+import Badge from "@material-ui/core/Badge";
+import { withStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
-export default function CartBtn() {
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px"
+  }
+}))(Badge);
+
+export default function CartBtn({ history }) {
   return (
-    <Link to={`/cart`}>
-      <CartWrapper>
-        <i className="fa fa-shopping-cart text-dark"></i>
+    <Link to="/cart" style={{ marginRight: "1rem" }}>
+      <IconButton aria-label="cart">
         <CartConsumer>
           {({ cart }) => (
-            <span className="badge badge-pill badge-orange">{cart.length}</span>
+            <StyledBadge badgeContent={cart.length} color="primary">
+              <ShoppingCartIcon />
+            </StyledBadge>
           )}
         </CartConsumer>
-      </CartWrapper>
+      </IconButton>
     </Link>
   );
 }
-
-const CartWrapper = styled.div`
-  display: inline-block;
-  vertical-align: middle;
-  width: 2.25rem;
-  height: 2rem;
-  position: relative;
-  .fa-shopping-cart {
-    display: inline-block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 1.5rem;
-  }
-  .badge {
-    position: absolute;
-    top: 0.15rem;
-    right: 0;
-  }
-`;

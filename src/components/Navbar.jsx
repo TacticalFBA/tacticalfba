@@ -24,25 +24,20 @@ export default class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-
-
               <NavLink className="nav-link" to="/about">
                 About
-                </NavLink>
-
+              </NavLink>
 
               <NavLink className="nav-link" to="/prices">
                 Prices
-                </NavLink>
-
+              </NavLink>
 
               <NavLink className="nav-link" to="/contact">
                 Contact
-                </NavLink>
-
+              </NavLink>
             </Nav>
             <Nav className="ml-auto">
-              <AccountNav/>
+              <AccountNav />
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -61,15 +56,15 @@ const style = {
     marginLeft: "1rem"
   },
   li: {
-    display: "inline-block",
+    display: "inline-block"
   }
-}
+};
 
-  // .nav-link {
-  //   color: var(--mainDark);
-  //   font-size: 1rem;
-  //   text-transform: capitalize;
-  //   &:hover {
-  //     color: var(--mainOrange);
-  //   }
-  // }
+// .nav-link {
+//   color: var(--mainDark);
+//   font-size: 1rem;
+//   text-transform: capitalize;
+//   &:hover {
+//     color: var(--mainOrange);
+//   }
+// }

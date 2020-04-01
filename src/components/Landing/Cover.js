@@ -1,32 +1,55 @@
-import React from 'react'
-import styled from "styled-components"
-import { Link } from "react-router-dom"
-import { UserConsumer } from "../../contexts/UserContext"
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { UserConsumer } from "../../contexts/UserContext";
+import Button from "@material-ui/core/Button";
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 
 export default function Cover() {
-
-    return (
-        <CoverWrapper>
-            <div className="text-wrap">
-                <div>
-                    <h2>Get more reviews with TacticalFBA</h2>
-                    <p className="lead">Research shows that well-worded product inserts help to increase the frequency of Amazon
-                    reviews.<br />We can
-                    help design, print, and ship your product insert directly to your factory in China for immediate
-                    packaging.</p>
-                </div>
-                <UserConsumer>
-                    {({ user, openModal }) => {
-                        if (user === null) {
-                            return (<button className="btn btn-orange" onClick={() => openModal(" new card")}>Get Started</button>)
-                        } else {
-                            return (<Link to="/insert" className="btn btn-orange">Get Started</Link>)
-                        }
-                    }}
-                </UserConsumer>
-            </div>
-        </CoverWrapper >
-    )
+  return (
+    <CoverWrapper>
+      <div className="text-wrap">
+        <div>
+          <h2>Get more reviews with TacticalFBA</h2>
+          <p className="lead">
+            Research shows that well-worded product inserts help to increase the
+            frequency of Amazon reviews.
+            <br />
+            We can help design, print, and ship your product insert directly to
+            your factory in China for immediate packaging.
+          </p>
+        </div>
+        <UserConsumer>
+          {({ user, openModal }) => {
+            if (user === null) {
+              return (
+                <Button
+                  size="large"
+                  startIcon={<KeyboardArrowRightIcon />}
+                  color="primary"
+                  onClick={() => openModal(" new card")}
+                >
+                  Get Started
+                </Button>
+              );
+            } else {
+              return (
+                <Link to="/insert" style={{ textDecoration: "none" }}>
+                  <Button
+                    size="large"
+                    color="primary"
+                    startIcon={<KeyboardArrowRightIcon />}
+                  >
+                    Get Started
+                  </Button>
+                </Link>
+              );
+            }
+          }}
+        </UserConsumer>
+      </div>
+    </CoverWrapper>
+  );
 }
 
 const CoverWrapper = styled.div`
@@ -61,4 +84,4 @@ const CoverWrapper = styled.div`
         }
 
     
-`
+`;

@@ -30,19 +30,23 @@ export default function CartTotals({
                 <span>$ {cartTotal}</span>
               </h6>
             </div>
-            <UserConsumer>
-              {({ user, inserts, adds }) => (
-                <PaypalBtn
-                  inserts={inserts}
-                  adds={adds}
-                  user={user}
-                  cart={cart}
-                  cartTotal={cartTotal}
-                  clearCart={clearCart}
-                  history={history}
-                />
-              )}
-            </UserConsumer>
+            {cart.length > 0 && (
+              <div>
+                <UserConsumer>
+                  {({ user, inserts, adds }) => (
+                    <PaypalBtn
+                      inserts={inserts}
+                      adds={adds}
+                      user={user}
+                      cart={cart}
+                      cartTotal={cartTotal}
+                      clearCart={clearCart}
+                      history={history}
+                    />
+                  )}
+                </UserConsumer>
+              </div>
+            )}
           </div>
         </div>
       </div>

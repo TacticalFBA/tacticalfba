@@ -1,15 +1,19 @@
-import React from 'react'
+import React from "react";
 
-import AddressForm from "../Address/AddressForm"
-import AddressTable from "../Address/AddressTable"
-
+import NewAddressBtn from "./NewAddressBtn";
+import AddressForm from "../Address/AddressForm";
+import AddressTable from "../Address/AddressTable";
 
 export default function Factories({ user, adds, handleDel }) {
-
-    return (
-        <div className="mt-5">
-            <AddressForm user={user} />
-            <AddressTable adds={adds} handleDel={handleDel} type={"account"} />
-        </div>
-    )
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => {
+    setShow(!show);
+  };
+  return (
+    <div>
+      <NewAddressBtn handleClick={handleClick} show={show} />
+      {show && <AddressForm user={user} />}
+      <AddressTable adds={adds} handleDel={handleDel} type={"account"} />
+    </div>
+  );
 }

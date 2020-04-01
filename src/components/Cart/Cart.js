@@ -1,50 +1,63 @@
 import React from "react";
 import { CartConsumer } from "../../contexts/CartContext";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Progress from "../Progress";
-import Title from "../Styled/Title";
+import Stepper from "../Stepper";
 import CartColumns from "./CartColumns";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    padding: "2rem",
+    marginTop: "2.5rem"
+  }
+}));
+
 export default function Cart({ history }) {
+  const classes = useStyles();
   return (
     <div className="container">
-      <Progress page={"cart"} history={history} />
-      <Title title={"Choose Quantitiy"} />
-      <CartConsumer>
-        {({
-          cart,
-          cartSubtotal,
-          cartTax,
-          cartTotal,
-          increment,
-          decrement,
-          removeItem,
-          clearCart
-        }) => {
-          return (
-            <div>
-              <CartColumns />
-              <CartList
-                cart={cart}
-                increment={increment}
-                decrement={decrement}
-                removeItem={removeItem}
-                history={history}
-              />
-              <CartTotals
-                cart={cart}
-                cartSubtotal={cartSubtotal}
-                cartTax={cartTax}
-                cartTotal={cartTotal}
-                clearCart={clearCart}
-                history={history}
-              />
-            </div>
-          );
-        }}
-      </CartConsumer>
+      <Stepper step={2} />
+      {/* <Title title={"Choose Quantitiy"} /> */}
+      <Paper className={classes.root}>
+        <CartConsumer>
+          {({
+            cart,
+            cartSubtotal,
+            cartTax,
+            cartTotal,
+            increment,
+            decrement,
+            removeItem,
+            clearCart
+          }) => {
+            return (
+              <div>
+                <CartColumns />
+                <CartList
+                  cart={cart}
+                  increment={increment}
+                  decrement={decrement}
+                  removeItem={removeItem}
+                  history={history}
+                />
+                <CartTotals
+                  cart={cart}
+                  cartSubtotal={cartSubtotal}
+                  cartTax={cartTax}
+                  cartTotal={cartTotal}
+                  clearCart={clearCart}
+                  history={history}
+                />
+              </div>
+            );
+          }}
+        </CartConsumer>
+      </Paper>
     </div>
   );
 }

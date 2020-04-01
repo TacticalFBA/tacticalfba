@@ -116,7 +116,6 @@ class CartProvider extends Component {
       localStorage.setItem("cart", JSON.stringify(newCart));
       this.setState({ cart: [...newCart] }, () => {
         this.addTotals();
-        localStorage.removeItem("comb");
         history.push("/cart");
       });
     } else {

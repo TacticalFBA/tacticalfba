@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { UserConsumer } from "../../contexts/UserContext";
 import CartBtn from "./CartBtn";
+import Button from "@material-ui/core/Button";
 
 export default function AccountNav() {
   return (
@@ -11,28 +12,30 @@ export default function AccountNav() {
           return (
             <React.Fragment>
               <CartBtn />
-              <Link to="/account" className="btn btn-sm mx-1">
-                Account
+              <Link
+                to="/account"
+                className="juzhong"
+                style={{ textDecoration: "none", marginRight: ".5rem" }}
+              >
+                <Button size="small">Account</Button>
               </Link>
               <Link
                 to="/"
-                className="btn btn-sm"
+                className="juzhong"
+                style={{ textDecoration: "none" }}
                 onClick={() => {
                   signOut();
                 }}
               >
-                Sign Out
+                <Button size="small">Sign Out</Button>
               </Link>
             </React.Fragment>
           );
         } else {
           return (
-            <button
-              className="btn btn-sm btn-orange ml-2"
-              onClick={() => openModal("account")}
-            >
+            <Button size="small" onClick={() => openModal("account")}>
               Login
-            </button>
+            </Button>
           );
         }
       }}

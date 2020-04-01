@@ -8,7 +8,6 @@ export default class Template extends Component {
     return (
       <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
         <div className="card">
-
           <div className="img-container p-3">
             <Link to={`/edit-template/${pid}`}>
               <img src={img} alt="template" className="card-img-top" />
@@ -17,7 +16,9 @@ export default class Template extends Component {
 
           {/* card footer */}
           <div className="card-footer">
-            <p className="mb-0">{type} with <strong>{name}</strong></p>
+            <p className="mb-0">
+              {type} with <strong>{name}</strong>
+            </p>
           </div>
         </div>
       </TemplateWrapper>

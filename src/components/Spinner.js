@@ -1,21 +1,14 @@
 import React from "react";
-import { UserConsumer } from "../contexts/UserContext";
 import styled from "styled-components";
 import { Spinner as SpinnerH } from "react-bootstrap";
 
-export default function Spinner() {
-  return (
-    <UserConsumer>
-      {({ spin }) => {
-        return !spin ? null : (
-          <ModalContainer>
-            <SpinnerH animation="border" role="status" variant="light">
-              <span className="sr-only">Loading...</span>
-            </SpinnerH>
-          </ModalContainer>
-        );
-      }}
-    </UserConsumer>
+export default function Spinner({ spin }) {
+  return !spin ? null : (
+    <ModalContainer>
+      <SpinnerH animation="border" role="status" variant="light">
+        <span className="sr-only">Loading...</span>
+      </SpinnerH>
+    </ModalContainer>
   );
 }
 

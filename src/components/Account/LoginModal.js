@@ -19,7 +19,7 @@ export default class LoginModal extends Component {
                 <div className="model modal-content col-10 col-sm-8 col-md-6 col-lg-4">
                   <div className="modal-header">
                     <h6 className="modal-title" id="exampleModalCenterTitle">
-                      Login to TacticalFBA with your Email
+                      Welcome to TacticalFBA
                     </h6>
                     <button
                       type="button"
@@ -31,29 +31,24 @@ export default class LoginModal extends Component {
                     </button>
                   </div>
                   <div className="modal-body">
-
-                    <div className="form-group">
-                      <input
+                    {/* <div className="form-group"> */}
+                    {/* <input
                         type="email"
                         className="form-control"
                         name="email"
                         placeholder="Email"
                         value={this.state.email}
-                        onChange={e =>
-                          this.setState({ email: e.target.value })
-                        }
+                        onChange={e => this.setState({ email: e.target.value })}
                       />
                     </div>
                     <button
                       type="button"
                       className="btn btn-orange btn-sm btn-block"
-                      onClick={() =>
-                        sendEmail(this.state.email, type)
-                      }
+                      onClick={() => sendEmail(this.state.email, type)}
                     >
                       Send link
-                    </button>
-                    <p className="text-center text-muted">or</p>
+                    </button> */}
+                    {/* <p className="text-center text-muted">or</p> */}
                     <button
                       type="button"
                       className="btn btn-orange btn-sm btn-block"
@@ -61,7 +56,6 @@ export default class LoginModal extends Component {
                     >
                       Login with Google
                     </button>
-
                   </div>
                 </div>
               </ModalContainer>
@@ -81,7 +75,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  z-index:9999;
+  z-index: 9999;
   align-items: center;
   justify-content: center;
   #modal {
