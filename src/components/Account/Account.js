@@ -61,7 +61,7 @@ export default function Account({ history }) {
 
   return (
     <UserConsumer>
-      {({ user, adds, orders, inserts, handleDel }) => (
+      {({ user, adds, orders, inserts }) => (
         <section className="container">
           <Title title={`Hello,  ${user}`} />
           <Paper className={classes.root}>
@@ -81,14 +81,10 @@ export default function Account({ history }) {
               <Orders orders={orders} history={history} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Inserts
-                inserts={inserts}
-                handleDel={handleDel}
-                history={history}
-              />
+              <Inserts user={user} inserts={inserts} history={history} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-              <Factories user={user} adds={adds} handleDel={handleDel} />
+              <Factories user={user} adds={adds} />
             </TabPanel>
           </Paper>
         </section>

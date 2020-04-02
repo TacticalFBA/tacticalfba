@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { products } from "../data";
+import { db } from "../config/Firebase";
 
 const CartContext = React.createContext();
 
@@ -123,6 +124,27 @@ class CartProvider extends Component {
     }
   };
 
+  handleDel = (user, id, collection, idType) => {
+    alert(`Cart items that uses this ${collection} will be removed!`);
+    const ref = db
+      .collection("users")
+      .doc(user)
+      .collection(collection)
+      .doc(id);
+    ref
+      .delete()
+      .then(() => {
+        const currentCart = JSON.parse(localStorage.getItem("cart"));
+        const newCart = currentCart.filter(item => item[idType] !== id);
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        this.setState({ cart: newCart });
+        this.addTotals();
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
   render() {
     return (
       <CartContext.Provider
@@ -132,7 +154,8 @@ class CartProvider extends Component {
           increment: this.increment,
           decrement: this.decrement,
           removeItem: this.removeItem,
-          clearCart: this.clearCart
+          clearCart: this.clearCart,
+          handleDel: this.handleDel
         }}
       >
         {this.props.children}

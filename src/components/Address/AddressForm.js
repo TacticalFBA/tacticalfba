@@ -5,7 +5,7 @@ import { CartConsumer } from "../../contexts/CartContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-export default function AddressForm({ user, history, location }) {
+export default function AddressForm({ user, location, history }) {
   const useStyles = makeStyles(theme => ({
     root: {
       "& > *": {
@@ -58,8 +58,6 @@ export default function AddressForm({ user, history, location }) {
           const comb = JSON.parse(localStorage.getItem("comb"));
           comb.aid = aid;
           localStorage.setItem("comb", JSON.stringify(comb));
-        })
-        .then(() => {
           if (location.pathname === "/address") {
             cb(history);
           }

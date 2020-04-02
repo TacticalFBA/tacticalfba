@@ -21,8 +21,8 @@ export default function CartList({
                 <CartItem
                   key={item.cid}
                   item={item}
-                  inserts={inserts}
-                  adds={adds}
+                  insert={inserts.filter(item => item.iid === item.iid)[0]}
+                  add={adds.filter(item => item.aid === item.aid)[0]}
                   increment={increment}
                   decrement={decrement}
                   removeItem={removeItem}

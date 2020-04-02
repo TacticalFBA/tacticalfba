@@ -4,8 +4,8 @@ import PreviewModal from "../PreviewModal";
 
 export default function CartItem({
   item,
-  inserts,
-  adds,
+  insert,
+  add,
   increment,
   decrement,
   removeItem,
@@ -13,8 +13,8 @@ export default function CartItem({
 }) {
   const { pid, aid, iid, cid } = item;
   const product = products.filter(item => item.pid === pid)[0];
-  const insert = inserts.filter(item => item.iid === iid)[0];
-  const add = adds.filter(item => item.aid === aid)[0];
+  // const insert = inserts.filter(item => item.iid === iid)[0];
+  // const add = adds.filter(item => item.aid === aid)[0];
   const [show, setShow] = useState(false);
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");

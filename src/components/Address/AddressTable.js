@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import ToCartBtn from "./ToCartBtn";
 import { CartConsumer } from "../../contexts/CartContext";
 
-export default function AddressTable({ history, adds, handleDel, type }) {
+export default function AddressTable({ user, history, adds, type }) {
   return (
     adds.length > 0 && (
       <React.Fragment>
@@ -30,27 +30,30 @@ export default function AddressTable({ history, adds, handleDel, type }) {
                   <td>{contact}</td>
                   <td>{email}</td>
                   <td>{mobile}</td>
-                  <td>
-                    {type === "account" && (
-                      <button
-                        className="btn btn-sm text-muted font-weight-bold"
-                        onClick={() => handleDel(aid, "factory", "aid")}
-                      >
-                        Delete
-                      </button>
-                    )}
-                    {type === "toCart" && (
-                      <CartConsumer>
-                        {({ addToCart }) => (
+
+                  <CartConsumer>
+                    {({ handleDel, addToCart }) => (
+                      <td>
+                        {type === "account" && (
+                          <button
+                            className="btn btn-sm text-muted font-weight-bold"
+                            onClick={() =>
+                              handleDel(user, aid, "factory", "aid")
+                            }
+                          >
+                            Delete
+                          </button>
+                        )}
+                        {type === "toCart" && (
                           <ToCartBtn
                             aid={aid}
                             addToCart={addToCart}
                             history={history}
                           />
                         )}
-                      </CartConsumer>
+                      </td>
                     )}
-                  </td>
+                  </CartConsumer>
                 </tr>
               )
             )}

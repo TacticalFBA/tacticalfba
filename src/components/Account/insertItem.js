@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { CartConsumer } from "../../contexts/CartContext";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function InsertCard({ insert, handleDel, history }) {
+export default function InsertCard({ user, insert, history }) {
   const classes = useStyles();
   const chooseInsert = (pid, iid) => {
     const comb = {
@@ -49,12 +50,16 @@ export default function InsertCard({ insert, handleDel, history }) {
         >
           Use
         </Button>
-        <Button
-          size="small"
-          onClick={() => handleDel(insert.iid, "insert", "iid")}
-        >
-          Delete
-        </Button>
+        <CartConsumer>
+          {({ handleDel }) => (
+            <Button
+              size="small"
+              onClick={() => handleDel(user, insert.iid, "insert", "iid")}
+            >
+              Delete
+            </Button>
+          )}
+        </CartConsumer>
       </CardActions>
     </Card>
   );

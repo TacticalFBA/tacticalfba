@@ -22,6 +22,8 @@ import Cart from "./components/Cart/Cart";
 import EditTemplate from "./components/Insert/editTemplate/EditTemplate";
 import Address from "./components/Address/Address";
 import FinishSignUp from "./components/Account/FinishSignUp";
+import BlogList from "./components/Blog/BlogList";
+import Post from "./components/Blog/Post";
 
 const App = () => {
   return (
@@ -43,6 +45,8 @@ const App = () => {
             <Route path="/insert" component={TemplateList} />
             <Route path="/edit-template/:pid" component={EditTemplate} />
             <Route path="/address" component={Address} />
+            <Route exact path="/blog" component={BlogList} />
+            <Route path="/post/:id" component={Post} />
           </Switch>
           <LoginModal />
         </main>

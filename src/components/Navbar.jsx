@@ -24,12 +24,16 @@ export default class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <NavLink className="nav-link" to="/about">
+              {/* <NavLink className="nav-link" to="/about">
                 About
-              </NavLink>
+              </NavLink> */}
 
               <NavLink className="nav-link" to="/prices">
                 Prices
+              </NavLink>
+
+              <NavLink className="nav-link" to="/blog">
+                Blog
               </NavLink>
 
               <NavLink className="nav-link" to="/contact">

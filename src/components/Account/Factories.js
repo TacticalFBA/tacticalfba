@@ -4,7 +4,7 @@ import NewAddressBtn from "./NewAddressBtn";
 import AddressForm from "../Address/AddressForm";
 import AddressTable from "../Address/AddressTable";
 
-export default function Factories({ user, adds, handleDel }) {
+export default function Factories({ user, adds }) {
   const [show, setShow] = React.useState(false);
   const handleClick = () => {
     setShow(!show);
@@ -13,7 +13,7 @@ export default function Factories({ user, adds, handleDel }) {
     <div>
       <NewAddressBtn handleClick={handleClick} show={show} />
       {show && <AddressForm user={user} />}
-      <AddressTable adds={adds} handleDel={handleDel} type={"account"} />
+      <AddressTable user={user} adds={adds} type={"account"} />
     </div>
   );
 }

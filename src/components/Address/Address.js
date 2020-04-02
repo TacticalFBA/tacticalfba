@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Address({ history }) {
+export default function Address({ history, location }) {
   const classes = useStyles();
   return (
     <UserConsumer>
@@ -29,9 +29,10 @@ export default function Address({ history }) {
               title={"Factory Address"}
               subtitle={"Where should we send these inserts? Shipping is free!"}
             /> */}
-              <AddressForm user={user} history={history} />
+              <AddressForm user={user} location={location} history={history} />
 
               <AddressTable
+                user={user}
                 adds={adds}
                 history={history}
                 handleDel={handleDel}

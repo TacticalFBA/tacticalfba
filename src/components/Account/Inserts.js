@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Inserts({ inserts, handleDel, history }) {
+export default function Inserts({ user, inserts, history }) {
   const classes = useStyles();
   const chooseInsert = (pid, iid) => {
     const comb = {
@@ -41,7 +41,7 @@ export default function Inserts({ inserts, handleDel, history }) {
                   className={classes.paper}
                   insert={insert}
                   history={history}
-                  handleDel={handleDel}
+                  user={user}
                 />
               </Grid>
             ))}
