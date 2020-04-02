@@ -35,8 +35,8 @@ export default function AddressForm({ user, location, history }) {
     for (const key in add) {
       if (add[key].trim() !== "") count++;
     }
-    if (Object.keys(error).length === 0 && count === 6) {
-      //   setShow(false);
+    console.log(1);
+    if (Object.keys(error).length === 0 && count === Object.keys(add).length) {
       const newAdd = {
         factory: "",
         address: "",
@@ -44,6 +44,7 @@ export default function AddressForm({ user, location, history }) {
         email: "",
         mobile: ""
       };
+      console.log(2);
       setAdd(newAdd);
       const ref = db
         .collection("users")
