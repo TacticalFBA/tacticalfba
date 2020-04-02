@@ -19,7 +19,6 @@ export default function AddressForm({ user, location, history }) {
   const [add, setAdd] = useState({
     factory: "",
     address: "",
-    zipcode: "",
     contact: "",
     email: "",
     mobile: ""
@@ -41,7 +40,6 @@ export default function AddressForm({ user, location, history }) {
       const newAdd = {
         factory: "",
         address: "",
-        zipcode: "",
         contact: "",
         email: "",
         mobile: ""
@@ -93,7 +91,7 @@ export default function AddressForm({ user, location, history }) {
       <form>
         <div className="form-row">
           {/* factory name can not be duplicate */}
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-4">
             <label htmlFor="factory">Factory Name</label>
             <input
               type="text"
@@ -112,7 +110,7 @@ export default function AddressForm({ user, location, history }) {
             }
           </div>
           {/* check if contains charators "省、市" */}
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-8">
             <label htmlFor="address">
               Address{" "}
               <small className="text-muted">* Address must be in Chinese</small>
@@ -130,27 +128,6 @@ export default function AddressForm({ user, location, history }) {
             {
               <small className="text-orange">
                 {"address" in error ? error["address"] : null}
-              </small>
-            }
-          </div>
-          {/* check if its chinese zipcode */}
-          <div className="form-group col-md-3">
-            <label htmlFor="zipcode">
-              Zipcode <small className="text-muted">* 6 digits</small>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="zipcode"
-              id="zipcode"
-              placeholder="200000"
-              value={add.zipcode}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
-            />
-            {
-              <small className="text-orange">
-                {"zipcode" in error ? error["zipcode"] : null}
               </small>
             }
           </div>

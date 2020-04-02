@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserConsumer } from "./contexts/UserContext";
 
 // import css
@@ -9,6 +9,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 
 // import components
+import Default from "./components/Default";
 import Spinner from "./components/Spinner";
 import NavBar from "./components/Navbar";
 import About from "./components/About";
@@ -28,6 +29,7 @@ import Post from "./components/Blog/Post";
 const App = () => {
   return (
     <React.Fragment>
+      <CssBaseline />
       <UserConsumer>{({ spin }) => <Spinner spin={spin} />}</UserConsumer>
       <div className="App">
         <header className="App-header">
@@ -47,6 +49,7 @@ const App = () => {
             <Route path="/address" component={Address} />
             <Route exact path="/blog" component={BlogList} />
             <Route path="/post/:id" component={Post} />
+            <Route component={Default}></Route>
           </Switch>
           <LoginModal />
         </main>

@@ -1,15 +1,49 @@
 import React from "react";
+import Parser from "html-react-parser";
+import Container from "@material-ui/core/Container";
 import { posts } from "../../posts";
+import {
+  EmailIcon,
+  FacebookIcon,
+  RedditIcon,
+  TwitterIcon,
+  EmailShareButton,
+  FacebookShareButton,
+  RedditShareButton,
+  TwitterShareButton
+} from "react-share";
 
 export default function Post({ match }) {
-  const { title, date, body } = posts.filter(
+  const { title, auther, date, body } = posts.filter(
     post => post.id === parseInt(match.params.id)
   )[0];
+  const shareUrl = `https://tacticalfba.netlify.com${match.url}`;
   return (
-    <div className="container my-5">
-      <h4 className="text-uppercase mb-2">{title}</h4>
-      <p className="text-muted">{date}</p>
-      <p>{body}</p>
+    <div className="my-5">
+      <Container maxWidth="sm">
+        <h4 className="text-uppercase mb-2">{title}</h4>
+        <p className="text-muted">
+          <span>Published on: {date}</span>
+          <span className="px-2">|</span>
+          <span>by {auther}</span>
+        </p>
+        <div className="mt-2 mb-5">
+          <span>Share: </span>
+          <EmailShareButton url={shareUrl}>
+            <EmailIcon size={28} round={true} />
+          </EmailShareButton>
+          <FacebookShareButton url={shareUrl}>
+            <FacebookIcon size={28} round={true} />
+          </FacebookShareButton>
+          <RedditShareButton url={shareUrl}>
+            <RedditIcon size={28} round={true} />
+          </RedditShareButton>
+          <TwitterShareButton url={shareUrl}>
+            <TwitterIcon size={28} round={true} />
+          </TwitterShareButton>
+        </div>
+        <p>{Parser(body)}</p>
+      </Container>
     </div>
   );
 }

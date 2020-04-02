@@ -30,9 +30,7 @@ export default function Orders({ orders, history }) {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
-              <span>
-                Submitted on: {order.info.date}, {order.info.time}
-              </span>
+              <span>Submitted on: {order.info.date}</span>
               <span className="total">
                 Order Total: $<strong>{order.info.total}</strong>
               </span>
@@ -63,8 +61,7 @@ export default function Orders({ orders, history }) {
                     <div className="row">
                       <div className="col-2 title">Send to:</div>
                       <div className="col-10">
-                        {item.add.factory}, {item.add.address},{" "}
-                        {item.add.zipcode}
+                        {item.add.factory}, {item.add.address}
                       </div>
                     </div>
                     <div className="row">

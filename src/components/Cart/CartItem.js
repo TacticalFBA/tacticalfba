@@ -11,7 +11,7 @@ export default function CartItem({
   removeItem,
   history
 }) {
-  const { pid, aid, iid, cid } = item;
+  const { pid, cid } = item;
   const product = products.filter(item => item.pid === pid)[0];
   // const insert = inserts.filter(item => item.iid === iid)[0];
   // const add = adds.filter(item => item.aid === aid)[0];
@@ -28,9 +28,9 @@ export default function CartItem({
     setFront("");
     setBack("");
   };
-  const editInsert = () => {
-    history.push(`/edit-template/${pid}/${iid}`);
-  };
+  // const editInsert = () => {
+  //   history.push(`/edit-template/${pid}/${iid}`);
+  // };
 
   return (
     <React.Fragment>
@@ -42,8 +42,8 @@ export default function CartItem({
       <div className="row my-2 text-capitalize text-center">
         <div className="col-10 mx-auto col-lg-2">
           <div>
-            <span className="d-lg-none text-start">product: </span>
-            {product.name} {product.type} -{" "}
+            <span className="d-lg-none text-start">item: </span>
+            {product.type} -{" "}
             <span
               style={{ cursor: "pointer", textDecoration: "underline" }}
               onClick={() => handleClick(insert.frontPre, insert.backPre)}

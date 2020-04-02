@@ -5,7 +5,7 @@ import RemoveCircleSharpIcon from "@material-ui/icons/RemoveCircleSharp";
 
 export default function NewAddressBtn({ handleClick, show }) {
   return (
-    <div style={{ marginBottom: "1rem" }}>
+    <div style={{ marginBottom: "2rem" }}>
       <Button
         color="primary"
         startIcon={show ? <RemoveCircleSharpIcon /> : <AddCircleSharpIcon />}

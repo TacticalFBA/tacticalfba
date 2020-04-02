@@ -4,7 +4,7 @@ import AddCircleSharpIcon from "@material-ui/icons/AddCircleSharp";
 
 export default function NewInsertBtn({ history }) {
   return (
-    <div style={{ marginBottom: "1rem" }}>
+    <div style={{ marginBottom: "2rem" }}>
       <Button
         color="primary"
         startIcon={<AddCircleSharpIcon />}

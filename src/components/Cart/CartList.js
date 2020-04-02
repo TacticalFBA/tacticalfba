@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import { UserConsumer } from "../../contexts/UserContext";
 
@@ -21,22 +20,22 @@ export default function CartList({
                 <CartItem
                   key={item.cid}
                   item={item}
-                  insert={inserts.filter(item => item.iid === item.iid)[0]}
-                  add={adds.filter(item => item.aid === item.aid)[0]}
+                  insert={inserts.filter(insert => insert.iid === item.iid)[0]}
+                  add={adds.filter(add => add.aid === item.aid)[0]}
                   increment={increment}
                   decrement={decrement}
                   removeItem={removeItem}
                   history={history}
                 />
               ))}
-              <Link
+              {/* <Link
                 to="/insert"
                 className="btn mt-5 d-block text-center text-orange"
               >
                 {cart.length === 0
                   ? " + Your cart is empty, let's create an insert"
                   : " + Create another insert"}
-              </Link>
+              </Link> */}
             </div>
           )
         );

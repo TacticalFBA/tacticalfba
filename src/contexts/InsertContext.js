@@ -66,8 +66,14 @@ function InsertProvider(props) {
 
   // handle image change
   const onSelectImg = e => {
-    const file = e.target.files[0];
-    const side = e.target.name;
+    const file = e.currentTarget.files[0];
+    const size = file.size / 1024;
+    if (size > 2000) {
+      alert("2mb maximum file size.");
+      e.currentTarget.value = "";
+      return false;
+    }
+    const side = e.currentTarget.name;
     const reader = new FileReader();
     reader.addEventListener(
       "load",
@@ -93,14 +99,18 @@ function InsertProvider(props) {
 
   const genPreview = async arr => {
     let newContent = Object.assign({}, content);
-    await htmlToImage.toJpeg(frontRef.current, { quality: 1 }).then(dataUrl => {
-      newContent.frontPre = dataUrl;
-      console.log("front preview converted");
-    });
-    await htmlToImage.toJpeg(backRef.current, { quality: 1 }).then(dataUrl => {
-      newContent.backPre = dataUrl;
-      console.log("back preview converted");
-    });
+    await htmlToImage
+      .toJpeg(frontRef.current, { quality: 0.5 })
+      .then(dataUrl => {
+        newContent.frontPre = dataUrl;
+        console.log("front preview converted");
+      });
+    await htmlToImage
+      .toJpeg(backRef.current, { quality: 0.5 })
+      .then(dataUrl => {
+        newContent.backPre = dataUrl;
+        console.log("back preview converted");
+      });
     return newContent;
   };
 
@@ -226,7 +236,19 @@ function InsertProvider(props) {
     //check if insert name set
     if (content.iName.trim() === "") {
       setShow(true);
-      setError("Please name your insert before save!");
+      setError("Please name your insert before saving.");
+      return false;
+    }
+    //check if select images
+    if (!content.frontImg.includes("data")) {
+      setShow(true);
+      setError("Please choose front image.");
+      return false;
+    }
+
+    if (!content.rearImg.includes("data")) {
+      setShow(true);
+      setError("Please choose rear image.");
       return false;
     }
 

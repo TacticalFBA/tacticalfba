@@ -1,7 +1,7 @@
 import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import { db } from "../../config/Firebase";
-import { nowDate, nowTime } from "../../utils/GetTime";
+import dateFormat from "dateformat";
 
 export default class PaypalBtn extends React.Component {
   render() {
@@ -38,8 +38,8 @@ export default class PaypalBtn extends React.Component {
       const order = {
         items: items,
         info: {
-          date: nowDate(),
-          time: nowTime(),
+          date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
+          // June 9th, 2007, 5:46:21 PM
           total: cartTotal
         }
       };

@@ -5,10 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^4.9.8",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.47",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
+    "dateformat": "^3.0.3",
     "draft-js": "^0.11.4",
     "draft-js-export-html": "^1.4.1",
     "firebase": "^7.11.0",
@@ -23,6 +25,7 @@
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-share": "^4.1.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {

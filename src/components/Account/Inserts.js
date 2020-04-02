@@ -17,14 +17,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function Inserts({ user, inserts, history }) {
   const classes = useStyles();
-  const chooseInsert = (pid, iid) => {
-    const comb = {
-      pid: pid,
-      iid: iid
-    };
-    localStorage.setItem("comb", JSON.stringify(comb));
-    history.push("/address");
-  };
+  // const chooseInsert = (pid, iid) => {
+  //   const comb = {
+  //     pid: pid,
+  //     iid: iid
+  //   };
+  //   localStorage.setItem("comb", JSON.stringify(comb));
+  //   history.push("/address");
+  // };
 
   // const editInsert = (pid, iid) => {
   //   history.push(`/edit-template/${pid}/${iid}`);

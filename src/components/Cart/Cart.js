@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "../Stepper";
 import CartColumns from "./CartColumns";
 import CartList from "./CartList";
+import NewInsertBtn from "../Account/NewInsertBtn";
 import CartTotals from "./CartTotals";
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +46,9 @@ export default function Cart({ history }) {
                   removeItem={removeItem}
                   history={history}
                 />
+                <div className="text-center pt-3">
+                  <NewInsertBtn history={history} />
+                </div>
                 <CartTotals
                   cart={cart}
                   cartSubtotal={cartSubtotal}

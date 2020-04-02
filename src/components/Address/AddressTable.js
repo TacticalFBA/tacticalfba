@@ -20,43 +20,37 @@ export default function AddressTable({ user, history, adds, type }) {
             </tr>
           </thead>
           <tbody>
-            {adds.map(
-              ({ aid, factory, address, zipcode, contact, email, mobile }) => (
-                <tr key={aid}>
-                  <td>{factory}</td>
-                  <td colSpan="2">
-                    {address}, {zipcode}
-                  </td>
-                  <td>{contact}</td>
-                  <td>{email}</td>
-                  <td>{mobile}</td>
+            {adds.map(({ aid, factory, address, contact, email, mobile }) => (
+              <tr key={aid}>
+                <td>{factory}</td>
+                <td colSpan="2">{address}</td>
+                <td>{contact}</td>
+                <td>{email}</td>
+                <td>{mobile}</td>
 
-                  <CartConsumer>
-                    {({ handleDel, addToCart }) => (
-                      <td>
-                        {type === "account" && (
-                          <button
-                            className="btn btn-sm text-muted font-weight-bold"
-                            onClick={() =>
-                              handleDel(user, aid, "factory", "aid")
-                            }
-                          >
-                            Delete
-                          </button>
-                        )}
-                        {type === "toCart" && (
-                          <ToCartBtn
-                            aid={aid}
-                            addToCart={addToCart}
-                            history={history}
-                          />
-                        )}
-                      </td>
-                    )}
-                  </CartConsumer>
-                </tr>
-              )
-            )}
+                <CartConsumer>
+                  {({ handleDel, addToCart }) => (
+                    <td>
+                      {type === "account" && (
+                        <button
+                          className="btn btn-sm text-muted font-weight-bold"
+                          onClick={() => handleDel(user, aid, "factory", "aid")}
+                        >
+                          Delete
+                        </button>
+                      )}
+                      {type === "toCart" && (
+                        <ToCartBtn
+                          aid={aid}
+                          addToCart={addToCart}
+                          history={history}
+                        />
+                      )}
+                    </td>
+                  )}
+                </CartConsumer>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </React.Fragment>

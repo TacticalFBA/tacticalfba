@@ -1,6 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
 
 export default function T0({ content, onSelect, frontRef, backRef }) {

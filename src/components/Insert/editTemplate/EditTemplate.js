@@ -2,6 +2,7 @@ import React from "react";
 import { UserConsumer } from "../../../contexts/UserContext";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import {
   InsertProvider,
   InsertConsumer
@@ -9,14 +10,13 @@ import {
 
 // import components
 import Stepper from "../../Stepper";
-import Title from "../../Styled/Title";
 import Preview from "../previewTemplate/Preview";
 import InsertName from "./InsertName";
 import ThemeColor from "./ThemeColor";
 import Editor from "./Editor";
 import ImageUploader from "./ImageUploader";
 import Spinner from "../../Spinner";
-import Alert from "./Alert";
+import SaveAlerts from "./SaveAlerts";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,6 +90,9 @@ export default function EditTemplate({ location, history, match }) {
                         <div className="row">
                           <div className="col-3">
                             <h6>Set Images: </h6>
+                            <small className="text-muted">
+                              Maximum file size on each side is 2M.
+                            </small>
                           </div>
                           <div className="col-9">
                             <span>Front image: </span>
@@ -142,14 +145,15 @@ export default function EditTemplate({ location, history, match }) {
                       </div>
 
                       {/* validator */}
-                      <Alert show={value.show} error={value.error} />
+                      <SaveAlerts show={value.show} error={value.error} />
 
                       {/* submit button */}
 
                       {!iid && (
-                        <button
-                          className="btn btn-sm btn-dark"
-                          type="button"
+                        <Button
+                          variant="contained"
+                          size="small"
+                          disableElevation
                           onClick={() =>
                             value.saveTemp(user, [
                               {
@@ -164,7 +168,25 @@ export default function EditTemplate({ location, history, match }) {
                           }
                         >
                           Save
-                        </button>
+                        </Button>
+                        // <button
+                        //   className="btn btn-sm btn-dark"
+                        //   type="button"
+                        //   onClick={() =>
+                        //     value.saveTemp(user, [
+                        //       {
+                        //         img: value.frontImage,
+                        //         item: "frontImg"
+                        //       },
+                        //       {
+                        //         img: value.rearImage,
+                        //         item: "rearImg"
+                        //       }
+                        //     ])
+                        //   }
+                        // >
+                        //   Save
+                        // </button>
                       )}
                       {iid && (
                         <React.Fragment>
