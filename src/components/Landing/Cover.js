@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { UserConsumer } from "../../contexts/UserContext";
 import Button from "@material-ui/core/Button";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 
 export default function Cover() {
   return (
@@ -24,8 +23,8 @@ export default function Cover() {
             if (user === null) {
               return (
                 <Button
+                  variant="contained"
                   size="large"
-                  startIcon={<KeyboardArrowRightIcon />}
                   color="primary"
                   onClick={() => openModal(" new card")}
                 >
@@ -35,11 +34,7 @@ export default function Cover() {
             } else {
               return (
                 <Link to="/insert" style={{ textDecoration: "none" }}>
-                  <Button
-                    size="large"
-                    color="primary"
-                    startIcon={<KeyboardArrowRightIcon />}
-                  >
+                  <Button variant="contained" size="large" color="primary">
                     Get Started
                   </Button>
                 </Link>

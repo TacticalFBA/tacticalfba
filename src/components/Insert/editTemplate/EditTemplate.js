@@ -38,7 +38,7 @@ export default function EditTemplate({ location, history, match }) {
 
   return (
     <div className="container">
-      <Stepper step={0} />
+      <Stepper step={1} />
       <Paper className={classes.root}>
         {/* page title */}
         {/* <Title title={pid === 0 ? "Upload Your Own Artwork" : "Edit template"} /> */}
@@ -90,9 +90,10 @@ export default function EditTemplate({ location, history, match }) {
                         <div className="row">
                           <div className="col-3">
                             <h6>Set Images: </h6>
-                            <small className="text-muted">
-                              Maximum file size on each side is 2M.
-                            </small>
+                            <p className="text-muted">
+                              1. Maximum file size on each side is 300KB.
+                            </p>
+                            <p className="text-muted">2. File format: JPG.</p>
                           </div>
                           <div className="col-9">
                             <span>Front image: </span>

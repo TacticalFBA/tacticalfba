@@ -7,8 +7,6 @@ const CartContext = React.createContext();
 class CartProvider extends Component {
   state = {
     cart: [],
-    cartSubtotal: 0,
-    cartTax: 0,
     cartTotal: 0
   };
 
@@ -65,16 +63,9 @@ class CartProvider extends Component {
   };
 
   addTotals = () => {
-    let subTotal = 0;
-    JSON.parse(localStorage.getItem("cart")).map(
-      item => (subTotal += item.total)
-    );
-    const tempTax = subTotal * 0.1;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
+    let total = 0;
+    JSON.parse(localStorage.getItem("cart")).map(item => (total += item.total));
     this.setState({
-      cartSubtotal: subTotal,
-      cartTax: tax,
       cartTotal: total
     });
   };

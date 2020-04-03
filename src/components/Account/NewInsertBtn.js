@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import AddCircleSharpIcon from "@material-ui/icons/AddCircleSharp";
 
-export default function NewInsertBtn({ history }) {
+export default function NewInsertBtn({ history, content }) {
   return (
     <div style={{ marginBottom: "2rem" }}>
       <Button
@@ -12,7 +12,7 @@ export default function NewInsertBtn({ history }) {
           history.push("/insert");
         }}
       >
-        Create An Insert
+        {content}
       </Button>
     </div>
   );

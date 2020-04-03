@@ -23,7 +23,7 @@ export default function Address({ history, location }) {
       {({ user, adds, handleDel }) => {
         return (
           <div className="container">
-            <Stepper step={1} />
+            <Stepper step={2} />
             <Paper className={classes.root}>
               {/* <Title
               title={"Factory Address"}

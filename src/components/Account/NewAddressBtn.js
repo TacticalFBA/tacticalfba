@@ -11,7 +11,7 @@ export default function NewAddressBtn({ handleClick, show }) {
         startIcon={show ? <RemoveCircleSharpIcon /> : <AddCircleSharpIcon />}
         onClick={handleClick}
       >
-        {show ? "Close" : " Add New Address"}
+        {show ? "Close" : " Add New Factory Address"}
       </Button>
     </div>
   );

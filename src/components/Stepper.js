@@ -19,17 +19,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ["Design Insert", "Factory Address", "Choose Quantitiy", "Check Out"];
+  return [
+    "Choose Template",
+    "Design Insert",
+    "Factory Address",
+    "Choose Quantitiy"
+  ];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return "Choose a template or upload your own";
+      return "Choose A Template";
     case 1:
-      return "Where should we send these inserts? Shipping is free!";
+      return "Design Insert / Upload Your Own ArtWork";
     case 2:
-      return "";
+      return "Where should we send these inserts? Shipping is free!";
     default:
       return "Unknown step";
   }
@@ -44,7 +49,7 @@ export default function HorizontalLinearStepper({ step }) {
         activeStep={step}
         style={{
           backgroundColor: "transparent",
-          marginTop: "2rem"
+          marginTop: "1.5rem"
         }}
       >
         {steps.map((label, index) => {

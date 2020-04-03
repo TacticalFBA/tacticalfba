@@ -1,6 +1,6 @@
 import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
-import { db } from "../../config/Firebase";
+import { firebase, db } from "../../config/Firebase";
 import dateFormat from "dateformat";
 
 export default class PaypalBtn extends React.Component {
@@ -36,6 +36,7 @@ export default class PaypalBtn extends React.Component {
       });
 
       const order = {
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         items: items,
         info: {
           date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
@@ -52,6 +53,7 @@ export default class PaypalBtn extends React.Component {
         .add(order)
         .then(() => {
           clearCart();
+          alert("Order Success! Redirecting to your history order page.");
           history.push("/account");
         })
         .catch(err => {

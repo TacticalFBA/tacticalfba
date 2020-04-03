@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PreviewModal from "../PreviewModal";
-import NewInsertBtn from "./NewInsertBtn";
 
 export default function Orders({ orders, history }) {
   const [show, setShow] = useState(false);
@@ -17,10 +16,8 @@ export default function Orders({ orders, history }) {
     setFront("");
     setBack("");
   };
-  return (
+  return orders.length > 0 ? (
     <div>
-      <NewInsertBtn history={history} />
-
       {show && (
         <div onClick={closeModal}>
           <PreviewModal front={front} back={back} />
@@ -30,7 +27,9 @@ export default function Orders({ orders, history }) {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
-              <span>Submitted on: {order.info.date}</span>
+              <span>Order ID: {order.oid} </span>
+              <span className="mx-2">|</span>
+              <span> Submitted on: {order.info.date}</span>
               <span className="total">
                 Order Total: $<strong>{order.info.total}</strong>
               </span>
@@ -40,34 +39,45 @@ export default function Orders({ orders, history }) {
                 return (
                   <div className="item" key={item.insert.iid}>
                     <div className="row">
-                      <div className="col-2 title">Insert:</div>
+                      <div className="col-2 title">Product Category:</div>
                       <div className="col-10">
-                        <span
-                          style={{
-                            cursor: "pointer",
-                            textDecoration: "underline"
-                          }}
-                          onClick={() =>
-                            handleClick(
-                              item.insert.frontPre,
-                              item.insert.backPre
-                            )
-                          }
-                        >
-                          {item.insert.iName}
-                        </span>
+                        {item.pid === 0 || 1 || 2
+                          ? "Package Insert"
+                          : "Other Product"}
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-2 title">Send to:</div>
-                      <div className="col-10">
-                        {item.add.factory}, {item.add.address}
+                      <div className="col-2 title">
+                        {item.pid === 0 || 1 || 2 ? "Insert" : "Other"} Name:
+                      </div>
+                      <div
+                        className="col-10"
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "underline"
+                        }}
+                        onClick={() =>
+                          handleClick(item.insert.frontPre, item.insert.backPre)
+                        }
+                      >
+                        {item.insert.iName}
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-2 title">Factory Contact:</div>
-                      <div className="col-10">
-                        {item.add.contact}, {item.add.email}, {item.add.mobile}
+                      <div className="col-2 title">Factory Name:</div>
+                      <div
+                        className="col-10"
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "underline"
+                        }}
+                        onClick={() =>
+                          alert(
+                            `Address: ${item.add.address}\nContact: ${item.add.contact}, ${item.add.email}, ${item.add.mobile}`
+                          )
+                        }
+                      >
+                        {item.add.factory}
                       </div>
                     </div>
                     <div className="row">
@@ -76,7 +86,7 @@ export default function Orders({ orders, history }) {
                     </div>
                     <div className="row">
                       <div className="col-2 title">
-                        Count: <small>(in thousands)</small>
+                        Quantity<small> (in thousands) </small>:
                       </div>
                       <div className="col-10 ">{item.count}</div>
                     </div>
@@ -91,6 +101,10 @@ export default function Orders({ orders, history }) {
           </Wrapper>
         );
       })}
+    </div>
+  ) : (
+    <div style={{ height: "200px" }} className="juzhong">
+      <div>You haven't placed any order yet.</div>
     </div>
   );
 }

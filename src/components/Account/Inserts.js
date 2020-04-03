@@ -31,7 +31,7 @@ export default function Inserts({ user, inserts, history }) {
   // };
   return (
     <div>
-      <NewInsertBtn history={history} />
+      <NewInsertBtn history={history} content={"create an insert"} />
       {inserts.length > 0 && (
         <div className={classes.root}>
           <Grid container spacing={3}>

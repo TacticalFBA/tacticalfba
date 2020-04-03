@@ -2,19 +2,24 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserConsumer } from "./contexts/UserContext";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // import css
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
+import Fab from "@material-ui/core/Fab";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 // import components
+// import NavBar from "./components/Nav/NavBar";
+import ScrollTop from "./components/Nav/ScrollTop";
 import Default from "./components/Default";
 import Spinner from "./components/Spinner";
-import NavBar from "./components/Navbar";
+import MainNav from "./components/MainNav";
 import About from "./components/About";
 import Prices from "./components/Prices";
-import Contact from "./components/Contact";
+import Contact from "./components/Contact/Contact";
 import Landing from "./components/Landing/Landing.js";
 import TemplateList from "./components/Insert/TemplateList";
 import LoginModal from "./components/Account/LoginModal";
@@ -26,14 +31,27 @@ import FinishSignUp from "./components/Account/FinishSignUp";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 
-const App = () => {
+// setting theme color
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#000080"
+    },
+    secondary: {
+      main: "#d32f2f"
+    }
+  }
+});
+
+const App = props => {
   return (
-    <React.Fragment>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <UserConsumer>{({ spin }) => <Spinner spin={spin} />}</UserConsumer>
       <div className="App">
-        <header className="App-header">
-          <NavBar />
+        <header className="App-header" id="back-to-top-anchor">
+          <MainNav />
+          {/* <NavBar /> */}
         </header>
         <main className="pTop">
           <Switch>
@@ -53,8 +71,13 @@ const App = () => {
           </Switch>
           <LoginModal />
         </main>
+        <ScrollTop {...props}>
+          <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
       </div>
-    </React.Fragment>
+    </MuiThemeProvider>
   );
 };
 

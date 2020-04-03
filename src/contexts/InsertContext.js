@@ -68,8 +68,8 @@ function InsertProvider(props) {
   const onSelectImg = e => {
     const file = e.currentTarget.files[0];
     const size = file.size / 1024;
-    if (size > 2000) {
-      alert("2mb maximum file size.");
+    if (size > 300) {
+      alert("300KB maximum file size.");
       e.currentTarget.value = "";
       return false;
     }

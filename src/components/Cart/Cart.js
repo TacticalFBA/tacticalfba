@@ -22,7 +22,7 @@ export default function Cart({ history }) {
   const classes = useStyles();
   return (
     <div className="container">
-      <Stepper step={2} />
+      <Stepper step={3} />
       {/* <Title title={"Choose Quantitiy"} /> */}
       <Paper className={classes.root}>
         <CartConsumer>
@@ -46,8 +46,15 @@ export default function Cart({ history }) {
                   removeItem={removeItem}
                   history={history}
                 />
-                <div className="text-center pt-3">
-                  <NewInsertBtn history={history} />
+                <div className="text-center pt-5">
+                  <NewInsertBtn
+                    history={history}
+                    content={
+                      cart.length === 0
+                        ? "Create an insert"
+                        : "Create Another Insert"
+                    }
+                  />
                 </div>
                 <CartTotals
                   cart={cart}

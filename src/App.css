@@ -1,5 +1,5 @@
 :root {
-  --mainOrange: #1655b7;
+  --mainOrange: #000080;
   --darkOrange: #030c7e;
   --mainWhite: #fafafa;
   --mainDark: #0a0908;
@@ -106,12 +106,4 @@ buttonactive.focus {
   outline: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
-}
-
-/* responsive */
-
-@media (max-width: 375px) {
-  .container {
-    padding: 0 1.5rem !important;
-  }
 }

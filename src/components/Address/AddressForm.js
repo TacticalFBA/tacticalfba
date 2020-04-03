@@ -113,7 +113,7 @@ export default function AddressForm({ user, location, history }) {
           {/* check if contains charators "省、市" */}
           <div className="form-group col-md-8">
             <label htmlFor="address">
-              Address{" "}
+              Factory Address{" "}
               <small className="text-muted">* Address must be in Chinese</small>
             </label>
             <input
@@ -136,7 +136,7 @@ export default function AddressForm({ user, location, history }) {
         <div className="form-row">
           {/* check if entered */}
           <div className="form-group col-md-4">
-            <label htmlFor="contact">Contact Name</label>
+            <label htmlFor="contact">Factory Contact Name</label>
             <input
               type="text"
               className="form-control"
@@ -155,7 +155,7 @@ export default function AddressForm({ user, location, history }) {
           </div>
           {/* to add email validator */}
           <div className="form-group col-md-4">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Factory Contact Email</label>
             <input
               type="email"
               className="form-control"
@@ -175,7 +175,7 @@ export default function AddressForm({ user, location, history }) {
           {/* to add mobile number validator */}
           <div className="form-group col-md-4">
             <label htmlFor="mobile">
-              Mobile{" "}
+              Factory Contact Mobile{" "}
               <small className="text-muted">* 11 digits Chinese number</small>
             </label>
             <input

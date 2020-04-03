@@ -102,7 +102,8 @@ class UserProvider extends Component {
     const ref = db
       .collection("users")
       .doc(user)
-      .collection("order");
+      .collection("order")
+      .orderBy("timestamp", "desc");
     ref.onSnapshot(snapshot => {
       const orders = snapshot.docs.map(doc => {
         // adding document id to the data
