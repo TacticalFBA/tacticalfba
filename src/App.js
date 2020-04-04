@@ -30,20 +30,21 @@ import Address from "./components/Address/Address";
 import FinishSignUp from "./components/Account/FinishSignUp";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
+import ComingSoon from "./components/ComingSoon";
 
 // setting theme color
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#000080"
+      main: "#000080",
     },
     secondary: {
-      main: "#d32f2f"
-    }
-  }
+      main: "#d32f2f",
+    },
+  },
 });
 
-const App = props => {
+const App = (props) => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
@@ -63,6 +64,10 @@ const App = props => {
             <Route path="/cart" component={Cart} />
             <Route exact path="/account" component={Account} />
             <Route path="/insert" component={TemplateList} />
+            <Route path="/photography" component={ComingSoon} />
+            <Route path="/packaging-box" component={ComingSoon} />
+            <Route path="/sticker-label" component={ComingSoon} />
+            <Route path="/bar-code" component={ComingSoon} />
             <Route path="/edit-template/:pid" component={EditTemplate} />
             <Route path="/address" component={Address} />
             <Route exact path="/blog" component={BlogList} />

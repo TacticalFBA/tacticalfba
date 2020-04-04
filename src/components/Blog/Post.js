@@ -10,12 +10,12 @@ import {
   EmailShareButton,
   FacebookShareButton,
   RedditShareButton,
-  TwitterShareButton
+  TwitterShareButton,
 } from "react-share";
 
 export default function Post({ match }) {
   const { title, auther, date, body } = posts.filter(
-    post => post.id === parseInt(match.params.id)
+    (post) => post.id === parseInt(match.params.id)
   )[0];
   const shareUrl = `https://tacticalfba.netlify.com${match.url}`;
   return (
@@ -29,13 +29,13 @@ export default function Post({ match }) {
         </p>
         <div className="mt-2 mb-5">
           <span>Share: </span>
-          <EmailShareButton url={shareUrl}>
+          <EmailShareButton url={shareUrl} className="mx-1">
             <EmailIcon size={28} round={true} />
           </EmailShareButton>
-          <FacebookShareButton url={shareUrl}>
+          <FacebookShareButton url={shareUrl} className="mr-1">
             <FacebookIcon size={28} round={true} />
           </FacebookShareButton>
-          <RedditShareButton url={shareUrl}>
+          <RedditShareButton url={shareUrl} className="mr-1">
             <RedditIcon size={28} round={true} />
           </RedditShareButton>
           <TwitterShareButton url={shareUrl}>
