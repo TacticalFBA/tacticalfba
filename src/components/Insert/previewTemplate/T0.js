@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { PreviewContainer } from "../../Styled/Containers";
+import { Button, Box, Link } from "@material-ui/core";
 
-export default function T0({ content, onSelect, frontRef, backRef }) {
+export default function T0({ content, frontRef, backRef }) {
   let { frontImg, rearImg } = content;
+  const bleed = `${process.env.PUBLIC_URL}/img/bleed.png`;
+  const [show, setShow] = useState(false);
   return (
     <div className="row">
       {/* front */}
@@ -15,9 +18,10 @@ export default function T0({ content, onSelect, frontRef, backRef }) {
             backgroundImage: `url(${frontImg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
         >
+          {show && <img src={bleed} alt="bleed" className="bleed" />}
           {/* {frontImg ? (
             <img src={frontImg} alt="front" style={{ width: "100%" }} />
           ) : (
@@ -36,9 +40,10 @@ export default function T0({ content, onSelect, frontRef, backRef }) {
             backgroundImage: `url(${rearImg})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
         >
+          {show && <img src={bleed} alt="bleed" className="bleed" />}
           {/* {rearImg ? (
             <img src={rearImg} alt="rear" style={{ width: "100%" }} />
           ) : (
@@ -46,6 +51,29 @@ export default function T0({ content, onSelect, frontRef, backRef }) {
           )} */}
         </PreviewContainer>
       </div>
+      <Box
+        mt={3}
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        alignItems="center"
+      >
+        <Button
+          variant="contained"
+          size="small"
+          onMouseDown={() => setShow(true)}
+          onMouseUp={() => setShow(false)}
+        >
+          Hold to see guide lines
+        </Button>
+        <Link
+          href="javascript:;"
+          onClick={(e) => e.preventDefault()}
+          style={{ marginLeft: "1rem" }}
+        >
+          What are the guide lines for?
+        </Link>
+      </Box>
     </div>
   );
 }

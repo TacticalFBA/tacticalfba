@@ -14,22 +14,22 @@ function InsertProvider(props) {
   let tempInsert = {};
 
   if (iid) {
-    tempInsert = inserts.filter(insert => insert.iid === iid)[0];
+    tempInsert = inserts.filter((insert) => insert.iid === iid)[0];
   } else {
-    tempInsert = samples.filter(sample => sample.pid === pid)[0];
+    tempInsert = samples.filter((sample) => sample.pid === pid)[0];
   }
 
   const [content, setContent] = useState(tempInsert);
 
   // handle insert name
-  const handleInsertName = e => {
+  const handleInsertName = (e) => {
     let newContent = Object.assign({}, content);
     newContent.iName = e.currentTarget.value;
     setContent(newContent);
   };
 
   // handle theme color
-  const handleThemeColor = color => {
+  const handleThemeColor = (color) => {
     let newContent = Object.assign({}, content);
     newContent.themeColor = color.hex;
     setContent(newContent);
@@ -40,7 +40,7 @@ function InsertProvider(props) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [item, setItem] = useState("");
 
-  const onSelect = item => {
+  const onSelect = (item) => {
     setItem(item);
     setEditorShow(true);
     // get the default html of selected part
@@ -55,7 +55,7 @@ function InsertProvider(props) {
   };
 
   // handle editor
-  const updateEditorState = editorState => {
+  const updateEditorState = (editorState) => {
     setEditorState(editorState);
     let contentState = editorState.getCurrentContent();
     let html = stateToHTML(contentState);
@@ -65,7 +65,7 @@ function InsertProvider(props) {
   };
 
   // handle image change
-  const onSelectImg = e => {
+  const onSelectImg = (e) => {
     const file = e.currentTarget.files[0];
     const size = file.size / 1024;
     if (size > 300) {
@@ -97,17 +97,17 @@ function InsertProvider(props) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-  const genPreview = async arr => {
+  const genPreview = async (arr) => {
     let newContent = Object.assign({}, content);
     await htmlToImage
       .toJpeg(frontRef.current, { quality: 0.5 })
-      .then(dataUrl => {
+      .then((dataUrl) => {
         newContent.frontPre = dataUrl;
         console.log("front preview converted");
       });
     await htmlToImage
       .toJpeg(backRef.current, { quality: 0.5 })
-      .then(dataUrl => {
+      .then((dataUrl) => {
         newContent.backPre = dataUrl;
         console.log("back preview converted");
       });
@@ -115,11 +115,9 @@ function InsertProvider(props) {
   };
 
   const genID = () => {
-    return Number(
-      Math.random()
-        .toString()
-        .substr(10) + Date.now()
-    ).toString(36);
+    return Number(Math.random().toString().substr(10) + Date.now()).toString(
+      36
+    );
   };
 
   const uploadImg = async (arr, cb) => {
@@ -131,11 +129,11 @@ function InsertProvider(props) {
       const uploadTask = ref.putString(image.dataUrl, "data_url");
       uploadTask.on(
         "state_changed",
-        snapShot => {
+        (snapShot) => {
           //takes a snap shot of the process as it is happening
           // console.log(snapShot);
         },
-        err => {
+        (err) => {
           //catches the errors
           console.log(err);
         },
@@ -144,7 +142,7 @@ function InsertProvider(props) {
             .ref("images")
             .child(imgID)
             .getDownloadURL()
-            .then(fireBaseUrl => {
+            .then((fireBaseUrl) => {
               newContent[image.name] = fireBaseUrl;
               count++;
               console.log(image.name + " uploaded");
@@ -191,43 +189,36 @@ function InsertProvider(props) {
     // }
   };
 
-  const saveToDb = data => {
-    const ref = db
-      .collection("users")
-      .doc(user)
-      .collection("insert");
+  const saveToDb = (data) => {
+    const ref = db.collection("users").doc(user).collection("insert");
     ref
       .add(data)
-      .then(docRef => {
+      .then((docRef) => {
         const comb = {
           pid: pid,
-          iid: docRef.id
+          iid: docRef.id,
         };
         localStorage.setItem("comb", JSON.stringify(comb));
         history.push("/address");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Error writing document: ", error.message);
       });
   };
 
-  const updateDb = data => {
-    const ref = db
-      .collection("users")
-      .doc(user)
-      .collection("insert")
-      .doc(iid);
+  const updateDb = (data) => {
+    const ref = db.collection("users").doc(user).collection("insert").doc(iid);
     ref
       .update(data)
-      .then(docRef => {
+      .then((docRef) => {
         const comb = {
           pid: pid,
-          iid: iid
+          iid: iid,
         };
         localStorage.setItem("comb", JSON.stringify(comb));
         history.push("/address");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Error writing document: ", error.message);
       });
   };
@@ -259,20 +250,20 @@ function InsertProvider(props) {
     const imgArr = [
       {
         dataUrl: converted.frontImg,
-        name: "frontImg"
+        name: "frontImg",
       },
       {
         dataUrl: converted.rearImg,
-        name: "rearImg"
+        name: "rearImg",
       },
       {
         dataUrl: converted.frontPre,
-        name: "frontPre"
+        name: "frontPre",
       },
       {
         dataUrl: converted.backPre,
-        name: "backPre"
-      }
+        name: "backPre",
+      },
     ];
 
     uploadImg(imgArr, saveToDb);
@@ -290,23 +281,23 @@ function InsertProvider(props) {
     let imgArr = [
       {
         dataUrl: converted.frontPre,
-        name: "frontPre"
+        name: "frontPre",
       },
       {
         dataUrl: converted.backPre,
-        name: "backPre"
-      }
+        name: "backPre",
+      },
     ];
     if (content.frontImg.includes("data")) {
       imgArr.push({
         dataUrl: converted.frontImg,
-        name: "frontImg"
+        name: "frontImg",
       });
     }
     if (content.rearImg.includes("data")) {
       imgArr.push({
         dataUrl: converted.rearImg,
-        name: "rearImg"
+        name: "rearImg",
       });
     }
     uploadImg(imgArr, saveToDb);
@@ -324,23 +315,23 @@ function InsertProvider(props) {
     let imgArr = [
       {
         dataUrl: converted.frontPre,
-        name: "frontPre"
+        name: "frontPre",
       },
       {
         dataUrl: converted.backPre,
-        name: "backPre"
-      }
+        name: "backPre",
+      },
     ];
     if (content.frontImg.includes("data")) {
       imgArr.push({
         dataUrl: converted.frontImg,
-        name: "frontImg"
+        name: "frontImg",
       });
     }
     if (content.rearImg.includes("data")) {
       imgArr.push({
         dataUrl: converted.rearImg,
-        name: "rearImg"
+        name: "rearImg",
       });
     }
     uploadImg(imgArr, updateDb);
@@ -366,7 +357,7 @@ function InsertProvider(props) {
         show: show,
         error: error,
         updateTemp: updateTemp,
-        saveAsNew: saveAsNew
+        saveAsNew: saveAsNew,
       }}
     >
       {props.children}

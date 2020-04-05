@@ -7,9 +7,9 @@ export const samples = [
     frontMsgSec: `<strong>James<br>from<br>TacticalFBA</strong>`,
     rearMsg: `<p>We appreciate your support!</p><p>Here is a promo code for 15% off on your next order:</p><br><p><strong>THANKYOU15</strong></p>`,
     frontImg: `${process.env.PUBLIC_URL}/img/person.jpg`,
-    rearImg: `${process.env.PUBLIC_URL}/img/logo.png`,
+    rearImg: `${process.env.PUBLIC_URL}/img/logo-white.png`,
     frontPre: "",
-    backPre: ""
+    backPre: "",
   },
   {
     pid: 2,
@@ -23,7 +23,7 @@ export const samples = [
     frontImg: `${process.env.PUBLIC_URL}/img/person.jpg`,
     rearImg: `${process.env.PUBLIC_URL} /img/product.jpg`,
     frontPre: "",
-    backPre: ""
+    backPre: "",
   },
   {
     pid: 0,
@@ -31,8 +31,8 @@ export const samples = [
     frontImg: `${process.env.PUBLIC_URL}/img/sample_image/t0/front.jpg`,
     rearImg: `${process.env.PUBLIC_URL}/img/sample_image/t0/rear.jpg`,
     frontPre: "",
-    backPre: ""
-  }
+    backPre: "",
+  },
 ];
 
 export const products = [
@@ -43,7 +43,7 @@ export const products = [
     img: "img/insert_cover/discount.jpg",
     price: 50,
     count: 0,
-    total: 0
+    total: 0,
   },
   {
     pid: 2,
@@ -52,7 +52,7 @@ export const products = [
     img: "img/insert_cover/new-product.jpg",
     price: 50,
     count: 0,
-    total: 0
+    total: 0,
   },
   {
     pid: 0,
@@ -61,6 +61,6 @@ export const products = [
     img: "img/insert_cover/own.jpg",
     price: 50,
     count: 0,
-    total: 0
-  }
+    total: 0,
+  },
 ];

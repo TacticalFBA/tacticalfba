@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
+import { Button, Box, Link } from "@material-ui/core";
 
 export default function T1({ content, onSelect, frontRef, backRef }) {
   let {
@@ -10,37 +11,45 @@ export default function T1({ content, onSelect, frontRef, backRef }) {
     frontMsgSec,
     rearMsg,
     frontImg,
-    rearImg
+    rearImg,
   } = content;
-  const imgWrapper = {
+  const frontImgWrapper = {
     backgroundImage: `url(${frontImg})`,
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   };
+  const rearImgWrapper = {
+    backgroundImage: `url(${rearImg})`,
+    backgroundPosition: "center center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  };
+  const bleed = `${process.env.PUBLIC_URL}/img/bleed.png`;
+  const [show, setShow] = useState(false);
   return (
     <div className="row">
       {/* front */}
       <div className="col-12 col-md-6">
         <h6 className="mb-3">Front:</h6>
         <PreviewContainer ref={frontRef}>
-          <LeftWrapper
-            className="juzhong"
-            style={{ backgroundColor: themeColor }}
-          >
-            <div className="frontImg" style={imgWrapper} />
-            <div
-              className="pointer highlight"
-              onClick={() => onSelect("frontMsgSec")}
-            >
-              {Parser(frontMsgSec)}
-            </div>
+          {show && <img src={bleed} alt="bleed" className="bleed" />}
+          <LeftWrapper style={{ backgroundColor: themeColor }}>
+            <LeftContainer>
+              <div className="frontImg" style={frontImgWrapper} />
+              <div
+                className="pointer highlight"
+                onClick={() => onSelect("frontMsgSec")}
+              >
+                {Parser(frontMsgSec)}
+              </div>
+            </LeftContainer>
           </LeftWrapper>
           <RightWrapper
             className="pointer highlight"
             onClick={() => onSelect("frontMsgBody")}
           >
-            {Parser(frontMsgBody)}
+            <div className="text-container">{Parser(frontMsgBody)}</div>
           </RightWrapper>
         </PreviewContainer>
       </div>
@@ -53,10 +62,11 @@ export default function T1({ content, onSelect, frontRef, backRef }) {
           className="juzhong"
           style={{ backgroundColor: themeColor }}
         >
+          {show && <img src={bleed} alt="bleed" className="bleed" />}
           <RearWrapper>
-            <img src={rearImg} alt="rear" />
+            <div className="rearImg" style={rearImgWrapper} />
             <div
-              className="pointer highlight"
+              className="pointer highlight rearText"
               onClick={() => onSelect("rearMsg")}
             >
               {Parser(rearMsg)}
@@ -64,25 +74,75 @@ export default function T1({ content, onSelect, frontRef, backRef }) {
           </RearWrapper>
         </PreviewContainer>
       </div>
+      <Box
+        mt={3}
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        alignItems="center"
+      >
+        <Button
+          variant="contained"
+          size="small"
+          onMouseDown={() => setShow(true)}
+          onMouseUp={() => setShow(false)}
+        >
+          Hold to see guide lines
+        </Button>
+        <Link
+          href="javascript:;"
+          onClick={(e) => e.preventDefault()}
+          style={{ marginLeft: "1rem" }}
+        >
+          What are the guide lines for?
+        </Link>
+      </Box>
     </div>
   );
 }
 
 const LeftWrapper = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   left: 0;
   top: 0;
-  padding: 1rem;
-  width: 23%;
+  padding: 10%;
+  width: 30%;
   height: 100%;
   color: var(--mainWhite);
-  font-size: 0.8rem;
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 88%;
+  height: 70%;
+  // border: 1px solid black;
+  position: absolute;
+  right: 0;
   text-align: center;
+  @media (max-width: 600px) {
+    font-size: 0.45rem;
+  }
+  @media (max-width: 800px) {
+    font-size: 0.65rem;
+  }
+  @media (max-width: 1200px) {
+    font-size: 0.75rem;
+  }
+  @media (min-width: 1221px) {
+    font-size: 0.8rem;
+  }
+
   .frontImg {
-    margin: 1rem 0;
+    margin: 0 auto 10%;
     border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
+    width: 65%;
+    height: 0;
+    padding-bottom: 65%;
   }
 `;
 
@@ -90,20 +150,32 @@ const RightWrapper = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  padding: 1.5rem 1.75rem 1.5rem 1.2rem;
-  width: 77%;
+  width: 70%;
   height: 100%;
   background: var(--mainWhite);
-  font-size: 0.75rem;
+  .text-container {
+    margin: 10% 10% 10% 5%;
+    font-size: 13px;
+  }
 `;
 
 const RearWrapper = styled.div`
   width: 70%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
-  img {
-    width: 25%;
+
+  .rearImg {
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    width: 30%;
+    height: 0;
+    padding-bottom: 30%;
   }
-  div {
+
+  .rearText {
     margin-top: 1rem;
     color: var(--mainWhite);
     width: 100%;
