@@ -90,10 +90,7 @@ export default function EditTemplate({ location, history, match }) {
                         <div className="row">
                           <div className="col-3">
                             <h6>Set Images: </h6>
-                            <p className="text-muted">
-                              1. Maximum file size on each side is 300KB.
-                            </p>
-                            <p className="text-muted">2. File format: JPG.</p>
+                            <p className="text-muted">1. File format: JPG.</p>
                           </div>
                           <div className="col-9">
                             <span>Front image: </span>

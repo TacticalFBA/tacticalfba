@@ -6,6 +6,7 @@ import { stateToHTML } from "draft-js-export-html";
 import htmlToImage from "html-to-image";
 import getCroppedImg from "../components/Insert/previewTemplate/CropImg/cropImage";
 import CropModal from "../components/Insert/previewTemplate/CropModal";
+import Compress from "compress.js";
 
 const InsertContext = React.createContext();
 
@@ -69,27 +70,64 @@ function InsertProvider(props) {
   // handle image change
   const onSelectImg = (e) => {
     const file = e.currentTarget.files[0];
+    const side = e.currentTarget.name;
+    console.log(file);
+    const compress = new Compress();
+    compress
+      .compress([file], {
+        size: 4, // the max size in MB, defaults to 2MB
+        quality: 0.75, // the quality of the image, max is 1,
+        maxWidth: 1920, // the max width of the output image, defaults to 1920px
+        maxHeight: 1920, // the max height of the output image, defaults to 1920px
+        resize: true, // defaults to true, set false if you do not want to resize the image width and height
+      })
+      .then((data) => {
+        // returns an array of compressed images
+        console.log(data);
+        const img1 = data[0];
+        const compressedFile = `${img1.prefix}${img1.data}`;
+        let newContent = Object.assign({}, content);
+        newContent[side] = compressedFile;
+        setContent(newContent);
+      });
+
     // const size = file.size / 1024;
     // if (size > 300) {
     //   alert("300KB maximum file size.");
     //   e.currentTarget.value = "";
     //   return false;
     // }
-    const side = e.currentTarget.name;
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        let newContent = Object.assign({}, content);
-        // convert image file to base64 string
-        newContent[side] = reader.result;
-        setContent(newContent);
-      },
-      false
-    );
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+
+    // const side = e.currentTarget.name;
+    // const reader = new FileReader();
+    // reader.addEventListener(
+    //   "load",
+    //   () => {
+    //     const compress = new Compress();
+    //     compress
+    //       .compress([file], {
+    //         size: 4, // the max size in MB, defaults to 2MB
+    //         quality: 0.75, // the quality of the image, max is 1,
+    //         maxWidth: 1920, // the max width of the output image, defaults to 1920px
+    //         maxHeight: 1920, // the max height of the output image, defaults to 1920px
+    //         resize: true, // defaults to true, set false if you do not want to resize the image width and height
+    //       })
+    //       .then((data) => {
+    //         // returns an array of compressed images
+    //         console.log(data);
+    //         const img1 = data[0];
+    //         const compressedFile = `${img1.prefix}${img1.data}`;
+    //         return compressedFile;
+    //       });
+    //     let newContent = Object.assign({}, content);
+    //     newContent[side] = reader.result;
+    //     setContent(newContent);
+    //   },
+    //   false
+    // );
+    // if (compressedFile) {
+    //   reader.readAsDataURL(compressedFile);
+    // }
   };
 
   const [open, setOpen] = useState(false);
