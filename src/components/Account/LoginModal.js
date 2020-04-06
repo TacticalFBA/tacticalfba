@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { UserConsumer } from "../../contexts/UserContext";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Paper,
+  makeStyles,
+  Collapse,
+  IconButton,
+  Snackbar,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
+import Spinner from "../Spinner";
 
 export default class LoginModal extends Component {
   state = {
-    email: ""
+    email: "",
   };
 
   render() {
@@ -31,31 +45,41 @@ export default class LoginModal extends Component {
                     </button>
                   </div>
                   <div className="modal-body">
-                    {/* <div className="form-group"> */}
-                    {/* <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={e => this.setState({ email: e.target.value })}
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-orange btn-sm btn-block"
-                      onClick={() => sendEmail(this.state.email, type)}
-                    >
-                      Send link
-                    </button> */}
-                    {/* <p className="text-center text-muted">or</p> */}
-                    <button
-                      type="button"
-                      className="btn btn-orange btn-sm btn-block"
+                    <Button
+                      variant="contained"
+                      size="small"
+                      color="primary"
+                      fullWidth
                       onClick={googleLogin}
                     >
                       Login with Google
-                    </button>
+                    </Button>
+
+                    <Box>
+                      <TextField
+                        label="Email"
+                        id="email"
+                        required
+                        value={this.state.email}
+                        onChange={(e) =>
+                          this.setState({ email: e.target.value })
+                        }
+                        fullWidth
+                        // onBlur={onBlur}
+                        // error={Boolean(Err)}
+                        // helperText={Err}
+                      />
+                    </Box>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      color="primary"
+                      fullWidth
+                      onClick={() => sendEmail(this.state.email, type)}
+                    >
+                      Send link
+                    </Button>
+                    <p className="text-center text-muted">or</p>
                   </div>
                 </div>
               </ModalContainer>
