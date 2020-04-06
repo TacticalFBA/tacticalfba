@@ -6,12 +6,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 export default function AddressForm({ user, location, history }) {
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
-        margin: theme.spacing(1)
-      }
-    }
+        margin: theme.spacing(1),
+      },
+    },
   }));
 
   const classes = useStyles();
@@ -21,10 +21,10 @@ export default function AddressForm({ user, location, history }) {
     address: "",
     contact: "",
     email: "",
-    mobile: ""
+    mobile: "",
   });
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     let newAdd = Object.assign({}, add);
     newAdd[e.currentTarget.name] = e.currentTarget.value;
     setAdd(newAdd);
@@ -42,17 +42,14 @@ export default function AddressForm({ user, location, history }) {
         address: "",
         contact: "",
         email: "",
-        mobile: ""
+        mobile: "",
       };
       console.log(2);
       setAdd(newAdd);
-      const ref = db
-        .collection("users")
-        .doc(user)
-        .collection("factory");
+      const ref = db.collection("users").doc(user).collection("factory");
       ref
         .add(add)
-        .then(docRef => {
+        .then((docRef) => {
           const aid = docRef.id;
           const comb = JSON.parse(localStorage.getItem("comb"));
           comb.aid = aid;
@@ -61,7 +58,7 @@ export default function AddressForm({ user, location, history }) {
             cb(history);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error.message);
         });
     }
@@ -69,10 +66,10 @@ export default function AddressForm({ user, location, history }) {
 
   const [error, setError] = useState({});
 
-  const checkValid = e => {
+  const checkValid = (e) => {
     const field = e.target.name;
     const value = e.target.value.trim();
-    const target = validation.filter(item => item.field === field)[0];
+    const target = validation.filter((item) => item.field === field)[0];
     const tempError = Object.assign({}, error);
 
     for (let i = 0; i < target.checkList.length; i++) {
@@ -101,8 +98,8 @@ export default function AddressForm({ user, location, history }) {
               id="factory"
               placeholder="Factory One..."
               value={add.factory}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
+              onBlur={(e) => checkValid(e)}
+              onChange={(e) => handleInputChange(e)}
             />
             {
               <small className="text-orange">
@@ -123,8 +120,8 @@ export default function AddressForm({ user, location, history }) {
               id="address"
               placeholder="中国上海市... "
               value={add.address}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
+              onBlur={(e) => checkValid(e)}
+              onChange={(e) => handleInputChange(e)}
             />
             {
               <small className="text-orange">
@@ -144,8 +141,8 @@ export default function AddressForm({ user, location, history }) {
               id="contact"
               placeholder="Mary"
               value={add.contact}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
+              onBlur={(e) => checkValid(e)}
+              onChange={(e) => handleInputChange(e)}
             />
             {
               <small className="text-orange">
@@ -163,8 +160,8 @@ export default function AddressForm({ user, location, history }) {
               id="email"
               placeholder="mary@tacticalfba.com"
               value={add.email}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
+              onBlur={(e) => checkValid(e)}
+              onChange={(e) => handleInputChange(e)}
             />
             {
               <small className="text-orange">
@@ -176,7 +173,7 @@ export default function AddressForm({ user, location, history }) {
           <div className="form-group col-md-4">
             <label htmlFor="mobile">
               Factory Contact Mobile{" "}
-              <small className="text-muted">* 11 digits Chinese number</small>
+              <small className="text-muted">* 11 digit Chinese number</small>
             </label>
             <input
               type="text"
@@ -185,8 +182,8 @@ export default function AddressForm({ user, location, history }) {
               id="mobile"
               placeholder="13800000000"
               value={add.mobile}
-              onBlur={e => checkValid(e)}
-              onChange={e => handleInputChange(e)}
+              onBlur={(e) => checkValid(e)}
+              onChange={(e) => handleInputChange(e)}
             />
             {
               <small className="text-orange">

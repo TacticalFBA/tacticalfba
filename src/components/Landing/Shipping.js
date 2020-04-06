@@ -63,8 +63,8 @@ const ShippingWrapper = styled.div`
       display: block;
       margin: 0 auto 30px;
       background: url(img/free-shipping.png) no-repeat center center;
-      width: 40px;
-      height: 40px;
+      width: 80px;
+      height: 80px;
       background-size: cover;
     }
     &::after {

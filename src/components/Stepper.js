@@ -5,17 +5,17 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   button: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 function getSteps() {
@@ -23,7 +23,7 @@ function getSteps() {
     "Choose Template",
     "Design Insert",
     "Factory Address",
-    "Choose Quantitiy"
+    "Choose Quantitiy",
   ];
 }
 
@@ -35,8 +35,10 @@ function getStepContent(step) {
       return "Design Insert / Upload Your Own ArtWork";
     case 2:
       return "Where should we send these inserts? Shipping is free!";
+    case 3:
+      return "How many do you need?";
     default:
-      return "Unknown step";
+      return "";
   }
 }
 
@@ -49,7 +51,7 @@ export default function HorizontalLinearStepper({ step }) {
         activeStep={step}
         style={{
           backgroundColor: "transparent",
-          marginTop: "1.5rem"
+          marginTop: "1.5rem",
         }}
       >
         {steps.map((label, index) => {

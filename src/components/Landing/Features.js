@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import SentimentSatisfiedSharpIcon from "@material-ui/icons/SentimentSatisfiedSharp";
+import TrendingUpSharpIcon from "@material-ui/icons/TrendingUpSharp";
+import AttachMoneySharpIcon from "@material-ui/icons/AttachMoneySharp";
 
 export default function Features() {
   return (
@@ -7,7 +10,7 @@ export default function Features() {
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <i className="fa fa-smile-o" />
+            <SentimentSatisfiedSharpIcon fontSize="large" color="primary" />
             <h6>Easy</h6>
             <p>
               Provide us with a logo, face photo, message body, and website URL
@@ -15,7 +18,7 @@ export default function Features() {
             </p>
           </div>
           <div className="col-md-4">
-            <i className="fa fa-bar-chart-o"></i>
+            <TrendingUpSharpIcon fontSize="large" color="primary" />
             <h6>Effective</h6>
             <p>
               Our professional product insert templates add a personal touch to
@@ -24,7 +27,7 @@ export default function Features() {
             </p>
           </div>
           <div className="col-md-4">
-            <i className="fa fa-dollar"></i>
+            <AttachMoneySharpIcon fontSize="large" color="primary" />
             <h6>Inexpensive</h6>
             <p>
               At $0.05 each, product inserts are one of the most cost effective
@@ -44,10 +47,6 @@ const FeatureWrapper = styled.div`
   h6 {
     margin: 40px 0;
     font-size: 1.25rem;
-  }
-  i {
-    font-size: 1.5rem;
-    color: var(--mainOrange);
   }
   @media (max-width: 768px) {
     i {

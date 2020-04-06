@@ -6,7 +6,6 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 // import css
 import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";

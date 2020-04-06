@@ -1,11 +1,36 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PreviewModal from "../PreviewModal";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function Orders({ orders, history }) {
   const [show, setShow] = useState(false);
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
+  const [open, setOpen] = useState(false);
+  const [add, setAdd] = useState("");
+
+  const handleClickOpen = (add) => {
+    setAdd(add);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleClick = (front, back) => {
     setShow(true);
     setFront(front);
@@ -23,7 +48,34 @@ export default function Orders({ orders, history }) {
           <PreviewModal front={front} back={back} />
         </div>
       )}
-      {orders.map(order => {
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          <Typography color="primary" variant="h6">
+            Factory Information
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            <Box>Address: {add.address}</Box>
+            <Box>Contact: {add.contact}</Box>
+            <Box>Email: {add.email}</Box>
+            <Box> Mobile: {add.mobile}</Box>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {orders.map((order) => {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
@@ -35,7 +87,7 @@ export default function Orders({ orders, history }) {
               </span>
             </div>
             <div className="body">
-              {order.items.map(item => {
+              {order.items.map((item) => {
                 return (
                   <div className="item" key={item.insert.iid}>
                     <div className="row">
@@ -54,7 +106,7 @@ export default function Orders({ orders, history }) {
                         className="col-10"
                         style={{
                           cursor: "pointer",
-                          textDecoration: "underline"
+                          textDecoration: "underline",
                         }}
                         onClick={() =>
                           handleClick(item.insert.frontPre, item.insert.backPre)
@@ -69,13 +121,14 @@ export default function Orders({ orders, history }) {
                         className="col-10"
                         style={{
                           cursor: "pointer",
-                          textDecoration: "underline"
+                          textDecoration: "underline",
                         }}
-                        onClick={() =>
-                          alert(
-                            `Address: ${item.add.address}\nContact: ${item.add.contact}, ${item.add.email}, ${item.add.mobile}`
-                          )
-                        }
+                        onClick={() => handleClickOpen(item.add)}
+                        // onClick={() =>
+                        //   alert(
+                        //     `Address: ${item.add.address}\nContact: ${item.add.contact}, ${item.add.email}, ${item.add.mobile}`
+                        //   )
+                        // }
                       >
                         {item.add.factory}
                       </div>
