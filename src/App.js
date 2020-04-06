@@ -31,6 +31,7 @@ import FinishSignUp from "./components/Account/FinishSignUp";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
+import Admin from "./components/Admin";
 
 // setting theme color
 const theme = createMuiTheme({
@@ -72,6 +73,7 @@ const App = (props) => {
             <Route path="/address" component={Address} />
             <Route exact path="/blog" component={BlogList} />
             <Route path="/post/:id" component={Post} />
+            <Route path="/admin" component={Admin} />
             <Route component={Default}></Route>
           </Switch>
           <LoginModal />

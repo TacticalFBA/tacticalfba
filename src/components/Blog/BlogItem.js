@@ -7,14 +7,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Parser from "html-react-parser";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    maxWidth: 345,
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
-  }
+    paddingTop: "56.25%", // 16:9
+  },
 }));
 
 export default function RecipeReviewCard({ post, history }) {
@@ -25,7 +25,7 @@ export default function RecipeReviewCard({ post, history }) {
     <Card
       className={classes.root}
       onClick={() => {
-        history.push(`/post/${post.id}`);
+        history.push(`/post/${post.bid}`);
       }}
     >
       <CardHeader

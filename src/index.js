@@ -4,17 +4,20 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import { CartProvider } from "./contexts/CartContext";
+import { PostProvider } from "./components/Blog/PostContext";
 
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <UserProvider>
-    <CartProvider>
-      <Router>
-        <App />
-      </Router>
-    </CartProvider>
-  </UserProvider>,
+  <PostProvider>
+    <UserProvider>
+      <CartProvider>
+        <Router>
+          <App />
+        </Router>
+      </CartProvider>
+    </UserProvider>
+  </PostProvider>,
   document.getElementById("root")
 );
 

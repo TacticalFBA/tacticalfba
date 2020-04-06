@@ -1,7 +1,7 @@
 import React from "react";
 import Parser from "html-react-parser";
 import Container from "@material-ui/core/Container";
-import { posts } from "../../posts";
+import { db } from "../../config/Firebase";
 import {
   EmailIcon,
   FacebookIcon,
@@ -14,35 +14,55 @@ import {
 } from "react-share";
 
 export default function Post({ match }) {
-  const { title, auther, date, body } = posts.filter(
-    (post) => post.id === parseInt(match.params.id)
-  )[0];
+  const bid = match.params.id;
   const shareUrl = `https://tacticalfba.netlify.com${match.url}`;
+  const [post, setPost] = React.useState({});
+
+  React.useEffect(() => {
+    const ref = db.collection("blog posts").doc(bid);
+    ref
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          console.log("No such document!");
+        } else {
+          setPost(doc.data());
+        }
+      })
+      .catch((error) => console.log(error.message));
+  });
+
+  const { title, timestamp, auther, body } = post;
+
   return (
     <div className="my-5">
       <Container maxWidth="sm">
-        <h4 className="text-uppercase mb-2">{title}</h4>
-        <p className="text-muted">
-          <span>Published on: {date}</span>
-          <span className="px-2">|</span>
-          <span>by {auther}</span>
-        </p>
-        <div className="mt-2 mb-5">
-          <span>Share: </span>
-          <EmailShareButton url={shareUrl} className="mx-1">
-            <EmailIcon size={28} round={true} />
-          </EmailShareButton>
-          <FacebookShareButton url={shareUrl} className="mr-1">
-            <FacebookIcon size={28} round={true} />
-          </FacebookShareButton>
-          <RedditShareButton url={shareUrl} className="mr-1">
-            <RedditIcon size={28} round={true} />
-          </RedditShareButton>
-          <TwitterShareButton url={shareUrl}>
-            <TwitterIcon size={28} round={true} />
-          </TwitterShareButton>
-        </div>
-        <p>{Parser(body)}</p>
+        {JSON.stringify(post) !== "{}" && (
+          <React.Fragment>
+            <h4 className="text-uppercase mb-2">{title}</h4>
+            <p className="text-muted">
+              <span>Published on: {timestamp.toDate().toString()}</span>
+              <span className="px-2">|</span>
+              <span>by {auther}</span>
+            </p>
+            <div className="mt-2 mb-5">
+              <span>Share: </span>
+              <EmailShareButton url={shareUrl} className="mx-1">
+                <EmailIcon size={28} round={true} />
+              </EmailShareButton>
+              <FacebookShareButton url={shareUrl} className="mr-1">
+                <FacebookIcon size={28} round={true} />
+              </FacebookShareButton>
+              <RedditShareButton url={shareUrl} className="mr-1">
+                <RedditIcon size={28} round={true} />
+              </RedditShareButton>
+              <TwitterShareButton url={shareUrl}>
+                <TwitterIcon size={28} round={true} />
+              </TwitterShareButton>
+            </div>
+            <p>{Parser(body)}</p>
+          </React.Fragment>
+        )}
       </Container>
     </div>
   );
