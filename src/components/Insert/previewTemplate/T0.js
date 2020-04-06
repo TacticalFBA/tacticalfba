@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PreviewContainer } from "../../Styled/Containers";
 import { Button, Box, Link } from "@material-ui/core";
 
-export default function T0({ content, frontRef, backRef }) {
+export default function T0({ content, frontRef, backRef, handleClickOpen }) {
   let { frontImg, rearImg } = content;
   const bleed = `${process.env.PUBLIC_URL}/img/bleed.png`;
   const [show, setShow] = useState(false);
@@ -12,7 +12,7 @@ export default function T0({ content, frontRef, backRef }) {
       <div className="col-12 col-md-6">
         <h6 className="mb-3">Front:</h6>
         <PreviewContainer
-          className="juzhong"
+          className="juzhong highlight pointer"
           ref={frontRef}
           style={{
             backgroundImage: `url(${frontImg})`,
@@ -20,6 +20,7 @@ export default function T0({ content, frontRef, backRef }) {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
           }}
+          onClick={() => handleClickOpen(frontImg, 96 / 60, "", "frontImg")}
         >
           {show && <img src={bleed} alt="bleed" className="bleed" />}
           {/* {frontImg ? (
@@ -34,7 +35,7 @@ export default function T0({ content, frontRef, backRef }) {
       <div className="col-12 col-md-6">
         <h6 className="mb-3">Rear:</h6>
         <PreviewContainer
-          className="juzhong"
+          className="juzhong highlight pointer"
           ref={backRef}
           style={{
             backgroundImage: `url(${rearImg})`,
@@ -42,6 +43,7 @@ export default function T0({ content, frontRef, backRef }) {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
           }}
+          onClick={() => handleClickOpen(rearImg, 96 / 60, "", "rearImg")}
         >
           {show && <img src={bleed} alt="bleed" className="bleed" />}
           {/* {rearImg ? (

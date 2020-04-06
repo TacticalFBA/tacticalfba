@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {
   InsertProvider,
-  InsertConsumer
+  InsertConsumer,
 } from "../../../contexts/InsertContext";
 
 // import components
@@ -18,13 +18,13 @@ import ImageUploader from "./ImageUploader";
 import Spinner from "../../Spinner";
 import SaveAlerts from "./SaveAlerts";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     padding: "2rem",
-    marginTop: "2.5rem"
-  }
+    marginTop: "2.5rem",
+  },
 }));
 
 export default function EditTemplate({ location, history, match }) {
@@ -52,7 +52,7 @@ export default function EditTemplate({ location, history, match }) {
               inserts={inserts}
             >
               <InsertConsumer>
-                {value => {
+                {(value) => {
                   return (
                     <React.Fragment>
                       {/* editting start */}
@@ -159,12 +159,12 @@ export default function EditTemplate({ location, history, match }) {
                             value.saveTemp(user, [
                               {
                                 img: value.frontImage,
-                                item: "frontImg"
+                                item: "frontImg",
                               },
                               {
                                 img: value.rearImage,
-                                item: "rearImg"
-                              }
+                                item: "rearImg",
+                              },
                             ])
                           }
                         >

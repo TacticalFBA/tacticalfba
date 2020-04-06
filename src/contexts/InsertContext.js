@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { samples } from "../data";
 import { db, storage } from "../config/Firebase";
 import { EditorState, convertFromHTML, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import htmlToImage from "html-to-image";
+import getCroppedImg from "../components/Insert/previewTemplate/CropImg/cropImage";
+import CropModal from "../components/Insert/previewTemplate/CropModal";
 
 const InsertContext = React.createContext();
 
@@ -67,12 +69,12 @@ function InsertProvider(props) {
   // handle image change
   const onSelectImg = (e) => {
     const file = e.currentTarget.files[0];
-    const size = file.size / 1024;
-    if (size > 300) {
-      alert("300KB maximum file size.");
-      e.currentTarget.value = "";
-      return false;
-    }
+    // const size = file.size / 1024;
+    // if (size > 300) {
+    //   alert("300KB maximum file size.");
+    //   e.currentTarget.value = "";
+    //   return false;
+    // }
     const side = e.currentTarget.name;
     const reader = new FileReader();
     reader.addEventListener(
@@ -87,6 +89,40 @@ function InsertProvider(props) {
     );
     if (file) {
       reader.readAsDataURL(file);
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+  const [cropInfo, setCropInfo] = useState({
+    img: "",
+    aspect: 1,
+    cropShape: "",
+    item: "",
+  });
+  const handleClickOpen = (img, aspect, cropShape, item) => {
+    setCropInfo({
+      img: img,
+      aspect: aspect,
+      cropShape: cropShape,
+      item: item,
+    });
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const showCroppedImage = async (url, croppedAreaPixels, rotation, item) => {
+    try {
+      let croppedImage = await getCroppedImg(url, croppedAreaPixels, rotation);
+      console.log("done", { croppedImage });
+      let newContent = Object.assign({}, content);
+      newContent[item] = croppedImage;
+      setContent(newContent);
+      handleClose();
+      // setCroppedImage(croppedImage);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -358,6 +394,11 @@ function InsertProvider(props) {
         error: error,
         updateTemp: updateTemp,
         saveAsNew: saveAsNew,
+        showCroppedImage: showCroppedImage,
+        open: open,
+        handleClose: handleClose,
+        cropInfo: cropInfo,
+        handleClickOpen: handleClickOpen,
       }}
     >
       {props.children}

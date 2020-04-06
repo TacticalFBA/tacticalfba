@@ -4,7 +4,13 @@ import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
 import { Button, Box, Link } from "@material-ui/core";
 
-export default function T2({ content, onSelect, frontRef, backRef }) {
+export default function T2({
+  content,
+  onSelect,
+  frontRef,
+  backRef,
+  handleClickOpen,
+}) {
   let {
     themeColor,
     frontMsgBody,
@@ -31,7 +37,13 @@ export default function T2({ content, onSelect, frontRef, backRef }) {
             {show && <img src={bleed} alt="bleed" className="bleed" />}
             <LeftWrapper style={{ backgroundColor: themeColor }}>
               <LeftContainer>
-                <div className="frontImg" style={imgWrapper} />
+                <div
+                  className="frontImg highlight pointer"
+                  style={imgWrapper}
+                  onClick={() =>
+                    handleClickOpen(frontImg, 1, "round", "frontImg")
+                  }
+                />
                 <div
                   className="pointer highlight"
                   onClick={() => onSelect("frontMsgSec")}
@@ -56,13 +68,14 @@ export default function T2({ content, onSelect, frontRef, backRef }) {
             {show && <img src={bleed} alt="bleed" className="bleed" />}
             <RearWrapper>
               <div
-                className="left"
+                className="left highlight pointer"
                 style={{
                   backgroundImage: `url(${rearImg})`,
                   backgroundPosition: "center center",
                   backgroudRepeat: "no-repeat",
                   backgroundSize: "cover",
                 }}
+                onClick={() => handleClickOpen(rearImg, 1, "", "rearImg")}
               >
                 {/* <img src={rearImg} alt="rear" /> */}
               </div>
