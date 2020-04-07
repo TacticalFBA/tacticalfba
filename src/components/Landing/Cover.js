@@ -26,7 +26,7 @@ export default function Cover() {
                   variant="contained"
                   size="large"
                   color="primary"
-                  onClick={() => openModal(" new card")}
+                  onClick={() => openModal("insert")}
                 >
                   Get Started
                 </Button>

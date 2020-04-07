@@ -1,22 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { UserConsumer } from "../../contexts/UserContext";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Paper,
-  makeStyles,
-  Collapse,
-  IconButton,
-  Snackbar,
-  Divider,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
+import { Box, Typography, TextField, Button, Divider } from "@material-ui/core";
 import Spinner from "../Spinner";
-import { auth } from "../../config/Firebase";
 
 export default class LoginModal extends Component {
   state = {
@@ -37,13 +23,12 @@ export default class LoginModal extends Component {
     }
     this.setState({ err: null });
   };
-  handleClick = (sendEmail, type, closeModal) => {
+  handleClick = (sendEmail, type) => {
     if (this.state.err || this.state.email === "") {
       return;
     }
-    // closeModal();
     this.setState({ spin: true }, () => {
-      sendEmail(this.state.email, `/${type}`);
+      sendEmail(this.state.email, `${type}`);
       this.setState({ email: "" });
     });
   };

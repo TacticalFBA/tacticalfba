@@ -27,9 +27,9 @@ class UserProvider extends Component {
       }
       auth
         .signInWithEmailLink(email, window.location.href)
-        .then((result) => {
-          if (url === "new card") {
-            window.location = "/new-card";
+        .then(() => {
+          if (url === "insert") {
+            window.location = "/insert";
           }
           if (url === "account") {
             window.location = "/account";
@@ -126,7 +126,7 @@ class UserProvider extends Component {
       .sendSignInLinkToEmail(email, actionCodeSettings)
       .then(function () {
         // The link was successfully sent. Inform the user.
-        alert("We sent a link via email for you to sign in.");
+        alert("The sign-in link has been sent to your email address.");
         // Save the email locally so you don't need to ask the user for it again
         // if they open the link on the same device.
         window.localStorage.setItem("emailForSignIn", email);

@@ -11,15 +11,16 @@ const config = {
   storageBucket: "tacticalfba-4163a.appspot.com",
   messagingSenderId: "920695674414",
   appId: "1:920695674414:web:6b0dbc6c9938bdd414b1bf",
-  measurementId: "G-BN4MFW5GQJ"
+  measurementId: "G-BN4MFW5GQJ",
 };
 
 firebase.initializeApp(config);
 
 const auth = firebase.auth();
 var actionCodeSettings = {
-  url: "https://tacticalfba.netlify.com/finish-signup",
-  handleCodeInApp: true
+  // url: "https://tacticalfba.netlify.com/finish-signup",
+  url: "http://localhost:3001/finish-signup",
+  handleCodeInApp: true,
 };
 
 const db = firebase.firestore();
