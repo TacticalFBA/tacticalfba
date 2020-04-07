@@ -8,7 +8,7 @@ export default class LoginModal extends Component {
   state = {
     email: "",
     err: null,
-    spin: false,
+    // spin: false,
   };
   onBlur = (e) => {
     const emailReg = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
@@ -27,22 +27,22 @@ export default class LoginModal extends Component {
     if (this.state.err || this.state.email === "") {
       return;
     }
-    this.setState({ spin: true }, () => {
-      sendEmail(this.state.email, `${type}`);
-      this.setState({ email: "" });
-    });
+    // this.setState({ spin: true }, () => {
+    sendEmail(this.state.email, `${type}`);
+    this.setState({ email: "" });
+    // });
   };
 
   render() {
     return (
       <UserConsumer>
-        {({ type, modalOpen, closeModal, sendEmail, googleLogin }) => {
+        {({ type, modalOpen, closeModal, sendEmail, googleLogin, spin }) => {
           if (!modalOpen) {
             return null;
           } else {
             return (
               <ModalContainer>
-                <Spinner spin={this.state.spin} />
+                <Spinner spin={spin} />
                 <div className="model modal-content col-10 col-sm-8 col-md-6 col-lg-4">
                   <div className="modal-header">
                     <h6 className="modal-title" id="exampleModalCenterTitle">

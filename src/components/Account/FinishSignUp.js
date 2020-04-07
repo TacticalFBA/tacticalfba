@@ -6,10 +6,9 @@ import Box from "@material-ui/core/Box";
 import Spinner from "../Spinner";
 
 export default function FinishSignUp() {
-  const [spin, setSpin] = React.useState(false);
   return (
     <Box className="juzhong" style={{ height: "90vh" }}>
-      <Spinner spin={spin} />
+      <Spinner />
       <Backdrop open={true} style={{ color: "#fff", zIndex: 1 }}></Backdrop>
       <UserConsumer>
         {({ SignIn }) => (
@@ -17,10 +16,7 @@ export default function FinishSignUp() {
             variant="contained"
             color="primary"
             style={{ zIndex: 2 }}
-            onClick={() => {
-              setSpin(true);
-              SignIn();
-            }}
+            onClick={() => SignIn()}
           >
             Sign Me In
           </Button>

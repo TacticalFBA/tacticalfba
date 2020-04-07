@@ -38,7 +38,7 @@ class UserProvider extends Component {
           window.localStorage.removeItem("redirectTo");
         })
         .catch((error) => {
-          console.log(`sign in : ${error.code}`);
+          alert(`sign in : ${error.message}`);
         });
     }
   };
@@ -122,19 +122,23 @@ class UserProvider extends Component {
   };
 
   sendEmail = (email, redirect) => {
-    auth
-      .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(function () {
-        // The link was successfully sent. Inform the user.
-        alert("The sign-in link has been sent to your email address.");
-        // Save the email locally so you don't need to ask the user for it again
-        // if they open the link on the same device.
-        window.localStorage.setItem("emailForSignIn", email);
-        window.localStorage.setItem("redirectTo", redirect);
-      })
-      .catch(function (error) {
-        console.log(error.message);
-      });
+    const realSend = () => {
+      auth
+        .sendSignInLinkToEmail(email, actionCodeSettings)
+        .then(() => {
+          // The link was successfully sent. Inform the user.
+          alert("The sign-in link has been sent to your email address.");
+          this.setState({ spin: false });
+          // Save the email locally so you don't need to ask the user for it again
+          // if they open the link on the same device.
+          window.localStorage.setItem("emailForSignIn", email);
+          window.localStorage.setItem("redirectTo", redirect);
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+    };
+    this.setState({ spin: true }, realSend.bind(this));
   };
 
   googleLogin = () => {

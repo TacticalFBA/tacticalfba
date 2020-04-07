@@ -9,17 +9,18 @@ import CartList from "./CartList";
 import NewInsertBtn from "../Account/NewInsertBtn";
 import CartTotals from "./CartTotals";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     padding: "2rem",
-    marginTop: "2.5rem"
-  }
+    marginTop: "2.5rem",
+  },
 }));
 
 export default function Cart({ history }) {
   const classes = useStyles();
+
   return (
     <div className="container">
       <Stepper step={3} />
@@ -34,7 +35,7 @@ export default function Cart({ history }) {
             increment,
             decrement,
             removeItem,
-            clearCart
+            clearCart,
           }) => {
             return (
               <div>

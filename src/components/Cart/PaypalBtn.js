@@ -12,26 +12,20 @@ export default class PaypalBtn extends React.Component {
       cart,
       clearCart,
       cartTotal,
-      history
+      openSpinner,
+      closeSpinner,
     } = this.props;
-    const onSuccess = payment => {
-      // Congratulation, it came here means everything's fine!
+    const onSuccess = (payment) => {
+      openSpinner();
       console.log("The payment was succeeded!", payment);
-      // save order to db
-      // order info
-      // const now = new Date();
-      // const date = `${now.getFullYear()} - ${now.getMonth() +
-      //   1} - ${now.getDate()}`;
-      // const time = `${now.getHours()} : ${now.getUTCMinutes()} : ${now.getSeconds()}`;
-      //product info
-      const items = cart.map(item => {
+      const items = cart.map((item) => {
         return {
           pid: item.pid,
-          insert: inserts.filter(insert => insert.iid === item.iid)[0],
-          add: adds.filter(add => add.aid === item.aid)[0],
+          insert: inserts.filter((insert) => insert.iid === item.iid)[0],
+          add: adds.filter((add) => add.aid === item.aid)[0],
           count: item.count,
           price: item.price,
-          total: item.total
+          total: item.total,
         };
       });
 
@@ -41,35 +35,31 @@ export default class PaypalBtn extends React.Component {
         info: {
           date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
           // June 9th, 2007, 5:46:21 PM
-          total: cartTotal
-        }
+          total: cartTotal,
+        },
       };
 
-      const ref = db
-        .collection("users")
-        .doc(user)
-        .collection("order");
+      const ref = db.collection("users").doc(user).collection("order");
       ref
         .add(order)
         .then(() => {
           clearCart();
-          alert("Order Success! Redirecting to your history order page.");
-          history.push("/account");
+          closeSpinner();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err.message);
         });
 
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     };
 
-    const onCancel = data => {
+    const onCancel = (data) => {
       // User pressed "cancel" or close Paypal's popup!
       console.log("The payment was cancelled!", data);
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     };
 
-    const onError = err => {
+    const onError = (err) => {
       // The main Paypal's script cannot be loaded or somethings block the loading of that script!
       console.log("Error!", err);
       // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
@@ -83,7 +73,7 @@ export default class PaypalBtn extends React.Component {
 
     const client = {
       sandbox: process.env.REACT_APP_APP_ID,
-      production: "YOUR-PRODUCTION-APP-ID"
+      production: "YOUR-PRODUCTION-APP-ID",
     };
     // In order to get production's app-ID, you will have to send your app to Paypal for approval first
     // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):

@@ -4,6 +4,7 @@ import { validation } from "./AddValidation";
 import { CartConsumer } from "../../contexts/CartContext";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Cheatsheet from "./Cheatsheet";
 
 export default function AddressForm({ user, location, history }) {
   const useStyles = makeStyles((theme) => ({
@@ -82,6 +83,16 @@ export default function AddressForm({ user, location, history }) {
         setError(tempError);
       }
     }
+  };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -203,6 +214,15 @@ export default function AddressForm({ user, location, history }) {
               >
                 Save
               </Button>
+              <Button
+                style={{ marginLeft: "1rem", textDecoration: "underline" }}
+                color="primary"
+                size="small"
+                onClick={handleClickOpen}
+              >
+                Cheatsheet to send to factory
+              </Button>
+              <Cheatsheet open={open} handleClose={handleClose} />
             </div>
           )}
         </CartConsumer>
