@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 export default function UserInserts({ history, myInserts }) {
   const handleClick = (pid, iid, iName, frontPre, backPre) => {
@@ -8,7 +11,7 @@ export default function UserInserts({ history, myInserts }) {
       "comb",
       JSON.stringify({
         pid: pid,
-        iid: iid
+        iid: iid,
       })
     );
     history.push("/address");
@@ -18,7 +21,7 @@ export default function UserInserts({ history, myInserts }) {
     <div>
       <h6 className="text-dark text-center">Your saved inserts:</h6>
       <div className="mt-3 text-center">
-        {myInserts.map(insert => (
+        {myInserts.map((insert) => (
           <Box mx={1} display="inline">
             <Button
               variant="outlined"

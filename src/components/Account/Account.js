@@ -34,24 +34,24 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  }
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
-export default function Account({ history }) {
+export default function Account({ history, location }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -81,7 +81,12 @@ export default function Account({ history }) {
               <Orders orders={orders} history={history} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Inserts user={user} inserts={inserts} history={history} />
+              <Inserts
+                user={user}
+                inserts={inserts}
+                history={history}
+                location={location}
+              />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <Factories user={user} adds={adds} />

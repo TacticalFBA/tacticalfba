@@ -2,54 +2,44 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import { UserConsumer } from "../../contexts/UserContext";
-
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 // products data
 import { products } from "../../data";
 
 // import components
 import Stepper from "../Stepper";
 import UserInserts from "./UserInserts";
+import Inserts from "../Account/Inserts";
 import TemplateItem from "./TemplateItem";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     padding: "2rem",
-    marginTop: "2.5rem"
-  }
+    marginTop: "2.5rem",
+  },
 }));
 
-export default function TemplateList({ history, handlePid }) {
+export default function TemplateList({ history, handlePid, location }) {
   const classes = useStyles();
   // get all products that type is "Insert" as templates
-  const templates = products.filter(product => product.type === "Insert");
+  const templates = products.filter((product) => product.type === "Insert");
 
   return (
     <div className="container">
       <Stepper step={0} />
       {/* or choose from templates anyway */}
       <Paper className={classes.root}>
-        {/* <Title title={"Choose a template"} /> */}
-        {/* if user already has some inserts saved, list them for choose */}
-        <div>
-          <UserConsumer>
-            {({ inserts }) => {
-              return (
-                <div>
-                  {inserts.length > 0 && (
-                    <UserInserts history={history} myInserts={inserts} />
-                  )}
-                </div>
-              );
-            }}
-          </UserConsumer>
-        </div>
-
-        {/* Todo: allow to upload own insert file */}
         {/* <span> or upload your own artwork</span> */}
+        <Box mb={3} textAlign="center">
+          <Typography variant="h6">
+            Choose from our templates or Upload your own
+          </Typography>
+        </Box>
         <div className="row">
-          {templates.map(template => (
+          {templates.map((template) => (
             <TemplateItem
               key={template.pid}
               template={template}
@@ -57,6 +47,31 @@ export default function TemplateList({ history, handlePid }) {
             />
           ))}
         </div>
+      </Paper>
+      <Paper className={classes.root}>
+        {/* if user already has some inserts saved, list them for choose */}
+
+        <Box mb={3} textAlign="center">
+          <Typography variant="h6">Your Saved Inserts</Typography>
+        </Box>
+        <Box>
+          <UserConsumer>
+            {({ inserts }) => {
+              return (
+                <div>
+                  {inserts.length > 0 && (
+                    // <UserInserts history={history} myInserts={inserts} />
+                    <Inserts
+                      history={history}
+                      inserts={inserts}
+                      location={location}
+                    />
+                  )}
+                </div>
+              );
+            }}
+          </UserConsumer>
+        </Box>
       </Paper>
     </div>
   );

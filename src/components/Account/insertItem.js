@@ -6,22 +6,23 @@ import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import CardHeader from "@material-ui/core/CardHeader";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345
+    // maxWidth: 250,
   },
   media: {
-    height: 250
-  }
+    width: "50%",
+  },
 });
 
-export default function InsertCard({ user, insert, history }) {
+export default function InsertCard({ user, insert, history, location }) {
   const classes = useStyles();
   const chooseInsert = (pid, iid) => {
     const comb = {
       pid: pid,
-      iid: iid
+      iid: iid,
     };
     localStorage.setItem("comb", JSON.stringify(comb));
     history.push("/address");
@@ -29,38 +30,56 @@ export default function InsertCard({ user, insert, history }) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={insert.iName} />
-      <CardMedia
-        component="img"
-        alt="front"
-        image={insert.frontPre}
-        title="Contemplative Reptile"
+      {/* <CardHeader
+        title={insert.iName}
+        titleTypographyProps={{ variant: "h6" }}
       />
-      <CardMedia
-        component="img"
-        alt="rear"
-        image={insert.backPre}
-        title="Contemplative Reptile"
-      />
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => chooseInsert(insert.pid, insert.iid)}
-        >
-          Use
-        </Button>
-        <CartConsumer>
-          {({ handleDel }) => (
+      <CardActions> */}
+      <Box display="flex" flexDirection="row" p={2}>
+        <Box flexGrow={1}>{insert.iName}</Box>
+        <Box display="flex" flexDirection="row">
+          <Box mr={2}>
             <Button
               size="small"
-              onClick={() => handleDel(user, insert.iid, "insert", "iid")}
+              color="primary"
+              variant="contained"
+              onClick={() => chooseInsert(insert.pid, insert.iid)}
             >
-              Delete
+              Use
             </Button>
+          </Box>
+          {location.pathname === "/account" && (
+            <CartConsumer>
+              {({ handleDel }) => (
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => handleDel(user, insert.iid, "insert", "iid")}
+                >
+                  Delete
+                </Button>
+              )}
+            </CartConsumer>
           )}
-        </CartConsumer>
-      </CardActions>
+        </Box>
+      </Box>
+
+      <Box display="flex" flexDirection="row" justifyContent="center">
+        <CardMedia
+          className={classes.media}
+          component="img"
+          alt="front"
+          image={insert.frontPre}
+          title="Contemplative Reptile"
+        />
+        <CardMedia
+          className={classes.media}
+          component="img"
+          alt="rear"
+          image={insert.backPre}
+          title="Contemplative Reptile"
+        />
+      </Box>
     </Card>
   );
 }
