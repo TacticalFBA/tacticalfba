@@ -11,7 +11,7 @@ class UserProvider extends Component {
     adds: [],
     inserts: [],
     orders: [],
-    modalOpen: false
+    modalOpen: false,
   };
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class UserProvider extends Component {
       }
       auth
         .signInWithEmailLink(email, window.location.href)
-        .then(result => {
+        .then((result) => {
           if (url === "new card") {
             window.location = "/new-card";
           }
@@ -37,14 +37,14 @@ class UserProvider extends Component {
           window.localStorage.removeItem("emailForSignIn");
           window.localStorage.removeItem("redirectTo");
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(`sign in : ${error.code}`);
         });
     }
   };
 
   authListener = () => {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         const email = user.email;
         const tempUser = email;
@@ -63,13 +63,10 @@ class UserProvider extends Component {
     });
   };
 
-  syncInsert = user => {
-    const ref = db
-      .collection("users")
-      .doc(user)
-      .collection("insert");
-    ref.onSnapshot(snapshot => {
-      const inserts = snapshot.docs.map(doc => {
+  syncInsert = (user) => {
+    const ref = db.collection("users").doc(user).collection("insert");
+    ref.onSnapshot((snapshot) => {
+      const inserts = snapshot.docs.map((doc) => {
         // adding document id to the data
         let tempDoc = doc.data();
         return (tempDoc = { ...tempDoc, iid: doc.id });
@@ -79,14 +76,11 @@ class UserProvider extends Component {
     });
   };
 
-  syncAdd = user => {
+  syncAdd = (user) => {
     if (user != null) {
-      const ref = db
-        .collection("users")
-        .doc(user)
-        .collection("factory");
-      ref.onSnapshot(snapshot => {
-        const adds = snapshot.docs.map(doc => {
+      const ref = db.collection("users").doc(user).collection("factory");
+      ref.onSnapshot((snapshot) => {
+        const adds = snapshot.docs.map((doc) => {
           // adding document id to the data
           let tempDoc = doc.data();
           return (tempDoc = { ...tempDoc, aid: doc.id });
@@ -98,14 +92,14 @@ class UserProvider extends Component {
     return;
   };
 
-  syncOrder = user => {
+  syncOrder = (user) => {
     const ref = db
       .collection("users")
       .doc(user)
       .collection("order")
       .orderBy("timestamp", "desc");
-    ref.onSnapshot(snapshot => {
-      const orders = snapshot.docs.map(doc => {
+    ref.onSnapshot((snapshot) => {
+      const orders = snapshot.docs.map((doc) => {
         // adding document id to the data
         let tempDoc = doc.data();
         return (tempDoc = { ...tempDoc, oid: doc.id });
@@ -116,10 +110,10 @@ class UserProvider extends Component {
   };
 
   // account start //
-  openModal = type => {
+  openModal = (type) => {
     this.setState({
       modalOpen: true,
-      type: type
+      type: type,
     });
   };
 
@@ -130,15 +124,15 @@ class UserProvider extends Component {
   sendEmail = (email, redirect) => {
     auth
       .sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(function() {
+      .then(function () {
         // The link was successfully sent. Inform the user.
-        alert("Go to your email to get the link");
+        alert("We sent a link via email for you to sign in.");
         // Save the email locally so you don't need to ask the user for it again
         // if they open the link on the same device.
         window.localStorage.setItem("emailForSignIn", email);
         window.localStorage.setItem("redirectTo", redirect);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error.message);
       });
   };
@@ -146,7 +140,7 @@ class UserProvider extends Component {
   googleLogin = () => {
     auth
       .signInWithPopup(provider)
-      .then(result => {
+      .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // var token = result.credential.accessToken;
         // The signed-in user info.
@@ -154,7 +148,7 @@ class UserProvider extends Component {
         // ...
         this.closeModal();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // Handle Errors here.
         // var errorCode = error.code;
         var errorMessage = error.message;
@@ -178,11 +172,11 @@ class UserProvider extends Component {
           totalCart: {
             cartSubtotal: 0,
             cartTax: 0,
-            cartTotal: 0
-          }
+            cartTotal: 0,
+          },
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(error.message);
       });
   };
@@ -201,10 +195,10 @@ class UserProvider extends Component {
       .delete()
       .then(() => {
         const currentCart = JSON.parse(localStorage.getItem("cart"));
-        const newCart = currentCart.filter(item => item[idType] !== id);
+        const newCart = currentCart.filter((item) => item[idType] !== id);
         localStorage.setItem("cart", JSON.stringify(newCart));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.message);
       });
   };
@@ -222,7 +216,7 @@ class UserProvider extends Component {
           signOut: this.signOut,
           googleLogin: this.googleLogin,
           //other fns
-          handleDel: this.handleDel
+          handleDel: this.handleDel,
         }}
       >
         {this.props.children}

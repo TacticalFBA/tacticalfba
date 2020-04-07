@@ -11,14 +11,41 @@ import {
   Collapse,
   IconButton,
   Snackbar,
+  Divider,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
 import Spinner from "../Spinner";
+import { auth } from "../../config/Firebase";
 
 export default class LoginModal extends Component {
   state = {
     email: "",
+    err: null,
+    spin: false,
+  };
+  onBlur = (e) => {
+    const emailReg = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+    const emptyReg = /\S/;
+    if (!emptyReg.test(e.target.value)) {
+      this.setState({ err: "Enter an email" });
+      return;
+    }
+    if (!emailReg.test(e.target.value)) {
+      this.setState({ err: "Invalid email address" });
+      return;
+    }
+    this.setState({ err: null });
+  };
+  handleClick = (sendEmail, type, closeModal) => {
+    if (this.state.err || this.state.email === "") {
+      return;
+    }
+    // closeModal();
+    this.setState({ spin: true }, () => {
+      sendEmail(this.state.email, `/${type}`);
+      this.setState({ email: "" });
+    });
   };
 
   render() {
@@ -30,6 +57,7 @@ export default class LoginModal extends Component {
           } else {
             return (
               <ModalContainer>
+                <Spinner spin={this.state.spin} />
                 <div className="model modal-content col-10 col-sm-8 col-md-6 col-lg-4">
                   <div className="modal-header">
                     <h6 className="modal-title" id="exampleModalCenterTitle">
@@ -45,41 +73,51 @@ export default class LoginModal extends Component {
                     </button>
                   </div>
                   <div className="modal-body">
-                    <Button
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      fullWidth
-                      onClick={googleLogin}
-                    >
-                      Login with Google
-                    </Button>
+                    <Box mb={2}>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        fullWidth
+                        onClick={googleLogin}
+                      >
+                        Login with Google
+                      </Button>
+                    </Box>
 
-                    <Box>
+                    <Divider light />
+                    <Box color="text.secondary" mt={2} textAlign="center">
+                      <Typography>or login with email</Typography>
+                    </Box>
+
+                    <Box my={2}>
                       <TextField
                         label="Email"
                         id="email"
                         required
+                        variant="outlined"
+                        size="small"
                         value={this.state.email}
                         onChange={(e) =>
                           this.setState({ email: e.target.value })
                         }
                         fullWidth
-                        // onBlur={onBlur}
-                        // error={Boolean(Err)}
-                        // helperText={Err}
+                        onBlur={this.onBlur}
+                        error={Boolean(this.state.err)}
+                        helperText={this.state.err}
                       />
                     </Box>
+
                     <Button
                       variant="contained"
                       size="small"
-                      color="primary"
                       fullWidth
-                      onClick={() => sendEmail(this.state.email, type)}
+                      onClick={() =>
+                        this.handleClick(sendEmail, type, closeModal)
+                      }
                     >
                       Send link
                     </Button>
-                    <p className="text-center text-muted">or</p>
                   </div>
                 </div>
               </ModalContainer>

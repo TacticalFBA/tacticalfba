@@ -6,7 +6,6 @@ import {
   Button,
   Paper,
   makeStyles,
-  Collapse,
   IconButton,
   Snackbar,
 } from "@material-ui/core";
