@@ -43,13 +43,15 @@ export default function EditTemplate({
     ? location.pathname.split("/")[3]
     : null;
 
-  const handleLoad = () => {
-    !user && openModal("insert");
-  };
+  // const handleLoad = () => {
+  //   if (!user) {
+  //     openModal("insert");
+  //   }
+  // };
 
-  React.useEffect(() => {
-    handleLoad();
-  }, [1]);
+  // React.useEffect(() => {
+  //   handleLoad();
+  // }, [1]);
 
   return (
     <div className="container">
@@ -182,48 +184,7 @@ export default function EditTemplate({
                         >
                           Save
                         </Button>
-                        // <button
-                        //   className="btn btn-sm btn-dark"
-                        //   type="button"
-                        //   onClick={() =>
-                        //     value.saveTemp(user, [
-                        //       {
-                        //         img: value.frontImage,
-                        //         item: "frontImg"
-                        //       },
-                        //       {
-                        //         img: value.rearImage,
-                        //         item: "rearImg"
-                        //       }
-                        //     ])
-                        //   }
-                        // >
-                        //   Save
-                        // </button>
                       )}
-                      {iid && (
-                        <React.Fragment>
-                          <button
-                            className="btn btn-sm btn-orange mr-3"
-                            type="button"
-                            onClick={value.updateTemp}
-                          >
-                            Update
-                          </button>
-                          <button
-                            className="btn btn-sm btn-dark"
-                            type="button"
-                            onClick={value.saveAsNew}
-                          >
-                            Save as New
-                          </button>
-                        </React.Fragment>
-                      )}
-
-                      {/* Reset Button */}
-                      {/* <button className="btn btn-sm btn-secondary ml-3">Reset</button> */}
-
-                      {/* spin when uploading images and save insert to the db */}
                       <Spinner spin={value.spin} />
                     </React.Fragment>
                   );

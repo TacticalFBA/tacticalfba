@@ -83,7 +83,8 @@ btn:hover {
 }
 
 .highlight:hover {
-  border: 0.125rem dashed var(--mainDark);
+  border: 2px solid #55fffe;
+  /* transform: translate(1px, 1px); */
 }
 
 .btn:focus,
