@@ -106,7 +106,6 @@ export default function T2({
           Hold to see guide lines
         </Button>
         <Link
-          href="javascript:;"
           onClick={(e) => e.preventDefault()}
           style={{ marginLeft: "1rem" }}
         >

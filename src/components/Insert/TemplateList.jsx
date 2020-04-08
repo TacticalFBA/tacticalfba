@@ -1,7 +1,6 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import { UserConsumer } from "../../contexts/UserContext";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 // products data
@@ -9,7 +8,6 @@ import { products } from "../../data";
 
 // import components
 import Stepper from "../Stepper";
-import UserInserts from "./UserInserts";
 import Inserts from "../Account/Inserts";
 import TemplateItem from "./TemplateItem";
 
@@ -22,10 +20,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TemplateList({ history, handlePid, location }) {
+export default function TemplateList({
+  history,
+  handlePid,
+  location,
+  inserts,
+  user,
+  openModal,
+}) {
   const classes = useStyles();
   // get all products that type is "Insert" as templates
   const templates = products.filter((product) => product.type === "Insert");
+  const handleLoad = () => {
+    !user && openModal("insert");
+  };
+  React.useEffect(() => {
+    handleLoad();
+  }, [1]);
 
   return (
     <div className="container">
@@ -55,22 +66,16 @@ export default function TemplateList({ history, handlePid, location }) {
           <Typography variant="h6">Your Saved Inserts</Typography>
         </Box>
         <Box>
-          <UserConsumer>
-            {({ inserts }) => {
-              return (
-                <div>
-                  {inserts.length > 0 && (
-                    // <UserInserts history={history} myInserts={inserts} />
-                    <Inserts
-                      history={history}
-                      inserts={inserts}
-                      location={location}
-                    />
-                  )}
-                </div>
-              );
-            }}
-          </UserConsumer>
+          <React.Fragment>
+            {inserts.length > 0 && (
+              // <UserInserts history={history} myInserts={inserts} />
+              <Inserts
+                history={history}
+                inserts={inserts}
+                location={location}
+              />
+            )}
+          </React.Fragment>
         </Box>
       </Paper>
     </div>

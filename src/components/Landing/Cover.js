@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { UserConsumer } from "../../contexts/UserContext";
 import Button from "@material-ui/core/Button";
 
 export default function Cover() {
@@ -18,30 +17,11 @@ export default function Cover() {
             your factory in China for immediate packaging.
           </p>
         </div>
-        <UserConsumer>
-          {({ user, openModal }) => {
-            if (user === null) {
-              return (
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  onClick={() => openModal("insert")}
-                >
-                  Get Started
-                </Button>
-              );
-            } else {
-              return (
-                <Link to="/insert" style={{ textDecoration: "none" }}>
-                  <Button variant="contained" size="large" color="primary">
-                    Get Started
-                  </Button>
-                </Link>
-              );
-            }
-          }}
-        </UserConsumer>
+        <Link to="/insert" style={{ textDecoration: "none" }}>
+          <Button variant="contained" size="large" color="primary">
+            Get Started
+          </Button>
+        </Link>
       </div>
     </CoverWrapper>
   );

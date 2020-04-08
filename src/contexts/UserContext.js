@@ -171,7 +171,8 @@ class UserProvider extends Component {
       .then(() => {
         this.setState({
           adds: [],
-          insert: [],
+          inserts: [],
+          orders: [],
           cart: [],
           totalCart: {
             cartSubtotal: 0,

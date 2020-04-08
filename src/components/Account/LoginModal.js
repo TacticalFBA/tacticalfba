@@ -48,14 +48,16 @@ export default class LoginModal extends Component {
                     <h6 className="modal-title" id="exampleModalCenterTitle">
                       Welcome to TacticalFBA
                     </h6>
-                    <button
-                      type="button"
-                      className="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span onClick={() => closeModal()}>&times;</span>
-                    </button>
+                    {window.location.pathname === "/" && (
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span onClick={() => closeModal()}>&times;</span>
+                      </button>
+                    )}
                   </div>
                   <div className="modal-body">
                     <Box mb={2}>

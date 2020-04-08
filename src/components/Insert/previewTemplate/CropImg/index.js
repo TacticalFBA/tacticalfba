@@ -2,11 +2,9 @@ import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
-import getCroppedImg from "./cropImage";
 import { InsertConsumer } from "../../../../contexts/InsertContext";
 
 // const url =

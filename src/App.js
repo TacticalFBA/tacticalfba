@@ -55,26 +55,51 @@ const App = (props) => {
           {/* <NavBar /> */}
         </header>
         <main className="pTop">
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/finish-signup" component={FinishSignUp} />
-            <Route path="/about" component={About} />
-            <Route path="/prices" component={Prices} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/cart" component={Cart} />
-            <Route exact path="/account" component={Account} />
-            <Route path="/insert" component={TemplateList} />
-            <Route path="/photography" component={ComingSoon} />
-            <Route path="/packaging-box" component={ComingSoon} />
-            <Route path="/sticker-label" component={ComingSoon} />
-            <Route path="/bar-code" component={ComingSoon} />
-            <Route path="/edit-template/:pid" component={EditTemplate} />
-            <Route path="/address" component={Address} />
-            <Route exact path="/blog" component={BlogList} />
-            <Route path="/post/:id" component={Post} />
-            <Route path="/admin" component={Admin} />
-            <Route component={Default}></Route>
-          </Switch>
+          <UserConsumer>
+            {({ user, inserts, openModal }) => (
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/finish-signup" component={FinishSignUp} />
+                <Route path="/about" component={About} />
+                <Route path="/prices" component={Prices} />
+                <Route path="/contact" component={Contact} />
+                <Route path="/cart" component={Cart} />
+                <Route exact path="/account" component={Account} />
+                <Route
+                  path="/insert"
+                  render={(props) => (
+                    <TemplateList
+                      {...props}
+                      user={user}
+                      inserts={inserts}
+                      openModal={openModal}
+                    />
+                  )}
+                />
+
+                <Route
+                  path="/edit-template/:pid"
+                  render={(props) => (
+                    <EditTemplate
+                      {...props}
+                      user={user}
+                      inserts={inserts}
+                      openModal={openModal}
+                    />
+                  )}
+                />
+                <Route path="/photography" component={ComingSoon} />
+                <Route path="/packaging-box" component={ComingSoon} />
+                <Route path="/sticker-label" component={ComingSoon} />
+                <Route path="/bar-code" component={ComingSoon} />
+                <Route path="/address" component={Address} />
+                <Route exact path="/blog" component={BlogList} />
+                <Route path="/post/:id" component={Post} />
+                <Route path="/admin" component={Admin} />
+                <Route component={Default}></Route>
+              </Switch>
+            )}
+          </UserConsumer>
           <LoginModal />
         </main>
         <ScrollTop {...props}>

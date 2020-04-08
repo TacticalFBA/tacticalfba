@@ -1,7 +1,6 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from "../logo.svg";
 import AccountNav from "./Account/AccountNav";
 import Button from "@material-ui/core/Button";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -12,13 +11,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    float: "left"
+    float: "left",
   },
   paper: {
-    marginRight: theme.spacing(2)
-  }
+    marginRight: theme.spacing(2),
+  },
 }));
 
 export default function MainNav({ history }) {
@@ -27,10 +26,10 @@ export default function MainNav({ history }) {
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -95,7 +94,7 @@ export default function MainNav({ history }) {
                     {...TransitionProps}
                     style={{
                       transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom"
+                        placement === "bottom" ? "center top" : "center bottom",
                     }}
                   >
                     <Paper>
@@ -177,9 +176,9 @@ const style = {
     display: "inline-block",
     color: "var(--mainDark)",
     fontSize: "1.2rem",
-    marginLeft: "1rem"
+    marginLeft: "1rem",
   },
   li: {
-    display: "inline-block"
-  }
+    display: "inline-block",
+  },
 };

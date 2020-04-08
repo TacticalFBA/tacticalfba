@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CropModal from "./CropModal";
 import { InsertConsumer } from "../../../contexts/InsertContext";
 import T0 from "./T0";
@@ -6,25 +6,6 @@ import T1 from "./T1";
 import T2 from "./T2";
 
 export default function Preview({ pid, content, onSelect, frontRef, backRef }) {
-  // const [open, setOpen] = useState(false);
-  // const [cropInfo, setCropInfo] = useState({
-  //   img: "",
-  //   aspect: 1,
-  //   cropShape: "",
-  //   item: "",
-  // });
-  // const handleClickOpen = (img, aspect, cropShape, item) => {
-  //   setCropInfo({
-  //     img: img,
-  //     aspect: aspect,
-  //     cropShape: cropShape,
-  //     item: item,
-  //   });
-  //   setOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   const renderTemplates = (handleClickOpen) => {
     switch (pid) {
       case 0:

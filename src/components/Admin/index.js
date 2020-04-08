@@ -15,12 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default function Admin() {
   const classes = useStyles();
   const [post, setPost] = useState({
     title: "",
     body: "",
-    auther: "",
     cover: "",
   });
   const handleTextChnage = (e) => {
@@ -50,10 +49,10 @@ export default () => {
   };
   const handleSubmit = () => {
     // add date
-    const tempPost = {
-      ...post,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    };
+    let tempPost = Object.assign({}, post);
+    tempPost.body = post.body.replace(/\n/g, "<br>");
+    tempPost.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
     // push to db
     const ref = db.collection("blog posts");
     ref
@@ -78,19 +77,6 @@ export default () => {
             size="small"
             name="title"
             value={post.title}
-            onChange={handleTextChnage}
-          ></TextField>
-        </Box>
-        <Box my={2}>
-          <TextField
-            requied
-            fullWidth
-            placeholder="Auther"
-            type="text"
-            variant="outlined"
-            size="small"
-            name="auther"
-            value={post.auther}
             onChange={handleTextChnage}
           ></TextField>
         </Box>
@@ -128,4 +114,4 @@ export default () => {
       </form>
     </Container>
   );
-};
+}

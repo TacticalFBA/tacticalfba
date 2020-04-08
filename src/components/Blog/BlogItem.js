@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Parser from "html-react-parser";
+import dateFormat from "dateformat";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard({ post, history }) {
-  const { date, title, body, cover } = post;
+  const { timestamp, title, body, cover } = post;
   const classes = useStyles();
 
   return (
@@ -30,14 +31,16 @@ export default function RecipeReviewCard({ post, history }) {
     >
       <CardHeader
         title={title}
-        subheader={date}
+        // dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+        // Saturday, June 9th, 2007, 5:46:21 PM
+        subheader={dateFormat(timestamp.toDate(), "mmmm dS, yyyy")}
         titleTypographyProps={{ variant: "h6" }}
         subheaderTypographyProps={{ variant: "p" }}
       />
       <CardMedia className={classes.media} image={cover} title="blog cover" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {Parser(body.substring(0, 120) + "......")}
+          {Parser(body.substring(0, 100) + "......")}
         </Typography>
       </CardContent>
     </Card>

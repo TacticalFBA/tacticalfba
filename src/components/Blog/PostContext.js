@@ -14,12 +14,14 @@ class PostProvider extends Component {
 
   syncPosts = () => {
     const ref = db.collection("blog posts");
-    ref.onSnapshot((snapshot) => {
+    ref.orderBy("timestamp", "desc").onSnapshot((snapshot) => {
       const posts = snapshot.docs.map((doc) => {
         // adding document id to the data
         let tempDoc = doc.data();
-        tempDoc.date = tempDoc.timestamp.toDate().toString();
-        return (tempDoc = { ...tempDoc, bid: doc.id });
+        return (tempDoc = {
+          ...tempDoc,
+          bid: doc.id,
+        });
       });
       this.setState({ posts });
     });

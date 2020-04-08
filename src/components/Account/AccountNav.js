@@ -5,21 +5,6 @@ import CartBtn from "./CartBtn";
 import Button from "@material-ui/core/Button";
 
 export default function AccountNav() {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleChange = event => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <UserConsumer>
       {({ user, openModal, signOut }) => {

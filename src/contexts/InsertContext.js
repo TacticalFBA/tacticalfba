@@ -1,11 +1,10 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { samples } from "../data";
 import { db, storage } from "../config/Firebase";
 import { EditorState, convertFromHTML, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import htmlToImage from "html-to-image";
 import getCroppedImg from "../components/Insert/previewTemplate/CropImg/cropImage";
-import CropModal from "../components/Insert/previewTemplate/CropModal";
 import Compress from "compress.js";
 
 const InsertContext = React.createContext();

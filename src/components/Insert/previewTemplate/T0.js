@@ -69,7 +69,6 @@ export default function T0({ content, frontRef, backRef, handleClickOpen }) {
           Hold to see guide lines
         </Button>
         <Link
-          href="javascript:;"
           onClick={(e) => e.preventDefault()}
           style={{ marginLeft: "1rem" }}
         >

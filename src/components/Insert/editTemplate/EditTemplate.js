@@ -27,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditTemplate({ location, history, match }) {
+export default function EditTemplate({
+  location,
+  history,
+  match,
+  inserts,
+  user,
+  openModal,
+}) {
   const classes = useStyles();
   // get template id
   const pid = parseInt(match.params.pid);
@@ -35,6 +42,14 @@ export default function EditTemplate({ location, history, match }) {
   const iid = location.pathname.split("/")[3]
     ? location.pathname.split("/")[3]
     : null;
+
+  const handleLoad = () => {
+    !user && openModal("insert");
+  };
+
+  React.useEffect(() => {
+    handleLoad();
+  }, [1]);
 
   return (
     <div className="container">

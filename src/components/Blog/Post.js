@@ -1,5 +1,4 @@
 import React from "react";
-import Parser from "html-react-parser";
 import Container from "@material-ui/core/Container";
 import { db } from "../../config/Firebase";
 import {
@@ -12,6 +11,8 @@ import {
   RedditShareButton,
   TwitterShareButton,
 } from "react-share";
+import parser from "html-react-parser";
+import dateFormat from "dateformat";
 
 export default function Post({ match }) {
   const bid = match.params.id;
@@ -32,7 +33,7 @@ export default function Post({ match }) {
       .catch((error) => console.log(error.message));
   });
 
-  const { title, timestamp, auther, body } = post;
+  const { title, timestamp, body } = post;
 
   return (
     <div className="my-5">
@@ -41,9 +42,9 @@ export default function Post({ match }) {
           <React.Fragment>
             <h4 className="text-uppercase mb-2">{title}</h4>
             <p className="text-muted">
-              <span>Published on: {timestamp.toDate().toString()}</span>
-              <span className="px-2">|</span>
-              <span>by {auther}</span>
+              <span>
+                Published on: {dateFormat(timestamp.toDate(), "mmmm dS, yyyy")}
+              </span>
             </p>
             <div className="mt-2 mb-5">
               <span>Share: </span>
@@ -60,7 +61,7 @@ export default function Post({ match }) {
                 <TwitterIcon size={28} round={true} />
               </TwitterShareButton>
             </div>
-            <p>{Parser(body)}</p>
+            <p>{parser(body)}</p>
           </React.Fragment>
         )}
       </Container>
