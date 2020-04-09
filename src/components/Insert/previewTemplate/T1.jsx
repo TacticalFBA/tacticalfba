@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
-import { Button, Box, Link } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
+import WhyGuideLineBtn from "./WhyGuideLineBtn.js/index.js";
 
 export default function T1({
   content,
@@ -105,12 +106,7 @@ export default function T1({
         >
           Hold to see guide lines
         </Button>
-        <Link
-          onClick={(e) => e.preventDefault()}
-          style={{ marginLeft: "1rem" }}
-        >
-          What are the guide lines for?
-        </Link>
+        <WhyGuideLineBtn />
       </Box>
     </div>
   );

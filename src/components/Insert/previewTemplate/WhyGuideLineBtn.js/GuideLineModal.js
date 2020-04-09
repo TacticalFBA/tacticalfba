@@ -16,7 +16,7 @@ export default ({ open, CloseOpenGuideLineModal }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"What are guide lines for?"}
+          {"What are the guide lines for?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -27,9 +27,9 @@ export default ({ open, CloseOpenGuideLineModal }) => {
                   href="https://en.wikipedia.org/wiki/Bleed_(printing)"
                   target="_blank"
                 >
-                  bleed line
+                  bleed
                 </a>{" "}
-                showing where the card will be cut.
+                line showing where the card will be cut.
               </li>
               <li>
                 The inner solid line represents the safety line denoting where
@@ -44,7 +44,7 @@ export default ({ open, CloseOpenGuideLineModal }) => {
             color="primary"
             onClick={CloseOpenGuideLineModal}
           >
-            Dismiss
+            Close
           </Button>
         </DialogActions>
       </Dialog>

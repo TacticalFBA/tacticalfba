@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Parser from "html-react-parser";
 import { PreviewContainer } from "../../Styled/Containers";
-import { Button, Box, Link } from "@material-ui/core";
-import GuideLineModal from "./GuideLineModal";
+import { Button, Box } from "@material-ui/core";
+import WhyGuideLineBtn from "./WhyGuideLineBtn.js/index.js";
 
 export default function T2({
   content,
@@ -28,13 +28,7 @@ export default function T2({
   };
   const bleed = `${process.env.PUBLIC_URL}/img/bleed.png`;
   const [show, setShow] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const OpenGuideLineModal = () => {
-    setOpen(true);
-  };
-  const CloseOpenGuideLineModal = () => {
-    setOpen(false);
-  };
+
   return (
     <React.Fragment>
       <div className="row">
@@ -114,18 +108,7 @@ export default function T2({
         >
           Hold to see guide lines
         </Button>
-        <Button
-          size="small"
-          color="primary"
-          style={{ marginLeft: "1rem", textDecoration: "underline" }}
-          onClick={OpenGuideLineModal}
-        >
-          What are the guide lines for?
-        </Button>
-        <GuideLineModal
-          open={open}
-          CloseOpenGuideLineModal={CloseOpenGuideLineModal}
-        />
+        <WhyGuideLineBtn />
       </Box>
     </React.Fragment>
   );
