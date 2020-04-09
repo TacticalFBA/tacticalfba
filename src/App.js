@@ -11,26 +11,21 @@ import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 // import components
-// import NavBar from "./components/Nav/NavBar";
 import ScrollTop from "./components/Nav/ScrollTop";
 import Default from "./components/Default";
 import Spinner from "./components/Spinner";
-import MainNav from "./components/MainNav";
-import About from "./components/About";
-import Prices from "./components/Prices";
+import MainNav from "./components/Nav/MainNav";
 import Contact from "./components/Contact/Contact";
 import Landing from "./components/Landing/Landing.js";
-import TemplateList from "./components/Insert/TemplateList";
 import LoginModal from "./components/Account/LoginModal";
 import Account from "./components/Account/Account";
 import Cart from "./components/Cart/Cart";
-import EditTemplate from "./components/Insert/editTemplate/EditTemplate";
-import Address from "./components/Address/Address";
 import FinishSignUp from "./components/Account/FinishSignUp";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
 import Admin from "./components/Admin";
+import Insert from "./components/Insert";
 
 // setting theme color
 const theme = createMuiTheme({
@@ -52,54 +47,24 @@ const App = (props) => {
       <div className="App">
         <header className="App-header" id="back-to-top-anchor">
           <MainNav />
-          {/* <NavBar /> */}
         </header>
         <main className="pTop">
-          <UserConsumer>
-            {({ user, inserts, openModal }) => (
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/finish-signup" component={FinishSignUp} />
-                <Route path="/about" component={About} />
-                <Route path="/prices" component={Prices} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/cart" component={Cart} />
-                <Route exact path="/account" component={Account} />
-                <Route
-                  path="/insert"
-                  render={(props) => (
-                    <TemplateList
-                      {...props}
-                      user={user}
-                      inserts={inserts}
-                      openModal={openModal}
-                    />
-                  )}
-                />
-
-                <Route
-                  path="/edit-template/:pid"
-                  render={(props) => (
-                    <EditTemplate
-                      {...props}
-                      user={user}
-                      inserts={inserts}
-                      openModal={openModal}
-                    />
-                  )}
-                />
-                <Route path="/photography" component={ComingSoon} />
-                <Route path="/packaging-box" component={ComingSoon} />
-                <Route path="/sticker-label" component={ComingSoon} />
-                <Route path="/bar-code" component={ComingSoon} />
-                <Route path="/address" component={Address} />
-                <Route exact path="/blog" component={BlogList} />
-                <Route path="/post/:id" component={Post} />
-                <Route path="/admin" component={Admin} />
-                <Route component={Default}></Route>
-              </Switch>
-            )}
-          </UserConsumer>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/finish-signup" component={FinishSignUp} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/cart" component={Cart} />
+            <Route exact path="/account" component={Account} />
+            <Route path="/insert" component={Insert} />
+            <Route path="/photography" component={ComingSoon} />
+            <Route path="/packaging-box" component={ComingSoon} />
+            <Route path="/sticker-label" component={ComingSoon} />
+            <Route path="/bar-code" component={ComingSoon} />
+            <Route exact path="/blog" component={BlogList} />
+            <Route path="/post/:id" component={Post} />
+            <Route path="/admin" component={Admin} />
+            <Route component={Default}></Route>
+          </Switch>
           <LoginModal />
         </main>
         <ScrollTop {...props}>

@@ -13,23 +13,7 @@ export default function SaveAlert({ show, error }) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <Collapse in={open}>
-        <Alert
-          severity="error"
-          // action={
-          //   <IconButton
-          //     aria-label="close"
-          //     color="inherit"
-          //     size="small"
-          //     onClick={() => {
-          //       setOpen(false);
-          //     }}
-          //   >
-          //     <CloseIcon fontSize="inherit" />
-          //   </IconButton>
-          //}
-        >
-          {error}
-        </Alert>
+        <Alert severity="error">{error}</Alert>
       </Collapse>
     </div>
   );

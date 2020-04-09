@@ -9,7 +9,6 @@ import {
 } from "../../../contexts/InsertContext";
 
 // import components
-import Stepper from "../../Stepper";
 import Preview from "../previewTemplate/Preview";
 import InsertName from "./InsertName";
 import ThemeColor from "./ThemeColor";
@@ -27,38 +26,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditTemplate({
-  location,
-  history,
-  match,
-  inserts,
-  user,
-  openModal,
-}) {
+export default function EditTemplate({ location, history, stepForward }) {
   const classes = useStyles();
   // get template id
-  const pid = parseInt(match.params.pid);
+  const pid = parseInt(localStorage.getItem("pid"));
 
   const iid = location.pathname.split("/")[3]
     ? location.pathname.split("/")[3]
     : null;
 
-  // const handleLoad = () => {
-  //   if (!user) {
-  //     openModal("insert");
-  //   }
-  // };
-
-  // React.useEffect(() => {
-  //   handleLoad();
-  // }, [1]);
-
   return (
     <div className="container">
-      <Stepper step={1} />
       <Paper className={classes.root}>
-        {/* page title */}
-        {/* <Title title={pid === 0 ? "Upload Your Own Artwork" : "Edit template"} /> */}
         <UserConsumer>
           {({ user, inserts }) => (
             <InsertProvider
@@ -67,6 +46,7 @@ export default function EditTemplate({
               iid={iid}
               history={history}
               inserts={inserts}
+              stepForward={stepForward}
             >
               <InsertConsumer>
                 {(value) => {
@@ -107,7 +87,7 @@ export default function EditTemplate({
                         <div className="row">
                           <div className="col-3">
                             <h6>Set Images: </h6>
-                            <p className="text-muted">1. File format: JPG.</p>
+                            <p className="text-muted">File format: JPG.</p>
                           </div>
                           <div className="col-9">
                             <span>Front image: </span>

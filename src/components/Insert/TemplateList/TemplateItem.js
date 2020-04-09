@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export default class Template extends Component {
   render() {
+    const { stepForward } = this.props;
     const { pid, type, name, img } = this.props.template;
     return (
       <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
         <div className="card">
           <div className="img-container p-3">
-            <Link to={`/edit-template/${pid}`}>
-              <img src={img} alt="template" className="card-img-top" />
-            </Link>
+            <img
+              src={img}
+              alt="template"
+              className="card-img-top"
+              onClick={() => {
+                localStorage.setItem("pid", pid);
+                stepForward();
+              }}
+            />
           </div>
 
           {/* card footer */}

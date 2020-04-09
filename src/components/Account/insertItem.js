@@ -15,37 +15,31 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InsertCard({ user, insert, history, location }) {
+export default function InsertCard({ user, insert, location, toStepThree }) {
   const classes = useStyles();
+
   const chooseInsert = (pid, iid) => {
-    const comb = {
-      pid: pid,
-      iid: iid,
-    };
-    localStorage.setItem("comb", JSON.stringify(comb));
-    history.push("/address");
+    localStorage.setItem("pid", pid);
+    localStorage.setItem("iid", iid);
+    toStepThree();
   };
 
   return (
     <Card className={classes.root}>
-      {/* <CardHeader
-        title={insert.iName}
-        titleTypographyProps={{ variant: "h6" }}
-      />
-      <CardActions> */}
       <Box display="flex" flexDirection="row" p={2}>
         <Box flexGrow={1}>{insert.iName}</Box>
         <Box display="flex" flexDirection="row">
-          <Box mr={2}>
-            <Button
-              size="small"
-              color="primary"
-              variant="contained"
-              onClick={() => chooseInsert(insert.pid, insert.iid)}
-            >
-              Use
-            </Button>
-          </Box>
+          {window.location.pathname === "/insert" && (
+            <Box mr={2}>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => chooseInsert(insert.pid, insert.iid)}
+              >
+                Use
+              </Button>
+            </Box>
+          )}
           {location.pathname === "/account" && (
             <CartConsumer>
               {({ handleDel }) => (

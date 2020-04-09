@@ -7,9 +7,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import { InsertConsumer } from "../../../../contexts/InsertContext";
 
-// const url =
-//   "https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000";
-
 const Demo = ({ classes, url, aspect, cropShape, item }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
@@ -19,10 +16,6 @@ const Demo = ({ classes, url, aspect, cropShape, item }) => {
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
-
-  // const onClose = useCallback(() => {
-  //   setCroppedImage(null);
-  // }, []);
 
   return (
     <div className={classes.root}>
@@ -56,21 +49,6 @@ const Demo = ({ classes, url, aspect, cropShape, item }) => {
             onChange={(e, zoom) => setZoom(zoom)}
           />
         </div>
-        {/* rotation */}
-        {/* <div className={classes.sliderContainer}>
-          <Typography variant="overline" className={classes.sliderLabel}>
-            Rotation
-          </Typography>
-          <Slider
-            value={rotation}
-            min={0}
-            max={360}
-            step={1}
-            aria-labelledby="Rotation"
-            className={classes.slider}
-            onChange={(e, rotation) => setRotation(rotation)}
-          />
-        </div> */}
         <InsertConsumer>
           {({ showCroppedImage }) => (
             <Button

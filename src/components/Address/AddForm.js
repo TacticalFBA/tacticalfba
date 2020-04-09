@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContactForm({ user, location, history }) {
+export default function ContactForm({ user, location, history, stepForward }) {
   const classes = useStyles();
   const [data, setData] = useState({
     factory: "",
@@ -85,11 +85,11 @@ export default function ContactForm({ user, location, history }) {
         .add(data)
         .then((docRef) => {
           const aid = docRef.id;
-          const comb = JSON.parse(localStorage.getItem("comb"));
-          comb.aid = aid;
-          localStorage.setItem("comb", JSON.stringify(comb));
-          if (location.pathname === "/address") {
-            cb(history);
+          localStorage.setItem("aid", aid);
+          if (window.location.pathname === "/insert") {
+            cb(stepForward);
+          } else {
+            setSpin(false);
           }
         })
         .catch((error) => {
@@ -251,7 +251,7 @@ export default function ContactForm({ user, location, history }) {
                   fullWidth
                   onClick={() => saveAdd(addToCart)}
                 >
-                  Next
+                  Save
                 </Button>
               )}
             </CartConsumer>

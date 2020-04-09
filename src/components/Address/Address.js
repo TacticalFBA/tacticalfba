@@ -3,7 +3,6 @@ import { UserConsumer } from "../../contexts/UserContext";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Stepper from "../Stepper";
 // import AddressForm from "./AddressForm";
 import AddressTable from "./AddressTable";
 import AddForm from "./AddForm";
@@ -17,28 +16,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Address({ history, location }) {
+export default function Address({ history, location, stepForward }) {
   const classes = useStyles();
   return (
     <UserConsumer>
       {({ user, adds, handleDel }) => {
         return (
           <div className="container">
-            <Stepper step={2} />
-
             <Paper className={classes.root}>
-              <AddForm user={user} location={location} history={history} />
-            </Paper>
-
-            <Paper className={classes.root}>
-              <AddressTable
+              <AddForm
                 user={user}
-                adds={adds}
+                location={location}
                 history={history}
-                handleDel={handleDel}
-                type={"toCart"}
+                stepForward={stepForward}
               />
             </Paper>
+            {adds.length > 0 && (
+              <Paper className={classes.root}>
+                <AddressTable
+                  user={user}
+                  adds={adds}
+                  history={history}
+                  handleDel={handleDel}
+                  type={"toCart"}
+                  stepForward={stepForward}
+                />
+              </Paper>
+            )}
           </div>
         );
       }}

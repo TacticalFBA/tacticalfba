@@ -1,11 +1,9 @@
 import React from "react";
 
-export default function ToCartBtn({ aid, addToCart, history }) {
-  const handleClick = aid => {
-    const comb = JSON.parse(localStorage.getItem("comb"));
-    comb.aid = aid;
-    localStorage.setItem("comb", JSON.stringify(comb));
-    addToCart(history);
+export default function ToCartBtn({ aid, addToCart, stepForward }) {
+  const handleClick = (aid) => {
+    localStorage.setItem("aid", aid);
+    addToCart(stepForward);
   };
 
   return (

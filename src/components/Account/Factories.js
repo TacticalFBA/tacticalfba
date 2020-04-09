@@ -14,7 +14,9 @@ export default function Factories({ user, adds }) {
     <div>
       <NewAddressBtn handleClick={handleClick} show={show} />
       <Box mb={2}>{show && <AddForm user={user} />}</Box>
-      <AddressTable user={user} adds={adds} type={"account"} />
+      {adds.length > 0 && (
+        <AddressTable user={user} adds={adds} type={"account"} />
+      )}
     </div>
   );
 }

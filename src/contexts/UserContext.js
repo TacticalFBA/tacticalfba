@@ -57,8 +57,14 @@ class UserProvider extends Component {
           });
         });
       } else {
-        this.setState({ user: null });
-        this.setState({ spin: false });
+        this.setState({ user: null, spin: false }, () => {
+          if (
+            window.location.pathname === "/account" ||
+            window.location.pathname === "/insert"
+          ) {
+            this.openModal();
+          }
+        });
       }
     });
   };
@@ -111,10 +117,12 @@ class UserProvider extends Component {
 
   // account start //
   openModal = (type) => {
-    this.setState({
-      modalOpen: true,
-      type: type,
-    });
+    if (this.state.modalOpen === false) {
+      this.setState({
+        modalOpen: true,
+        type: type,
+      });
+    }
   };
 
   closeModal = () => {

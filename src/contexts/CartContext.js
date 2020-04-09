@@ -7,7 +7,7 @@ const CartContext = React.createContext();
 class CartProvider extends Component {
   state = {
     cart: [],
-    cartTotal: 0
+    cartTotal: 0,
   };
 
   componentDidMount() {
@@ -18,12 +18,12 @@ class CartProvider extends Component {
   }
 
   // find cart Item
-  getCartItem = cid => {
-    const cartItem = this.state.cart.find(item => item.cid === cid);
+  getCartItem = (cid) => {
+    const cartItem = this.state.cart.find((item) => item.cid === cid);
     return cartItem;
   };
 
-  increment = cid => {
+  increment = (cid) => {
     let tempCart = [...this.state.cart];
     const cartItem = this.getCartItem(cid);
     const index = tempCart.indexOf(cartItem);
@@ -36,7 +36,7 @@ class CartProvider extends Component {
     });
   };
 
-  decrement = cid => {
+  decrement = (cid) => {
     let tempCart = [...this.state.cart];
     const cartItem = this.getCartItem(cid);
     const index = tempCart.indexOf(cartItem);
@@ -53,9 +53,9 @@ class CartProvider extends Component {
     }
   };
 
-  removeItem = cid => {
+  removeItem = (cid) => {
     let tempCart = [...this.state.cart];
-    tempCart = tempCart.filter(item => item.cid !== cid);
+    tempCart = tempCart.filter((item) => item.cid !== cid);
     localStorage.setItem("cart", JSON.stringify(tempCart));
     this.setState({ cart: [...tempCart] }, () => {
       this.addTotals();
@@ -64,9 +64,11 @@ class CartProvider extends Component {
 
   addTotals = () => {
     let total = 0;
-    JSON.parse(localStorage.getItem("cart")).map(item => (total += item.total));
+    JSON.parse(localStorage.getItem("cart")).map(
+      (item) => (total += item.total)
+    );
     this.setState({
-      cartTotal: total
+      cartTotal: total,
     });
   };
 
@@ -74,7 +76,7 @@ class CartProvider extends Component {
     localStorage.setItem("cart", JSON.stringify([]));
     this.setState(
       {
-        cart: []
+        cart: [],
       },
       () => {
         this.addTotals();
@@ -84,12 +86,13 @@ class CartProvider extends Component {
 
   // cart manipulation end
 
-  addToCart = history => {
-    const comb = JSON.parse(localStorage.getItem("comb"));
-    const { pid, iid, aid } = comb;
+  addToCart = (stepForward) => {
+    const pid = parseInt(localStorage.getItem("pid"));
+    const iid = localStorage.getItem("iid");
+    const aid = localStorage.getItem("aid");
     const cid = iid + "&" + aid;
 
-    const product = products.find(product => product.pid === pid);
+    const product = products.find((product) => product.pid === pid);
 
     // set cart product
     const cartProduct = {
@@ -99,16 +102,16 @@ class CartProvider extends Component {
       iid: iid,
       count: 1,
       price: product.price,
-      total: product.price
+      total: product.price,
     };
 
-    const exist = this.state.cart.filter(item => item.cid === cid);
+    const exist = this.state.cart.filter((item) => item.cid === cid);
     if (exist.length === 0) {
       const newCart = [...this.state.cart, cartProduct];
       localStorage.setItem("cart", JSON.stringify(newCart));
       this.setState({ cart: [...newCart] }, () => {
         this.addTotals();
-        history.push("/cart");
+        stepForward();
       });
     } else {
       alert("Aready in cart");
@@ -117,21 +120,20 @@ class CartProvider extends Component {
 
   handleDel = (user, id, collection, idType) => {
     alert(`Cart items that uses this ${collection} will be removed!`);
-    const ref = db
-      .collection("users")
-      .doc(user)
-      .collection(collection)
-      .doc(id);
+    const ref = db.collection("users").doc(user).collection(collection).doc(id);
     ref
       .delete()
       .then(() => {
         const currentCart = JSON.parse(localStorage.getItem("cart"));
-        const newCart = currentCart.filter(item => item[idType] !== id);
+        const newCart = currentCart.filter((item) => item[idType] !== id);
         localStorage.setItem("cart", JSON.stringify(newCart));
+        localStorage.removeItem("pid");
+        localStorage.removeItem("iid");
+        localStorage.removeItem("aid");
         this.setState({ cart: newCart });
         this.addTotals();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.message);
       });
   };
@@ -146,7 +148,7 @@ class CartProvider extends Component {
           decrement: this.decrement,
           removeItem: this.removeItem,
           clearCart: this.clearCart,
-          handleDel: this.handleDel
+          handleDel: this.handleDel,
         }}
       >
         {this.props.children}

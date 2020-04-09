@@ -26,11 +26,7 @@ export default function AlertDialogSlide({
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* <DialogTitle id="alert-dialog-slide-title">
-          {"Use Google's location service?"}
-        </DialogTitle> */}
         <DialogContent style={{ width: "60vh", height: "70vh" }}>
-          {/* <img src={img} alt="crop image" /> */}
           <CropImg
             url={img}
             aspect={aspect}

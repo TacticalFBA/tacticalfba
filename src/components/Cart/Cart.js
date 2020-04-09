@@ -3,7 +3,6 @@ import { CartConsumer } from "../../contexts/CartContext";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Stepper from "../Stepper";
 import CartColumns from "./CartColumns";
 import CartList from "./CartList";
 import NewInsertBtn from "../Account/NewInsertBtn";
@@ -18,12 +17,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cart({ history }) {
+export default function Cart({ history, toStepOne }) {
   const classes = useStyles();
 
   return (
     <div className="container">
-      <Stepper step={3} />
       {/* <Title title={"Choose Quantitiy"} /> */}
       <Paper className={classes.root}>
         <CartConsumer>
@@ -55,6 +53,7 @@ export default function Cart({ history }) {
                         ? "Create an insert"
                         : "Create Another Insert"
                     }
+                    toStepOne={toStepOne}
                   />
                 </div>
                 <CartTotals

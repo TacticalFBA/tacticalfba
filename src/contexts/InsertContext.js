@@ -10,7 +10,7 @@ import Compress from "compress.js";
 const InsertContext = React.createContext();
 
 function InsertProvider(props) {
-  const { pid, iid, history, user, inserts } = props;
+  const { pid, iid, user, inserts, stepForward } = props;
   const frontRef = useRef();
   const backRef = useRef();
   let tempInsert = {};
@@ -89,44 +89,6 @@ function InsertProvider(props) {
         newContent[side] = compressedFile;
         setContent(newContent);
       });
-
-    // const size = file.size / 1024;
-    // if (size > 300) {
-    //   alert("300KB maximum file size.");
-    //   e.currentTarget.value = "";
-    //   return false;
-    // }
-
-    // const side = e.currentTarget.name;
-    // const reader = new FileReader();
-    // reader.addEventListener(
-    //   "load",
-    //   () => {
-    //     const compress = new Compress();
-    //     compress
-    //       .compress([file], {
-    //         size: 4, // the max size in MB, defaults to 2MB
-    //         quality: 0.75, // the quality of the image, max is 1,
-    //         maxWidth: 1920, // the max width of the output image, defaults to 1920px
-    //         maxHeight: 1920, // the max height of the output image, defaults to 1920px
-    //         resize: true, // defaults to true, set false if you do not want to resize the image width and height
-    //       })
-    //       .then((data) => {
-    //         // returns an array of compressed images
-    //         console.log(data);
-    //         const img1 = data[0];
-    //         const compressedFile = `${img1.prefix}${img1.data}`;
-    //         return compressedFile;
-    //       });
-    //     let newContent = Object.assign({}, content);
-    //     newContent[side] = reader.result;
-    //     setContent(newContent);
-    //   },
-    //   false
-    // );
-    // if (compressedFile) {
-    //   reader.readAsDataURL(compressedFile);
-    // }
   };
 
   const [open, setOpen] = useState(false);
@@ -227,39 +189,6 @@ function InsertProvider(props) {
         }
       );
     }
-
-    // for await (const image of arr) {
-    //   const imgID = genID();
-    //   const ref = storage.ref(`/images/${imgID}`);
-    //   const uploadTask = ref.putString(image.dataUrl, "data_url");
-    //   uploadTask.on(
-    //     "state_changed",
-    //     snapShot => {
-    //       //takes a snap shot of the process as it is happening
-    //       // console.log(snapShot);
-    //     },
-    //     err => {
-    //       //catches the errors
-    //       console.log(err);
-    //     },
-    //     () => {
-    //       storage
-    //         .ref("images")
-    //         .child(imgID)
-    //         .getDownloadURL()
-    //         .then(fireBaseUrl => {
-    //           newContent[image.name] = fireBaseUrl;
-    //           console.log(image.name + " uploaded");
-    //           count++;
-    //           if (count === arr.length) {
-    //             console.log("images all uploaded");
-    //             cb(newContent);
-    //             count = 0;
-    //           }
-    //         });
-    //     }
-    //   );
-    // }
   };
 
   const saveToDb = (data) => {
@@ -267,29 +196,8 @@ function InsertProvider(props) {
     ref
       .add(data)
       .then((docRef) => {
-        const comb = {
-          pid: pid,
-          iid: docRef.id,
-        };
-        localStorage.setItem("comb", JSON.stringify(comb));
-        history.push("/address");
-      })
-      .catch((error) => {
-        console.log("Error writing document: ", error.message);
-      });
-  };
-
-  const updateDb = (data) => {
-    const ref = db.collection("users").doc(user).collection("insert").doc(iid);
-    ref
-      .update(data)
-      .then((docRef) => {
-        const comb = {
-          pid: pid,
-          iid: iid,
-        };
-        localStorage.setItem("comb", JSON.stringify(comb));
-        history.push("/address");
+        localStorage.setItem("iid", docRef.id);
+        stepForward();
       })
       .catch((error) => {
         console.log("Error writing document: ", error.message);
@@ -342,74 +250,6 @@ function InsertProvider(props) {
     uploadImg(imgArr, saveToDb);
   };
 
-  const saveAsNew = async () => {
-    // check if insert name set
-    if (content.iName.trim() === "") {
-      setShow(true);
-      setError("Please name your insert before save!");
-      return false;
-    }
-    await setSpin(true);
-    const converted = await genPreview();
-    let imgArr = [
-      {
-        dataUrl: converted.frontPre,
-        name: "frontPre",
-      },
-      {
-        dataUrl: converted.backPre,
-        name: "backPre",
-      },
-    ];
-    if (content.frontImg.includes("data")) {
-      imgArr.push({
-        dataUrl: converted.frontImg,
-        name: "frontImg",
-      });
-    }
-    if (content.rearImg.includes("data")) {
-      imgArr.push({
-        dataUrl: converted.rearImg,
-        name: "rearImg",
-      });
-    }
-    uploadImg(imgArr, saveToDb);
-  };
-
-  const updateTemp = async () => {
-    // check if insert name set
-    if (content.iName.trim() === "") {
-      setShow(true);
-      setError("Please name your insert before save!");
-      return false;
-    }
-    await setSpin(true);
-    const converted = await genPreview();
-    let imgArr = [
-      {
-        dataUrl: converted.frontPre,
-        name: "frontPre",
-      },
-      {
-        dataUrl: converted.backPre,
-        name: "backPre",
-      },
-    ];
-    if (content.frontImg.includes("data")) {
-      imgArr.push({
-        dataUrl: converted.frontImg,
-        name: "frontImg",
-      });
-    }
-    if (content.rearImg.includes("data")) {
-      imgArr.push({
-        dataUrl: converted.rearImg,
-        name: "rearImg",
-      });
-    }
-    uploadImg(imgArr, updateDb);
-  };
-
   return (
     <InsertContext.Provider
       value={{
@@ -429,8 +269,6 @@ function InsertProvider(props) {
         saveTemp: saveTemp,
         show: show,
         error: error,
-        updateTemp: updateTemp,
-        saveAsNew: saveAsNew,
         showCroppedImage: showCroppedImage,
         open: open,
         handleClose: handleClose,

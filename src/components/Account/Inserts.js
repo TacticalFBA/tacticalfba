@@ -15,20 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Inserts({ user, inserts, history, location }) {
+export default function Inserts({
+  user,
+  inserts,
+  history,
+  location,
+  toStepThree,
+}) {
   const classes = useStyles();
-  // const chooseInsert = (pid, iid) => {
-  //   const comb = {
-  //     pid: pid,
-  //     iid: iid
-  //   };
-  //   localStorage.setItem("comb", JSON.stringify(comb));
-  //   history.push("/address");
-  // };
-
-  // const editInsert = (pid, iid) => {
-  //   history.push(`/edit-template/${pid}/${iid}`);
-  // };
   return (
     <div>
       {location.pathname === "/account" && (
@@ -45,6 +39,7 @@ export default function Inserts({ user, inserts, history, location }) {
                   history={history}
                   user={user}
                   location={location}
+                  toStepThree={toStepThree}
                 />
               </Grid>
             ))}
