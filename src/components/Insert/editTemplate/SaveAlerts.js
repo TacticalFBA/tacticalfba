@@ -8,7 +8,7 @@ export default function SaveAlert({ show, error }) {
     if (show) {
       setOpen(true);
     }
-  });
+  }, [show]);
 
   return (
     <div style={{ marginBottom: "1rem" }}>

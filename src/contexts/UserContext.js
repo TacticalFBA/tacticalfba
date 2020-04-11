@@ -29,7 +29,7 @@ class UserProvider extends Component {
         .signInWithEmailLink(email, window.location.href)
         .then(() => {
           if (url === "insert") {
-            window.location = "/insert";
+            window.location = "/insert/design";
           }
           if (url === "account") {
             window.location = "/account";
@@ -49,6 +49,7 @@ class UserProvider extends Component {
         const email = user.email;
         const tempUser = email;
         this.setState({ user: tempUser }, () => {
+          this.closeModal();
           const p1 = this.syncAdd(email);
           const p2 = this.syncInsert(email);
           const p3 = this.syncOrder(email);
@@ -60,7 +61,7 @@ class UserProvider extends Component {
         this.setState({ user: null, spin: false }, () => {
           if (
             window.location.pathname === "/account" ||
-            window.location.pathname === "/insert"
+            window.location.pathname === "/insert/design"
           ) {
             this.openModal();
           }
@@ -240,4 +241,4 @@ class UserProvider extends Component {
 
 const UserConsumer = UserContext.Consumer;
 
-export { UserProvider, UserConsumer };
+export { UserProvider, UserConsumer, UserContext };

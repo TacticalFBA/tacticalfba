@@ -26,15 +26,16 @@ import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
 import Admin from "./components/Admin";
 import Insert from "./components/Insert";
+import InsertIntro from "./components/InsertIntro";
 
 // setting theme color
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#000080",
+      main: "#286DA8",
     },
     secondary: {
-      main: "#d32f2f",
+      main: "#cd5360",
     },
   },
 });
@@ -55,7 +56,8 @@ const App = (props) => {
             <Route path="/contact" component={Contact} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/account" component={Account} />
-            <Route path="/insert" component={Insert} />
+            <Route exact path="/insert" component={InsertIntro} />
+            <Route exact path="/insert/design" component={Insert} />
             <Route path="/photography" component={ComingSoon} />
             <Route path="/packaging-box" component={ComingSoon} />
             <Route path="/sticker-label" component={ComingSoon} />

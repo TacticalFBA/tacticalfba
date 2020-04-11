@@ -36,6 +36,7 @@ export default class PaypalBtn extends React.Component {
           date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
           // June 9th, 2007, 5:46:21 PM
           total: cartTotal,
+          user: user,
         },
       };
 
@@ -45,6 +46,19 @@ export default class PaypalBtn extends React.Component {
         .then(() => {
           clearCart();
           closeSpinner();
+          fetch(
+            "http://localhost:4000/api/orderEmail" ||
+              process.env.ORDER_EMAIL_API,
+            {
+              method: "POST",
+              body: JSON.stringify({ ...order }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
         })
         .catch((err) => {
           console.log(err.message);

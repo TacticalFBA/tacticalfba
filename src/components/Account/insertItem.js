@@ -29,7 +29,7 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
       <Box display="flex" flexDirection="row" p={2}>
         <Box flexGrow={1}>{insert.iName}</Box>
         <Box display="flex" flexDirection="row">
-          {window.location.pathname === "/insert" && (
+          {window.location.pathname === "/insert/design" && (
             <Box mr={2}>
               <Button
                 size="small"

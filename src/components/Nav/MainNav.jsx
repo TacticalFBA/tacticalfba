@@ -54,6 +54,8 @@ export default function MainNav({ history }) {
     prevOpen.current = open;
   }, [open]);
 
+  const logoURL = `${process.env.PUBLIC_URL}/img/logo.png`;
+
   return (
     <Navbar bg="light" expand="lg" fixed="top" style={style}>
       <Container>
@@ -61,7 +63,7 @@ export default function MainNav({ history }) {
           <Link className="navbar-brand" to="/">
             <img
               alt=""
-              src="img/logo.png"
+              src={logoURL}
               width="30"
               height="30"
               className="d-inline-block align-top"

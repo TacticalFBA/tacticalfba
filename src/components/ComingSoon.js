@@ -12,7 +12,7 @@ import {
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
 import { firebase, db } from "../config/Firebase";
-import Spinner from "../components/Spinner";
+import Spinner from "./Spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { CFV } from "./ContactFormValidation";
+import Spinner from "../Spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,7 @@ export default function ContactForm() {
     message: "",
   });
   const [Error, setError] = useState([]);
+  const [spin, setSpin] = useState(false);
   const onChange = (e) => {
     let tempData = Object.assign({}, data);
     tempData[e.currentTarget.name] = e.currentTarget.value;
@@ -53,9 +55,39 @@ export default function ContactForm() {
       setError(tempError);
     }
   };
+
+  const handleSubmit = () => {
+    setSpin(true);
+    let tempData = Object.assign({}, data);
+    tempData.message = data.message.replace(/\n/g, "<br/>");
+    fetch(
+      "http://localhost:4000/api/contactForm" || process.env.CONTACT_FORM_API,
+      {
+        method: "POST",
+        body: JSON.stringify({ ...tempData }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          setData({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+          setSpin(false);
+          alert("Contact request sent, we will reply soon");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <Paper className={classes.root}>
-      <form className={classes.form} validate autoComplete="off">
+      <Spinner spin={spin} />
+      <form className={classes.form} autoComplete="off">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -130,7 +162,7 @@ export default function ContactForm() {
           </Grid>
         </Grid>
         <Box margin="10vh auto 0">
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Box>

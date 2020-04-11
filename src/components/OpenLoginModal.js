@@ -1,19 +1,17 @@
-import React, { Component } from "react";
-import { UserConsumer } from "../contexts/UserContext";
+import { Component } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default class OpenLoginModal extends Component {
-  renderModal(user, openModal) {
+  static contextType = UserContext;
+
+  componentDidMount() {
+    const { user, openModal } = this.context;
     if (!user) {
       openModal();
     }
   }
+
   render() {
-    return (
-      <UserConsumer>
-        {({ user, openModal }) => {
-          this.renderModal(user, openModal);
-        }}
-      </UserConsumer>
-    );
+    return null;
   }
 }
