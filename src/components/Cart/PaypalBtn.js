@@ -46,17 +46,13 @@ export default class PaypalBtn extends React.Component {
         .then(() => {
           clearCart();
           closeSpinner();
-          fetch(
-            "http://localhost:4000/api/orderEmail" ||
-              process.env.ORDER_EMAIL_API,
-            {
-              method: "POST",
-              body: JSON.stringify({ ...order }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
+          fetch(process.env.ORDER_EMAIL_API, {
+            method: "POST",
+            body: JSON.stringify({ ...order }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         })

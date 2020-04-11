@@ -60,16 +60,13 @@ export default function ContactForm() {
     setSpin(true);
     let tempData = Object.assign({}, data);
     tempData.message = data.message.replace(/\n/g, "<br/>");
-    fetch(
-      "http://localhost:4000/api/contactForm" || process.env.CONTACT_FORM_API,
-      {
-        method: "POST",
-        body: JSON.stringify({ ...tempData }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(process.env.CONTACT_FORM_API, {
+      method: "POST",
+      body: JSON.stringify({ ...tempData }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (res.status === 200) {
           setData({
