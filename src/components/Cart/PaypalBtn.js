@@ -48,6 +48,7 @@ export default class PaypalBtn extends React.Component {
           closeSpinner();
           fetch("https://tfbaserver.herokuapp.com/api/orderEmail", {
             method: "POST",
+            mode: "no-cors",
             body: JSON.stringify({ ...order }),
             headers: {
               "Content-Type": "application/json",

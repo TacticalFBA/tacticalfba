@@ -62,6 +62,7 @@ export default function ContactForm() {
     tempData.message = data.message.replace(/\n/g, "<br/>");
     fetch("https://tfbaserver.herokuapp.com/api/contactForm", {
       method: "POST",
+      mode: "no-cors",
       body: JSON.stringify({ ...tempData }),
       headers: {
         "Content-Type": "application/json",
