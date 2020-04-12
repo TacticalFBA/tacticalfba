@@ -60,7 +60,7 @@ export default function ContactForm() {
     setSpin(true);
     let tempData = Object.assign({}, data);
     tempData.message = data.message.replace(/\n/g, "<br/>");
-    fetch(process.env.CONTACT_FORM_API, {
+    fetch("https://tfbaserver.herokuapp.com/api/contactForm", {
       method: "POST",
       body: JSON.stringify({ ...tempData }),
       headers: {
