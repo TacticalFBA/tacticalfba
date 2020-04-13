@@ -60,14 +60,19 @@ export default function ContactForm() {
     setSpin(true);
     let tempData = Object.assign({}, data);
     tempData.message = data.message.replace(/\n/g, "<br/>");
-    fetch("https://tfbaserver.herokuapp.com/api/contactForm", {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify({ ...tempData }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    const endpoint = "/api/contactForm";
+    console.log(tempData);
+
+    fetch(
+      `http://localhost:4000${endpoint}` || `${process.env.SERVER}${endpoint}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ ...tempData }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 200) {
           setData({

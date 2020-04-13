@@ -41,19 +41,24 @@ export default class PaypalBtn extends React.Component {
       };
 
       const ref = db.collection("users").doc(user).collection("order");
+      const endpoint = "/api/orderEmail";
       ref
         .add(order)
         .then(() => {
           clearCart();
           closeSpinner();
-          fetch("https://tfbaserver.herokuapp.com/api/orderEmail", {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify({ ...order }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
+          fetch(
+            `${process.env.SERVER}${endpoint}` ||
+              `http://localhost:4000${endpoint}`,
+            {
+              method: "POST",
+              mode: "no-cors",
+              body: JSON.stringify({ ...order }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         })
