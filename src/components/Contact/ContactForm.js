@@ -64,7 +64,8 @@ export default function ContactForm() {
     console.log(tempData);
 
     fetch(
-      `${process.env.SERVER}${endpoint}` || `http://localhost:4000/${endpoint}`,
+      `https://tfbaserver.herokuapp.com/${endpoint}` ||
+        `http://localhost:4000/${endpoint}`,
       {
         method: "POST",
         body: JSON.stringify({ ...tempData }),
