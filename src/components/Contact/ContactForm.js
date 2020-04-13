@@ -60,11 +60,11 @@ export default function ContactForm() {
     setSpin(true);
     let tempData = Object.assign({}, data);
     tempData.message = data.message.replace(/\n/g, "<br/>");
-    const endpoint = "/api/contactForm";
+    const endpoint = "api/contactForm";
     console.log(tempData);
 
     fetch(
-      `${process.env.SERVER}${endpoint}` || `http://localhost:4000${endpoint}`,
+      `${process.env.SERVER}${endpoint}` || `http://localhost:4000/${endpoint}`,
       {
         method: "POST",
         body: JSON.stringify({ ...tempData }),
