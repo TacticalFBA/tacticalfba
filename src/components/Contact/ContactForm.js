@@ -64,7 +64,7 @@ export default function ContactForm() {
     console.log(tempData);
 
     fetch(
-      `http://localhost:4000${endpoint}` || `${process.env.SERVER}${endpoint}`,
+      `${process.env.SERVER}${endpoint}` || `http://localhost:4000${endpoint}`,
       {
         method: "POST",
         body: JSON.stringify({ ...tempData }),
@@ -85,7 +85,7 @@ export default function ContactForm() {
           alert("Contact request sent, we will reply soon");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
   return (
     <Paper className={classes.root}>
