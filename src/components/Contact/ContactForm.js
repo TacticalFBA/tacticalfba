@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { CFV } from "./ContactFormValidation";
 import Spinner from "../Spinner";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,32 +63,34 @@ export default function ContactForm() {
     tempData.message = data.message.replace(/\n/g, "<br/>");
     const endpoint = "api/contactForm";
     console.log(tempData);
+    const form = await axios.post(`https://tfbaserver.herokuapp.com/${endpoint}` ||
+    `http://localhost:4000/${endpoint}`, {...tempData})
 
-    fetch(
-      `https://tfbaserver.herokuapp.com/${endpoint}` ||
-        `http://localhost:4000/${endpoint}`,
-      {
-        method: "POST",
-        body: JSON.stringify(tempData),
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-      }
-    )
-      .then((res) => {
-        if (res.status === 200) {
-          setData({
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
-          setSpin(false);
-          alert("Contact request sent, we will reply soon");
-        }
-      })
-      .catch((err) => console.log(err.message));
+    // fetch(
+    //   `https://tfbaserver.herokuapp.com/${endpoint}` ||
+    //     `http://localhost:4000/${endpoint}`,
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(tempData),
+    //     mode: "no-cors",
+    //     headers: {
+    //       "Content-Type": "application/json;charset=utf-8",
+    //     },
+    //   }
+    // )
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       setData({
+    //         name: "",
+    //         email: "",
+    //         subject: "",
+    //         message: "",
+    //       });
+    //       setSpin(false);
+    //       alert("Contact request sent, we will reply soon");
+    //     }
+    //   })
+    //   .catch((err) => console.log(err.message));
   };
   return (
     <Paper className={classes.root}>
