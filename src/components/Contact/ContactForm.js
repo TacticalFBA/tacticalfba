@@ -68,7 +68,7 @@ export default function ContactForm() {
         `http://localhost:4000/${endpoint}`,
       {
         method: "POST",
-        body: JSON.stringify({ ...tempData }),
+        body: JSON.stringify(tempData),
         mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
