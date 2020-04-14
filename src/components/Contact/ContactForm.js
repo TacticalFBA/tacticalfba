@@ -63,9 +63,25 @@ export default function ContactForm() {
     tempData.message = data.message.replace(/\n/g, "<br/>");
     const endpoint = "api/contactForm";
     console.log(tempData);
-    const form = await axios.post(`https://tfbaserver.herokuapp.com/${endpoint}` ||
-    `http://localhost:4000/${endpoint}`, {...tempData})
-
+    axios
+      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, tempData)
+      .then((res) => {
+        console.log(res);
+        setSpin(false);
+        if (res.status === 200) {
+          setData({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+          alert("Message sent, we will contact you soon :)");
+        } else {
+          alert("oops, something went wron, try again later");
+        }
+      })
+      .catch((err) => console.log(err.message));
+    // `https://tfbaserver.herokuapp.com/${endpoint}` ||
     // fetch(
     //   `https://tfbaserver.herokuapp.com/${endpoint}` ||
     //     `http://localhost:4000/${endpoint}`,

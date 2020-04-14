@@ -56,6 +56,7 @@ export default function CartTotals({ cart, cartTotal, clearCart, history }) {
                       open={open}
                       handleClose={handleClose}
                       history={history}
+                      user={user}
                     />
                   </React.Fragment>
                 )}
