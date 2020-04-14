@@ -64,12 +64,11 @@ export default function ContactForm() {
     const endpoint = "api/contactForm";
     console.log(tempData);
     axios
-      .post(
-        `https://tfbaserver.herokuapp.com/${endpoint}`,
-        JSON.stringify(tempData)
-      )
+      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, tempData, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setSpin(false);
         if (res.status === 200) {
           setData({
