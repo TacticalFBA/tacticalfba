@@ -49,7 +49,7 @@ export default class PaypalBtn extends React.Component {
           clearCart();
           closeSpinner();
           axios
-            .post(`https://tfbaserver.herokuapp.com/${endpoint}`, order)
+            .post(`https://tfbaserver.herokuapp.com${endpoint}`, order)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         })
