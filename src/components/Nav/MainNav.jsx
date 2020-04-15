@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     float: "left",
   },
+  navLink: {
+    fontWeight: 700,
+    color: "#000",
+    marginLeft: "30px",
+  },
   paper: {
     marginRight: theme.spacing(2),
   },
@@ -64,11 +69,11 @@ export default function MainNav({ history }) {
             <img
               alt=""
               src={logoURL}
-              width="30"
+              // width="30"
               height="30"
               className="d-inline-block align-top"
             />
-            <h1 style={style.h1}>TacticalFBA</h1>
+            {/* <h1 style={{ textIndent: "-99999px" }}>TacticalFBA</h1> */}
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -81,6 +86,7 @@ export default function MainNav({ history }) {
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
+                className={classes.navLink}
               >
                 Services
               </Button>
@@ -150,13 +156,13 @@ export default function MainNav({ history }) {
               </Popper>
               {/* blog */}
               <Button>
-                <Link className="nav-link" to="/blog">
+                <Link className={classes.navLink} to="/blog">
                   Blog
                 </Link>
               </Button>
               {/* contact */}
               <Button>
-                <Link className="nav-link" to="/contact">
+                <Link className={classes.navLink} to="/contact">
                   Contact
                 </Link>
               </Button>

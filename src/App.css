@@ -1,5 +1,5 @@
 :root {
-  --mainOrange: #000080;
+  --mainOrange: #10069f;
   --darkOrange: #030c7e;
   --mainWhite: #fafafa;
   --mainDark: #0a0908;
@@ -17,12 +17,15 @@ h6 {
 html,
 body,
 main {
-  /* font-family: "Hind Madurai", sans-serif !important; */
+  font-family: "Open Sans", sans-serif !important;
   height: 100%;
   width: 100%;
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
   scroll-behavior: smooth;
+}
+a:hover {
+  text-decoration: none !important;
 }
 .pTop {
   padding-top: 4.125rem;

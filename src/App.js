@@ -32,11 +32,12 @@ import InsertIntro from "./components/InsertIntro";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#286DA8",
+      main: "#10069F",
     },
     secondary: {
       main: "#cd5360",
     },
+    fontFamily: ["Open Sans", "sans-serif"].join(","),
   },
 });
 

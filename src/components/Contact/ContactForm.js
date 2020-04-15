@@ -64,11 +64,9 @@ export default function ContactForm() {
     const endpoint = "api/contactForm";
     console.log(tempData);
     axios
-      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, tempData, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      })
+      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, tempData)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         setSpin(false);
         if (res.status === 200) {
           setData({
@@ -83,32 +81,6 @@ export default function ContactForm() {
         }
       })
       .catch((err) => console.log(err.message));
-    // `https://tfbaserver.herokuapp.com/${endpoint}` ||
-    // fetch(
-    //   `https://tfbaserver.herokuapp.com/${endpoint}` ||
-    //     `http://localhost:4000/${endpoint}`,
-    //   {
-    //     method: "POST",
-    //     body: JSON.stringify(tempData),
-    //     mode: "no-cors",
-    //     headers: {
-    //       "Content-Type": "application/json;charset=utf-8",
-    //     },
-    //   }
-    // )
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       setData({
-    //         name: "",
-    //         email: "",
-    //         subject: "",
-    //         message: "",
-    //       });
-    //       setSpin(false);
-    //       alert("Contact request sent, we will reply soon");
-    //     }
-    //   })
-    //   .catch((err) => console.log(err.message));
   };
   return (
     <Paper className={classes.root}>
