@@ -2,6 +2,7 @@ import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import { firebase, db } from "../../config/Firebase";
 import dateFormat from "dateformat";
+import axios from "axios";
 
 export default class PaypalBtn extends React.Component {
   render() {
@@ -47,18 +48,8 @@ export default class PaypalBtn extends React.Component {
         .then(() => {
           clearCart();
           closeSpinner();
-          fetch(
-            `${process.env.SERVER}${endpoint}` ||
-              `http://localhost:4000${endpoint}`,
-            {
-              method: "POST",
-              mode: "no-cors",
-              body: JSON.stringify({ ...order }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
+          axios
+            .post(`https://tfbaserver.herokuapp.com/${endpoint}`, order)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         })
