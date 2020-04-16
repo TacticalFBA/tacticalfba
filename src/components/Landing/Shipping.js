@@ -5,17 +5,11 @@ import Button from "@material-ui/core/Button";
 export default function Shipping({ history }) {
   return (
     <ShippingWrapper className="juzhong">
-      <div className="container">
-        <h6>FREE shipping to your factory in China</h6>
-        <p>
-          Because our printing press is located in China, after we finish
-          printing your order we will ship it straight to your factory for them
-          to insert into each of your product packages. This should be a
-          complimentary service that your factory provides.
-        </p>
+      <div>
         <Button
-          variant="contained"
+          variant="outlined"
           size="large"
+          color="inherit"
           onClick={() => history.push("/insert")}
         >
           Get Started
@@ -28,8 +22,8 @@ export default function Shipping({ history }) {
 const ShippingWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 80vh;
-  background-color: var(--mainOrange);
+  height: 40vh;
+  background-color: #3f4354;
   color: #fff;
   text-align: center;
   &::before {
@@ -43,43 +37,6 @@ const ShippingWrapper = styled.div`
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 20px solid var(--mainOrange);
-  }
-  .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  i {
-    font-size: 3rem;
-    margin-bottom: 3rem;
-  }
-  h6 {
-    margin-bottom: 30px;
-    font-size: 1.25rem;
-    &::before {
-      content: "";
-      display: block;
-      margin: 0 auto 30px;
-      background: url(img/free-shipping.png) no-repeat center center;
-      width: 80px;
-      height: 80px;
-      background-size: cover;
-    }
-    &::after {
-      content: "";
-      display: block;
-      margin: 0 auto;
-      width: 50px;
-      height: 40px;
-      border-bottom: 4px solid #fff;
-    }
-  }
-  p {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 5rem;
-    width: 70%;
+    border-bottom: 20px solid #3f4354;
   }
 `;

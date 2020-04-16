@@ -10,6 +10,7 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,6 +87,8 @@ export default function MainNav({ history }) {
                 aria-haspopup="true"
                 onClick={handleToggle}
                 className={classes.navLink}
+                endIcon={<ExpandMoreIcon />}
+                style={{ margin: "0 .5rem 0 1rem" }}
               >
                 Services
               </Button>
@@ -113,7 +116,10 @@ export default function MainNav({ history }) {
                         >
                           <Link
                             to="/insert"
-                            style={{ textDecoration: "none", color: "#000" }}
+                            style={{
+                              textDecoration: "none",
+                              color: "#000",
+                            }}
                             onClick={handleClose}
                           >
                             <MenuItem>Package Inserts</MenuItem>
@@ -154,13 +160,13 @@ export default function MainNav({ history }) {
                 )}
               </Popper>
               {/* blog */}
-              <Button>
+              <Button style={{ margin: "0 .5rem" }}>
                 <Link className={classes.navLink} to="/blog">
                   Blog
                 </Link>
               </Button>
               {/* contact */}
-              <Button>
+              <Button style={{ margin: "0 .5rem" }}>
                 <Link className={classes.navLink} to="/contact">
                   Contact
                 </Link>

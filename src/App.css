@@ -2,7 +2,7 @@
   --mainOrange: #10069f;
   --darkOrange: #030c7e;
   --mainWhite: #fafafa;
-  --mainDark: #0a0908;
+  --mainDark: #3f4354;
   --mainGrey: #b1b1b1;
 }
 h1,
@@ -13,6 +13,7 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
+  color: var(--mainDark);
 }
 html,
 body,
@@ -23,6 +24,9 @@ main {
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
   scroll-behavior: smooth;
+}
+p {
+  color: var(--mainDark);
 }
 a:hover {
   text-decoration: none !important;

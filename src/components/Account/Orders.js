@@ -74,7 +74,7 @@ export default function Orders({ orders, history }) {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
-              <span>Order ID: {order.oid} </span>
+              <span>Order ID: {order.info.id} </span>
               <span className="mx-2">|</span>
               <span> Submitted on: {order.info.date}</span>
               <span className="total">
@@ -86,7 +86,7 @@ export default function Orders({ orders, history }) {
                 return (
                   <div className="item" key={item.insert.iid}>
                     <div className="row">
-                      <div className="col-2 title">Product Category:</div>
+                      <div className="col-2 title">Product Type:</div>
                       <div className="col-10">
                         {item.pid === 0 || 1 || 2
                           ? "Package Insert"
