@@ -24,7 +24,6 @@ import FinishSignUp from "./components/Account/FinishSignUp";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
-import Admin from "./components/Admin";
 import Insert from "./components/Insert";
 import InsertIntro from "./components/InsertIntro";
 
@@ -65,7 +64,7 @@ const App = (props) => {
             <Route path="/bar-code" component={ComingSoon} />
             <Route exact path="/blog" component={BlogList} />
             <Route path="/post/:id" component={Post} />
-            <Route path="/admin" component={Admin} />
+            {/* <Route path="/admin" component={Admin} /> */}
             <Route component={Default}></Route>
           </Switch>
           <LoginModal />

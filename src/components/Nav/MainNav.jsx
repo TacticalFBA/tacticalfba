@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   navLink: {
     fontWeight: 700,
     color: "#000",
-    marginLeft: "30px",
   },
   paper: {
     marginRight: theme.spacing(2),

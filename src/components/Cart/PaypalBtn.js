@@ -30,10 +30,17 @@ export default class PaypalBtn extends React.Component {
         };
       });
 
+      const genID = () => {
+        return Math.floor(
+          Math.random() * Math.floor(Math.random() * Date.now())
+        ).toString();
+      };
+
       const order = {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         items: items,
         info: {
+          id: genID(),
           date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
           // June 9th, 2007, 5:46:21 PM
           total: cartTotal,
@@ -42,9 +49,13 @@ export default class PaypalBtn extends React.Component {
       };
 
       const ref = db.collection("users").doc(user).collection("order");
+      const orderList = db.collection("orders");
       const endpoint = "api/orderEmail";
       ref
         .add(order)
+        .then(() => {
+          orderList.add(order).catch((err) => console.log(err));
+        })
         .then(() => {
           clearCart();
           closeSpinner();
