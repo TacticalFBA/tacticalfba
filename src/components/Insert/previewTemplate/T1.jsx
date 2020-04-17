@@ -51,7 +51,7 @@ export default function T1({
                 }
               />
               <div
-                className="pointer highlight"
+                className="pointer highlight text"
                 onClick={() => onSelect("frontMsgSec")}
               >
                 {Parser(frontMsgSec)}
@@ -114,72 +114,83 @@ export default function T1({
 
 const LeftWrapper = styled.div`
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   left: 0;
   top: 0;
-  padding: 10%;
   width: 30%;
   height: 100%;
   color: var(--mainWhite);
-`;
-
-const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
+
+const LeftContainer = styled.div`
   width: 88%;
-  height: 70%;
-  // border: 1px solid black;
+  height: 80%;
+  overflow: hidden;
+  overflow: hidden;
   position: absolute;
   right: 0;
   text-align: center;
-  @media (max-width: 600px) {
-    font-size: 0.45rem;
-  }
-  @media (max-width: 800px) {
-    font-size: 0.65rem;
-  }
-  @media (max-width: 1200px) {
-    font-size: 0.75rem;
-  }
-  @media (min-width: 1221px) {
-    font-size: 0.8rem;
+  color: var(--mainWhite) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
   }
 
   .frontImg {
-    margin: 0 auto 10%;
     border-radius: 50%;
     width: 65%;
     height: 0;
     padding-bottom: 65%;
   }
+
+  .text {
+    margin-top: 1rem;
+    color: var(--mainWhite) !important;
+    overflow: hidden;
+    font-size: 12px;
+    width: 90%;
+    max-height: 60%;
+  }
 `;
 
 const RightWrapper = styled.div`
   position: absolute;
-  right: 0;
   top: 0;
+  bottom: 0;
+  right: 0;
   width: 70%;
   height: 100%;
   background: var(--mainWhite);
   .text-container {
-    margin: 10% 10% 10% 5%;
+    position: absolute;
+    top: 51%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: 85%;
+    overflow: hidden;
     font-size: 13px;
   }
 `;
 
 const RearWrapper = styled.div`
+  overflow: hidden;
   width: 70%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   text-align: center;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .rearImg {
     margin: 0 auto;
-    margin-bottom: 1.5rem;
     border-radius: 50%;
     width: 30%;
     height: 0;
@@ -187,9 +198,13 @@ const RearWrapper = styled.div`
   }
 
   .rearText {
+    overflow: hidden;
     margin-top: 1rem;
-    color: var(--mainWhite);
     width: 100%;
+    max-height: 50%;
     font-size: 0.8rem;
+    p {
+      color: var(--mainWhite) !important;
+    }
   }
 `;

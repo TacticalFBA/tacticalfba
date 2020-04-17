@@ -134,14 +134,15 @@ function InsertProvider(props) {
 
   const genPreview = async (arr) => {
     let newContent = Object.assign({}, content);
+
     await htmlToImage
-      .toJpeg(frontRef.current, { quality: 0.5 })
+      .toJpeg(frontRef.current, { quality: 1 })
       .then((dataUrl) => {
         newContent.frontPre = dataUrl;
         console.log("front preview converted");
       });
     await htmlToImage
-      .toJpeg(backRef.current, { quality: 0.5 })
+      .toJpeg(backRef.current, { quality: 1 })
       .then((dataUrl) => {
         newContent.backPre = dataUrl;
         console.log("back preview converted");

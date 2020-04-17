@@ -18,15 +18,12 @@ h6 {
 html,
 body,
 main {
-  font-family: "Open Sans", sans-serif !important;
+  /* font-family: "Open Sans", sans-serif !important; */
   height: 100%;
   width: 100%;
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
   scroll-behavior: smooth;
-}
-p {
-  color: var(--mainDark);
 }
 a:hover {
   text-decoration: none !important;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const PreviewContainer = styled.div`
+  font-family: Arial, Helvetica, sans-serif !important;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -9,7 +10,6 @@ export const PreviewContainer = styled.div`
   width: 100%;
   height: 0;
   padding-bottom: 62.5%;
-  // border: 1px solid #ccc;
   p {
     margin: 0;
     padding: 0;

@@ -74,7 +74,7 @@ export default function Orders({ orders, history }) {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
-              <span>Order ID: {order.info.id} </span>
+              <span>Order Number: {order.info.id} </span>
               <span className="mx-2">|</span>
               <span> Submitted on: {order.info.date}</span>
               <span className="total">
