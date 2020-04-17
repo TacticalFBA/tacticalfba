@@ -11,17 +11,16 @@ export const ToolbarItem = styled.div`
   background-color: transparent;
   border-radius: 25%;
   border: 2px solid var(--mainDark);
-  font-size: 1rem;
+  font-size: 0.8rem;
   transition: all 0.5m ease-in-out;
   cursor: pointer;
-  ${props =>
+  ${(props) =>
     props.isActive &&
     `
         transform: translateY(1px);
         background-color: var(--mainDark);
         color: var(--mainWhite);
-        `
-  }
+        `}
   &:hover {
     transform: translateY(1px);
     background-color: var(--mainDark);

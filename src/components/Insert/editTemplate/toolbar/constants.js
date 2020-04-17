@@ -1,21 +1,24 @@
 import React from "react";
+import FormatBoldIcon from "@material-ui/icons/FormatBold";
+import FormatItalicIcon from "@material-ui/icons/FormatItalic";
+import FormatUnderlinedIcon from "@material-ui/icons/FormatUnderlined";
 
 const inlineStyles = [
-    {
-        label: "Bold",
-        style: "BOLD",
-        icon: <i className="fa fa-bold" />
-    },
-    {
-        label: "Italic",
-        style: "ITALIC",
-        icon: <i className="fa fa-italic" />
-    },
-    {
-        label: "Underline",
-        style: "UNDERLINE",
-        icon: <i className="fa fa-underline" />
-    }
+  {
+    label: "Bold",
+    style: "BOLD",
+    icon: <FormatBoldIcon />,
+  },
+  {
+    label: "Italic",
+    style: "ITALIC",
+    icon: <FormatItalicIcon />,
+  },
+  {
+    label: "Underline",
+    style: "UNDERLINE",
+    icon: <FormatUnderlinedIcon />,
+  },
 ];
 
 export { inlineStyles };
