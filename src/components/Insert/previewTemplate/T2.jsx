@@ -96,7 +96,7 @@ export default function T2({
 
       <Box
         mt={3}
-        ml={2}
+        ml={1}
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
@@ -105,7 +105,6 @@ export default function T2({
         <Button
           variant="contained"
           size="small"
-          color="primary"
           onMouseDown={() => setShow(true)}
           onMouseUp={() => setShow(false)}
         >

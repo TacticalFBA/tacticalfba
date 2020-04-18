@@ -30,13 +30,13 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return "Choose A Template";
+      return "Choose from one of our professional templates or upload your own design";
     case 1:
-      return "Design Insert / Upload Your Own ArtWork";
+      return "Design Insert";
     case 2:
       return "Where should we send these inserts? Shipping is free!";
     case 3:
-      return "How many do you need?";
+      return "Choose your quantity in multiples of 1000.";
     default:
       return "";
   }

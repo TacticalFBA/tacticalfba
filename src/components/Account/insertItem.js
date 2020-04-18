@@ -62,7 +62,7 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
           component="img"
           alt="front"
           image={insert.frontPre}
-          title="Contemplative Reptile"
+          title="front"
           style={{ padding: "0 8px 8px 8px" }}
         />
         <CardMedia
@@ -70,7 +70,7 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
           component="img"
           alt="rear"
           image={insert.backPre}
-          title="Contemplative Reptile"
+          title="rear"
           style={{ padding: "0 8px 8px 0" }}
         />
       </Box>

@@ -35,11 +35,11 @@ export default function TemplateList({
       {({ inserts }) => (
         <React.Fragment>
           <Paper className={classes.root}>
-            <Box mb={3} textAlign="center">
+            {/* <Box mb={3} textAlign="center">
               <Typography variant="h6">
                 Choose from our templates or Upload your own
               </Typography>
-            </Box>
+            </Box> */}
             <div className="row">
               {templates.map((template) => (
                 <TemplateItem
