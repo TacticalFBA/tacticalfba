@@ -165,6 +165,12 @@ export default function MainNav({ history }) {
                   Blog
                 </Link>
               </Button>
+              {/* about us */}
+              <Button style={{ margin: "0 .5rem" }}>
+                <Link className={classes.navLink} to="/about-us">
+                  About Us
+                </Link>
+              </Button>
               {/* contact */}
               <Button style={{ margin: "0 .5rem" }}>
                 <Link className={classes.navLink} to="/contact">

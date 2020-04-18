@@ -1,11 +1,14 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 import BlogItem from "./BlogItem";
 import { PostConsumer } from "./PostContext";
 
 export default function BlogList({ history }) {
   return (
-    <div className="container my-5">
+    <Container maxWidth="md">
+      <Box pt={5}></Box>
       <PostConsumer>
         {({ posts }) => (
           <Grid container spacing={3}>
@@ -26,6 +29,6 @@ export default function BlogList({ history }) {
           </Grid>
         )}
       </PostConsumer>
-    </div>
+    </Container>
   );
 }

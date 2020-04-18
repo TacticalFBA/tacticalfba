@@ -33,7 +33,9 @@ export default class PaypalBtn extends React.Component {
       const genID = () => {
         return Math.floor(
           Math.random() * Math.floor(Math.random() * Date.now())
-        ).toString();
+        )
+          .toString()
+          .substring(0, 9);
       };
 
       const order = {
@@ -41,8 +43,8 @@ export default class PaypalBtn extends React.Component {
         items: items,
         info: {
           id: genID(),
-          date: dateFormat("mmmm dS, yyyy, h:MM:ss TT"),
-          // June 9th, 2007, 5:46:21 PM
+          date: dateFormat("mmmm dS, yyyy, hh:MM:ss TT"),
+          // June 9th, 2007, 05:46:21 PM
           total: cartTotal,
           user: user,
         },

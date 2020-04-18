@@ -29,7 +29,7 @@ class UserProvider extends Component {
         .signInWithEmailLink(email, window.location.href)
         .then(() => {
           if (url === "insert") {
-            window.location = "/insert/design";
+            window.location = "/insert";
           }
           if (url === "account") {
             window.location = "/account";
@@ -61,7 +61,7 @@ class UserProvider extends Component {
         this.setState({ user: null, spin: false }, () => {
           if (
             window.location.pathname === "/account" ||
-            window.location.pathname === "/insert/design"
+            window.location.pathname === "/insert"
           ) {
             this.openModal();
           }

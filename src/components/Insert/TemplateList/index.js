@@ -55,7 +55,7 @@ export default function TemplateList({
               {/* if user already has some inserts saved, list them for choose */}
 
               <Box mb={3} textAlign="center">
-                <Typography variant="h6">Your Saved Inserts</Typography>
+                <Typography variant="h6">Saved Inserts</Typography>
               </Box>
               <Box>
                 <React.Fragment>

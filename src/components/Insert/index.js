@@ -3,6 +3,7 @@ import OpenLoginModal from "../OpenLoginModal";
 
 // UI
 import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
 
 // Components
 import Stepper from "./Stepper";
@@ -23,7 +24,7 @@ export default ({ history, location }) => {
     setStep(0);
   };
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <OpenLoginModal />
       <Stepper step={step} />
       {/* steps */}
@@ -50,6 +51,7 @@ export default ({ history, location }) => {
           <Cart history={history} location={location} toStepOne={toStepOne} />
         )}
       </React.Fragment>
+      <Box pb={5}>{""}</Box>
     </Container>
   );
 };

@@ -96,6 +96,7 @@ export default function T2({
 
       <Box
         mt={3}
+        ml={2}
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
@@ -153,7 +154,7 @@ const LeftContainer = styled.div`
     margin-top: 1rem;
     color: var(--mainWhite) !important;
     overflow: hidden;
-    font-size: 12px;
+    font-size: 10px;
     width: 90%;
     max-height: 60%;
   }
@@ -175,7 +176,7 @@ const RightWrapper = styled.div`
     height: 80%;
     width: 85%;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 10px;
   }
 `;
 
@@ -205,7 +206,7 @@ const RearWrapper = styled.div`
       width: 72%;
       max-height: 80%;
       overflow: hidden;
-      font-size: 13px;
+      font-size: 10px;
     }
   }
 `;

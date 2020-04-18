@@ -25,7 +25,7 @@ import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
 import Insert from "./components/Insert";
-import InsertIntro from "./components/InsertIntro";
+import AboutUs from "./components/AboutUs";
 
 // setting theme color
 const theme = createMuiTheme({
@@ -54,17 +54,16 @@ const App = (props) => {
             <Route exact path="/" component={Landing} />
             <Route exact path="/finish-signup" component={FinishSignUp} />
             <Route path="/contact" component={Contact} />
+            <Route path="/about-us" component={AboutUs} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/account" component={Account} />
-            <Route exact path="/insert" component={InsertIntro} />
-            <Route exact path="/insert/design" component={Insert} />
+            <Route exact path="/insert" component={Insert} />
             <Route path="/photography" component={ComingSoon} />
             <Route path="/packaging-box" component={ComingSoon} />
             <Route path="/sticker-label" component={ComingSoon} />
             <Route path="/bar-code" component={ComingSoon} />
             <Route exact path="/blog" component={BlogList} />
             <Route path="/post/:id" component={Post} />
-            {/* <Route path="/admin" component={Admin} /> */}
             <Route component={Default}></Route>
           </Switch>
           <LoginModal />

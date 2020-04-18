@@ -56,6 +56,7 @@ export default function T0({ content, frontRef, backRef, handleClickOpen }) {
       </div>
       <Box
         mt={3}
+        ml={2}
         display="flex"
         flexDirection="row"
         flexWrap="wrap"

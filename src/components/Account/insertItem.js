@@ -29,8 +29,8 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
       <Box display="flex" flexDirection="row" p={2}>
         <Box flexGrow={1}>{insert.iName}</Box>
         <Box display="flex" flexDirection="row">
-          {window.location.pathname === "/insert/design" && (
-            <Box mr={2}>
+          {window.location.pathname === "/insert" && (
+            <Box>
               <Button
                 size="small"
                 color="primary"
@@ -63,6 +63,7 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
           alt="front"
           image={insert.frontPre}
           title="Contemplative Reptile"
+          style={{ padding: "0 8px 8px 8px" }}
         />
         <CardMedia
           className={classes.media}
@@ -70,6 +71,7 @@ export default function InsertCard({ user, insert, location, toStepThree }) {
           alt="rear"
           image={insert.backPre}
           title="Contemplative Reptile"
+          style={{ padding: "0 8px 8px 0" }}
         />
       </Box>
     </Card>

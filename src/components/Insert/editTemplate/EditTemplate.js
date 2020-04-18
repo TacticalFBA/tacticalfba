@@ -128,7 +128,7 @@ export default function EditTemplate({ location, history, stepForward }) {
                       {/* editting end */}
 
                       {/* preview area */}
-                      <div className="pb-5">
+                      <div className="pb-3">
                         <Preview
                           pid={pid}
                           history={history}
@@ -147,8 +147,7 @@ export default function EditTemplate({ location, history, stepForward }) {
                       {!iid && (
                         <Button
                           variant="contained"
-                          size="small"
-                          disableElevation
+                          color="primary"
                           onClick={() =>
                             value.saveTemp(user, [
                               {
