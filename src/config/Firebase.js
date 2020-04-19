@@ -5,7 +5,7 @@ import "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyASP3i_oxmNp1DySil_66HeY7i1cSaKrXI",
-  authDomain: "tacticalfba.com",
+  authDomain: "app.tacticalfba.com",
   databaseURL: "https://tacticalfba-4163a.firebaseio.com",
   projectId: "tacticalfba-4163a",
   storageBucket: "tacticalfba-4163a.appspot.com",
