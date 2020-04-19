@@ -18,7 +18,7 @@ export default function Cover() {
           </p>
         </div>
         <Link to="/insert" style={{ textDecoration: "none" }}>
-          <Button variant="contained" size="large" color="primary">
+          <Button className="btnBottom" variant="contained" color="primary">
             Get Started
           </Button>
         </Link>
@@ -51,11 +51,19 @@ const CoverWrapper = styled.div`
         background-size: cover;
         text-align: center;
         .text-wrap {
+            top: 30%;
             left: 50%;
             width: 70%;
             p {
                 margin: 20px 0 40px;
-            }    
+                font-size: 1rem;
+            }
+        }
+        .btnBottom{
+          position: absolute;
+          bottom: -70%;
+          left: 50%;
+          transform: translate(-50%)
         }
 
     

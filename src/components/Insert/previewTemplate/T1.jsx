@@ -151,7 +151,7 @@ const LeftContainer = styled.div`
     margin-top: 1rem;
     color: var(--mainWhite) !important;
     overflow: hidden;
-    font-size: 10px;
+    font-size: 12px;
     width: 90%;
     max-height: 60%;
   }
@@ -173,7 +173,7 @@ const RightWrapper = styled.div`
     height: 80%;
     width: 85%;
     overflow: hidden;
-    font-size: 10px;
+    font-size: 12.5px;
   }
 `;
 
@@ -193,9 +193,9 @@ const RearWrapper = styled.div`
   .rearImg {
     margin: 0 auto;
     border-radius: 50%;
-    width: 30%;
+    width: 20%;
     height: 0;
-    padding-bottom: 30%;
+    padding-bottom: 20%;
   }
 
   .rearText {
@@ -203,7 +203,7 @@ const RearWrapper = styled.div`
     margin-top: 1rem;
     width: 100%;
     max-height: 50%;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     p {
       color: var(--mainWhite) !important;
     }

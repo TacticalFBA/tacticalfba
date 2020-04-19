@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
     color: theme.palette.text.secondary,
-    maxWidth: "80vw",
+    maxWidth: "65vw",
     margin: "0 auto",
   },
   form: {

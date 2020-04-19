@@ -4,8 +4,8 @@ import ContactForm from "./ContactForm";
 
 export default function Contact() {
   return (
-    <React.Fragment>
-      <Box component="div" textAlign="center">
+    <div className="container ">
+      <Box component="div" textAlign="center" marginBottom="10vh">
         <Box
           component="div"
           textAlign="center"
@@ -15,7 +15,7 @@ export default function Contact() {
           <h4>Contact Us</h4>
         </Box>
         <ContactForm />
-      </Box>
-    </React.Fragment>
+      </Box >
+    </div>
   );
 }

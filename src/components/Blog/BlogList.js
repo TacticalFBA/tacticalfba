@@ -1,13 +1,12 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import BlogItem from "./BlogItem";
 import { PostConsumer } from "./PostContext";
 
 export default function BlogList({ history }) {
   return (
-    <Container maxWidth="md">
+    <div className="container">
       <Box pt={5}></Box>
       <PostConsumer>
         {({ posts }) => (
@@ -29,6 +28,6 @@ export default function BlogList({ history }) {
           </Grid>
         )}
       </PostConsumer>
-    </Container>
+    </div>
   );
 }

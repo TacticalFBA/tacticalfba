@@ -52,6 +52,7 @@ const WhyWrapper = styled.div`
 padding-top: 5rem;
 padding-bottom: 5rem;
 h4{
+  padding-left: 30px;
     padding-right: 30px;
     border-right: 3px solid var(--mainOrange);
     color: var(--mainOrange);
@@ -59,6 +60,7 @@ h4{
 
 @media (max-width: 768px) { 
     h4{
+      padding-left: 0;
         border-right: none;
         &::after{
             content: '';

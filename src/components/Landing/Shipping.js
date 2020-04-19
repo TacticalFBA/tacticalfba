@@ -22,7 +22,7 @@ export default function Shipping({ history }) {
 const ShippingWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 40vh;
+  height: 30vh;
   background-color: #3f4354;
   color: #fff;
   text-align: center;

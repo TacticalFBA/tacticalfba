@@ -6,7 +6,7 @@ export default class Template extends Component {
     const { stepForward } = this.props;
     const { pid, type, name, img } = this.props.template;
     return (
-      <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-4 my-3">
+      <TemplateWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
         <div className="card">
           <div className="img-container p-3">
             <img

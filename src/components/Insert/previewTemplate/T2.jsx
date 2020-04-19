@@ -153,7 +153,7 @@ const LeftContainer = styled.div`
     margin-top: 1rem;
     color: var(--mainWhite) !important;
     overflow: hidden;
-    font-size: 10px;
+    font-size: 12px;
     width: 90%;
     max-height: 60%;
   }
@@ -175,7 +175,7 @@ const RightWrapper = styled.div`
     height: 80%;
     width: 85%;
     overflow: hidden;
-    font-size: 10px;
+    font-size: 12.5px;
   }
 `;
 
@@ -205,7 +205,7 @@ const RearWrapper = styled.div`
       width: 72%;
       max-height: 80%;
       overflow: hidden;
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 `;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import OpenLoginModal from "../OpenLoginModal";
 
 // UI
-import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
 // Components
@@ -24,7 +23,7 @@ export default ({ history, location }) => {
     setStep(0);
   };
   return (
-    <Container maxWidth="md">
+    <div className="container">
       <OpenLoginModal />
       <Stepper step={step} />
       {/* steps */}
@@ -52,6 +51,6 @@ export default ({ history, location }) => {
         )}
       </React.Fragment>
       <Box pb={5}>{""}</Box>
-    </Container>
+    </div>
   );
 };

@@ -8,6 +8,6 @@ export default function Fixed() {
 const FixedWrapper = styled.div`
   background: url(/img/fixed.jpg) no-repeat center center fixed;
   width: 100%;
-  height: 30vh;
+  height: 50vh;
   background-size: cover;
 `;
