@@ -4,14 +4,14 @@ import "firebase/firebase-firestore";
 import "firebase/storage";
 
 const config = {
-  apiKey: "AIzaSyASP3i_oxmNp1DySil_66HeY7i1cSaKrXI",
-  authDomain: "tacticalfba.com",
-  databaseURL: "https://tacticalfba-4163a.firebaseio.com",
-  projectId: "tacticalfba-4163a",
-  storageBucket: "tacticalfba-4163a.appspot.com",
-  messagingSenderId: "920695674414",
-  appId: "1:920695674414:web:6b0dbc6c9938bdd414b1bf",
-  measurementId: "G-BN4MFW5GQJ",
+  apiKey: "AIzaSyDX_8hufHc3H3SI66b4_-gCgbQA_iGxS7Q",
+  authDomain: "tacticalfba-28b9b.firebaseapp.com",
+  databaseURL: "https://tacticalfba-28b9b.firebaseio.com",
+  projectId: "tacticalfba-28b9b",
+  storageBucket: "tacticalfba-28b9b.appspot.com",
+  messagingSenderId: "149879790771",
+  appId: "1:149879790771:web:534d2375a7b225ec8b24c6",
+  measurementId: "G-12WCTCMXD5",
 };
 
 firebase.initializeApp(config);

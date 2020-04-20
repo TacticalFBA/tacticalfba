@@ -24,7 +24,7 @@ export default ({ history, location }) => {
   };
   return (
     <div className="container">
-      <OpenLoginModal />
+      {/* <OpenLoginModal /> */}
       <Stepper step={step} />
       {/* steps */}
       <React.Fragment>

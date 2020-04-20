@@ -204,8 +204,7 @@ const RearWrapper = styled.div`
     width: 100%;
     max-height: 50%;
     font-size: 0.85rem;
-    p {
-      color: var(--mainWhite) !important;
-    }
+
+    color: var(--mainWhite) !important;
   }
 `;
