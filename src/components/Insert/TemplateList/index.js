@@ -40,6 +40,48 @@ export default function TemplateList({
                 Choose from our templates or Upload your own
               </Typography>
             </Box> */}
+            <Box display="flex" flexDirection="row" my={2} px={5}>
+              <Box flexGrow={1}>
+                <Typography variant="h6" style={{ fontWeight: "700" }}>
+                  Business Card Style
+                </Typography>
+                <Typography variant="subtitle2" color="textSecondary">
+                  <ul
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      padding: 0,
+                    }}
+                  >
+                    {[
+                      "90 x 54 (mm)",
+                      "card stock",
+                      "full color",
+                      "double sided",
+                    ].map((item, index) => {
+                      return index === 0 ? (
+                        <li key={index} style={{ marginLeft: "1rem" }}>
+                          {item}
+                        </li>
+                      ) : (
+                        <li key={index} style={{ marginLeft: "1.5rem" }}>
+                          {item}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Typography>
+              </Box>
+              <Box display="flex" flexDirection="column" alignItems="flex-end">
+                <Typography variant="h6" style={{ fontWeight: "700" }}>
+                  $ 50
+                </Typography>
+                <Typography variant="subtitle2" color="textSecondary">
+                  in thousands
+                </Typography>
+              </Box>
+            </Box>
+
             <div className="row">
               {templates.map((template) => (
                 <TemplateItem
