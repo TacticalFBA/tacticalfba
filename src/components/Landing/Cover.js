@@ -11,10 +11,10 @@ export default function Cover() {
           <h2>Get more reviews with TacticalFBA</h2>
           <p className="lead">
             Research shows that well-worded product inserts help to increase the
-            frequency of Amazon reviews.
-            <br />
-            We can help design, print, and ship your product insert directly to
-            your factory in China for immediate packaging.
+            frequency of Amazon reviews for your products. With our offices in
+            Shanghai, TacticalFBA can help you design, print, and ship your
+            product inserts directly to your factory in China for immediate
+            packaging.
           </p>
         </div>
         <Link to="/insert" style={{ textDecoration: "none" }}>

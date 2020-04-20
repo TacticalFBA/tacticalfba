@@ -35,11 +35,6 @@ export default function TemplateList({
       {({ inserts }) => (
         <React.Fragment>
           <Paper className={classes.root}>
-            {/* <Box mb={3} textAlign="center">
-              <Typography variant="h6">
-                Choose from our templates or Upload your own
-              </Typography>
-            </Box> */}
             <Box display="flex" flexDirection="row" my={2} px={5}>
               <Box flexGrow={1}>
                 <Typography variant="h6" style={{ fontWeight: "700" }}>
@@ -77,7 +72,7 @@ export default function TemplateList({
                   $ 50
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
-                  in thousands
+                  per thousands
                 </Typography>
               </Box>
             </Box>

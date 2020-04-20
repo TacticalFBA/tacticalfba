@@ -59,12 +59,12 @@ class UserProvider extends Component {
         });
       } else {
         this.setState({ user: null, spin: false }, () => {
-          // if (
-          //   window.location.pathname === "/account" ||
-          //   window.location.pathname === "/insert"
-          // ) {
-          //   this.openModal();
-          // }
+          if (
+            window.location.pathname === "/account" ||
+            window.location.pathname === "/insert"
+          ) {
+            this.openModal();
+          }
         });
       }
     });

@@ -27,11 +27,31 @@ export default function AddressTable({
         <tbody>
           {adds.map(({ aid, factory, address, contact, email, mobile }) => (
             <tr key={aid}>
-              <td>{factory}</td>
-              <td colSpan="2">{address}</td>
-              <td>{contact}</td>
-              <td>{email}</td>
-              <td>{mobile}</td>
+              <td>
+                <div style={{ height: "31px", lineHeight: "31px" }}>
+                  {factory}
+                </div>
+              </td>
+              <td colSpan="2" style={{ border: "transparent" }}>
+                <div style={{ height: "31px", lineHeight: "31px" }}>
+                  {address}
+                </div>
+              </td>
+              <td>
+                <div style={{ height: "31px", lineHeight: "31px" }}>
+                  {contact}
+                </div>
+              </td>
+              <td>
+                <div style={{ height: "31px", lineHeight: "31px" }}>
+                  {email}
+                </div>
+              </td>
+              <td>
+                <div style={{ height: "31px", lineHeight: "31px" }}>
+                  {mobile}
+                </div>
+              </td>
 
               <CartConsumer>
                 {({ handleDel, addToCart }) => (

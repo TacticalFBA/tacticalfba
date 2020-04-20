@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserConsumer } from "./contexts/UserContext";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
@@ -43,7 +42,7 @@ const theme = createMuiTheme({
 const App = (props) => {
   return (
     <MuiThemeProvider theme={theme}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <UserConsumer>{({ spin }) => <Spinner spin={spin} />}</UserConsumer>
       <div className="App">
         <header className="App-header" id="back-to-top-anchor">

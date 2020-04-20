@@ -14,17 +14,17 @@ export default function Features() {
             <EmojiEmotionsSharpIcon fontSize="large" color="primary" />
             <h6 style={{ fontWeight: "700" }}>Easy</h6>
             <p>
-              Provide us with a logo, face photo, message body, and website URL
-              and we will design a personalized product insert just for you
+              Choose from one of our customizable professional templates or
+              upload your own design and create your product insert in minutes.
             </p>
           </div>
           <div className="col-md-6 px-5">
             <TrendingUpSharpIcon fontSize="large" color="primary" />
             <h6 style={{ fontWeight: "700" }}>Effective</h6>
             <p>
-              Our professional product insert templates add a personal touch to
-              online purchases, and are proven to increase customer satisfaction
-              and review posting frequency
+              Proven to increase customer satisfaction and review posting
+              frequency, our business card sized product inserts are
+              double-sided and printed in full color on high quality card stock.
             </p>
           </div>
         </div>
@@ -34,17 +34,16 @@ export default function Features() {
             <h6 style={{ fontWeight: "700" }}>Inexpensive</h6>
             <p>
               At $0.05 each, product inserts are one of the most cost effective
-              methods to increasing Amazon FBA performance.
+              methods to growing your Amazon FBA business.
             </p>
           </div>
           <div className="col-md-6 px-5">
             <LocalShippingSharpIcon fontSize="large" color="primary" />
             <h6 style={{ fontWeight: "700" }}>Free Shipping</h6>
             <p>
-              Because our printing press is located in China, after we finish
-              printing your order we will ship it straight to your factory for
-              them to insert into each of your product packages. This should be
-              a complimentary service that your factory provides.
+              Shipping fees from our Shanghai printing press to your factory is
+              free. Insertion of product inserts into your product packaging is
+              usually a complementary service that your factory will provide.
             </p>
           </div>
         </div>

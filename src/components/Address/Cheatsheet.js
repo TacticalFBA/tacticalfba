@@ -12,7 +12,18 @@ export default function Cheatsheet({ open, handleClose }) {
   const textAreaRef = useRef(null);
 
   const copyToClipboard = () => {
-    const copyText = textAreaRef.current.innerHTML.replace(/<br>/g, "\r\n");
+    const copyText = `你好，我需要以下快递信息：
+
+1. 具体收件地址 (要求：中文填写)
+2. 收件人姓名 (要求：中文姓名)
+3. 收件人电话 (要求：11位手机号码，不需要+86)
+
+请将您的真实快递信息替换以下举例，并发还给我，谢谢！
+
+Factory Address：上海市徐汇区天平路120号1220室
+Contact Name：刘德华
+Contact Mobile：13800000000`;
+    // const copyText = textAreaRef.current.innerHTML.replace(/<br>/g, "\r\n");
     // console.log(copyText);
     navigator.clipboard.writeText(copyText);
     setCopySuccess("Copied");
@@ -30,14 +41,17 @@ export default function Cheatsheet({ open, handleClose }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Request for factory address information:"}
+          {"Request for Factory Address Information:"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Box mb={2}>
-              Please copy the following message and send to your supplier.
+              Please send the following factory address request to your
+              supplier. It clearly requests the information in the correct
+              format for your convenience.
               <br />
-              They will fill out and send it back to you.
+              The red portion is a template. They will use it as a guideline and
+              send it back to you.
             </Box>
             <Box>******</Box>
             <Box ref={textAreaRef}>
@@ -52,12 +66,15 @@ export default function Cheatsheet({ open, handleClose }) {
               <br />
               请将您的真实快递信息替换以下举例，并发还给我，谢谢！
               <br />
-              Factory Address：上海市徐汇区天平路120号1220室
               <br />
-              Contact Name：刘德华 <br />
-              Contact Mobile：13800000000 <br />
+              <Box style={{ color: "red" }} mb={1}>
+                Factory Address：上海市徐汇区天平路120号1220室
+                <br />
+                Contact Name：刘德华 <br />
+                Contact Mobile：13800000000 <br />
+              </Box>
             </Box>
-            <Box>******</Box>
+            <Box mt={1}>******</Box>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -65,12 +82,18 @@ export default function Cheatsheet({ open, handleClose }) {
             onClick={copyToClipboard}
             color="primary"
             autoFocus
+            size="small"
             variant="contained"
           >
             {copySuccess}
           </Button>
 
-          <Button onClick={handleClose} color="primary" variant="outlined">
+          <Button
+            onClick={handleClose}
+            color="primary"
+            variant="outlined"
+            size="small"
+          >
             Close
           </Button>
         </DialogActions>

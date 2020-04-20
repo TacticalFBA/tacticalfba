@@ -122,7 +122,7 @@ export default function MainNav({ history }) {
                             }}
                             onClick={handleClose}
                           >
-                            <MenuItem>Package Inserts</MenuItem>
+                            <MenuItem>Product Inserts</MenuItem>
                           </Link>
 
                           <Link
