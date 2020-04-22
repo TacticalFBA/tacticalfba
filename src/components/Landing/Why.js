@@ -25,7 +25,7 @@ export default function Why() {
             </p> */}
           </div>
           <div className="col-xl-2 col-md-4 col-sm-12">
-            <h4>Why do I need packaging inserts?</h4>
+            <h4>Why do I need product inserts?</h4>
           </div>
           <div className="col-xl-4 col-md-8 col-sm-12">
             <p>

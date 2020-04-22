@@ -12,7 +12,7 @@ export default function AddressTable({
 }) {
   return (
     <React.Fragment>
-      <h6 className="pb-3 text-uppercase">Saved Factories</h6>
+      <h6 className="pb-5 text-uppercase">Saved Factories</h6>
       <Table responsive hover>
         <thead>
           <tr>

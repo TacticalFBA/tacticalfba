@@ -18,7 +18,7 @@ export default class PaypalBtn extends React.Component {
     } = this.props;
     const onSuccess = (payment) => {
       openSpinner();
-      console.log("The payment was succeeded!", payment);
+      // console.log("The payment was succeeded!", payment);
       const items = cart.map((item) => {
         return {
           pid: item.pid,
@@ -35,18 +35,24 @@ export default class PaypalBtn extends React.Component {
           Math.random() * Math.floor(Math.random() * Date.now())
         )
           .toString()
-          .substring(0, 9);
+          .substring(0, 10);
       };
+
+      delete payment["address"];
+      console.log(payment);
 
       const order = {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         items: items,
         info: {
-          id: genID(),
+          OrderNO: genID(),
           date: dateFormat("mmmm dS, yyyy, hh:MM:ss TT"),
           // June 9th, 2007, 05:46:21 PM
           total: cartTotal,
           user: user,
+        },
+        payment: {
+          ...payment,
         },
       };
 
@@ -63,7 +69,7 @@ export default class PaypalBtn extends React.Component {
           closeSpinner();
           axios
             .post(`https://tfbaserver.herokuapp.com/${endpoint}`, order)
-            .then((res) => console.log(res))
+            // .then((res) => console.log(res))
             .catch((err) => console.log(err));
         })
         .catch((err) => {
@@ -90,6 +96,7 @@ export default class PaypalBtn extends React.Component {
     let currency = "USD"; // or you can set this value from your props or state
     let total = cartTotal; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
     // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
+    const shipping = 1;
 
     const client = {
       sandbox: process.env.REACT_APP_APP_ID,
@@ -106,6 +113,7 @@ export default class PaypalBtn extends React.Component {
       <PaypalExpressBtn
         env={env}
         client={client}
+        shipping={shipping}
         currency={currency}
         total={total}
         onError={onError}

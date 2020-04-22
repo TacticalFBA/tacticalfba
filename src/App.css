@@ -87,8 +87,8 @@ btn:hover {
 }
 
 .highlight:hover {
-  border: 2px solid #55fffe;
-  /* transform: translate(1px, 1px); */
+  /* border: 2px solid var(--mainDark); */
+  transform: translate(2px, 2px);
 }
 
 .btn:focus,

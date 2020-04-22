@@ -2,7 +2,6 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import CheckCircleOutlineSharpIcon from "@material-ui/icons/CheckCircleOutlineSharp";
 import { green } from "@material-ui/core/colors";
@@ -31,14 +30,14 @@ export default ({ open, handleClose, history, user }) => {
           style={{ color: green[500], fontSize: 60 }}
           // color="primary"
         />
-        <DialogContentText id="alert-dialog-description">
-          <Box my={2}>
-            <Typography variant="h6">Order Successful!</Typography>
-          </Box>
-          Thank you. A confirmation email has been sent to{" "}
-          <span style={{ fontWeight: 700 }}>{user}</span>
-          {/* Redirecting to your order history page after {counter} seconds... */}
-        </DialogContentText>
+        {/* <DialogContentText id="alert-dialog-description"> */}
+        <Box my={2}>
+          <Typography variant="h6">Order Successful!</Typography>
+        </Box>
+        Thank you. A confirmation email has been sent to{" "}
+        <span style={{ fontWeight: 700 }}>{user}</span>
+        {/* Redirecting to your order history page after {counter} seconds... */}
+        {/* </DialogContentText> */}
         <DialogActions>
           <Button onClick={() => history.push("/account")} color="primary">
             order history

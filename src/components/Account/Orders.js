@@ -74,7 +74,7 @@ export default function Orders({ orders, history }) {
         return (
           <Wrapper key={order.oid}>
             <div className="header">
-              <span>Order Number: {order.info.id} </span>
+              <span>Order Number: {order.info.orderNO} </span>
               <span className="mx-2">|</span>
               <span> Submitted on: {order.info.date}</span>
               <span className="total">
@@ -82,9 +82,9 @@ export default function Orders({ orders, history }) {
               </span>
             </div>
             <div className="body">
-              {order.items.map((item) => {
+              {order.items.map((item, index) => {
                 return (
-                  <div className="item" key={item.insert.iid}>
+                  <div className="item" key={index}>
                     <div className="row">
                       <div className="col-2 title">Product Type:</div>
                       <div className="col-10">

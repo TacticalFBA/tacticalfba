@@ -50,7 +50,7 @@ export default function TemplateList({
                   >
                     {[
                       "90 x 54 (mm)",
-                      "card stock",
+                      " cardstock",
                       "full color",
                       "double sided",
                     ].map((item, index) => {
@@ -72,7 +72,7 @@ export default function TemplateList({
                   $ 50
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
-                  per thousands
+                  per thousand
                 </Typography>
               </Box>
             </Box>
@@ -91,7 +91,7 @@ export default function TemplateList({
             <Paper className={classes.root}>
               {/* if user already has some inserts saved, list them for choose */}
 
-              <Box mb={3} textAlign="center">
+              <Box mb={5} textAlign="center">
                 <Typography variant="h6">Saved Inserts</Typography>
               </Box>
               <Box>

@@ -50,8 +50,8 @@ Contact Mobile：13800000000`;
               supplier. It clearly requests the information in the correct
               format for your convenience.
               <br />
-              The red portion is a template. They will use it as a guideline and
-              send it back to you.
+              The <span style={{ color: "red" }}>red portion</span> is a
+              template. They will use it as a guideline and send it back to you.
             </Box>
             <Box>******</Box>
             <Box ref={textAreaRef}>
@@ -70,7 +70,8 @@ Contact Mobile：13800000000`;
               <Box style={{ color: "red" }} mb={1}>
                 Factory Address：上海市徐汇区天平路120号1220室
                 <br />
-                Contact Name：刘德华 <br />
+                Contact Name：刘德华
+                <br />
                 Contact Mobile：13800000000 <br />
               </Box>
             </Box>

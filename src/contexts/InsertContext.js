@@ -61,9 +61,13 @@ function InsertProvider(props) {
     setEditorState(editorState);
     let contentState = editorState.getCurrentContent();
     let html = stateToHTML(contentState);
+    if (html == "<p><br></p>") {
+      html = "<p>Enter something...</p>";
+    }
     let newContent = Object.assign({}, content);
     newContent[item] = html;
     setContent(newContent);
+    // setEditorState(newContent);
   };
 
   // handle image change

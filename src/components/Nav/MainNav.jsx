@@ -147,11 +147,11 @@ export default function MainNav({ history }) {
                             <MenuItem>Sticker Labels</MenuItem>
                           </Link>
                           <Link
-                            to="/bar-code"
+                            to="/barcode"
                             style={{ textDecoration: "none", color: "#000" }}
                             onClick={handleClose}
                           >
-                            <MenuItem>Bar Codes</MenuItem>
+                            <MenuItem>Barcodes</MenuItem>
                           </Link>
                         </MenuList>
                       </ClickAwayListener>

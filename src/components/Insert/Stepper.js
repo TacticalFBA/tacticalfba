@@ -1,9 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,9 +45,11 @@ function getStepContent(step) {
   }
 }
 
-export default function HorizontalLinearStepper({ step }) {
+export default function HorizontalLinearStepper({ step, stepBack }) {
   const classes = useStyles();
+  const theme = useTheme();
   const steps = getSteps();
+
   return (
     <div className={classes.root}>
       <Stepper
@@ -64,7 +69,21 @@ export default function HorizontalLinearStepper({ step }) {
           );
         })}
       </Stepper>
-      <div>
+
+      <div style={{ position: "relative" }}>
+        <Button
+          style={{ position: "absolute", left: "1.5rem" }}
+          size="small"
+          disabled={step === 0}
+          onClick={stepBack}
+        >
+          {theme.direction === "rtl" ? (
+            <KeyboardArrowRight />
+          ) : (
+            <KeyboardArrowLeft />
+          )}
+          Back
+        </Button>
         {step === steps.length ? (
           <div>
             <Typography className={classes.instructions}>

@@ -16,16 +16,24 @@ export default ({ history, location }) => {
   const stepForward = () => {
     setStep(step + 1);
   };
+  const stepBack = () => {
+    if (step === 2) {
+      toStepOne();
+    } else {
+      setStep(step - 1);
+    }
+  };
   const toStepThree = () => {
     setStep(2);
   };
   const toStepOne = () => {
     setStep(0);
   };
+
   return (
     <div className="container">
       <OpenLoginModal />
-      <Stepper step={step} />
+      <Stepper step={step} stepBack={stepBack} />
       {/* steps */}
       <React.Fragment>
         {step === 0 && (

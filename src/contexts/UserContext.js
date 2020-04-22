@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { auth, provider, actionCodeSettings, db } from "../config/Firebase";
+import {
+  auth,
+  provider,
+  actionCodeSettings,
+  db,
+  storage,
+} from "../config/Firebase";
 
 const UserContext = React.createContext();
 
@@ -196,27 +202,6 @@ class UserProvider extends Component {
   };
   // account end
 
-  // cart manipulation start
-
-  handleDel = (id, collection, idType) => {
-    alert(`Cart items that uses this ${collection} will be removed!`);
-    const ref = db
-      .collection("users")
-      .doc(this.state.user)
-      .collection(collection)
-      .doc(id);
-    ref
-      .delete()
-      .then(() => {
-        const currentCart = JSON.parse(localStorage.getItem("cart"));
-        const newCart = currentCart.filter((item) => item[idType] !== id);
-        localStorage.setItem("cart", JSON.stringify(newCart));
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
   render() {
     return (
       <UserContext.Provider
@@ -229,8 +214,6 @@ class UserProvider extends Component {
           SignIn: this.SignIn,
           signOut: this.signOut,
           googleLogin: this.googleLogin,
-          //other fns
-          handleDel: this.handleDel,
         }}
       >
         {this.props.children}
