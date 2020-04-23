@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import { Editor as DraftEditor } from "draft-js";
+import createToolbarPlugin from "draft-js-static-toolbar-plugin";
 import styled from "styled-components";
 import Toolbar from "./toolbar";
 
+const toolbarPlugin = createToolbarPlugin();
+
 export default function Editor({ editorState, updateEditorState }) {
-  const editor = React.useRef(null);
+  const editor = useRef(null);
   function focusEditor() {
     editor.current.focus();
   }
