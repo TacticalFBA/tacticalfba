@@ -58,13 +58,18 @@ export default function ContactForm() {
   };
 
   const handleSubmit = () => {
+    for (const key in data) {
+      if (data[key] === "") {
+        return false;
+      }
+    }
+    if (Error.length > 0) return false;
+
     setSpin(true);
-    let tempData = Object.assign({}, data);
-    tempData.message = data.message.replace(/\n/g, "<br/>");
     const endpoint = "api/contactForm";
-    console.log(tempData);
+    // console.log(tempData);
     axios
-      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, tempData)
+      .post(`https://tfbaserver.herokuapp.com/${endpoint}`, data)
       .then((res) => {
         console.log(res);
         setSpin(false);
@@ -98,7 +103,7 @@ export default function ContactForm() {
               value={data.name}
               onChange={(e) => onChange(e)}
               onBlur={(e) => onBlur(e)}
-              error={Error.find((item) => item.field === "name")}
+              error={Boolean(Error.find((item) => item.field === "name"))}
               helperText={
                 Error.find((item) => item.field === "name") &&
                 Error.filter((item) => item.field === "name")[0].message
@@ -115,7 +120,7 @@ export default function ContactForm() {
               value={data.email}
               onChange={(e) => onChange(e)}
               onBlur={(e) => onBlur(e)}
-              error={Error.find((item) => item.field === "email")}
+              error={Boolean(Error.find((item) => item.field === "email"))}
               helperText={
                 Error.find((item) => item.field === "email") &&
                 Error.filter((item) => item.field === "email")[0].message
@@ -133,7 +138,7 @@ export default function ContactForm() {
               value={data.subject}
               onChange={(e) => onChange(e)}
               onBlur={(e) => onBlur(e)}
-              error={Error.find((item) => item.field === "subject")}
+              error={Boolean(Error.find((item) => item.field === "subject"))}
               helperText={
                 Error.find((item) => item.field === "subject") &&
                 Error.filter((item) => item.field === "subject")[0].message
@@ -152,7 +157,7 @@ export default function ContactForm() {
               value={data.message}
               onChange={(e) => onChange(e)}
               onBlur={(e) => onBlur(e)}
-              error={Error.find((item) => item.field === "message")}
+              error={Boolean(Error.find((item) => item.field === "message"))}
               helperText={
                 Error.find((item) => item.field === "message") &&
                 Error.filter((item) => item.field === "message")[0].message

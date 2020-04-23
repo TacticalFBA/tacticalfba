@@ -45,7 +45,7 @@ export default class PaypalBtn extends React.Component {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         items: items,
         info: {
-          OrderNO: genID(),
+          orderNO: genID(),
           date: dateFormat("mmmm dS, yyyy, hh:MM:ss TT"),
           // June 9th, 2007, 05:46:21 PM
           total: cartTotal,

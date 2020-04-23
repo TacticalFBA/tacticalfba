@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import { CartProvider } from "./contexts/CartContext";
 import { PostProvider } from "./components/Blog/PostContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -13,7 +14,9 @@ ReactDOM.render(
     <UserProvider>
       <CartProvider>
         <Router>
-          <App />
+          <ScrollToTop>
+            <App />
+          </ScrollToTop>
         </Router>
       </CartProvider>
     </UserProvider>

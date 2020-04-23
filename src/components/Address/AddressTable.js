@@ -28,29 +28,19 @@ export default function AddressTable({
           {adds.map(({ aid, factory, address, contact, email, mobile }) => (
             <tr key={aid}>
               <td>
-                <div style={{ height: "31px", lineHeight: "31px" }}>
-                  {factory}
-                </div>
+                <div>{factory}</div>
               </td>
-              <td colSpan="2" style={{ border: "transparent" }}>
-                <div style={{ height: "31px", lineHeight: "31px" }}>
-                  {address}
-                </div>
+              <td colSpan="2">
+                <div>{address}</div>
               </td>
               <td>
-                <div style={{ height: "31px", lineHeight: "31px" }}>
-                  {contact}
-                </div>
+                <div>{contact}</div>
               </td>
               <td>
-                <div style={{ height: "31px", lineHeight: "31px" }}>
-                  {email}
-                </div>
+                <div>{email}</div>
               </td>
               <td>
-                <div style={{ height: "31px", lineHeight: "31px" }}>
-                  {mobile}
-                </div>
+                <div>{mobile}</div>
               </td>
 
               <CartConsumer>

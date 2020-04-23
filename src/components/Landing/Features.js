@@ -43,7 +43,7 @@ export default function Features() {
             <p>
               Shipping fees from our Shanghai printing press to your factory is
               free. Insertion of product inserts into your product packaging is
-              usually a complementary service that your factory will provide.
+              usually a complimentary service that your factory will provide.
             </p>
           </div>
         </div>

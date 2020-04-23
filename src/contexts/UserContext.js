@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  auth,
-  provider,
-  actionCodeSettings,
-  db,
-  storage,
-} from "../config/Firebase";
+import { auth, provider, actionCodeSettings, db } from "../config/Firebase";
 
 const UserContext = React.createContext();
 

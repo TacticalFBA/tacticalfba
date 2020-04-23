@@ -87,7 +87,14 @@ export default function EditTemplate({ location, history, stepForward }) {
                         <div className="row">
                           <div className="col-3">
                             <h6>Set Images: </h6>
-                            <p className="text-muted">File format: JPG.</p>
+                            <small className="text-muted">
+                              <ul style={{ paddingLeft: "1rem" }}>
+                                <li>File format: JPG</li>
+                                {pid === 0 && (
+                                  <li>Upload dimensions: 96*60 (mm)</li>
+                                )}
+                              </ul>
+                            </small>
                           </div>
                           <div className="col-9">
                             <span>Front image: </span>
