@@ -13,17 +13,12 @@ export default function Why() {
             <p>
               Product inserts are printed marketing materials that sellers can
               add to their Amazon packages prior to sending to customers.
-              <br />
+            </p>
+            <p>
               Usually the size of a business card, product inserts are essential
               in creating a stand-out customer experience, leading to higher
               customer satisfaction and frequency of Amazon reviews.
             </p>
-            {/* <p>
-              Packaging inserts have the potential to be an essential part of
-              creating a stand-out customer experience, achieve different
-              marketing goals, and directly communicate with your Amazon
-              community.
-            </p> */}
           </div>
           <div className="col-xl-2 col-md-4 col-sm-12">
             <h4>Why do I need product inserts?</h4>
@@ -33,18 +28,12 @@ export default function Why() {
               Each product sold has massive potential for upselling,
               incentivizing repeat purchases and encouraging feedback. And
               that’s what product inserts can help to promote.
-              <br />
+            </p>
+            <p>
               Adding a personal touch and directly communicating with your
               Amazon customer base is an invaluable asset from a marketing
               perspective.
             </p>
-            {/* <p>
-              However, to protect customers from spam, Amazon has enforced
-              strict limitations on what kind of marketing materials you can add
-              to your packages. That means you have to be very careful and exact
-              when creating packaging inserts in order not to violate Amazon’s
-              TOS.
-            </p> */}
           </div>
         </div>
       </div>

@@ -11,9 +11,9 @@ import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(7),
     color: theme.palette.text.secondary,
-    maxWidth: "65vw",
+    maxWidth: "75vw",
     margin: "0 auto",
   },
   form: {
@@ -91,7 +91,7 @@ export default function ContactForm() {
     <Paper className={classes.root}>
       <Spinner spin={spin} />
       <form className={classes.form} autoComplete="off">
-        <Grid container spacing={3}>
+        <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
             <TextField
               required

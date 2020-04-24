@@ -182,7 +182,7 @@ export default function ContactForm({ user, location, history, stepForward }) {
               helperText={
                 (Err.find((item) => item.field === "address") &&
                   Err.find((item) => item.field === "address").message) ||
-                "in Chinese"
+                "use Chinese characters"
               }
             />
           </Grid>
@@ -200,7 +200,7 @@ export default function ContactForm({ user, location, history, stepForward }) {
               helperText={
                 (Err.find((item) => item.field === "contact") &&
                   Err.find((item) => item.field === "contact").message) ||
-                "in Chinese"
+                "use Chinese characters"
               }
             />
           </Grid>

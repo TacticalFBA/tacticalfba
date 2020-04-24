@@ -288,4 +288,4 @@ function InsertProvider(props) {
 
 const InsertConsumer = InsertContext.Consumer;
 
-export { InsertProvider, InsertConsumer };
+export { InsertProvider, InsertConsumer, InsertContext };

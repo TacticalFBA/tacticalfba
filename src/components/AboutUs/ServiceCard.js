@@ -19,7 +19,7 @@ export default function ServiceCard({ icon, name, content, link }) {
         <img
           src={icon}
           alt={name}
-          style={{ width: "2.5rem", verticalAlign: "middle" }}
+          style={{ width: "2.2rem", verticalAlign: "middle" }}
         />
         <span
           style={{

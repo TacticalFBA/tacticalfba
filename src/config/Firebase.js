@@ -4,7 +4,7 @@ import "firebase/firebase-firestore";
 import "firebase/storage";
 
 const config = {
-  apiKey: "AIzaSyDX_8hufHc3H3SI66b4_-gCgbQA_iGxS7Q",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "tacticalfba-28b9b.firebaseapp.com",
   databaseURL: "https://tacticalfba-28b9b.firebaseio.com",
   projectId: "tacticalfba-28b9b",

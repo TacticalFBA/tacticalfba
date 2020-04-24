@@ -1,29 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   input: {
-    display: "none"
-  }
+    display: "none",
+  },
 }));
 
 export default function ImageUploader({ onSelectImg, side }) {
   const classes = useStyles();
   return (
-    <div className="mb-3">
+    <div>
       <input
         type="file"
         name={side}
         className={classes.input}
         id={side}
         accept="image/*"
-        onChange={e => onSelectImg(e)}
+        onChange={(e) => onSelectImg(e)}
       />
       <label htmlFor={side}>
         <Button
@@ -32,7 +32,7 @@ export default function ImageUploader({ onSelectImg, side }) {
           variant="contained"
           disableElevation
         >
-          Choose File
+          {"Choose File"}
         </Button>
       </label>
     </div>

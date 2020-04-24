@@ -97,12 +97,26 @@ export default function EditTemplate({ location, history, stepForward }) {
                             </small>
                           </div>
                           <div className="col-9">
-                            <span>Front image: </span>
+                            <span
+                              style={{
+                                display: "block",
+                                paddingBottom: "10px",
+                              }}
+                            >
+                              Front image:{" "}
+                            </span>
                             <ImageUploader
                               side={"frontImg"}
                               onSelectImg={value.onSelectImg}
                             />
-                            <span>Rear image: </span>
+                            <span
+                              style={{
+                                display: "block",
+                                paddingBottom: "10px",
+                              }}
+                            >
+                              Rear image:{" "}
+                            </span>
                             <ImageUploader
                               side={"rearImg"}
                               onSelectImg={value.onSelectImg}

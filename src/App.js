@@ -62,7 +62,7 @@ const App = (props) => {
             <Route path="/packaging-box" component={ComingSoon} />
             <Route path="/sticker-label" component={ComingSoon} />
             <Route path="/barcode" component={ComingSoon} />
-            <Route exact path="/blog" component={BlogList} />
+            {/* <Route exact path="/blog" component={BlogList} /> */}
             <Route path="/post/:id" component={Post} />
             <Route component={Default}></Route>
           </Switch>

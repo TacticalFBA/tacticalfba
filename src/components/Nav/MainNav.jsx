@@ -160,11 +160,11 @@ export default function MainNav({ history }) {
                 )}
               </Popper>
               {/* blog */}
-              <Button style={{ margin: "0 .5rem" }}>
+              {/* <Button style={{ margin: "0 .5rem" }}>
                 <Link className={classes.navLink} to="/blog">
                   Blog
-                </Link>
-              </Button>
+                </Link> */}
+              {/* </Button> */}
               {/* about us */}
               <Button style={{ margin: "0 .5rem" }}>
                 <Link className={classes.navLink} to="/about-us">
