@@ -4,24 +4,29 @@ import { Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
-export default function ServiceCard({ name, content, link }) {
+export default function ServiceCard({ icon, name, content, link }) {
+  const styles = {
+    box: {
+      background: "var(--mainWhite)",
+      padding: "2rem",
+      borderRadius: "3px",
+      height: "300px",
+    },
+  };
   return (
-    <Box
-      style={{
-        // border: "1px solid black",
-        background: "var(--mainWhite)",
-        padding: "2rem",
-        borderRadius: "3px",
-        height: "38vh",
-      }}
-    >
+    <Box style={styles.box}>
       <Box>
-        <PhotoCameraIcon />
+        <img
+          src={icon}
+          alt={name}
+          style={{ width: "2.5rem", verticalAlign: "middle" }}
+        />
         <span
           style={{
             fontWeight: "700",
-            paddingLeft: ".5rem",
+            paddingLeft: ".75rem",
             fontSize: "1rem",
+            verticalAlign: "middle",
           }}
         >
           {name}

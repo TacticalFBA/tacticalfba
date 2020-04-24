@@ -19,11 +19,7 @@ export default function P1() {
                 At TacticalFBA, we are your one-stop Amazon FBA solutions
                 service. Our US based company has an office in Shanghai allowing
                 us to efficiently coordinate value-added FBA services directly
-                with your partnering manufacturers in China. Our services
-                include <strong>product inserts</strong>,{" "}
-                <strong>product photography</strong>, <strong>bar codes</strong>
-                ,<strong>packaging boxes</strong>, and{" "}
-                <strong>package labelling</strong>. <br />
+                with your partnering manufacturers in China.
               </Typography>
             </Box>
           </Grid>

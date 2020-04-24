@@ -27,9 +27,14 @@ export default function P2() {
                 important facets of your ecommerce business.
               </div>
             </Grid>
-            {services.map(({ name, content, link }, index) => (
+            {services.map(({ icon, name, content, link }, index) => (
               <Grid key={index} item xs={12} md={4}>
-                <ServiceCard name={name} content={content} link={link} />
+                <ServiceCard
+                  icon={icon}
+                  name={name}
+                  content={content}
+                  link={link}
+                />
               </Grid>
             ))}
           </Grid>
