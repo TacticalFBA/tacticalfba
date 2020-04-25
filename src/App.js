@@ -21,6 +21,7 @@ import LoginModal from "./components/Account/LoginModal";
 import Account from "./components/Account/Account";
 import Cart from "./components/Cart/Cart";
 import FinishSignUp from "./components/Account/FinishSignUp";
+import FAQ from "./components/FAQ";
 import BlogList from "./components/Blog/BlogList";
 import Post from "./components/Blog/Post";
 import ComingSoon from "./components/ComingSoon";
@@ -53,8 +54,9 @@ const App = (props) => {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/finish-signup" component={FinishSignUp} />
-            <Route path="/contact" component={Contact} />
+            <Route path="/contact-us" component={Contact} />
             <Route path="/about-us" component={AboutUs} />
+            <Route path="/faq" component={FAQ} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/account" component={Account} />
             <Route exact path="/insert" component={Insert} />

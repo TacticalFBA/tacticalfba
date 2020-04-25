@@ -173,8 +173,14 @@ export default function MainNav({ history }) {
               </Button>
               {/* contact */}
               <Button style={{ margin: "0 .5rem" }}>
-                <Link className={classes.navLink} to="/contact">
-                  Contact
+                <Link className={classes.navLink} to="/contact-us">
+                  Contact Us
+                </Link>
+              </Button>
+              {/* FAQ */}
+              <Button style={{ margin: "0 .5rem" }}>
+                <Link className={classes.navLink} to="/faq">
+                  FAQ
                 </Link>
               </Button>
             </div>

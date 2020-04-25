@@ -50,9 +50,9 @@ export default function TemplateList({
                   >
                     {[
                       "90 x 54 (mm)",
-                      " cardstock",
-                      "full color",
-                      "double sided",
+                      "cardstock",
+                      "full-color",
+                      "double-sided",
                     ].map((item, index) => {
                       return index === 0 ? (
                         <li key={index} style={{ marginLeft: "1rem" }}>

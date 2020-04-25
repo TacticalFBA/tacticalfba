@@ -11,7 +11,7 @@ export default function Contact() {
         className="container"
         style={{
           position: "absolute",
-          top: "70%",
+          top: "65%",
           zIndex: "99",
           left: "50%",
           transform: "translateX(-50%)",
