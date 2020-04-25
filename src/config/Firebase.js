@@ -5,13 +5,13 @@ import "firebase/storage";
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "tacticalfba-28b9b.firebaseapp.com",
-  databaseURL: "https://tacticalfba-28b9b.firebaseio.com",
-  projectId: "tacticalfba-28b9b",
-  storageBucket: "tacticalfba-28b9b.appspot.com",
-  messagingSenderId: "149879790771",
-  appId: "1:149879790771:web:534d2375a7b225ec8b24c6",
-  measurementId: "G-12WCTCMXD5",
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(config);
