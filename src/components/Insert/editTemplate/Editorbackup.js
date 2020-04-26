@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Editor as DraftEditor } from "draft-js";
 import styled from "styled-components";
 import Toolbar from "./toolbar";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
@@ -11,15 +11,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import Draggable from "react-draggable";
 import Paper from "@material-ui/core/Paper";
-
-const useStyles = makeStyles({
-  dialogLeft: {
-    position: "absolute",
-    // left: "50%",
-    // top: "50%",
-    // transform: "translate(-50%,-50%) !important",
-  },
-});
 
 function PaperComponent(props) {
   return (
@@ -75,10 +66,17 @@ export default function Editor({
   open,
   setEditorShow,
 }) {
-  const classes = useStyles();
+  const editor = useRef(null);
+  // function focusEditor() {
+  //   editor.current.focus();
+  // }
   const handleClose = () => {
     setEditorShow(false);
   };
+
+  // React.useEffect(() => {
+  //   focusEditor();
+  // }, []);
 
   return (
     <React.Fragment>
@@ -87,9 +85,6 @@ export default function Editor({
         aria-labelledby="draggable-dialog-title"
         open={open}
         PaperComponent={PaperComponent}
-        classes={{
-          paper: classes.dialogLeft,
-        }}
       >
         <DialogTitle
           style={{ cursor: "move" }}
@@ -106,6 +101,7 @@ export default function Editor({
             />
             <EditorContainer>
               <DraftEditor
+                ref={editor}
                 editorState={editorState}
                 onChange={updateEditorState}
                 onClick={updateEditorState}
@@ -113,6 +109,11 @@ export default function Editor({
             </EditorContainer>
           </EditorWrapper>
         </DialogContent>
+        {/* <DialogActions>
+          <Button autoFocus color="primary">
+            Save changes
+          </Button>
+        </DialogActions> */}
       </Dialog>
     </React.Fragment>
   );

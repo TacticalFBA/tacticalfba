@@ -8,19 +8,14 @@ export default function ThemeColor({ color, handleThemeColor }) {
 
   return (
     <React.Fragment>
-      <Button
-        variant="contained"
-        size="small"
-        disableElevation
-        onClick={() => setShow(!show)}
-      >
-        {show ? "Close Color Picker" : "Open Color Picker"}
+      <Button variant="contained" size="small" onClick={() => setShow(!show)}>
+        {show ? "Close Color Picker" : "Choose Theme Color"}
       </Button>
       {show === true && (
         <Wrapper>
           <CompactPicker
             color={color}
-            onChangeComplete={color => handleThemeColor(color)}
+            onChangeComplete={(color) => handleThemeColor(color)}
           />
           <p className="text-muted">* You may enter any color hex code</p>
         </Wrapper>
@@ -30,9 +25,9 @@ export default function ThemeColor({ color, handleThemeColor }) {
 }
 
 const Wrapper = styled.div`
-  padding-top: 1rem;
+  margin-top: 1rem;
   p {
-    padding-top: 0.8rem;
+    margin-top: 0.8rem;
     margin-bottom: 0;
   }
 `;

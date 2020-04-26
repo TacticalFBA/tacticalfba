@@ -1,33 +1,17 @@
 import React from "react";
-import styled from "styled-components";
+import Textfield from "@material-ui/core/TextField";
 
 export default function InsertName({ iName, handleInsertName }) {
   return (
-    <React.Fragment>
-      <Wrapper>
-        <input
-          type="text"
-          value={iName}
-          placeholder="My Template..."
-          onChange={e => handleInsertName(e)}
-        />
-      </Wrapper>
-    </React.Fragment>
+    <Textfield
+      value={iName}
+      placeholder="My Template..."
+      label="Name your insert"
+      variant="outlined"
+      required
+      size="small"
+      onChange={handleInsertName}
+      style={{ paddingRight: "1rem", width: "20rem", verticalAlign: "middle" }}
+    />
   );
 }
-
-const Wrapper = styled.div`
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  input {
-    display: flex;
-    border-radius: 4px;
-    background-color: #fff;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 300;
-    border: #ccc 1px solid;
-  }
-`;

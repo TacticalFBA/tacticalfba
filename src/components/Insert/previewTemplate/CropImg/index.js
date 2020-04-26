@@ -2,10 +2,12 @@ import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import { InsertConsumer } from "../../../../contexts/InsertContext";
+import ImageUploader from "../../editTemplate/ImageUploader";
 
 const Demo = ({ classes, url, aspect, cropShape, item }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -49,21 +51,41 @@ const Demo = ({ classes, url, aspect, cropShape, item }) => {
             onChange={(e, zoom) => setZoom(zoom)}
           />
         </div>
-        <InsertConsumer>
-          {({ showCroppedImage }) => (
-            <Button
-              onClick={() =>
-                showCroppedImage(url, croppedAreaPixels, rotation, item)
-              }
-              variant="contained"
-              color="primary"
-              className={classes.cropButton}
-            >
-              Save
-            </Button>
-          )}
-        </InsertConsumer>
       </div>
+      <InsertConsumer>
+        {({ showCroppedImage, onSelectImg, cropInfo }) => (
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignContent="center"
+          >
+            <Box style={{ width: "40%" }}>
+              <ImageUploader onSelectImg={onSelectImg} side={cropInfo.item} />
+            </Box>
+            <Box style={{ width: "10%" }}> </Box>
+            <Box style={{ width: "40%" }}>
+              <Button
+                onClick={() =>
+                  showCroppedImage(
+                    url,
+                    croppedAreaPixels,
+                    rotation,
+                    item,
+                    setZoom
+                  )
+                }
+                variant="outlined"
+                size="small"
+                color="primary"
+                fullWidth
+              >
+                Save
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </InsertConsumer>
     </div>
   );
 };

@@ -44,7 +44,7 @@ export default function Preview({ pid, content, onSelect, frontRef, backRef }) {
   };
   return (
     <InsertConsumer>
-      {({ open, handleClose, cropInfo, handleClickOpen }) => (
+      {({ open, handleClose, cropInfo, handleClickOpen, onSelectImg }) => (
         <React.Fragment>
           <div>{renderTemplates(handleClickOpen)}</div>
           <CropModal
@@ -54,6 +54,7 @@ export default function Preview({ pid, content, onSelect, frontRef, backRef }) {
             aspect={cropInfo.aspect}
             cropShape={cropInfo.cropShape}
             item={cropInfo.item}
+            onSelectImg={onSelectImg}
           />
         </React.Fragment>
       )}

@@ -91,7 +91,7 @@ btn:hover {
   transform: translate(2px, 2px);
 }
 
-.btn:focus,
+/* .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
 .btn.focus,
@@ -100,7 +100,7 @@ btn:hover {
   outline: none;
   border-color: transparent;
   box-shadow: none;
-}
+} */
 
 button:focus,
 button:active:focus,
@@ -111,4 +111,7 @@ buttonactive.focus {
   outline: none !important;
   border-color: transparent !important;
   box-shadow: none !important;
+}
+button {
+  font-weight: 700 !important;
 }

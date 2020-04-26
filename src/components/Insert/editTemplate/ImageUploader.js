@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ImageUploader({ onSelectImg, side }) {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <input
         type="file"
         name={side}
@@ -25,12 +25,13 @@ export default function ImageUploader({ onSelectImg, side }) {
         accept="image/*"
         onChange={(e) => onSelectImg(e)}
       />
-      <label htmlFor={side}>
+      <label htmlFor={side} style={{ width: "100%" }}>
         <Button
           size="small"
           component="span"
           variant="contained"
-          disableElevation
+          color="primary"
+          fullWidth
         >
           {"Choose File"}
         </Button>

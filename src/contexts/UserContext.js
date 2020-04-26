@@ -34,6 +34,7 @@ class UserProvider extends Component {
           if (url === "account") {
             window.location.href = "/account";
           }
+          window.location.href = "/";
           window.localStorage.removeItem("emailForSignIn");
           window.localStorage.removeItem("redirectTo");
         })

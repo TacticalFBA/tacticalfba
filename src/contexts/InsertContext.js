@@ -42,18 +42,22 @@ function InsertProvider(props) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [item, setItem] = useState("");
 
-  const onSelect = (item) => {
-    setItem(item);
-    setEditorShow(true);
-    // get the default html of selected part
-    const html = content[item];
-    // set the default editor content
+  const setEditorHTML = (html) => {
     const blocksFromHTML = convertFromHTML(html);
     const defaultContent = ContentState.createFromBlockArray(
       blocksFromHTML.contentBlocks,
       blocksFromHTML.entityMap
     );
     setEditorState(EditorState.createWithContent(defaultContent));
+  };
+
+  const onSelect = (item) => {
+    setItem(item);
+    setEditorShow(true);
+    // get the default html of selected part
+    const html = content[item];
+    // set the default editor content
+    setEditorHTML(html);
   };
 
   // handle editor
@@ -63,12 +67,20 @@ function InsertProvider(props) {
     let html = stateToHTML(contentState);
     if (html === "<p><br></p>") {
       html = "<p>Enter something...</p>";
+      setEditorHTML(html);
     }
     let newContent = Object.assign({}, content);
     newContent[item] = html;
     setContent(newContent);
-    // setEditorState(newContent);
   };
+
+  const [open, setOpen] = useState(false);
+  const [cropInfo, setCropInfo] = useState({
+    img: "",
+    aspect: 1,
+    cropShape: "",
+    item: "",
+  });
 
   // handle image change
   const onSelectImg = (e) => {
@@ -92,16 +104,12 @@ function InsertProvider(props) {
         let newContent = Object.assign({}, content);
         newContent[side] = compressedFile;
         setContent(newContent);
+        const newCropInfo = Object.assign({}, cropInfo);
+        newCropInfo.img = compressedFile;
+        setCropInfo(newCropInfo);
       });
   };
 
-  const [open, setOpen] = useState(false);
-  const [cropInfo, setCropInfo] = useState({
-    img: "",
-    aspect: 1,
-    cropShape: "",
-    item: "",
-  });
   const handleClickOpen = (img, aspect, cropShape, item) => {
     setCropInfo({
       img: img,
@@ -115,7 +123,13 @@ function InsertProvider(props) {
     setOpen(false);
   };
 
-  const showCroppedImage = async (url, croppedAreaPixels, rotation, item) => {
+  const showCroppedImage = async (
+    url,
+    croppedAreaPixels,
+    rotation,
+    item,
+    setZoom
+  ) => {
     try {
       let croppedImage = await getCroppedImg(url, croppedAreaPixels, rotation);
       console.log("done", { croppedImage });
@@ -123,6 +137,7 @@ function InsertProvider(props) {
       newContent[item] = croppedImage;
       setContent(newContent);
       handleClose();
+      setZoom(1);
       // setCroppedImage(croppedImage);
     } catch (e) {
       console.error(e);
@@ -279,6 +294,7 @@ function InsertProvider(props) {
         handleClose: handleClose,
         cropInfo: cropInfo,
         handleClickOpen: handleClickOpen,
+        setEditorShow: setEditorShow,
       }}
     >
       {props.children}
