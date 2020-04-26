@@ -134,7 +134,7 @@ export default function ContactForm() {
               id="subject"
               label="Subject"
               name="subject"
-              placeholder="If you are inquring about an order, please include order number here."
+              placeholder="If you are inquiring about an order, please include your order number here."
               value={data.subject}
               onChange={(e) => onChange(e)}
               onBlur={(e) => onBlur(e)}

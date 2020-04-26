@@ -120,70 +120,72 @@ class CartProvider extends Component {
 
   handleDel = (user, id, collection, idType) => {
     // confirm delete
-    window.confirm(`Cart items that uses this ${collection} will be removed!`);
+    if (
+      window.confirm(`Cart items that uses this ${collection} will be removed!`)
+    ) {
+      // get data ref
+      const dataRef = db
+        .collection("users")
+        .doc(user)
+        .collection(collection)
+        .doc(id);
 
-    // get data ref
-    const dataRef = db
-      .collection("users")
-      .doc(user)
-      .collection(collection)
-      .doc(id);
-
-    const deleteData = () => {
-      dataRef
-        .delete()
-        .then(() => {
-          const currentCart = JSON.parse(localStorage.getItem("cart"));
-          const newCart = currentCart.filter((item) => item[idType] !== id);
-          localStorage.setItem("cart", JSON.stringify(newCart));
-          localStorage.removeItem("pid");
-          localStorage.removeItem("iid");
-          localStorage.removeItem("aid");
-          this.setState({ cart: newCart });
-          this.addTotals();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
-
-    // deleting insert
-    if (collection === "insert") {
-      // get image arr
-      dataRef
-        .get()
-        .then((doc) => {
-          // console.log(doc.data());
-          const data = doc.data();
-          const arr = ["frontImg", "rearImg", "frontPre", "backPre"];
-          const names = arr.map((item) => {
-            // https://firebasestorage.googleapis.com/v0/b/tacticalfba-28b9b.appspot.com/o/images%2F3uctizd9sjo000?alt=media&token=8367a6ef-8185-4d32-bca9-d9669fa8d721
-            const url = data[item];
-            // goal:3uctizd9sjo000
-            const split1 = url.split("images%2F")[1];
-            const name = split1.split("?alt=")[0];
-            return name;
+      const deleteData = () => {
+        dataRef
+          .delete()
+          .then(() => {
+            const currentCart = JSON.parse(localStorage.getItem("cart"));
+            const newCart = currentCart.filter((item) => item[idType] !== id);
+            localStorage.setItem("cart", JSON.stringify(newCart));
+            localStorage.removeItem("pid");
+            localStorage.removeItem("iid");
+            localStorage.removeItem("aid");
+            this.setState({ cart: newCart });
+            this.addTotals();
+          })
+          .catch((err) => {
+            console.log(err.message);
           });
+      };
 
-          // console.log(names);
+      // deleting insert
+      if (collection === "insert") {
+        // get image arr
+        dataRef
+          .get()
+          .then((doc) => {
+            // console.log(doc.data());
+            const data = doc.data();
+            const arr = ["frontImg", "rearImg", "frontPre", "backPre"];
+            const names = arr.map((item) => {
+              // https://firebasestorage.googleapis.com/v0/b/tacticalfba-28b9b.appspot.com/o/images%2F3uctizd9sjo000?alt=media&token=8367a6ef-8185-4d32-bca9-d9669fa8d721
+              const url = data[item];
+              // goal:3uctizd9sjo000
+              const split1 = url.split("images%2F")[1];
+              const name = split1.split("?alt=")[0];
+              return name;
+            });
 
-          names.forEach((img) => {
-            const imgRef = storage.ref(`images/${img}`);
-            // Delete the file
-            imgRef
-              .delete()
-              .then(() => {
-                console.log(`${img} deleted`);
-              })
-              .then(() => deleteData())
-              .catch((err) => {
-                console.log(err.message);
-              });
-          });
-        })
-        .catch((err) => console.log(err.message));
-    } else {
-      deleteData();
+            // console.log(names);
+
+            names.forEach((img) => {
+              const imgRef = storage.ref(`images/${img}`);
+              // Delete the file
+              imgRef
+                .delete()
+                .then(() => {
+                  console.log(`${img} deleted`);
+                })
+                .then(() => deleteData())
+                .catch((err) => {
+                  console.log(err.message);
+                });
+            });
+          })
+          .catch((err) => console.log(err.message));
+      } else {
+        deleteData();
+      }
     }
   };
 

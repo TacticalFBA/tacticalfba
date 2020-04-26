@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { UserConsumer } from "../../contexts/UserContext";
 import { Box, Typography, TextField, Button, Divider } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Spinner from "../Spinner";
 
 export default class LoginModal extends Component {
@@ -58,6 +59,16 @@ export default class LoginModal extends Component {
                         <span onClick={() => closeModal()}>&times;</span>
                       </button>
                     )}
+                    {window.location.pathname !== "/" && (
+                      <Button
+                        // color="primary"
+                        size="small"
+                        startIcon={<ArrowBackIosIcon />}
+                        onClick={() => (window.location.href = "/")}
+                      >
+                        Go back
+                      </Button>
+                    )}
                   </div>
                   <div className="modal-body">
                     <Box mb={2}>
@@ -84,6 +95,7 @@ export default class LoginModal extends Component {
                         required
                         variant="outlined"
                         size="small"
+                        placeholder="hello@tacticalfba.com"
                         value={this.state.email}
                         onChange={(e) =>
                           this.setState({ email: e.target.value })
