@@ -264,7 +264,7 @@ export default function ContactForm({ user, location, history, stepForward }) {
               fullWidth
               onClick={OpenCheatSheet}
             >
-              Cheatsheet to send to factory
+              Don't know your factory address?
             </Button>
             <Cheatsheet open={CheatSheetOpen} handleClose={closeCheatSheet} />
           </Box>

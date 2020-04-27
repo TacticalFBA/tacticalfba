@@ -35,7 +35,7 @@ function getStepContent(step) {
     case 0:
       return "Choose from one of our professional templates or upload your own design";
     case 1:
-      return "Design Insert";
+      return "Hover over to edit";
     case 2:
       return "Where should we send these inserts? Shipping is free!";
     case 3:

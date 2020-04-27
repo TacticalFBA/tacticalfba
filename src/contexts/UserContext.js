@@ -28,13 +28,13 @@ class UserProvider extends Component {
       auth
         .signInWithEmailLink(email, window.location.href)
         .then(() => {
-          if (url === "insert") {
-            window.location.href = "/insert";
-          }
-          if (url === "account") {
-            window.location.href = "/account";
-          }
-          window.location.href = "/";
+          //   if (url === "insert") {
+          //     window.location.href = "/insert";
+          //   }
+          //   if (url === "account") {
+          //     window.location.href = "/account";
+          //   }
+          window.location.href = url;
           window.localStorage.removeItem("emailForSignIn");
           window.localStorage.removeItem("redirectTo");
         })
@@ -155,23 +155,11 @@ class UserProvider extends Component {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // var token = result.credential.accessToken;
-        // The signed-in user info.
-        // var user = result.user;
-        // ...
         this.closeModal();
       })
       .catch(function (error) {
-        // Handle Errors here.
-        // var errorCode = error.code;
         var errorMessage = error.message;
         alert(errorMessage);
-        // The email of the user's account used.
-        // var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        // var credential = error.credential;
-        // ...
       });
   };
 

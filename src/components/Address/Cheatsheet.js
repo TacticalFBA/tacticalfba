@@ -46,12 +46,23 @@ Contact Mobile：13800000000`;
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Box mb={2}>
-              Please send the following factory address request to your
-              supplier. It clearly requests the information in the correct
-              format for your convenience.
+              Here's a message template to send to your factory contact to
+              insure the address information is filled out in the correct format
+              for the Chinese Postal Service.
               <br />
-              The <span style={{ color: "red" }}>red portion</span> is a
-              template. They will use it as a guideline and send it back to you.
+              <ol>
+                <li>
+                  Copy the following message and send it to your contact at your
+                  factory
+                </li>
+                <li>
+                  Wait for them to respond with the three fields in{" "}
+                  <span style={{ color: "red" }}>red</span> filled out
+                </li>
+                <li>Enter the information here</li>
+              </ol>
+              {/* The <span style={{ color: "red" }}>red portion</span> is a
+              template. They will use it as a guideline and send it back to you. */}
             </Box>
             <Box>******</Box>
             <Box ref={textAreaRef}>

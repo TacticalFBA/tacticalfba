@@ -28,10 +28,8 @@ export default class LoginModal extends Component {
     if (this.state.err || this.state.email === "") {
       return;
     }
-    // this.setState({ spin: true }, () => {
-    sendEmail(this.state.email, `${type}`);
+    sendEmail(this.state.email, window.location.pathname);
     this.setState({ email: "" });
-    // });
   };
 
   render() {
