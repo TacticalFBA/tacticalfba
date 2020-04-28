@@ -58,6 +58,10 @@ export default ({ location, history }) => {
       return;
     }
 
+    if (Email === "") {
+      return;
+    }
+
     // start spinner
     setSpin(true);
 
