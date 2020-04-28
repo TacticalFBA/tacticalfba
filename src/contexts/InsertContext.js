@@ -135,7 +135,7 @@ function InsertProvider(props) {
   ) => {
     try {
       let croppedImage = await getCroppedImg(url, croppedAreaPixels, rotation);
-      console.log("done", { croppedImage });
+      // console.log("done", { croppedImage });
       let newContent = Object.assign({}, content);
       newContent[item] = croppedImage;
       setContent(newContent);
