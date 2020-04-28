@@ -65,7 +65,7 @@ export default ({ location, history }) => {
     setEmail("");
 
     // check if the email already exists
-    const collectionRef = db.collection("mailing list");
+    const collectionRef = db.collection("mailing");
     collectionRef
       .where("Email", "==", Email)
       .get()

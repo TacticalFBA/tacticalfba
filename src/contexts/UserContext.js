@@ -28,12 +28,6 @@ class UserProvider extends Component {
       auth
         .signInWithEmailLink(email, window.location.href)
         .then(() => {
-          //   if (url === "insert") {
-          //     window.location.href = "/insert";
-          //   }
-          //   if (url === "account") {
-          //     window.location.href = "/account";
-          //   }
           window.location.href = url;
           window.localStorage.removeItem("emailForSignIn");
           window.localStorage.removeItem("redirectTo");
