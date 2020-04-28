@@ -86,19 +86,19 @@ function InsertProvider(props) {
   const onSelectImg = (e) => {
     const file = e.currentTarget.files[0];
     const side = e.currentTarget.name;
-    console.log(file);
+    // console.log(file);
     const compress = new Compress();
     compress
       .compress([file], {
         size: 4, // the max size in MB, defaults to 2MB
-        quality: 0.75, // the quality of the image, max is 1,
+        quality: 1, // the quality of the image, max is 1,
         maxWidth: 1920, // the max width of the output image, defaults to 1920px
         maxHeight: 1920, // the max height of the output image, defaults to 1920px
         resize: true, // defaults to true, set false if you do not want to resize the image width and height
       })
       .then((data) => {
         // returns an array of compressed images
-        console.log(data);
+        // console.log(data);
         const img1 = data[0];
         const compressedFile = `${img1.prefix}${img1.data}`;
         let newContent = Object.assign({}, content);
@@ -158,13 +158,13 @@ function InsertProvider(props) {
       .toJpeg(frontRef.current, { quality: 1 })
       .then((dataUrl) => {
         newContent.frontPre = dataUrl;
-        console.log("front preview converted");
+        // console.log("front preview converted");
       });
     await htmlToImage
       .toJpeg(backRef.current, { quality: 1 })
       .then((dataUrl) => {
         newContent.backPre = dataUrl;
-        console.log("back preview converted");
+        // console.log("back preview converted");
       });
     return newContent;
   };
@@ -200,9 +200,9 @@ function InsertProvider(props) {
             .then((fireBaseUrl) => {
               newContent[image.name] = fireBaseUrl;
               count++;
-              console.log(image.name + " uploaded");
+              // console.log(image.name + " uploaded");
               if (count === arr.length) {
-                console.log("images all uploaded");
+                // console.log("images all uploaded");
                 cb(newContent);
               }
             });

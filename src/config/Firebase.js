@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore";
 import "firebase/storage";
+import "firebase/analytics";
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -24,5 +25,6 @@ var actionCodeSettings = {
 
 const db = firebase.firestore();
 const storage = firebase.storage();
+const analytics = firebase.analytics();
 const provider = new firebase.auth.GoogleAuthProvider();
-export { firebase, db, auth, provider, actionCodeSettings, storage };
+export { firebase, db, auth, provider, actionCodeSettings, storage, analytics };
