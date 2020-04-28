@@ -75,6 +75,7 @@ function InsertProvider(props) {
   };
 
   const [open, setOpen] = useState(false);
+  const [progress, setProgress] = useState(false);
   const [cropInfo, setCropInfo] = useState({
     img: "",
     aspect: 1,
@@ -84,6 +85,7 @@ function InsertProvider(props) {
 
   // handle image change
   const onSelectImg = (e) => {
+    setProgress(true);
     const file = e.currentTarget.files[0];
     const side = e.currentTarget.name;
     // console.log(file);
@@ -107,6 +109,7 @@ function InsertProvider(props) {
         const newCropInfo = Object.assign({}, cropInfo);
         newCropInfo.img = compressedFile;
         setCropInfo(newCropInfo);
+        setProgress(false);
       });
   };
 
@@ -295,6 +298,7 @@ function InsertProvider(props) {
         cropInfo: cropInfo,
         handleClickOpen: handleClickOpen,
         setEditorShow: setEditorShow,
+        progress: progress,
       }}
     >
       {props.children}

@@ -39,7 +39,7 @@ export default class PaypalBtn extends React.Component {
       };
 
       delete payment["address"];
-      console.log(payment);
+      // console.log(payment);
 
       const order = {
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -81,7 +81,7 @@ export default class PaypalBtn extends React.Component {
 
     const onCancel = (data) => {
       // User pressed "cancel" or close Paypal's popup!
-      console.log("The payment was cancelled!", data);
+      // console.log("The payment was cancelled!", data);
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     };
 

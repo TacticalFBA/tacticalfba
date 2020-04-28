@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
@@ -22,7 +22,7 @@ export default function ImageUploader({ onSelectImg, side }) {
         name={side}
         className={classes.input}
         id={side}
-        accept="image/*"
+        accept="image/jpeg,image/jpg"
         onChange={(e) => onSelectImg(e)}
       />
       <label htmlFor={side} style={{ width: "100%" }}>
