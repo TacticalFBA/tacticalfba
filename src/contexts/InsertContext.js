@@ -84,33 +84,54 @@ function InsertProvider(props) {
   });
 
   // handle image change
-  const onSelectImg = (e) => {
-    setProgress(true);
-    const file = e.currentTarget.files[0];
-    const side = e.currentTarget.name;
+  const onSelectImg = (event) => {
+    // setProgress(true);
+    const file = event.currentTarget.files[0];
+
+    const maxSize = 3000000;
+    if (file.size > maxSize) {
+      alert("Maximum file size is 3MB");
+      return;
+    }
+
+    const side = event.currentTarget.name;
     // console.log(file);
-    const compress = new Compress();
-    compress
-      .compress([file], {
-        size: 4, // the max size in MB, defaults to 2MB
-        quality: 1, // the quality of the image, max is 1,
-        maxWidth: 1920, // the max width of the output image, defaults to 1920px
-        maxHeight: 1920, // the max height of the output image, defaults to 1920px
-        resize: true, // defaults to true, set false if you do not want to resize the image width and height
-      })
-      .then((data) => {
-        // returns an array of compressed images
-        // console.log(data);
-        const img1 = data[0];
-        const compressedFile = `${img1.prefix}${img1.data}`;
+    // const compress = new Compress();
+    // compress
+    //   .compress([file], {
+    //     size: 4, // the max size in MB, defaults to 2MB
+    //     quality: 1, // the quality of the image, max is 1,
+    //     maxWidth: 1920, // the max width of the output image, defaults to 1920px
+    //     maxHeight: 1920, // the max height of the output image, defaults to 1920px
+    //     resize: true, // defaults to true, set false if you do not want to resize the image width and height
+    //   })
+    //   .then((data) => {
+    //     // returns an array of compressed images
+    //     // console.log(data);
+    //     const img1 = data[0];
+    //     const compressedFile = `${img1.prefix}${img1.data}`;
+    //     let newContent = Object.assign({}, content);
+    //     newContent[side] = compressedFile;
+    //     setContent(newContent);
+    //     const newCropInfo = Object.assign({}, cropInfo);
+    //     newCropInfo.img = compressedFile;
+    //     setCropInfo(newCropInfo);
+    //     setProgress(false);
+    //   });
+    // Assuming only image
+    if (event.target.files && file) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target.result;
         let newContent = Object.assign({}, content);
-        newContent[side] = compressedFile;
+        newContent[side] = result;
         setContent(newContent);
         const newCropInfo = Object.assign({}, cropInfo);
-        newCropInfo.img = compressedFile;
+        newCropInfo.img = result;
         setCropInfo(newCropInfo);
-        setProgress(false);
-      });
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   };
 
   const handleClickOpen = (img, aspect, cropShape, item) => {
@@ -158,13 +179,13 @@ function InsertProvider(props) {
     let newContent = Object.assign({}, content);
 
     await htmlToImage
-      .toJpeg(frontRef.current, { quality: 1 })
+      .toJpeg(frontRef.current, { quality: 0.85 })
       .then((dataUrl) => {
         newContent.frontPre = dataUrl;
         // console.log("front preview converted");
       });
     await htmlToImage
-      .toJpeg(backRef.current, { quality: 1 })
+      .toJpeg(backRef.current, { quality: 0.85 })
       .then((dataUrl) => {
         newContent.backPre = dataUrl;
         // console.log("back preview converted");

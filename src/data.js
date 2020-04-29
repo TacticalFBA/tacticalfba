@@ -14,7 +14,7 @@ export const samples = [
   {
     pid: 2,
     iName: "",
-    themeColor: "#002057",
+    themeColor: "#10069F",
     frontMsgBody: `Hey there,<br/><br/>Thanks so much for supporting our small and growing Amazon business.<br/><br/>We really hope you like our products, if you have any questions, feel free to reach out anytime.</br><br/>If you have a second, leaving us an honest review would help us out so much, as well as help other customers who might be looking for our products.<br/><br/>Thanks again!`,
     frontMsgSec:
       "<strong>Michelle<br/><br/>Founder<br/>of<br/>TacticalFBA</strong>",

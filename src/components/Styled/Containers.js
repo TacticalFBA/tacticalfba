@@ -5,11 +5,11 @@ export const PreviewContainer = styled.div`
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  // width: 28.5rem;
-  // height: 17.1rem;
+  // width: 1087px;
+  // height: 661px;
   width: 100%;
   height: 0;
-  padding-bottom: 62.5%;
+  padding-bottom: 60.87%;
   p {
     margin: 0;
     padding: 0;
